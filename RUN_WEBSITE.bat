@@ -25,7 +25,11 @@ if %ERRORLEVEL% NEQ 0 (
 
 :start_server
 echo.
-echo Step 2: Starting server...
+echo Step 2: Preparing database client...
+call npx.cmd prisma generate
+
+echo.
+echo Step 3: Starting server...
 echo.
 echo ========================================================
 echo   Website will open in your browser automatically!

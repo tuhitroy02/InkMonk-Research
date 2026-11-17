@@ -1,56 +1,23 @@
 @import "tailwindcss";
 
-:root {
-  --font-sans: "Comic Sans MS", "Comic Sans", "Comic Neue", cursive, sans-serif;
-  --font-serif: "Comic Sans MS", "Comic Sans", "Comic Neue", cursive, sans-serif;
-}
-
-*, *::before, *::after, html, body, p, span, div, a, button, input, select, textarea, li, h1, h2, h3, h4, h5, h6, label {
-  font-family: "Comic Sans MS", "Comic Sans", "Comic Neue", cursive, sans-serif !important;
-  font-weight: 700 !important;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 900 !important;
-  line-height: 1.3;
-  overflow: visible;
-}
-
-.section-heading {
-  color: #0A1128;
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.3;
-  padding-block: 0.12em;
-}
-
-.section-subheading { color: #475569; line-height: 1.7; }
-.orange-badge {
-  display: inline-block;
-  color: #c2410c;
-  background: #fff7ed;
-  border-radius: 9999px;
-  padding: 0.4rem 1rem;
-  margin-bottom: 1rem;
+@layer base {
+  :root {
+    --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+    --font-serif: var(--font-geist-mono), monospace;
+  }
 }
 
 body {
-  font-family: "Comic Sans MS", "Comic Sans", "Comic Neue", cursive, sans-serif !important;
-  font-weight: 700 !important;
-  background-color: #F9F7F4;
-  color: #0F172A;
+  font-family: var(--font-sans);
+  background-color: #030305;
+  color: #F8FAFC;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Typography Utility Classes ─────────────────────────────────────────── */
-.font-serif, .font-sans {
-  font-family: "Comic Sans MS", "Comic Sans", "Comic Neue", cursive, sans-serif !important;
-  font-weight: 700 !important;
-}
-
 /* ─── Prestige Color Gradients & Surfaces ────────────────────────────────── */
 .bg-midnight {
-  background: radial-gradient(circle at 80% 20%, #152758 0%, #0A1128 50%, #060B1A 100%);
+  background: radial-gradient(circle at 80% 20%, #152758 0%, #0A1128 50%, #030305 100%);
 }
 
 .bg-midnight-card {
@@ -61,14 +28,14 @@ body {
 }
 
 .bg-glass-white {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .gradient-saffron {
-  background: linear-gradient(135deg, #E8671A 0%, #F59E0B 100%);
+  background: linear-gradient(135deg, #FF6B00 0%, #F59E0B 100%);
 }
 
 .gradient-gold-text {
@@ -79,7 +46,7 @@ body {
 }
 
 .gradient-saffron-text {
-  background: linear-gradient(135deg, #E8671A 0%, #F97316 100%);
+  background: linear-gradient(135deg, #FF6B00 0%, #F97316 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -87,56 +54,54 @@ body {
 
 /* ─── Interactive Buttons ────────────────────────────────────────────────── */
 .btn-primary-glow {
-  background: linear-gradient(135deg, #E8671A 0%, #F59E0B 100%);
+  background: linear-gradient(135deg, #FF6B00 0%, #F59E0B 100%);
   color: #FFFFFF;
-  font-weight: 800 !important;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   padding: 0.875rem 2rem;
   border-radius: 9999px;
-  box-shadow: 0 10px 25px -5px rgba(232, 103, 26, 0.4), 0 8px 10px -6px rgba(232, 103, 26, 0.2);
+  box-shadow: 0 10px 25px -5px rgba(255, 107, 0, 0.4), 0 8px 10px -6px rgba(255, 107, 0, 0.2);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   border: none;
   cursor: pointer;
-  font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif !important;
 }
 
 .btn-primary-glow:hover {
   transform: translateY(-2px);
-  box-shadow: 0 15px 30px -5px rgba(232, 103, 26, 0.55), 0 10px 15px -5px rgba(232, 103, 26, 0.3);
+  box-shadow: 0 15px 30px -5px rgba(255, 107, 0, 0.55), 0 10px 15px -5px rgba(255, 107, 0, 0.3);
   filter: brightness(1.05);
 }
 
 .btn-secondary-dark {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
   color: #FFFFFF;
-  font-weight: 800 !important;
+  font-weight: 500;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   padding: 0.875rem 1.875rem;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(12px);
   transition: all 0.25s ease;
   text-decoration: none;
-  font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif !important;
 }
 
 .btn-secondary-dark:hover {
-  background: rgba(255, 255, 255, 0.16);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
 }
 
 .btn-whatsapp-pill {
   background: #25D366;
   color: #FFFFFF;
-  font-weight: 800 !important;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -145,7 +110,6 @@ body {
   box-shadow: 0 10px 20px -5px rgba(37, 211, 102, 0.4);
   transition: all 0.25s ease;
   text-decoration: none;
-  font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif !important;
 }
 
 .btn-whatsapp-pill:hover {
@@ -159,51 +123,49 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(245, 166, 35, 0.12);
-  border: 1px solid rgba(245, 166, 35, 0.35);
+  background: rgba(245, 166, 35, 0.1);
+  border: 1px solid rgba(245, 166, 35, 0.3);
   color: #F5A623;
-  font-weight: 800 !important;
+  font-weight: 500;
   font-size: 0.85rem;
   letter-spacing: 0.05em;
   padding: 0.4rem 1rem;
   border-radius: 9999px;
-  font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif !important;
 }
 
 /* ─── Cards & Surfaces ───────────────────────────────────────────────────── */
 .card-premium {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
+  background: rgba(16, 26, 56, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1.5rem;
   padding: 2rem;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 20px -2px rgba(10, 17, 40, 0.05);
 }
 
 .card-premium:hover {
   transform: translateY(-6px);
-  border-color: rgba(232, 103, 26, 0.35);
-  box-shadow: 0 20px 35px -10px rgba(10, 17, 40, 0.12);
+  border-color: rgba(255, 107, 0, 0.4);
+  box-shadow: 0 20px 40px -15px rgba(255, 107, 0, 0.15);
 }
 
 /* ─── Chat Bubbles ───────────────────────────────────────────────────────── */
 .chat-bubble-bot {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
+  background: rgba(16, 26, 56, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
   padding: 1rem 1.25rem;
-  color: #0F172A;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-  font-weight: 700 !important;
+  color: #F8FAFC;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .chat-bubble-user {
-  background: linear-gradient(135deg, #1A2B6D, #2B45A2);
+  background: linear-gradient(135deg, #FF6B00, #F59E0B);
   border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
   padding: 1rem 1.25rem;
   color: #FFFFFF;
-  box-shadow: 0 4px 15px rgba(26, 43, 109, 0.25);
-  font-weight: 700 !important;
+  box-shadow: 0 4px 20px rgba(255, 107, 0, 0.3);
 }
 
 /* ─── Animations ─────────────────────────────────────────────────────────── */
@@ -228,7 +190,7 @@ body {
 .typing-dot {
   width: 7px;
   height: 7px;
-  background: #E8671A;
+  background: #FF6B00;
   border-radius: 50%;
   animation: typing 1.2s infinite ease-in-out;
 }
