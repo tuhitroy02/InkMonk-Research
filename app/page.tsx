@@ -1,5 +1,23 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import {
+  UkFlagLogo,
+  IndiaFlagLogo,
+  TurnitinShieldLogo,
+  ResearchPaperRealIcon,
+  ThesisRealIcon,
+  BookRealIcon,
+  PresentationRealIcon,
+  CodeModelRealIcon,
+  SynopsisRealIcon,
+  LocationRealIcon,
+  WhatsAppRealIcon,
+  EmailRealIcon,
+  Step1Icon,
+  Step2Icon,
+  Step3Icon,
+  Step4Icon,
+} from '@/components/RealIcons';
 
 export const metadata = {
   title: 'InkMonk Research — Research with care. Writing with clarity.',
@@ -9,55 +27,55 @@ export const metadata = {
 
 const SERVICES = [
   {
-    icon: '📄',
+    icon: <ResearchPaperRealIcon className="w-12 h-12" />,
     title: 'Research Paper Writing',
     desc: 'IEEE, Springer, Elsevier standard manuscripts with structured methodology, experiments, and citations in English & Hindi.',
     href: '/quote?service=RESEARCH_PAPER',
   },
   {
-    icon: '🎓',
+    icon: <ThesisRealIcon className="w-12 h-12" />,
     title: 'Thesis & Dissertation',
     desc: 'Master and Doctoral thesis drafting from literature review to conclusion, with optional computational model implementation.',
     href: '/quote?service=THESIS',
   },
   {
-    icon: '📖',
+    icon: <BookRealIcon className="w-12 h-12" />,
     title: 'Book Writing (100–300 Pages)',
     desc: 'Full-length scholarly book manuscripts, edited volumes, monographs, and book chapters formatted for ISBN publication.',
     href: '/quote?service=BOOK',
   },
   {
-    icon: '🔬',
+    icon: <ResearchPaperRealIcon className="w-12 h-12" />,
     title: 'Review Papers',
     desc: 'Systematic literature reviews and bibliometric surveys mapping state-of-the-art developments across your discipline.',
     href: '/quote?service=REVIEW_PAPER',
   },
   {
-    icon: '✍️',
+    icon: <SynopsisRealIcon className="w-12 h-12" />,
     title: 'Article Writing',
     desc: 'Expertly researched academic, journal, and thought leadership articles at verified per-word rates (₹0.60–0.80/word).',
     href: '/quote?service=ARTICLE',
   },
   {
-    icon: '📊',
+    icon: <PresentationRealIcon className="w-12 h-12" />,
     title: 'Academic PPT & Defense',
     desc: 'Engaging, professional thesis defense and conference presentation slide decks (₹120–170 per slide).',
     href: '/quote?service=PPT',
   },
   {
-    icon: '💻',
+    icon: <CodeModelRealIcon className="w-12 h-12" />,
     title: 'Model & Code Implementation',
     desc: 'Machine learning, deep learning (PyTorch, TensorFlow), Python, and MATLAB code implementation with reproducible benchmarks.',
     href: '/quote?service=MODEL',
   },
   {
-    icon: '📝',
+    icon: <SynopsisRealIcon className="w-12 h-12" />,
     title: 'Synopsis & Research Proposals',
     desc: 'Crisp, defensible research synopses for PhD registrations, grant applications, and institutional committees.',
     href: '/quote?service=SYNOPSIS',
   },
   {
-    icon: '🛡️',
+    icon: <TurnitinShieldLogo className="w-12 h-12" />,
     title: 'Turnitin AI & Plagiarism Reports',
     desc: 'Instructor-tier Turnitin verification audits checking similarity index and AI writing percentages at fixed ₹200/file.',
     href: '/quote?type=TURNITIN',
@@ -67,21 +85,25 @@ const SERVICES = [
 const WORKFLOW_STEPS = [
   {
     num: '01',
+    icon: <Step1Icon className="w-7 h-7" />,
     title: 'Project Consultation',
     desc: 'Share your discipline, word count, rubric, and timeline via our instant quotation engine or our local AI assistant.',
   },
   {
     num: '02',
+    icon: <Step2Icon className="w-7 h-7" />,
     title: 'Deterministic Quotation',
     desc: 'Receive an immediate, transparent estimate calculated on our verified internal schedule. Zero surprise costs.',
   },
   {
     num: '03',
+    icon: <Step3Icon className="w-7 h-7" />,
     title: 'Expert Drafting',
     desc: 'Domain researchers draft your manuscript or develop code with strict adherence to IEEE, APA, or university guidelines.',
   },
   {
     num: '04',
+    icon: <Step4Icon className="w-7 h-7" />,
     title: 'Turnitin Audit & Handover',
     desc: 'Full originality and AI verification audit completed. Download your deliverables directly from your client portal.',
   },
@@ -91,15 +113,15 @@ export default function HomePage() {
   return (
     <div className="min-h-screen text-center">
 
-      {/* ─── Hero Section ─────────────────────────────────────────────────── */}
+      {/* ─── Hero Section with 3D Holographic Aura ───────────────────────── */}
       <section
         className="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-28 text-white text-center"
         style={{
           background: 'radial-gradient(circle at 50% 20%, #172A66 0%, #0A1128 60%, #050814 100%)',
         }}
       >
-        {/* Subtle background ambient glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
+        {/* Futuristic 3D Lighting Orb */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-orange-600/20 via-amber-500/15 to-blue-600/15 rounded-full blur-3xl pointer-events-none animate-holo-glow" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -108,8 +130,8 @@ export default function HomePage() {
             <div className="lg:col-span-7 flex flex-col items-center text-center">
 
               {/* Tagline Badge */}
-              <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 px-4 py-1.5 rounded-full backdrop-blur-md mb-5">
-                <span className="w-2 h-2 rounded-full bg-orange-400 animate-pulse"></span>
+              <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 px-4 py-1.5 rounded-full backdrop-blur-md mb-5 shadow-lg">
+                <span className="w-2.5 h-2.5 rounded-full bg-orange-400 animate-ping"></span>
                 <span className="text-xs font-bold uppercase tracking-wider text-orange-300">
                   Academic Research &amp; Writing Hub • Kolkata
                 </span>
@@ -122,12 +144,12 @@ export default function HomePage() {
 
               {/* Distinctive Subtitle */}
               <p className="text-xl sm:text-2xl font-serif italic text-amber-200/90 font-bold mb-4 text-center">
-                "Research with care. Writing with clarity."
+                &ldquo;Research with care. Writing with clarity.&rdquo;
               </p>
 
-              {/* Assurance Ribbon (User requirement: AI 0% & Plag < 10%) */}
-              <div className="inline-flex items-center gap-2 bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full mb-5 shadow-sm">
-                <span className="text-emerald-400">🛡️</span>
+              {/* Assurance Ribbon with Real Shield Logo */}
+              <div className="inline-flex items-center gap-2.5 bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full mb-6 shadow-md backdrop-blur-sm">
+                <TurnitinShieldLogo className="w-5 h-5" />
                 <span>We assure AI to be 0% and Plagiarism less than 10%</span>
               </div>
 
@@ -159,31 +181,34 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              {/* Trust Indicators (Centered with "Turnitin" in title case) */}
-              <div className="grid grid-cols-3 gap-3 max-w-md mx-auto w-full">
-                <div className="bg-white/5 border border-white/10 p-3.5 rounded-2xl backdrop-blur-sm text-center">
-                  <div className="text-orange-400 font-bold text-lg font-serif">English</div>
-                  <div className="text-[11px] text-slate-300 font-bold mt-0.5">Tech &amp; Non-Tech</div>
+              {/* Trust Indicators with Real Badges */}
+              <div className="grid grid-cols-3 gap-3.5 max-w-lg mx-auto w-full">
+                <div className="bg-white/5 border border-white/10 p-3 rounded-2xl backdrop-blur-md text-center flex flex-col items-center">
+                  <UkFlagLogo className="w-7 h-7 mb-1" />
+                  <div className="text-orange-300 font-bold text-sm">English</div>
+                  <div className="text-[10px] text-slate-300 font-bold">Tech &amp; Non-Tech</div>
                 </div>
-                <div className="bg-white/5 border border-white/10 p-3.5 rounded-2xl backdrop-blur-sm text-center">
-                  <div className="text-orange-400 font-bold text-lg font-serif">Hindi</div>
-                  <div className="text-[11px] text-slate-300 font-bold mt-0.5">Tech &amp; Non-Tech</div>
+                <div className="bg-white/5 border border-white/10 p-3 rounded-2xl backdrop-blur-md text-center flex flex-col items-center">
+                  <IndiaFlagLogo className="w-7 h-7 mb-1" />
+                  <div className="text-orange-300 font-bold text-sm">Hindi</div>
+                  <div className="text-[10px] text-slate-300 font-bold">Tech &amp; Non-Tech</div>
                 </div>
-                <div className="bg-white/5 border border-white/10 p-3.5 rounded-2xl backdrop-blur-sm text-center">
-                  <div className="text-amber-400 font-bold text-lg font-serif">Turnitin</div>
-                  <div className="text-[11px] text-slate-300 font-bold mt-0.5">AI &amp; Plag Check</div>
+                <div className="bg-white/5 border border-white/10 p-3 rounded-2xl backdrop-blur-md text-center flex flex-col items-center">
+                  <TurnitinShieldLogo className="w-7 h-7 mb-1" />
+                  <div className="text-amber-300 font-bold text-sm">Turnitin</div>
+                  <div className="text-[10px] text-slate-300 font-bold">AI &amp; Plag Check</div>
                 </div>
               </div>
 
             </div>
 
-            {/* Right Column: CIRCULAR LOGO on Right Side */}
+            {/* Right Column: 3D Holographic Circular Logo */}
             <div className="lg:col-span-5 flex justify-center items-center">
-              <div className="relative animate-float">
-                {/* Ambient Golden Glow */}
-                <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-orange-500/25 to-amber-500/25 blur-2xl animate-pulse-glow" />
+              <div className="relative animate-3d-float">
+                {/* Ambient Glow */}
+                <div className="absolute -inset-6 rounded-full bg-gradient-to-r from-orange-500/30 to-amber-500/30 blur-2xl animate-holo-glow" />
 
-                {/* Circular Logo Container */}
+                {/* Circular Logo Container with 3D Bevel */}
                 <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full bg-white border-4 border-amber-400 shadow-2xl overflow-hidden flex items-center justify-center">
                   <Image
                     src="/logo.png"
@@ -195,13 +220,13 @@ export default function HomePage() {
                   />
                 </div>
 
-                {/* Floating Badges */}
-                <div className="absolute -top-5 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#0A1128] text-white border border-white/20 text-xs font-bold px-3.5 py-1.5 rounded-xl shadow-xl flex items-center gap-1.5">
-                  <span>✍️</span>
+                {/* 3D Floating Badges */}
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#0A1128] text-white border border-amber-400/50 text-xs font-bold px-4 py-1.5 rounded-xl shadow-2xl flex items-center gap-2">
+                  <ResearchPaperRealIcon className="w-4 h-4" />
                   <span>Pure Scholarship</span>
                 </div>
-                <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap bg-emerald-600 text-white text-xs font-bold px-3.5 py-1.5 rounded-xl shadow-xl flex items-center gap-1.5">
-                  <span>🛡️</span>
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap bg-emerald-700 text-white border border-emerald-400/50 text-xs font-bold px-4 py-1.5 rounded-xl shadow-2xl flex items-center gap-2">
+                  <TurnitinShieldLogo className="w-4 h-4" />
                   <span>0% AI • Plag &lt; 10%</span>
                 </div>
               </div>
@@ -211,7 +236,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── 3 Primary Pillars ────────────────────────────────────────────── */}
+      {/* ─── 3 Primary Pillars (English & Hindi Specialists) ─────────────── */}
       <section className="py-20 px-4 bg-white text-center" id="services">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -225,15 +250,20 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* English Card */}
-            <div className="card-premium flex flex-col justify-between border-t-4 border-t-[#1A2B6D] text-center">
+            {/* English Card (English Specialists) */}
+            <div className="card-futuristic-3d p-8 flex flex-col justify-between border-t-4 border-t-[#1A2B6D] text-center relative">
+              <span className="absolute top-4 right-4 bg-[#1A2B6D] text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow">
+                English Specialists
+              </span>
               <div>
-                <div className="text-4xl mb-4 text-center">🇬🇧</div>
+                <div className="flex justify-center mb-4">
+                  <UkFlagLogo className="w-16 h-16" />
+                </div>
                 <h3 className="font-serif text-2xl font-bold text-[#0A1128] mb-2 text-center">English Services</h3>
                 <p className="text-slate-600 text-sm mb-6 text-center">
                   Technical and non-technical manuscripts formatted to IEEE, Springer, Elsevier, APA, Harvard, and UGC standards.
                 </p>
-                {/* BULLETS: Left-aligned inside centered container as requested */}
+                {/* BULLETS: Left-aligned inside centered card container */}
                 <div className="max-w-xs mx-auto mb-8">
                   <ul className="space-y-2.5 text-sm text-slate-700 text-left">
                     <li className="flex items-center gap-2">
@@ -259,13 +289,15 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Hindi Card */}
-            <div className="card-premium flex flex-col justify-between border-t-4 border-t-orange-500 relative text-center">
-              <span className="absolute top-4 right-4 bg-orange-100 text-orange-700 text-[11px] font-bold px-2.5 py-1 rounded-full uppercase">
-                Specialized Division
+            {/* Hindi Card (Hindi Specialists) */}
+            <div className="card-futuristic-3d p-8 flex flex-col justify-between border-t-4 border-t-orange-500 text-center relative">
+              <span className="absolute top-4 right-4 bg-orange-500 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow">
+                Hindi Specialists
               </span>
               <div>
-                <div className="text-4xl mb-4 text-center">🇮🇳</div>
+                <div className="flex justify-center mb-4">
+                  <IndiaFlagLogo className="w-16 h-16" />
+                </div>
                 <h3 className="font-serif text-2xl font-bold text-[#0A1128] mb-2 text-center">Hindi Services</h3>
                 <p className="text-slate-600 text-sm mb-6 text-center">
                   Authentic scholarly Hindi led by Sampreeti Mukherjee with standardized Devanagari vocabulary and grammatical precision.
@@ -297,9 +329,14 @@ export default function HomePage() {
             </div>
 
             {/* Turnitin Card */}
-            <div className="card-premium flex flex-col justify-between border-t-4 border-t-slate-800 text-center">
+            <div className="card-futuristic-3d p-8 flex flex-col justify-between border-t-4 border-t-slate-800 text-center relative">
+              <span className="absolute top-4 right-4 bg-emerald-600 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow">
+                Verified Originality
+              </span>
               <div>
-                <div className="text-4xl mb-4 text-center">🛡️</div>
+                <div className="flex justify-center mb-4">
+                  <TurnitinShieldLogo className="w-16 h-16" />
+                </div>
                 <h3 className="font-serif text-2xl font-bold text-[#0A1128] mb-2 text-center">Turnitin Reports</h3>
                 <p className="text-slate-600 text-sm mb-6 text-center">
                   Instructor-grade originality and AI writing detection report without saving your file to public repositories.
@@ -335,7 +372,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── 9-Service Grid ──────────────────────────────────────────────── */}
+      {/* ─── 9-Service Grid with Real High-Def Visual Icons ───────────────── */}
       <section className="py-20 px-4 bg-[#F5F2EC] text-center">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -353,10 +390,12 @@ export default function HomePage() {
               <Link
                 key={s.title}
                 href={s.href}
-                className="bg-white p-6 rounded-2xl border border-slate-200 hover:border-orange-400 hover:shadow-lg transition-all group flex flex-col justify-between text-center items-center"
+                className="card-futuristic-3d p-7 flex flex-col justify-between text-center items-center group"
               >
                 <div className="flex flex-col items-center text-center">
-                  <div className="text-3xl mb-3 text-center">{s.icon}</div>
+                  <div className="mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                    {s.icon}
+                  </div>
                   <h3 className="font-serif font-bold text-lg text-[#0A1128] group-hover:text-orange-600 transition-colors mb-2 text-center">
                     {s.title}
                   </h3>
@@ -374,7 +413,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── How It Works ────────────────────────────────────────────────── */}
+      {/* ─── Redesigned 3D Futuristic 1, 2, 3, 4 Steps Section ─────────────── */}
       <section className="py-20 px-4 bg-white text-center" id="how-it-works">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -389,12 +428,26 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {WORKFLOW_STEPS.map((w) => (
-              <div key={w.num} className="bg-[#FAF8F5] p-6 rounded-2xl border border-slate-200 flex flex-col items-center text-center">
-                <div className="w-12 h-12 rounded-xl gradient-saffron text-white font-serif font-bold text-xl flex items-center justify-center mb-4 shadow mx-auto">
-                  {w.num}
+              <div
+                key={w.num}
+                className="card-futuristic-3d p-7 flex flex-col items-center text-center group"
+              >
+                {/* 3D Holographic Step Badge */}
+                <div className="relative mb-5">
+                  <div className="step-number-futuristic">
+                    {w.num}
+                  </div>
+                  <div className="absolute -bottom-2 -right-2 bg-white rounded-full p-1 shadow-md border border-slate-200">
+                    {w.icon}
+                  </div>
                 </div>
-                <h3 className="font-serif font-bold text-lg text-[#0A1128] mb-2 text-center">{w.title}</h3>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed text-center">{w.desc}</p>
+
+                <h3 className="font-serif font-bold text-lg text-[#0A1128] mb-2 text-center group-hover:text-orange-600 transition-colors">
+                  {w.title}
+                </h3>
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed text-center">
+                  {w.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -421,8 +474,8 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white p-8 rounded-3xl border border-slate-200 text-center shadow-sm flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full bg-[#0A1128] text-white font-serif font-bold text-2xl flex items-center justify-center mx-auto mb-4 border-4 border-amber-400">
+            <div className="card-futuristic-3d p-8 text-center flex flex-col items-center">
+              <div className="w-20 h-20 rounded-full bg-[#0A1128] text-white font-serif font-bold text-2xl flex items-center justify-center mx-auto mb-4 border-4 border-amber-400 shadow-xl">
                 TR
               </div>
               <h3 className="font-serif text-2xl font-bold text-[#0A1128] text-center">Tuhit Roy</h3>
@@ -434,8 +487,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-3xl border border-slate-200 text-center shadow-sm flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full bg-orange-600 text-white font-serif font-bold text-2xl flex items-center justify-center mx-auto mb-4 border-4 border-amber-400">
+            <div className="card-futuristic-3d p-8 text-center flex flex-col items-center">
+              <div className="w-20 h-20 rounded-full bg-orange-600 text-white font-serif font-bold text-2xl flex items-center justify-center mx-auto mb-4 border-4 border-amber-400 shadow-xl">
                 SM
               </div>
               <h3 className="font-serif text-2xl font-bold text-[#0A1128] text-center">Sampreeti Mukherjee</h3>
@@ -450,32 +503,54 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── Office & Contact Banner ──────────────────────────────────────── */}
-      <section className="py-16 px-4 bg-[#0A1128] text-white text-center">
-        <div className="max-w-4xl mx-auto flex flex-col items-center text-center gap-6">
-          <div>
-            <span className="text-xs font-bold text-orange-400 uppercase tracking-widest block mb-2 text-center">
-              Physical Presence in Kolkata
-            </span>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold mb-2 text-center">
+      {/* ─── Redesigned 3D Futuristic Office & Contact Section ────────────── */}
+      <section className="py-20 px-4 bg-midnight text-white text-center relative overflow-hidden">
+        <div className="max-w-5xl mx-auto flex flex-col items-center text-center gap-8 relative z-10">
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 px-4 py-1.5 rounded-full backdrop-blur-md mb-4 shadow">
+              <LocationRealIcon className="w-4 h-4" />
+              <span className="text-xs font-bold text-orange-400 uppercase tracking-widest">
+                Physical Presence in Kolkata
+              </span>
+            </div>
+            <h3 className="font-serif text-3xl sm:text-4xl font-bold mb-3 text-center">
               Karunamoyee, Salt Lake Sector 2
             </h3>
-            <p className="text-slate-300 text-sm max-w-lg mx-auto text-center">
+            <p className="text-slate-300 text-sm sm:text-base max-w-lg mx-auto text-center">
               Serving researchers across all Indian universities and international institutions. Visits by appointment.
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-3xl">
+            <div className="bg-white/5 border border-white/15 p-6 rounded-2xl backdrop-blur-md flex flex-col items-center text-center">
+              <LocationRealIcon className="w-10 h-10 mb-3" />
+              <div className="text-sm font-bold text-white mb-1">Our Location</div>
+              <div className="text-xs text-slate-300">Sector 2, Salt Lake City, Kolkata 700091</div>
+            </div>
+            <div className="bg-white/5 border border-white/15 p-6 rounded-2xl backdrop-blur-md flex flex-col items-center text-center">
+              <WhatsAppRealIcon className="w-10 h-10 mb-3" />
+              <div className="text-sm font-bold text-white mb-1">WhatsApp Chat</div>
+              <div className="text-xs text-emerald-300 font-bold">+91 7980470880</div>
+            </div>
+            <div className="bg-white/5 border border-white/15 p-6 rounded-2xl backdrop-blur-md flex flex-col items-center text-center">
+              <EmailRealIcon className="w-10 h-10 mb-3" />
+              <div className="text-sm font-bold text-white mb-1">Email Support</div>
+              <div className="text-xs text-sky-300 font-bold">inkmonkresearch@gmail.com</div>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-4 mt-2">
             <a
               href="https://wa.me/917980470880"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-whatsapp-pill"
             >
-              <span>WhatsApp: +91 7980470880</span>
+              <WhatsAppRealIcon className="w-5 h-5" />
+              <span>Direct WhatsApp: +91 7980470880</span>
             </a>
             <Link href="/contact" className="btn-secondary-dark">
-              Send an Inquiry
+              Send an Academic Inquiry →
             </Link>
           </div>
         </div>

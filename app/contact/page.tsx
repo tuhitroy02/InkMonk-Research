@@ -2,6 +2,12 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import {
+  LocationRealIcon,
+  WhatsAppRealIcon,
+  EmailRealIcon,
+  TurnitinShieldLogo,
+} from '@/components/RealIcons';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -44,107 +50,122 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-ink-50 py-16 px-4">
+    <div className="min-h-screen bg-[#F9F7F4] py-16 px-4 text-center">
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="orange-badge">Direct Communication</div>
-          <h1 className="section-heading mb-4">Contact InkMonk Research</h1>
-          <p className="section-subheading">
-            Connect directly with founders <strong>Tuhit Roy</strong> and <strong>Sampreeti Mukherjee</strong>. We respond swiftly to all inquiries, quotes, and research consultations.
+          <div className="badge-pill-gold mb-3">Direct Academic Consultation</div>
+          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-[#0A1128] mb-4 text-center">
+            Connect with InkMonk Research
+          </h1>
+          <p className="text-slate-600 text-base sm:text-lg text-center leading-relaxed">
+            Connect directly with founders <strong>Tuhit Roy</strong> and <strong>Sampreeti Mukherjee</strong>. We review and respond swiftly to all scholarly briefs, quotes, and research requirements.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
 
-          {/* Contact Details Column */}
+          {/* Contact Details Column (3D Futuristic Cards) */}
           <div className="space-y-6">
-            <div className="bg-white rounded-3xl p-6 border border-ink-100 shadow-card">
-              <div className="w-10 h-10 rounded-xl gradient-navy text-white flex items-center justify-center text-xl mb-4 shadow">
-                📍
-              </div>
-              <h3 className="font-serif font-bold text-lg text-navy-800 mb-1">Office Address</h3>
-              <p className="text-ink-600 text-sm leading-relaxed">
+
+            {/* Office Address Card */}
+            <div className="card-futuristic-3d p-7 flex flex-col items-center text-center">
+              <LocationRealIcon className="w-12 h-12 mb-3" />
+              <h3 className="font-serif font-bold text-xl text-[#0A1128] mb-2 text-center">Office Address</h3>
+              <p className="text-slate-600 text-sm leading-relaxed text-center">
                 Karunamoyee, Sector 2, Salt Lake City,<br />
                 Kolkata 700091, West Bengal, India
               </p>
-              <div className="text-xs text-ink-400 mt-2">Visits by prior appointment</div>
+              <span className="inline-block mt-3 text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded-full font-bold">
+                Visits by prior appointment
+              </span>
             </div>
 
-            <div className="bg-white rounded-3xl p-6 border border-ink-100 shadow-card">
-              <div className="w-10 h-10 rounded-xl gradient-orange text-white flex items-center justify-center text-xl mb-4 shadow">
-                💬
+            {/* WhatsApp & Instant Advisory Card */}
+            <div className="card-futuristic-3d p-7 flex flex-col items-center text-center border-2 border-emerald-400/40">
+              <WhatsAppRealIcon className="w-12 h-12 mb-3" />
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">Online &amp; Available</span>
               </div>
-              <h3 className="font-serif font-bold text-lg text-navy-800 mb-1">WhatsApp &amp; Phone</h3>
-              <p className="text-ink-600 text-sm mb-3">
-                Quickest channel for urgent deadlines and live consultations.
+              <h3 className="font-serif font-bold text-xl text-[#0A1128] mb-2 text-center">Direct WhatsApp</h3>
+              <p className="text-slate-600 text-xs sm:text-sm mb-4 text-center leading-relaxed">
+                Direct consultation for urgent deadlines and instant quotes with our directors.
               </p>
               <a
                 href="https://wa.me/917980470880"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-whatsapp text-xs py-2 px-4 inline-flex"
+                className="btn-whatsapp-pill w-full justify-center text-sm"
               >
                 Chat on WhatsApp (+91 7980470880)
               </a>
             </div>
 
-            <div className="bg-white rounded-3xl p-6 border border-ink-100 shadow-card">
-              <div className="w-10 h-10 rounded-xl bg-ink-900 text-white flex items-center justify-center text-xl mb-4 shadow">
-                📧
-              </div>
-              <h3 className="font-serif font-bold text-lg text-navy-800 mb-1">Email Inquiries</h3>
-              <p className="text-ink-600 text-sm mb-2">
-                For detailed briefs, manuscript attachments, and institutional agreements.
+            {/* Email Support Card */}
+            <div className="card-futuristic-3d p-7 flex flex-col items-center text-center">
+              <EmailRealIcon className="w-12 h-12 mb-3" />
+              <h3 className="font-serif font-bold text-xl text-[#0A1128] mb-2 text-center">Email Desk</h3>
+              <p className="text-slate-600 text-xs sm:text-sm mb-3 text-center leading-relaxed">
+                For detailed research briefs, institutional contracts, and manuscript attachments.
               </p>
               <a
                 href="mailto:inkmonkresearch@gmail.com"
-                className="text-orange-600 font-medium text-sm hover:underline"
+                className="text-orange-600 font-bold text-sm hover:underline"
               >
                 inkmonkresearch@gmail.com
               </a>
             </div>
+
           </div>
 
-          {/* Form Column */}
+          {/* Inquiry Form Column (Sleek Glassmorphic 3D Card) */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-3xl p-8 md:p-10 border border-ink-100 shadow-card">
-              <h2 className="font-serif text-2xl font-bold text-navy-800 mb-2">Send an Academic Inquiry</h2>
-              <p className="text-ink-600 text-sm mb-6">
-                Fill in your details below. We typically review and respond within 2 to 4 business hours.
+            <div className="card-futuristic-3d p-8 md:p-10 text-center">
+              <h2 className="font-serif text-3xl font-bold text-[#0A1128] mb-2 text-center">
+                Send an Academic Inquiry
+              </h2>
+              <p className="text-slate-600 text-sm mb-8 text-center">
+                Fill in your project specifications below. Our directors review and respond within 2 to 4 business hours.
               </p>
 
               {submitted ? (
-                <div className="p-8 bg-emerald-50 rounded-2xl border border-emerald-200 text-center animate-fade-in">
-                  <div className="text-4xl mb-3">✉️</div>
-                  <h3 className="font-serif text-2xl font-bold text-emerald-900 mb-2">Message Dispatched!</h3>
-                  <p className="text-emerald-700 text-sm max-w-md mx-auto mb-6">
-                    Thank you for reaching out to InkMonk Research. Tuhit Roy and Sampreeti Mukherjee have received your message and will review your specifications shortly.
+                <div className="p-8 bg-emerald-50 rounded-2xl border border-emerald-300 text-center animate-3d-float">
+                  <TurnitinShieldLogo className="w-16 h-16 mx-auto mb-3" />
+                  <h3 className="font-serif text-2xl font-bold text-emerald-900 mb-2 text-center">
+                    Message Dispatched Successfully!
+                  </h3>
+                  <p className="text-emerald-700 text-sm max-w-md mx-auto mb-6 text-center leading-relaxed">
+                    Thank you for reaching out to InkMonk Research. Founders Tuhit Roy and Sampreeti Mukherjee have received your submission and will review your specifications promptly.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="btn-secondary text-emerald-900 border-emerald-600 hover:bg-emerald-100 text-xs py-2 px-5"
+                    className="btn-secondary-dark !text-emerald-900 !border-emerald-600 hover:!bg-emerald-100 text-xs py-2 px-6"
                   >
                     Send Another Note
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-5 text-center">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-ink-700 mb-1">Your Full Name *</label>
+                    <div className="text-left">
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                        Your Full Name *
+                      </label>
                       <input
                         type="text"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="Dr. / Mr. / Ms. Name"
+                        placeholder="Dr. / Prof. / Scholar Name"
                         className="input-field text-sm"
                       />
                     </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-ink-700 mb-1">Email Address *</label>
+                    <div className="text-left">
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                        Email Address *
+                      </label>
                       <input
                         type="email"
                         required
@@ -157,8 +178,10 @@ export default function ContactPage() {
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-ink-700 mb-1">WhatsApp / Phone Number</label>
+                    <div className="text-left">
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                        WhatsApp / Phone Number
+                      </label>
                       <input
                         type="tel"
                         value={formData.phone}
@@ -167,46 +190,51 @@ export default function ContactPage() {
                         className="input-field text-sm"
                       />
                     </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-ink-700 mb-1">Subject / Discipline</label>
+                    <div className="text-left">
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                        Academic Discipline / Subject
+                      </label>
                       <input
                         type="text"
                         value={formData.subject}
                         onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                        placeholder="e.g. Master's Thesis in Mechanical Engg"
+                        placeholder="e.g. PhD Thesis in Computer Science"
                         className="input-field text-sm"
                       />
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-semibold text-ink-700 mb-1">Project Details / Requirements *</label>
+                  <div className="text-left">
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                      Project Requirements &amp; Scope *
+                    </label>
                     <textarea
                       required
                       rows={5}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Please outline the target word count, language (English/Hindi), urgency, and specific academic guidelines..."
+                      placeholder="Outline your target word count, language (English/Hindi), model implementation needs, and deadlines..."
                       className="input-field text-sm"
                     />
                   </div>
 
                   {error && (
-                    <div className="p-3 bg-red-50 text-red-700 text-sm rounded-xl border border-red-200">
+                    <div className="p-3 bg-red-50 text-red-700 text-sm rounded-xl border border-red-200 text-center">
                       {error}
                     </div>
                   )}
 
-                  <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-2">
-                    <span className="text-xs text-ink-400">
-                      All research queries are covered under non-disclosure confidentiality.
-                    </span>
+                  <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-slate-100">
+                    <div className="flex items-center gap-2 text-xs text-slate-500">
+                      <TurnitinShieldLogo className="w-4 h-4" />
+                      <span>Strict Academic Non-Disclosure &amp; Confidentiality Assured</span>
+                    </div>
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="btn-primary w-full sm:w-auto"
+                      className="btn-primary-glow w-full sm:w-auto text-sm px-8"
                     >
-                      {isSubmitting ? 'Transmitting...' : 'Send Inquiry →'}
+                      {isSubmitting ? 'Transmitting...' : 'Dispatch Inquiry →'}
                     </button>
                   </div>
                 </form>

@@ -1,13 +1,21 @@
 import Link from 'next/link';
+import {
+  ResearchPaperRealIcon,
+  ThesisRealIcon,
+  TurnitinShieldLogo,
+  IndiaFlagLogo,
+  UkFlagLogo,
+} from '@/components/RealIcons';
 
 export const metadata = {
-  title: 'Academic Writing Samples & Previews',
+  title: 'Academic Writing Samples & Previews — InkMonk Research',
   description: 'Examine redacted, approved samples of academic research papers, theses, literature reviews, and Turnitin reports by InkMonk Research.',
 };
 
 const SAMPLES = [
   {
     id: 'sample-1',
+    logo: <ResearchPaperRealIcon className="w-10 h-10" />,
     title: 'Deep Residual Networks for Automated Pulmonary Radiograph Diagnostics',
     category: 'Research Paper',
     domain: 'Computer Science / Healthcare AI',
@@ -23,6 +31,7 @@ const SAMPLES = [
   },
   {
     id: 'sample-2',
+    logo: <IndiaFlagLogo className="w-10 h-10" />,
     title: 'भारतीय संदर्भ में समावेशी शिक्षा और डिजिटल विभाजन का समाजशास्त्रीय अध्ययन',
     category: 'Review Paper',
     domain: 'Sociology & Educational Policy',
@@ -38,6 +47,7 @@ const SAMPLES = [
   },
   {
     id: 'sample-3',
+    logo: <ThesisRealIcon className="w-10 h-10" />,
     title: 'Microgrid Energy Management System with Hybrid Solar-Wind Storage',
     category: 'Thesis Excerpt',
     domain: 'Electrical & Sustainable Energy Engineering',
@@ -53,6 +63,7 @@ const SAMPLES = [
   },
   {
     id: 'sample-4',
+    logo: <TurnitinShieldLogo className="w-10 h-10" />,
     title: 'Sample Turnitin Originality & AI Paraphrase Audit',
     category: 'Turnitin Report',
     domain: 'Plagiarism & AI Verification Audit',
@@ -70,75 +81,79 @@ const SAMPLES = [
 
 export default function SamplesPage() {
   return (
-    <div className="min-h-screen bg-ink-50 py-16 px-4">
+    <div className="min-h-screen bg-[#F9F7F4] py-16 px-4 text-center">
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="orange-badge">Demonstrated Quality</div>
-          <h1 className="section-heading mb-4">Sample Work &amp; Redacted Previews</h1>
-          <p className="section-subheading">
+          <div className="badge-pill-gold mb-3">Demonstrated Quality</div>
+          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-[#0A1128] mb-4 text-center">
+            Sample Work &amp; Redacted Previews
+          </h1>
+          <p className="text-slate-600 text-base sm:text-lg text-center leading-relaxed">
             To strictly protect client confidentiality and proprietary research data, all personal information, institutional affiliations, and unpublished findings have been redacted. Real samples are continuously updated.
           </p>
         </div>
 
         {/* Samples List */}
-        <div className="space-y-8 mb-16">
+        <div className="space-y-8 mb-16 text-center">
           {SAMPLES.map((sample) => (
             <div
               key={sample.id}
-              className="bg-white rounded-3xl p-6 md:p-8 border border-ink-100 shadow-card hover:border-orange-200 transition-all"
+              className="card-futuristic-3d p-6 md:p-8 text-center"
             >
-              <div className="flex flex-wrap items-center justify-between gap-2 mb-4 pb-4 border-b border-ink-100">
-                <div className="flex flex-wrap gap-2 items-center">
-                  <span className="px-3 py-1 bg-navy-50 text-navy-800 text-xs font-bold rounded-full">
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-4 pb-4 border-b border-slate-100">
+                <div className="flex flex-wrap gap-2 items-center mx-auto sm:mx-0">
+                  <div className="mr-2">{sample.logo}</div>
+                  <span className="px-3 py-1 bg-slate-100 text-[#0A1128] text-xs font-bold rounded-full">
                     {sample.category}
                   </span>
-                  <span className="px-3 py-1 bg-orange-50 text-orange-700 text-xs font-semibold rounded-full">
+                  <span className="px-3 py-1 bg-orange-100 text-orange-800 text-xs font-bold rounded-full">
                     {sample.domain}
                   </span>
-                  <span className="px-3 py-1 bg-ink-100 text-ink-700 text-xs rounded-full">
+                  <span className="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-full">
                     {sample.language}
                   </span>
                 </div>
-                <div className="text-xs text-ink-500 font-medium">
+                <div className="text-xs text-slate-500 font-bold mx-auto sm:mx-0">
                   {sample.format}
                 </div>
               </div>
 
-              <h2 className="font-serif text-xl sm:text-2xl font-bold text-navy-800 mb-3 leading-snug">
+              <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#0A1128] mb-3 text-center">
                 {sample.title}
               </h2>
 
-              <div className="mb-5 bg-ink-50/70 p-4 rounded-xl border border-ink-100 text-sm text-ink-700 leading-relaxed italic">
-                <strong className="not-italic text-navy-800 block mb-1">Abstract Preview:</strong>
-                "{sample.abstract}"
+              <div className="mb-6 bg-slate-50 p-5 rounded-2xl border border-slate-200 text-sm text-slate-700 leading-relaxed text-center sm:text-left">
+                <strong className="not-italic text-[#0A1128] block mb-1 text-center sm:text-left">
+                  Abstract Preview:
+                </strong>
+                &ldquo;{sample.abstract}&rdquo;
               </div>
 
-              <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-ink-500 mb-2">
+              <div className="text-left max-w-2xl mx-auto mb-6">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3 text-center">
                   Sample Structural Attributes:
                 </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <ul className="space-y-2 text-xs sm:text-sm text-slate-700 text-left">
                   {sample.highlights.map((h, i) => (
-                    <div key={i} className="flex items-center gap-2 text-xs sm:text-sm text-ink-700">
-                      <span className="w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0"></span>
+                    <li key={i} className="flex items-center gap-2">
+                      <span className="text-orange-500 font-bold">✓</span>
                       <span>{h}</span>
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-ink-100 flex flex-wrap justify-between items-center gap-4">
-                <span className="text-xs text-ink-400">
+              <div className="pt-4 border-t border-slate-100 flex flex-wrap justify-between items-center gap-4">
+                <span className="text-xs text-slate-400">
                   Redacted under InkMonk Research Non-Disclosure Protocol
                 </span>
                 <Link
                   href="/quote"
-                  className="text-sm font-semibold text-orange-600 hover:text-orange-700 flex items-center gap-1 group"
+                  className="btn-primary-glow text-xs py-2 px-5"
                 >
-                  Order a similar paper
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  Order a similar paper →
                 </Link>
               </div>
             </div>
@@ -146,20 +161,22 @@ export default function SamplesPage() {
         </div>
 
         {/* Bottom Banner */}
-        <div className="gradient-navy rounded-3xl p-8 md:p-12 text-white text-center shadow-float">
-          <h3 className="font-serif text-2xl sm:text-3xl font-bold mb-3">
-            Have a Specific Format or Journal Requirement?
-          </h3>
-          <p className="text-white/70 max-w-xl mx-auto text-sm sm:text-base mb-8">
-            Whether your university requires IEEE, Springer LNCS, Elsevier, Harvard, or a customized university thesis template in English or Hindi, our team configures the exact style guide.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/quote" className="btn-primary">
-              Configure Your Project
-            </Link>
-            <Link href="/chat" className="btn-secondary">
-              Consult with AI Assistant
-            </Link>
+        <div className="bg-midnight rounded-3xl p-8 md:p-12 text-white text-center shadow-2xl relative overflow-hidden">
+          <div className="relative z-10 flex flex-col items-center text-center">
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold mb-3 text-center">
+              Have a Specific Format or Journal Requirement?
+            </h3>
+            <p className="text-slate-300 max-w-xl mx-auto text-sm sm:text-base mb-8 text-center leading-relaxed">
+              Whether your university requires IEEE, Springer LNCS, Elsevier, Harvard, or a customized university thesis template in English or Hindi, our team configures the exact style guide.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link href="/quote" className="btn-primary-glow">
+                Configure Your Project →
+              </Link>
+              <Link href="/chat" className="btn-secondary-dark">
+                Consult with AI Assistant
+              </Link>
+            </div>
           </div>
         </div>
 

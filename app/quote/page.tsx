@@ -3,6 +3,12 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import {
+  UkFlagLogo,
+  IndiaFlagLogo,
+  TurnitinShieldLogo,
+  WhatsAppRealIcon,
+} from '@/components/RealIcons';
 
 interface QuoteResult {
   totalPaise: number;
@@ -249,9 +255,9 @@ function QuoteWizard() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
               {[
-                { id: 'EN', title: 'English Writing', desc: 'Technical & Non-Technical' },
-                { id: 'HI', title: 'Hindi Writing', desc: 'Technical & Non-Technical' },
-                { id: 'TURNITIN', title: 'Turnitin Report', desc: 'AI + Plagiarism Check (₹200/file)' },
+                { id: 'EN', title: 'English Writing', desc: 'Technical & Non-Technical', logo: <UkFlagLogo className="w-8 h-8 mb-2" /> },
+                { id: 'HI', title: 'Hindi Writing', desc: 'Technical & Non-Technical', logo: <IndiaFlagLogo className="w-8 h-8 mb-2" /> },
+                { id: 'TURNITIN', title: 'Turnitin Report', desc: 'AI + Plagiarism Check (₹200/file)', logo: <TurnitinShieldLogo className="w-8 h-8 mb-2" /> },
               ].map((cat) => (
                 <button
                   key={cat.id}
@@ -264,14 +270,15 @@ function QuoteWizard() {
                       setService('RESEARCH_PAPER');
                     }
                   }}
-                  className={`p-5 rounded-xl border-2 text-left transition-all ${
+                  className={`p-5 rounded-2xl border-2 text-center flex flex-col items-center justify-center transition-all ${
                     language === cat.id
                       ? 'border-orange-500 bg-orange-50/50 shadow-md ring-2 ring-orange-500/20'
-                      : 'border-ink-200 hover:border-ink-300 bg-white'
+                      : 'border-slate-200 hover:border-orange-200 bg-white'
                   }`}
                 >
-                  <div className="font-serif font-bold text-lg text-navy-800 mb-1">{cat.title}</div>
-                  <div className="text-ink-600 text-xs">{cat.desc}</div>
+                  {cat.logo}
+                  <div className="font-serif font-bold text-lg text-[#0A1128] mb-1">{cat.title}</div>
+                  <div className="text-slate-500 text-xs">{cat.desc}</div>
                 </button>
               ))}
             </div>

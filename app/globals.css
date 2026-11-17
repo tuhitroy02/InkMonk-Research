@@ -2,17 +2,105 @@
 
 @layer base {
   :root {
-    --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-    --font-serif: var(--font-geist-mono), monospace;
+    --font-cavolini: "Cavolini Condensed", "Cavolini", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   }
 }
 
 body {
-  font-family: var(--font-sans);
-  background-color: #030305;
-  color: #F8FAFC;
+  font-family: var(--font-cavolini);
+  background-color: #F9F7F4;
+  color: #1E293B;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}
+
+/* ─── Global Text Alignment Rule (Requirement 1) ────────────────────────── */
+/* All texts across the site are centered EXCEPT bullet lists */
+p, h1, h2, h3, h4, h5, h6, .center-text-content {
+  text-align: center;
+}
+
+ul, ol, li, .bullet-point, .bullet-list {
+  text-align: left !important;
+}
+
+/* ─── 3D Futuristic Animations & Effects (Requirement 10) ────────────────── */
+@keyframes float3d {
+  0%, 100% {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px);
+  }
+  50% {
+    transform: perspective(1000px) rotateX(4deg) rotateY(-4deg) translateY(-12px);
+  }
+}
+
+.animate-3d-float {
+  animation: float3d 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+@keyframes holoGlow {
+  0%, 100% {
+    box-shadow: 0 10px 30px -10px rgba(255, 107, 0, 0.3), 0 0 40px rgba(245, 166, 35, 0.15);
+  }
+  50% {
+    box-shadow: 0 15px 45px -5px rgba(255, 107, 0, 0.5), 0 0 60px rgba(245, 166, 35, 0.35);
+  }
+}
+
+.animate-holo-glow {
+  animation: holoGlow 4s ease-in-out infinite;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
+
+/* ─── 3D Futuristic Cards ────────────────────────────────────────────────── */
+.card-futuristic-3d {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px -5px rgba(10, 17, 40, 0.05), 0 0 15px rgba(255, 107, 0, 0.03);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+.card-futuristic-3d:hover {
+  transform: perspective(1000px) translateY(-8px) rotateX(2deg) scale(1.015);
+  box-shadow: 0 25px 50px -12px rgba(10, 17, 40, 0.15), 0 0 30px rgba(255, 107, 0, 0.2);
+  border-color: rgba(245, 166, 35, 0.6);
+}
+
+/* ─── Futuristic Step Numbers 1, 2, 3, 4 (Requirement 2) ─────────────────── */
+.step-number-futuristic {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, #FF6B00 0%, #D97706 50%, #0A1128 100%);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px -5px rgba(255, 107, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(254, 215, 170, 0.6);
+  transform: perspective(600px) rotateX(10deg);
+  transition: all 0.3s ease;
+}
+
+.step-number-futuristic:hover {
+  transform: perspective(600px) rotateX(0deg) scale(1.1);
+  box-shadow: 0 15px 35px -5px rgba(255, 107, 0, 0.7);
 }
 
 /* ─── Prestige Color Gradients & Surfaces ────────────────────────────────── */
@@ -25,13 +113,6 @@ body {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.bg-glass-white {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .gradient-saffron {
@@ -56,7 +137,7 @@ body {
 .btn-primary-glow {
   background: linear-gradient(135deg, #FF6B00 0%, #F59E0B 100%);
   color: #FFFFFF;
-  font-weight: 600;
+  font-weight: 700;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -71,7 +152,7 @@ body {
 }
 
 .btn-primary-glow:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02);
   box-shadow: 0 15px 30px -5px rgba(255, 107, 0, 0.55), 0 10px 15px -5px rgba(255, 107, 0, 0.3);
   filter: brightness(1.05);
 }
@@ -79,7 +160,7 @@ body {
 .btn-secondary-dark {
   background: rgba(255, 255, 255, 0.05);
   color: #FFFFFF;
-  font-weight: 500;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -101,7 +182,7 @@ body {
 .btn-whatsapp-pill {
   background: #25D366;
   color: #FFFFFF;
-  font-weight: 600;
+  font-weight: 700;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -113,7 +194,7 @@ body {
 }
 
 .btn-whatsapp-pill:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.03);
   box-shadow: 0 15px 25px -5px rgba(37, 211, 102, 0.5);
   filter: brightness(1.05);
 }
@@ -122,32 +203,16 @@ body {
 .badge-pill-gold {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  background: rgba(245, 166, 35, 0.1);
-  border: 1px solid rgba(245, 166, 35, 0.3);
-  color: #F5A623;
-  font-weight: 500;
+  background: rgba(245, 166, 35, 0.12);
+  border: 1px solid rgba(245, 166, 35, 0.35);
+  color: #D97706;
+  font-weight: 700;
   font-size: 0.85rem;
   letter-spacing: 0.05em;
-  padding: 0.4rem 1rem;
+  padding: 0.4rem 1.25rem;
   border-radius: 9999px;
-}
-
-/* ─── Cards & Surfaces ───────────────────────────────────────────────────── */
-.card-premium {
-  background: rgba(16, 26, 56, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1.5rem;
-  padding: 2rem;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.card-premium:hover {
-  transform: translateY(-6px);
-  border-color: rgba(255, 107, 0, 0.4);
-  box-shadow: 0 20px 40px -15px rgba(255, 107, 0, 0.15);
 }
 
 /* ─── Chat Bubbles ───────────────────────────────────────────────────────── */
@@ -168,36 +233,20 @@ body {
   box-shadow: 0 4px 20px rgba(255, 107, 0, 0.3);
 }
 
-/* ─── Animations ─────────────────────────────────────────────────────────── */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+/* ─── Form Inputs ────────────────────────────────────────────────────────── */
+.input-field {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border-radius: 0.875rem;
+  border: 1px solid #CBD5E1;
+  background-color: #FFFFFF;
+  color: #0A1128;
+  transition: all 0.2s ease;
+  font-family: inherit;
 }
 
-.animate-float {
-  animation: float 5s ease-in-out infinite;
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 4s ease-in-out infinite;
-}
-
-.typing-dot {
-  width: 7px;
-  height: 7px;
-  background: #FF6B00;
-  border-radius: 50%;
-  animation: typing 1.2s infinite ease-in-out;
-}
-.typing-dot:nth-child(2) { animation-delay: 0.2s; }
-.typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes typing {
-  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-  40% { transform: scale(1); opacity: 1; }
+.input-field:focus {
+  outline: none;
+  border-color: #FF6B00;
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
 }

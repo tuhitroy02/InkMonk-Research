@@ -1,13 +1,23 @@
 import Link from 'next/link';
+import {
+  Step1Icon,
+  Step2Icon,
+  Step3Icon,
+  Step4Icon,
+  TurnitinShieldLogo,
+  ResearchPaperRealIcon,
+  ThesisRealIcon,
+} from '@/components/RealIcons';
 
 export const metadata = {
-  title: 'How It Works — Step-by-Step Academic Process',
+  title: 'How It Works — Step-by-Step Academic Process | InkMonk Research',
   description: 'Learn how InkMonk Research executes your academic research and writing projects with rigorous peer-review quality and strict delivery timelines.',
 };
 
 const PHASES = [
   {
     step: '01',
+    logo: <Step1Icon className="w-9 h-9" />,
     title: 'Consultation & Precise Scope Definition',
     desc: 'You provide your research topic, word count, institutional guidelines, target journal/university rubric, and deadline. Use our instant quote engine or consult our interactive local AI assistant.',
     subpoints: [
@@ -19,6 +29,7 @@ const PHASES = [
   },
   {
     step: '02',
+    logo: <Step2Icon className="w-9 h-9" />,
     title: 'Assignment to Domain Specialist',
     desc: 'Your project is assigned directly to qualified subject-matter researchers. For engineering and AI papers, computational specialists lead the architecture. For Hindi research, native scholars oversee grammar and terminology.',
     subpoints: [
@@ -29,6 +40,7 @@ const PHASES = [
   },
   {
     step: '03',
+    logo: <Step3Icon className="w-9 h-9" />,
     title: 'Rigorous Drafting & Model Experimentation',
     desc: 'The complete manuscript is drafted adhering strictly to your target citation style (IEEE, APA, MLA, Harvard, Chicago). When models are requested, scripts and benchmarks are produced and documented.',
     subpoints: [
@@ -39,6 +51,7 @@ const PHASES = [
   },
   {
     step: '04',
+    logo: <TurnitinShieldLogo className="w-9 h-9" />,
     title: 'Turnitin Audit & Quality Assurance',
     desc: 'Every document undergoes an independent Turnitin plagiarism and AI detection audit before delivery to verify zero unintended overlap and authentic authorship.',
     subpoints: [
@@ -49,6 +62,7 @@ const PHASES = [
   },
   {
     step: '05',
+    logo: <ThesisRealIcon className="w-9 h-9" />,
     title: 'Delivery, Review & Client Revisions',
     desc: 'Your files are delivered securely via your client portal and email. You have dedicated revision windows to address any committee or mentor feedback.',
     subpoints: [
@@ -61,40 +75,50 @@ const PHASES = [
 
 export default function HowItWorksPage() {
   return (
-    <div className="min-h-screen bg-ink-50 py-16 px-4">
+    <div className="min-h-screen bg-[#F9F7F4] py-16 px-4 text-center">
       <div className="max-w-5xl mx-auto">
 
-        {/* Header */}
+        {/* Header (Removed Transparent Methodology as requested in Requirement 4) */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="orange-badge">Transparent Methodology</div>
-          <h1 className="section-heading mb-4">Our End-to-End Workflow</h1>
-          <p className="section-subheading">
+          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-[#0A1128] mb-4 text-center">
+            Our End-to-End Workflow
+          </h1>
+          <p className="text-slate-600 text-base sm:text-lg text-center leading-relaxed">
             At InkMonk Research, every paper, thesis, and monograph follows an unyielding quality-assurance pipeline founded on care, clarity, and academic integrity.
           </p>
         </div>
 
-        {/* Steps Timeline */}
+        {/* Steps Timeline with Real Logos & 3D Futuristic Badges */}
         <div className="space-y-8 mb-16">
-          {PHASES.map((p, idx) => (
+          {PHASES.map((p) => (
             <div
               key={p.step}
-              className="bg-white rounded-3xl p-6 md:p-8 border border-ink-100 shadow-card flex flex-col md:flex-row gap-6 items-start"
+              className="card-futuristic-3d p-6 md:p-8 flex flex-col md:flex-row gap-6 items-center md:items-start text-center md:text-left"
             >
-              <div className="w-16 h-16 rounded-2xl gradient-orange text-white font-serif font-bold text-2xl flex items-center justify-center shrink-0 shadow-md">
-                {p.step}
+              {/* Left Side: Real Logo & 3D Step Number */}
+              <div className="flex flex-col items-center gap-2 shrink-0">
+                <div className="step-number-futuristic">
+                  {p.step}
+                </div>
+                <div className="bg-white p-2 rounded-xl shadow-md border border-slate-200">
+                  {p.logo}
+                </div>
               </div>
-              <div className="flex-1">
-                <h2 className="font-serif text-2xl font-bold text-navy-800 mb-2">
+
+              {/* Step Content */}
+              <div className="flex-1 text-center md:text-left">
+                <h2 className="font-serif text-2xl font-bold text-[#0A1128] mb-2 text-center md:text-left">
                   {p.title}
                 </h2>
-                <p className="text-ink-600 text-sm leading-relaxed mb-4">
+                <p className="text-slate-600 text-sm leading-relaxed mb-4 text-center md:text-left">
                   {p.desc}
                 </p>
-                <div className="bg-ink-50/80 p-4 rounded-xl border border-ink-100">
-                  <div className="text-xs font-bold uppercase tracking-wider text-navy-800 mb-2">
+                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                  <div className="text-xs font-bold uppercase tracking-wider text-[#0A1128] mb-2 text-center md:text-left">
                     Key Deliverables in this Phase:
                   </div>
-                  <ul className="space-y-1.5 text-xs sm:text-sm text-ink-700">
+                  {/* Bullets Left-Aligned */}
+                  <ul className="space-y-1.5 text-xs sm:text-sm text-slate-700 text-left">
                     {p.subpoints.map((pt, i) => (
                       <li key={i} className="flex items-center gap-2">
                         <span className="text-orange-500 font-bold">✓</span>
@@ -109,29 +133,29 @@ export default function HowItWorksPage() {
         </div>
 
         {/* Confidentiality & Security Pledge */}
-        <div className="bg-white rounded-3xl p-8 md:p-12 border border-ink-100 shadow-card mb-12">
-          <h3 className="font-serif text-2xl font-bold text-navy-800 mb-4 text-center">
+        <div className="card-futuristic-3d p-8 md:p-12 mb-12 text-center">
+          <h3 className="font-serif text-2xl font-bold text-[#0A1128] mb-4 text-center">
             Our Confidentiality &amp; Academic Guarantee
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <div className="p-5 rounded-2xl bg-ink-50 border border-ink-100">
-              <div className="text-2xl mb-2">🔒</div>
-              <h4 className="font-bold text-navy-800 text-base mb-1">Strict Non-Disclosure</h4>
-              <p className="text-ink-600 text-xs leading-relaxed">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 text-center">
+            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col items-center text-center">
+              <TurnitinShieldLogo className="w-10 h-10 mb-3" />
+              <h4 className="font-bold text-[#0A1128] text-base mb-1 text-center">Strict Non-Disclosure</h4>
+              <p className="text-slate-600 text-xs leading-relaxed text-center">
                 Your research topics, client data, and raw findings are protected under confidentiality agreements and never repurposed or shared.
               </p>
             </div>
-            <div className="p-5 rounded-2xl bg-ink-50 border border-ink-100">
-              <div className="text-2xl mb-2">⚡</div>
-              <h4 className="font-bold text-navy-800 text-base mb-1">Punctual Delivery</h4>
-              <p className="text-ink-600 text-xs leading-relaxed">
+            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col items-center text-center">
+              <ResearchPaperRealIcon className="w-10 h-10 mb-3" />
+              <h4 className="font-bold text-[#0A1128] text-base mb-1 text-center">Punctual Delivery</h4>
+              <p className="text-slate-600 text-xs leading-relaxed text-center">
                 We respect academic calendar deadlines, defense schedules, and conference submission cutoffs with rigorous milestone tracking.
               </p>
             </div>
-            <div className="p-5 rounded-2xl bg-ink-50 border border-ink-100">
-              <div className="text-2xl mb-2">✍️</div>
-              <h4 className="font-bold text-navy-800 text-base mb-1">Human Scholarship</h4>
-              <p className="text-ink-600 text-xs leading-relaxed">
+            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col items-center text-center">
+              <ThesisRealIcon className="w-10 h-10 mb-3" />
+              <h4 className="font-bold text-[#0A1128] text-base mb-1 text-center">Human Scholarship</h4>
+              <p className="text-slate-600 text-xs leading-relaxed text-center">
                 Every project is researched and written by domain experts, audited through Turnitin, and verified against shallow AI hallucinations.
               </p>
             </div>
@@ -140,8 +164,8 @@ export default function HowItWorksPage() {
 
         {/* CTA */}
         <div className="text-center">
-          <Link href="/quote" className="btn-primary px-8 py-3.5 text-base">
-            Get Your Project Underway →
+          <Link href="/quote" className="btn-primary-glow text-base px-8 py-3.5 shadow-xl">
+            Configure Your Project Quote →
           </Link>
         </div>
 
