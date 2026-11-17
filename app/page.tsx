@@ -2,8 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import SplitRevealIntro from '@/components/SplitRevealIntro';
-import { CyberEcosystem3D } from '@/components/CyberEcosystemVisuals';
+import InkMonkCinematicCore from '@/components/InkMonkCinematicCore';
 import {
   ScrollProgressLaser,
   CyberCircuitSpine,
@@ -146,10 +145,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen text-center bg-[#030712] text-[#F8FAFC] relative selection:bg-cyan-500 selection:text-black" style={{ fontFamily: '"Cavolini", "Cavolini Condensed", sans-serif' }}>
 
-      {/* ─── 1. Jitter "The Edit: Split Reveal" Entrance Animation ─────────── */}
-      <SplitRevealIntro />
-
-      {/* ─── 2. Fixed Top Laser Scroll Progress Scanner & HUD ─────────────── */}
+      {/* ─── Fixed Top Laser Scroll Progress Scanner & HUD ─────────────── */}
       <ScrollProgressLaser />
 
       {/* ─── Hero Section with 3D Cyber Ecosystem & Kinetic Motion ────────── */}
@@ -268,17 +264,17 @@ export default function HomePage() {
 
             </div>
 
-            {/* Right Column: 3D Procedural Cyber Ecosystem */}
+            {/* Right Column: 3D InkMonk Research Core (Cinematic Sequence & Final Freeze) */}
             <div className="lg:col-span-5 flex flex-col justify-center items-center gap-4">
-              <div className="w-full">
-                <CyberEcosystem3D />
+              <div className="w-full flex justify-center">
+                <InkMonkCinematicCore />
               </div>
 
               {/* Interactive Badges */}
-              <div className="flex items-center gap-3 w-full justify-center">
+              <div className="flex flex-wrap items-center gap-2.5 w-full justify-center">
                 <button
                   onClick={() => setNdaModalOpen(true)}
-                  className="bg-[#060B18] text-cyan-300 border border-cyan-500/40 hover:border-cyan-400 text-xs font-bold px-4 py-2 rounded-xl shadow-xl flex items-center gap-2 hover:bg-cyan-950/40 transition-colors cursor-pointer font-mono"
+                  className="bg-[#060B18] text-cyan-300 border border-cyan-500/40 hover:border-cyan-400 text-xs font-bold px-3.5 py-1.5 rounded-xl shadow-xl flex items-center gap-2 hover:bg-cyan-950/40 transition-colors cursor-pointer font-mono"
                 >
                   <NdaShieldIcon className="w-4 h-4" />
                   <span>Mutual NDA Protected</span>
@@ -286,10 +282,24 @@ export default function HomePage() {
 
                 <button
                   onClick={() => setSampleModalOpen(true)}
-                  className="bg-emerald-950/80 text-emerald-300 border border-emerald-500/50 hover:border-emerald-400 text-xs font-bold px-4 py-2 rounded-xl shadow-xl flex items-center gap-2 hover:bg-emerald-900/60 transition-colors cursor-pointer font-mono"
+                  className="bg-emerald-950/80 text-emerald-300 border border-emerald-500/50 hover:border-emerald-400 text-xs font-bold px-3.5 py-1.5 rounded-xl shadow-xl flex items-center gap-2 hover:bg-emerald-900/60 transition-colors cursor-pointer font-mono"
                 >
                   <OfficialTurnitinLogo className="w-4 h-4" />
                   <span>Watermarked Sample →</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    if (typeof window !== 'undefined') {
+                      sessionStorage.removeItem('inkmonk_cinematic_played');
+                      window.location.reload();
+                    }
+                  }}
+                  title="Replay the cinematic 3D entrance animation"
+                  className="bg-white/5 text-slate-400 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 text-[11px] font-mono px-3 py-1.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5"
+                >
+                  <span>↺</span>
+                  <span>Replay 3D Sequence</span>
                 </button>
               </div>
             </div>
