@@ -20,13 +20,15 @@ html, body, div, span, p, h1, h2, h3, h4, h5, h6, button, input, select, textare
   font-family: "Cavolini", "Cavolini Condensed", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif !important;
 }
 
+/* ─── Global Background & Base Theme: Kevlar, Chrome & Cyber Flare ─────────── */
 body {
   font-family: var(--font-cavolini) !important;
-  background-color: #F9F7F4;
-  color: #1E293B;
+  background-color: #030712;
+  color: #F8FAFC;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  overflow-x: hidden;
 }
 
 /* ─── Global Text Alignment Rule (Requirement 1) ────────────────────────── */
@@ -56,10 +58,10 @@ ul, ol, li, .bullet-point, .bullet-list {
 
 @keyframes holoGlow {
   0%, 100% {
-    box-shadow: 0 10px 30px -10px rgba(255, 107, 0, 0.3), 0 0 40px rgba(245, 166, 35, 0.15);
+    box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.35), 0 0 40px rgba(16, 185, 129, 0.15);
   }
   50% {
-    box-shadow: 0 15px 45px -5px rgba(255, 107, 0, 0.5), 0 0 60px rgba(245, 166, 35, 0.35);
+    box-shadow: 0 15px 45px -5px rgba(6, 182, 212, 0.6), 0 0 60px rgba(16, 185, 129, 0.35);
   }
 }
 
@@ -76,21 +78,24 @@ ul, ol, li, .bullet-point, .bullet-list {
   animation: spinSlow 20s linear infinite;
 }
 
-/* ─── 3D Futuristic Cards ────────────────────────────────────────────────── */
+/* ─── 3D Futuristic Cards (Kevlar Obsidian & Chrome Aesthetic) ───────────── */
 .card-futuristic-3d {
   position: relative;
-  background: #FFFFFF;
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  background: rgba(8, 14, 30, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.2);
   border-radius: 1.5rem;
-  box-shadow: 0 10px 30px -5px rgba(10, 17, 40, 0.05), 0 0 15px rgba(255, 107, 0, 0.03);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 0 20px rgba(6, 182, 212, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   transform-style: preserve-3d;
+  color: #F8FAFC;
 }
 
 .card-futuristic-3d:hover {
   transform: perspective(1000px) translateY(-8px) rotateX(2deg) scale(1.015);
-  box-shadow: 0 25px 50px -12px rgba(10, 17, 40, 0.15), 0 0 30px rgba(255, 107, 0, 0.2);
-  border-color: rgba(245, 166, 35, 0.6);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 35px rgba(6, 182, 212, 0.35);
+  border-color: rgba(34, 211, 238, 0.6);
 }
 
 /* ─── Futuristic Step Numbers 1, 2, 3, 4 (Requirement 2) ─────────────────── */
@@ -99,66 +104,66 @@ ul, ol, li, .bullet-point, .bullet-list {
   width: 4rem;
   height: 4rem;
   border-radius: 1.25rem;
-  background: linear-gradient(135deg, #FF6B00 0%, #D97706 50%, #0A1128 100%);
+  background: linear-gradient(135deg, #00F2FE 0%, #06B6D4 50%, #030712 100%);
   color: #FFFFFF;
   font-weight: 800;
   font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 25px -5px rgba(255, 107, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.4);
-  border: 2px solid rgba(254, 215, 170, 0.6);
+  box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(103, 232, 249, 0.6);
   transform: perspective(600px) rotateX(10deg);
   transition: all 0.3s ease;
 }
 
 .step-number-futuristic:hover {
   transform: perspective(600px) rotateX(0deg) scale(1.1);
-  box-shadow: 0 15px 35px -5px rgba(255, 107, 0, 0.7);
+  box-shadow: 0 15px 35px -5px rgba(6, 182, 212, 0.7);
 }
 
-/* ─── Prestige Color Gradients & Surfaces ────────────────────────────────── */
+/* ─── Futuristic Gradients & Surfaces ────────────────────────────────────── */
 .bg-midnight {
-  background: radial-gradient(circle at 80% 20%, #152758 0%, #0A1128 50%, #030305 100%);
+  background: radial-gradient(circle at 50% 20%, #0A1938 0%, #060B18 50%, #030712 100%);
 }
 
 .bg-midnight-card {
-  background: rgba(16, 26, 56, 0.75);
+  background: rgba(8, 14, 30, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 .gradient-saffron {
-  background: linear-gradient(135deg, #FF6B00 0%, #F59E0B 100%);
+  background: linear-gradient(135deg, #00F2FE 0%, #06B6D4 100%);
 }
 
 .gradient-gold-text {
-  background: linear-gradient(135deg, #F5A623 0%, #FBBF24 50%, #F59E0B 100%);
+  background: linear-gradient(135deg, #00F2FE 0%, #38BDF8 50%, #10B981 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-saffron-text {
-  background: linear-gradient(135deg, #FF6B00 0%, #F97316 100%);
+  background: linear-gradient(135deg, #00F2FE 0%, #38BDF8 50%, #10B981 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* ─── Interactive Buttons ────────────────────────────────────────────────── */
+/* ─── Interactive Buttons (Cyber Glow & Platinum Chrome) ──────────────────── */
 .btn-primary-glow {
-  background: linear-gradient(135deg, #FF6B00 0%, #F59E0B 100%);
-  color: #FFFFFF;
-  font-weight: 700;
+  background: linear-gradient(135deg, #00F2FE 0%, #06B6D4 50%, #0891B2 100%);
+  color: #030712;
+  font-weight: 800;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   padding: 0.875rem 2rem;
   border-radius: 9999px;
-  box-shadow: 0 10px 25px -5px rgba(255, 107, 0, 0.4), 0 8px 10px -6px rgba(255, 107, 0, 0.2);
+  box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.45), 0 0 20px rgba(6, 182, 212, 0.3);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   border: none;
@@ -167,62 +172,64 @@ ul, ol, li, .bullet-point, .bullet-list {
 
 .btn-primary-glow:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 15px 30px -5px rgba(255, 107, 0, 0.55), 0 10px 15px -5px rgba(255, 107, 0, 0.3);
-  filter: brightness(1.05);
+  box-shadow: 0 15px 35px -5px rgba(6, 182, 212, 0.65), 0 0 30px rgba(6, 182, 212, 0.5);
+  filter: brightness(1.1);
+  color: #000000;
 }
 
 .btn-secondary-dark {
-  background: rgba(255, 255, 255, 0.05);
-  color: #FFFFFF;
-  font-weight: 600;
+  background: rgba(255, 255, 255, 0.06);
+  color: #F8FAFC;
+  font-weight: 700;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   padding: 0.875rem 1.875rem;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(226, 232, 240, 0.25);
   backdrop-filter: blur(12px);
   transition: all 0.25s ease;
   text-decoration: none;
 }
 
 .btn-secondary-dark:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(34, 211, 238, 0.5);
   transform: translateY(-2px);
+  color: #FFFFFF;
 }
 
 .btn-whatsapp-pill {
-  background: #25D366;
+  background: #10B981;
   color: #FFFFFF;
-  font-weight: 700;
+  font-weight: 800;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.75rem;
   border-radius: 9999px;
-  box-shadow: 0 10px 20px -5px rgba(37, 211, 102, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.45), 0 0 20px rgba(16, 185, 129, 0.25);
   transition: all 0.25s ease;
   text-decoration: none;
 }
 
 .btn-whatsapp-pill:hover {
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 15px 25px -5px rgba(37, 211, 102, 0.5);
-  filter: brightness(1.05);
+  box-shadow: 0 15px 30px -5px rgba(16, 185, 129, 0.65);
+  filter: brightness(1.1);
 }
 
-/* ─── Luxury Badge ───────────────────────────────────────────────────────── */
+/* ─── Cyber Flare Badges ─────────────────────────────────────────────────── */
 .badge-pill-gold {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: rgba(245, 166, 35, 0.12);
-  border: 1px solid rgba(245, 166, 35, 0.35);
-  color: #D97706;
-  font-weight: 700;
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  color: #22D3EE;
+  font-weight: 800;
   font-size: 0.85rem;
   letter-spacing: 0.05em;
   padding: 0.4rem 1.25rem;
@@ -231,20 +238,21 @@ ul, ol, li, .bullet-point, .bullet-list {
 
 /* ─── Chat Bubbles ───────────────────────────────────────────────────────── */
 .chat-bubble-bot {
-  background: rgba(16, 26, 56, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(8, 14, 30, 0.9);
+  border: 1px solid rgba(56, 189, 248, 0.25);
   border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
   padding: 1rem 1.25rem;
   color: #F8FAFC;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .chat-bubble-user {
-  background: linear-gradient(135deg, #FF6B00, #F59E0B);
+  background: linear-gradient(135deg, #00F2FE, #06B6D4);
   border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
   padding: 1rem 1.25rem;
-  color: #FFFFFF;
-  box-shadow: 0 4px 20px rgba(255, 107, 0, 0.3);
+  color: #030712;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.35);
 }
 
 /* ─── Form Inputs ────────────────────────────────────────────────────────── */
@@ -252,17 +260,17 @@ ul, ol, li, .bullet-point, .bullet-list {
   width: 100%;
   padding: 0.875rem 1rem;
   border-radius: 0.875rem;
-  border: 1px solid #CBD5E1;
-  background-color: #FFFFFF;
-  color: #0A1128;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  background-color: rgba(8, 14, 30, 0.8);
+  color: #F8FAFC;
   transition: all 0.2s ease;
   font-family: inherit;
 }
 
 .input-field:focus {
   outline: none;
-  border-color: #FF6B00;
-  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
+  border-color: #00F2FE;
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.25);
 }
 
 /* ─── Futuristic Split Reveal & Cyber Motion (Inspired by Jitter "The Edit") ─ */
@@ -300,11 +308,11 @@ ul, ol, li, .bullet-point, .bullet-list {
   50% {
     transform: scaleX(1);
     opacity: 1;
-    box-shadow: 0 0 20px #FF6B00, 0 0 40px #38BDF8;
+    box-shadow: 0 0 25px #00F2FE, 0 0 50px #10B981;
   }
   100% {
     transform: scaleX(1);
-    opacity: 0.75;
+    opacity: 0.85;
   }
 }
 
@@ -339,14 +347,14 @@ ul, ol, li, .bullet-point, .bullet-list {
 }
 
 .animate-scanline {
-  animation: scanlineSweep 8s linear infinite;
+  animation: scanlineSweep 4s linear infinite;
 }
 
 /* Cyber Grid Background */
 .cyber-grid-bg {
   background-image: 
-    linear-gradient(to right, rgba(255, 107, 0, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
+    linear-gradient(to right, rgba(6, 182, 212, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.08) 1px, transparent 1px);
   background-size: 36px 36px;
   mask-image: radial-gradient(circle at 50% 40%, black 40%, transparent 80%);
   -webkit-mask-image: radial-gradient(circle at 50% 40%, black 40%, transparent 80%);
@@ -357,7 +365,7 @@ ul, ol, li, .bullet-point, .bullet-list {
   position: relative;
   overflow: hidden;
   border-radius: 1.5rem;
-  background: #0A1128;
+  background: #060B18;
   padding: 1px;
 }
 
@@ -371,9 +379,9 @@ ul, ol, li, .bullet-point, .bullet-list {
   background: conic-gradient(
     transparent 0deg,
     transparent 280deg,
-    #FF6B00 320deg,
-    #38BDF8 350deg,
-    #F59E0B 360deg
+    #00F2FE 320deg,
+    #10B981 350deg,
+    #38BDF8 360deg
   );
   animation: borderBeamSpin 6s linear infinite;
   z-index: 0;
@@ -382,7 +390,7 @@ ul, ol, li, .bullet-point, .bullet-list {
 .border-beam-content {
   position: relative;
   z-index: 1;
-  background: #0A1128;
+  background: #080E1E;
   border-radius: calc(1.5rem - 1px);
 }
 
@@ -398,8 +406,8 @@ ul, ol, li, .bullet-point, .bullet-list {
   left: -2px;
   width: 12px;
   height: 12px;
-  border-top: 2px solid #FF6B00;
-  border-left: 2px solid #FF6B00;
+  border-top: 2px solid #00F2FE;
+  border-left: 2px solid #00F2FE;
   pointer-events: none;
 }
 
@@ -410,8 +418,8 @@ ul, ol, li, .bullet-point, .bullet-list {
   right: -2px;
   width: 12px;
   height: 12px;
-  border-bottom: 2px solid #38BDF8;
-  border-right: 2px solid #38BDF8;
+  border-bottom: 2px solid #10B981;
+  border-right: 2px solid #10B981;
   pointer-events: none;
 }
 
@@ -420,7 +428,7 @@ ul, ol, li, .bullet-point, .bullet-list {
   background: #FFFFFF;
   background-image: radial-gradient(#E2E8F0 1px, transparent 1px);
   background-size: 16px 16px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
   border: 1px solid #E2E8F0;
 }
 

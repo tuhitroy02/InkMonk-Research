@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { WhatsAppRealIcon } from '@/components/RealIcons';
+import { Interactive3DCard } from '@/components/FuturisticScrollExperience';
 
 interface FAQItem {
   q: string;
@@ -61,30 +62,30 @@ export default function FAQPage() {
   const filteredFaqs = filter === 'All' ? FAQS : FAQS.filter(f => f.category === filter);
 
   return (
-    <div className="min-h-screen bg-[#F9F7F4] py-16 px-4 text-center">
+    <div className="min-h-screen bg-[#030712] text-[#F8FAFC] py-20 px-4 text-center selection:bg-cyan-500 selection:text-black" style={{ fontFamily: '"Cavolini", "Cavolini Condensed", sans-serif' }}>
       <div className="max-w-4xl mx-auto">
 
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="badge-pill-gold mb-3">Frequently Asked Questions</div>
-          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-[#0A1128] mb-4 text-center">
+          <div className="badge-pill-gold mb-3 font-mono">FREQUENTLY ASKED QUESTIONS</div>
+          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-4 text-center">
             Got Questions? We Have Answers
           </h1>
-          <p className="text-slate-600 text-base sm:text-lg text-center leading-relaxed">
+          <p className="text-slate-400 text-base sm:text-lg text-center leading-relaxed font-medium">
             Clear, transparent answers about our academic workflows, pricing estimates, confidentiality protocols, and research standards.
           </p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        <div className="flex flex-wrap justify-center gap-2 mb-10 font-mono">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 filter === cat
-                  ? 'bg-[#0A1128] text-white shadow-md'
-                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                  ? 'bg-cyan-950 text-cyan-300 border border-cyan-400/50 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
+                  : 'bg-[#060B18] text-slate-400 hover:text-white border border-slate-800'
               }`}
             >
               {cat}
@@ -92,55 +93,54 @@ export default function FAQPage() {
           ))}
         </div>
 
-        {/* Accordion (Centered question header, left-aligned answer for readability) */}
+        {/* Accordion */}
         <div className="space-y-4 mb-16 text-center">
           {filteredFaqs.map((faq, idx) => {
             const isOpen = openIdx === idx;
             return (
-              <div
-                key={idx}
-                className="card-futuristic-3d overflow-hidden text-center"
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenIdx(isOpen ? null : idx)}
-                  className="w-full text-center p-6 flex justify-between items-center gap-4 hover:bg-slate-50 transition-colors"
-                >
-                  <span className="font-serif font-bold text-base sm:text-lg text-[#0A1128] text-left">
-                    {faq.q}
-                  </span>
-                  <span className="w-8 h-8 rounded-full bg-slate-100 text-[#0A1128] flex items-center justify-center shrink-0 text-sm font-bold">
-                    {isOpen ? '−' : '+'}
-                  </span>
-                </button>
-                {isOpen && (
-                  <div className="px-6 pb-6 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-4 text-left">
-                    {faq.a}
-                  </div>
-                )}
-              </div>
+              <Interactive3DCard key={idx} glowColor="cyan">
+                <div className="card-futuristic-3d overflow-hidden text-center">
+                  <button
+                    type="button"
+                    onClick={() => setOpenIdx(isOpen ? null : idx)}
+                    className="w-full text-center p-6 flex justify-between items-center gap-4 hover:bg-white/5 transition-colors cursor-pointer"
+                  >
+                    <span className="font-serif font-bold text-base sm:text-lg text-white text-left">
+                      {faq.q}
+                    </span>
+                    <span className="w-8 h-8 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500/40 flex items-center justify-center shrink-0 text-sm font-bold font-mono">
+                      {isOpen ? '−' : '+'}
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <div className="px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-slate-800 pt-4 text-left">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              </Interactive3DCard>
             );
           })}
         </div>
 
         {/* Still have questions */}
-        <div className="bg-midnight rounded-3xl p-8 md:p-10 text-white text-center shadow-2xl relative overflow-hidden">
+        <div className="bg-[#060B18] border border-cyan-500/30 rounded-3xl p-8 md:p-10 text-white text-center shadow-2xl relative overflow-hidden">
           <div className="relative z-10 flex flex-col items-center text-center">
             <h3 className="font-serif text-2xl sm:text-3xl font-bold mb-2 text-center">
               Have a Question Not Listed Here?
             </h3>
-            <p className="text-slate-300 text-sm max-w-md mx-auto mb-6 text-center">
+            <p className="text-slate-300 text-sm max-w-md mx-auto mb-6 text-center font-medium">
               Ask our instant local AI assistant or talk directly with our founders on WhatsApp.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/chat" className="btn-primary-glow">
+              <Link href="/chat" className="btn-primary-glow font-mono">
                 Ask AI Assistant →
               </Link>
               <a
                 href="https://wa.me/917980470880"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-whatsapp-pill"
+                className="btn-whatsapp-pill font-mono"
               >
                 <WhatsAppRealIcon className="w-5 h-5" />
                 <span>WhatsApp (+91 7980470880)</span>

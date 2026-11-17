@@ -8,6 +8,7 @@ import {
   EmailRealIcon,
   TurnitinShieldLogo,
 } from '@/components/RealIcons';
+import { Interactive3DCard } from '@/components/FuturisticScrollExperience';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -50,17 +51,17 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F9F7F4] py-16 px-4 text-center">
+    <div className="min-h-screen bg-[#030712] text-[#F8FAFC] py-20 px-4 text-center selection:bg-cyan-500 selection:text-black" style={{ fontFamily: '"Cavolini", "Cavolini Condensed", sans-serif' }}>
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="badge-pill-gold mb-3">Direct Academic Consultation</div>
-          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-[#0A1128] mb-4 text-center">
+          <div className="badge-pill-gold mb-3 font-mono">DIRECT ACADEMIC CONSULTATION</div>
+          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-4 text-center">
             Connect with InkMonk Research
           </h1>
-          <p className="text-slate-600 text-base sm:text-lg text-center leading-relaxed">
-            Connect directly with founders <strong>Tuhit Roy</strong> and <strong>Sampreeti Mukherjee</strong>. We review and respond swiftly to all scholarly briefs, quotes, and research requirements.
+          <p className="text-slate-400 text-base sm:text-lg text-center leading-relaxed font-medium">
+            Connect directly with founders <strong className="text-white">Tuhit Roy</strong> and <strong className="text-white">Sampreeti Mukherjee</strong>. We review and respond swiftly to all scholarly briefs, quotes, and research requirements.
           </p>
         </div>
 
@@ -70,78 +71,84 @@ export default function ContactPage() {
           <div className="space-y-6">
 
             {/* Office Address Card */}
-            <div className="card-futuristic-3d p-7 flex flex-col items-center text-center">
-              <LocationRealIcon className="w-12 h-12 mb-3" />
-              <h3 className="font-serif font-bold text-xl text-[#0A1128] mb-2 text-center">Office Address</h3>
-              <p className="text-slate-600 text-sm leading-relaxed text-center">
-                Karunamoyee, Sector 2, Salt Lake City,<br />
-                Kolkata 700091, West Bengal, India
-              </p>
-              <span className="inline-block mt-3 text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded-full font-bold">
-                Visits by prior appointment
-              </span>
-            </div>
+            <Interactive3DCard glowColor="cyan">
+              <div className="card-futuristic-3d p-7 flex flex-col items-center text-center">
+                <LocationRealIcon className="w-12 h-12 mb-3" />
+                <h3 className="font-serif font-bold text-xl text-white mb-2 text-center">Office Address</h3>
+                <p className="text-slate-400 text-sm leading-relaxed text-center">
+                  Karunamoyee, Sector 2, Salt Lake City,<br />
+                  Kolkata 700091, West Bengal, India
+                </p>
+                <span className="inline-block mt-3 text-xs bg-cyan-950/80 text-cyan-300 border border-cyan-500/40 px-3 py-1 rounded-full font-mono font-bold">
+                  Visits by prior appointment
+                </span>
+              </div>
+            </Interactive3DCard>
 
             {/* WhatsApp & Instant Advisory Card */}
-            <div className="card-futuristic-3d p-7 flex flex-col items-center text-center border-2 border-emerald-400/40">
-              <WhatsAppRealIcon className="w-12 h-12 mb-3" />
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">Online &amp; Available</span>
+            <Interactive3DCard glowColor="emerald">
+              <div className="card-futuristic-3d p-7 flex flex-col items-center text-center border-2 border-emerald-500/40">
+                <WhatsAppRealIcon className="w-12 h-12 mb-3" />
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">Online &amp; Available</span>
+                </div>
+                <h3 className="font-serif font-bold text-xl text-white mb-2 text-center">Direct WhatsApp</h3>
+                <p className="text-slate-400 text-xs sm:text-sm mb-4 text-center leading-relaxed">
+                  Direct consultation for urgent deadlines and instant quotes with our directors.
+                </p>
+                <a
+                  href="https://wa.me/917980470880"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-whatsapp-pill w-full justify-center text-sm font-mono"
+                >
+                  Chat on WhatsApp (+91 7980470880)
+                </a>
               </div>
-              <h3 className="font-serif font-bold text-xl text-[#0A1128] mb-2 text-center">Direct WhatsApp</h3>
-              <p className="text-slate-600 text-xs sm:text-sm mb-4 text-center leading-relaxed">
-                Direct consultation for urgent deadlines and instant quotes with our directors.
-              </p>
-              <a
-                href="https://wa.me/917980470880"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-whatsapp-pill w-full justify-center text-sm"
-              >
-                Chat on WhatsApp (+91 7980470880)
-              </a>
-            </div>
+            </Interactive3DCard>
 
             {/* Email Support Card */}
-            <div className="card-futuristic-3d p-7 flex flex-col items-center text-center">
-              <EmailRealIcon className="w-12 h-12 mb-3" />
-              <h3 className="font-serif font-bold text-xl text-[#0A1128] mb-2 text-center">Email Desk</h3>
-              <p className="text-slate-600 text-xs sm:text-sm mb-3 text-center leading-relaxed">
-                For detailed research briefs, institutional contracts, and manuscript attachments.
-              </p>
-              <a
-                href="mailto:inkmonkresearch@gmail.com"
-                className="text-orange-600 font-bold text-sm hover:underline"
-              >
-                inkmonkresearch@gmail.com
-              </a>
-            </div>
+            <Interactive3DCard glowColor="cyan">
+              <div className="card-futuristic-3d p-7 flex flex-col items-center text-center">
+                <EmailRealIcon className="w-12 h-12 mb-3" />
+                <h3 className="font-serif font-bold text-xl text-white mb-2 text-center">Email Desk</h3>
+                <p className="text-slate-400 text-xs sm:text-sm mb-3 text-center leading-relaxed">
+                  For detailed research briefs, institutional contracts, and manuscript attachments.
+                </p>
+                <a
+                  href="mailto:inkmonkresearch@gmail.com"
+                  className="text-cyan-400 font-mono font-bold text-sm hover:underline"
+                >
+                  inkmonkresearch@gmail.com
+                </a>
+              </div>
+            </Interactive3DCard>
 
           </div>
 
           {/* Inquiry Form Column (Sleek Glassmorphic 3D Card) */}
           <div className="lg:col-span-2">
-            <div className="card-futuristic-3d p-8 md:p-10 text-center">
-              <h2 className="font-serif text-3xl font-bold text-[#0A1128] mb-2 text-center">
+            <div className="card-futuristic-3d p-8 md:p-10 text-center h-full">
+              <h2 className="font-serif text-3xl font-bold text-white mb-2 text-center">
                 Send an Academic Inquiry
               </h2>
-              <p className="text-slate-600 text-sm mb-8 text-center">
+              <p className="text-slate-400 text-sm mb-8 text-center">
                 Fill in your project specifications below. Our directors review and respond within 2 to 4 business hours.
               </p>
 
               {submitted ? (
-                <div className="p-8 bg-emerald-50 rounded-2xl border border-emerald-300 text-center animate-3d-float">
+                <div className="p-8 bg-emerald-950/80 rounded-2xl border border-emerald-500/50 text-center animate-3d-float">
                   <TurnitinShieldLogo className="w-16 h-16 mx-auto mb-3" />
-                  <h3 className="font-serif text-2xl font-bold text-emerald-900 mb-2 text-center">
+                  <h3 className="font-serif text-2xl font-bold text-white mb-2 text-center">
                     Message Dispatched Successfully!
                   </h3>
-                  <p className="text-emerald-700 text-sm max-w-md mx-auto mb-6 text-center leading-relaxed">
+                  <p className="text-emerald-300 text-sm max-w-md mx-auto mb-6 text-center leading-relaxed">
                     Thank you for reaching out to InkMonk Research. Founders Tuhit Roy and Sampreeti Mukherjee have received your submission and will review your specifications promptly.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="btn-secondary-dark !text-emerald-900 !border-emerald-600 hover:!bg-emerald-100 text-xs py-2 px-6"
+                    className="btn-secondary-dark text-xs py-2 px-6"
                   >
                     Send Another Note
                   </button>
@@ -150,7 +157,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-5 text-center">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="text-left">
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                      <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 text-left">
                         Your Full Name *
                       </label>
                       <input
@@ -163,7 +170,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div className="text-left">
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                      <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 text-left">
                         Email Address *
                       </label>
                       <input
@@ -179,7 +186,7 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="text-left">
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                      <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 text-left">
                         WhatsApp / Phone Number
                       </label>
                       <input
@@ -191,7 +198,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div className="text-left">
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                      <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 text-left">
                         Academic Discipline / Subject
                       </label>
                       <input
@@ -205,7 +212,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="text-left">
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                    <label className="block text-xs font-mono font-bold text-slate-300 mb-1.5 text-left">
                       Project Requirements &amp; Scope *
                     </label>
                     <textarea
@@ -219,20 +226,20 @@ export default function ContactPage() {
                   </div>
 
                   {error && (
-                    <div className="p-3 bg-red-50 text-red-700 text-sm rounded-xl border border-red-200 text-center">
+                    <div className="p-3 bg-red-950/80 text-red-300 text-sm rounded-xl border border-red-500/40 text-center">
                       {error}
                     </div>
                   )}
 
-                  <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-slate-100">
-                    <div className="flex items-center gap-2 text-xs text-slate-500">
-                      <TurnitinShieldLogo className="w-4 h-4" />
+                  <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-slate-800">
+                    <div className="flex items-center gap-2 text-xs text-slate-400">
+                      <TurnitinShieldLogo className="w-4 h-4 text-emerald-400" />
                       <span>Strict Academic Non-Disclosure &amp; Confidentiality Assured</span>
                     </div>
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="btn-primary-glow w-full sm:w-auto text-sm px-8"
+                      className="btn-primary-glow w-full sm:w-auto text-sm px-8 font-mono"
                     >
                       {isSubmitting ? 'Transmitting...' : 'Dispatch Inquiry →'}
                     </button>

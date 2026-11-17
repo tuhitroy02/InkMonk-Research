@@ -7,7 +7,7 @@ import { TurnitinShieldLogo, AcademicLabCrestLogo } from '@/components/RealIcons
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center font-bold">Accessing InkMonk Security Portal…</div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center font-bold bg-[#030712] text-cyan-300 font-mono">ACCESSING INKMONK SECURITY MATRIX…</div>}>
       <LoginContent />
     </Suspense>
   );
@@ -98,9 +98,9 @@ function LoginContent() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Verification failed.');
-      router.replace('/client');
+      router.replace(data.user.role === 'ADMIN' ? '/admin' : '/client');
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Invalid code. Try again or use 123456.');
+      setError(err instanceof Error ? err.message : 'Invalid code.');
     } finally {
       setLoading(false);
     }
@@ -149,25 +149,25 @@ function LoginContent() {
   }
 
   return (
-    <div className="min-h-[calc(100vh-5rem)] bg-[#F9F7F4] px-4 py-12 flex items-center justify-center text-center">
+    <div className="min-h-[calc(100vh-5rem)] bg-[#030712] text-[#F8FAFC] px-4 py-16 flex items-center justify-center text-center selection:bg-cyan-500 selection:text-black" style={{ fontFamily: '"Cavolini", "Cavolini Condensed", sans-serif' }}>
       <div className="max-w-md w-full">
 
         {/* Portal Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-900 text-xs font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 bg-cyan-950/80 border border-cyan-400/40 text-cyan-300 text-xs font-mono font-bold px-3 py-1 rounded-full mb-3 uppercase tracking-wider">
             <AcademicLabCrestLogo className="w-5 h-5" />
             <span>InkMonk Research Portals</span>
           </div>
-          <h1 className="font-serif text-3xl font-bold text-[#0A1128] mb-1">
+          <h1 className="font-serif text-3xl font-bold text-white mb-1">
             Access Your Portal
           </h1>
-          <p className="text-slate-600 text-xs">
+          <p className="text-slate-400 text-xs font-medium">
             Direct access for academic clients and research directors
           </p>
         </div>
 
         {/* Top Portal Switcher (Client vs Admin) */}
-        <div className="grid grid-cols-2 gap-2 p-1.5 bg-slate-200 rounded-2xl mb-6 shadow-inner">
+        <div className="grid grid-cols-2 gap-2 p-1.5 bg-[#060B18] border border-cyan-500/30 rounded-2xl mb-6 shadow-inner font-mono">
           <button
             type="button"
             onClick={() => {
@@ -175,10 +175,10 @@ function LoginContent() {
               setError(null);
               setSuccessMsg(null);
             }}
-            className={`py-2.5 text-xs font-bold rounded-xl transition-all ${
+            className={`py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
               activeTab === 'CLIENT'
-                ? 'bg-white text-orange-600 shadow-md scale-[1.02]'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-cyan-950 text-cyan-300 border border-cyan-400/50 shadow-[0_0_15px_rgba(6,182,212,0.3)] scale-[1.02]'
+                : 'text-slate-400 hover:text-white'
             }`}
           >
             Client Portal
@@ -190,10 +190,10 @@ function LoginContent() {
               setError(null);
               setSuccessMsg(null);
             }}
-            className={`py-2.5 text-xs font-bold rounded-xl transition-all ${
+            className={`py-2.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
               activeTab === 'ADMIN'
-                ? 'bg-[#0A1128] text-amber-300 shadow-md scale-[1.02]'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-emerald-950 text-emerald-300 border border-emerald-400/50 shadow-[0_0_15px_rgba(16,185,129,0.3)] scale-[1.02]'
+                : 'text-slate-400 hover:text-white'
             }`}
           >
             Admin Dashboard
@@ -202,29 +202,29 @@ function LoginContent() {
 
         {/* Error / Success Notifications */}
         {error && (
-          <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-bold text-center">
+          <div className="mb-6 p-4 rounded-xl bg-red-950/80 border border-red-500/40 text-red-300 text-xs font-bold text-center">
             {error}
           </div>
         )}
 
         {successMsg && (
-          <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-bold text-center">
+          <div className="mb-6 p-4 rounded-xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-bold text-center">
             {successMsg}
           </div>
         )}
 
         {/* ─── CLIENT PORTAL LOGIN CARD ────────────────────────────────────── */}
         {activeTab === 'CLIENT' && (
-          <div className="card-futuristic-3d p-6 sm:p-8 text-center border-t-4 border-t-orange-500">
+          <div className="card-futuristic-3d p-6 sm:p-8 text-center border-t-4 border-t-cyan-500">
             <div className="flex justify-center mb-3">
-              <span className="w-12 h-12 rounded-2xl bg-orange-100 flex items-center justify-center text-orange-600 text-xl font-bold">
+              <span className="w-12 h-12 rounded-2xl bg-cyan-950/80 border border-cyan-400/40 flex items-center justify-center text-cyan-300 text-xl font-bold">
                 🎓
               </span>
             </div>
-            <h2 className="font-serif text-xl font-bold text-[#0A1128] mb-1">
+            <h2 className="font-serif text-xl font-bold text-white mb-1">
               Client Project Portal
             </h2>
-            <p className="text-slate-500 text-xs mb-6">
+            <p className="text-slate-400 text-xs mb-6 font-medium">
               Track chapters, verify Turnitin reports, and download deliverables
             </p>
 
@@ -234,7 +234,7 @@ function LoginContent() {
                 {!codeSent ? (
                   <form onSubmit={handleSendOtp} className="space-y-4 text-left">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-mono font-bold text-slate-300 mb-1">
                         Email Address or Phone Number
                       </label>
                       <input
@@ -249,7 +249,7 @@ function LoginContent() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="btn-primary-glow w-full !py-3 text-xs font-bold disabled:opacity-50"
+                      className="btn-primary-glow w-full !py-3 text-xs font-bold font-mono disabled:opacity-50"
                     >
                       {loading ? 'Generating Code…' : 'Send Access Code →'}
                     </button>
@@ -257,21 +257,21 @@ function LoginContent() {
                 ) : (
                   <form onSubmit={handleVerifyOtp} className="space-y-4 text-left">
                     {codeHint && (
-                      <div className="p-3 bg-amber-50 border border-amber-300 rounded-xl text-center">
-                        <div className="text-[11px] text-amber-800 font-bold uppercase">
+                      <div className="p-3 bg-cyan-950/80 border border-cyan-400/50 rounded-xl text-center">
+                        <div className="text-[11px] text-cyan-300 font-mono font-bold uppercase">
                           Instant Access Code
                         </div>
-                        <div className="font-mono text-2xl font-black text-[#0A1128] my-1 tracking-widest">
+                        <div className="font-mono text-2xl font-black text-white my-1 tracking-widest">
                           {codeHint}
                         </div>
-                        <div className="text-[10px] text-slate-500">
+                        <div className="text-[10px] text-slate-400 font-mono">
                           (Code automatically applied below)
                         </div>
                       </div>
                     )}
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                      <label className="block text-xs font-mono font-bold text-slate-300 mb-1">
                         Enter 6-Digit Code
                       </label>
                       <input
@@ -287,7 +287,7 @@ function LoginContent() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="btn-primary-glow w-full !py-3 text-xs font-bold disabled:opacity-50"
+                      className="btn-primary-glow w-full !py-3 text-xs font-bold font-mono disabled:opacity-50"
                     >
                       {loading ? 'Verifying…' : 'Enter Client Portal →'}
                     </button>
@@ -298,7 +298,7 @@ function LoginContent() {
                         setCodeSent(false);
                         setCodeHint(null);
                       }}
-                      className="w-full text-center text-xs text-slate-500 hover:text-slate-800 pt-1"
+                      className="w-full text-center text-xs text-slate-400 hover:text-cyan-300 pt-1 font-mono cursor-pointer"
                     >
                       ← Change Email / Phone
                     </button>
@@ -306,18 +306,18 @@ function LoginContent() {
                 )}
 
                 {/* Switch to Password or Google */}
-                <div className="mt-6 pt-4 border-t border-slate-100 flex flex-col gap-2">
+                <div className="mt-6 pt-4 border-t border-slate-800 flex flex-col gap-2">
                   <button
                     type="button"
                     onClick={() => setClientAuthMode('PASSWORD')}
-                    className="text-xs text-orange-600 font-bold hover:underline"
+                    className="text-xs text-cyan-400 font-mono font-bold hover:underline cursor-pointer"
                   >
                     Or Sign in with Email &amp; Password →
                   </button>
 
                   <a
                     href="/api/auth/google"
-                    className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors mt-2"
+                    className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-slate-700 bg-white/5 hover:bg-white/10 text-xs font-mono font-bold text-slate-200 transition-colors mt-2"
                   >
                     <svg className="w-4 h-4" viewBox="0 0 24 24">
                       <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -333,7 +333,7 @@ function LoginContent() {
               /* Password Form */
               <form onSubmit={handleClientPasswordLogin} className="space-y-4 text-left">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-xs font-mono font-bold text-slate-300 mb-1">
                     Email Address
                   </label>
                   <input
@@ -347,7 +347,7 @@ function LoginContent() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-xs font-mono font-bold text-slate-300 mb-1">
                     Password
                   </label>
                   <input
@@ -358,15 +358,15 @@ function LoginContent() {
                     placeholder="Enter your password"
                     className="input-field text-xs"
                   />
-                  <div className="text-[10px] text-slate-400 mt-1">
-                    Default demo/first-time password: <code className="font-bold text-slate-600">InkMonk@2026</code>
+                  <div className="text-[10px] text-slate-400 mt-1 font-mono">
+                    Default demo/first-time password: <code className="font-bold text-cyan-300">InkMonk@2026</code>
                   </div>
                 </div>
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="btn-primary-glow w-full !py-3 text-xs font-bold disabled:opacity-50"
+                  className="btn-primary-glow w-full !py-3 text-xs font-bold font-mono disabled:opacity-50"
                 >
                   {loading ? 'Authenticating…' : 'Sign In with Password →'}
                 </button>
@@ -375,7 +375,7 @@ function LoginContent() {
                   <button
                     type="button"
                     onClick={() => setClientAuthMode('OTP')}
-                    className="text-xs text-slate-500 hover:text-slate-800"
+                    className="text-xs text-slate-400 hover:text-cyan-300 font-mono cursor-pointer"
                   >
                     ← Back to OTP / Instant Code Sign In
                   </button>
@@ -387,22 +387,22 @@ function LoginContent() {
 
         {/* ─── ADMIN DASHBOARD LOGIN CARD ──────────────────────────────────── */}
         {activeTab === 'ADMIN' && (
-          <div className="card-futuristic-3d p-6 sm:p-8 text-center border-t-4 border-t-slate-900 bg-slate-900 text-white">
+          <div className="card-futuristic-3d p-6 sm:p-8 text-center border-t-4 border-t-emerald-500 bg-[#060B18]">
             <div className="flex justify-center mb-3">
-              <span className="w-12 h-12 rounded-2xl bg-slate-800 border border-amber-400/50 flex items-center justify-center text-amber-300 text-xl font-bold">
+              <span className="w-12 h-12 rounded-2xl bg-emerald-950 border border-emerald-400/50 flex items-center justify-center text-emerald-300 text-xl font-bold">
                 🔒
               </span>
             </div>
             <h2 className="font-serif text-xl font-bold text-white mb-1">
               Director &amp; Staff Login
             </h2>
-            <p className="text-slate-400 text-xs mb-6">
+            <p className="text-slate-400 text-xs mb-6 font-medium">
               Administrative management of leads, pricing, and projects
             </p>
 
             <form onSubmit={handleAdminLogin} className="space-y-4 text-left">
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1">
+                <label className="block text-xs font-mono font-bold text-slate-300 mb-1">
                   Administrator Email
                 </label>
                 <input
@@ -411,12 +411,12 @@ function LoginContent() {
                   value={adminEmail}
                   onChange={(e) => setAdminEmail(e.target.value)}
                   placeholder="inkmonkresearch@gmail.com"
-                  className="input-field !bg-slate-800 !text-white !border-slate-700 text-xs focus:!border-amber-400"
+                  className="input-field text-xs"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1">
+                <label className="block text-xs font-mono font-bold text-slate-300 mb-1">
                   Director Password
                 </label>
                 <input
@@ -425,9 +425,9 @@ function LoginContent() {
                   value={adminPassword}
                   onChange={(e) => setAdminPassword(e.target.value)}
                   placeholder="Enter administrator password"
-                  className="input-field !bg-slate-800 !text-white !border-slate-700 text-xs focus:!border-amber-400"
+                  className="input-field text-xs"
                 />
-                <div className="text-[10px] text-amber-300/80 mt-1">
+                <div className="text-[10px] text-emerald-300/80 mt-1 font-mono">
                   Authorized password: <code className="font-bold text-white">InkMonk@2026</code> (or <code className="font-bold text-white">admin123</code>)
                 </div>
               </div>
@@ -435,7 +435,7 @@ function LoginContent() {
               <button
                 type="submit"
                 disabled={loading}
-                className="btn-primary-glow w-full !py-3 text-xs font-bold disabled:opacity-50 !bg-gradient-to-r !from-amber-500 !to-orange-500"
+                className="btn-whatsapp-pill w-full !py-3 text-xs font-bold font-mono disabled:opacity-50 justify-center"
               >
                 {loading ? 'Verifying Admin Access…' : 'Access Admin Dashboard →'}
               </button>
@@ -445,7 +445,7 @@ function LoginContent() {
 
         {/* Back Link */}
         <div className="text-center mt-6">
-          <Link href="/" className="text-xs text-slate-500 hover:text-slate-800 font-bold">
+          <Link href="/" className="text-xs text-slate-400 hover:text-cyan-300 font-mono font-bold">
             ← Return to InkMonk Research Homepage
           </Link>
         </div>
