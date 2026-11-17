@@ -87,18 +87,26 @@ export default function Navbar() {
           </nav>
 
           {/* Right Action CTAs */}
-          <div className="hidden md:flex items-center gap-3.5">
+          <div className="hidden md:flex items-center gap-2.5">
             <Link
               href="/login"
-              className={`text-sm font-bold px-3 py-2 rounded-xl transition-colors ${
+              className={`text-xs font-bold px-3 py-2 rounded-xl transition-colors ${
                 isDark ? 'text-slate-300 hover:text-white' : 'text-slate-600 hover:text-[#0A1128]'
               }`}
             >
-              Portal Login
+              Client Portal
+            </Link>
+            <Link
+              href="/admin"
+              className={`text-xs font-bold px-3 py-2 rounded-xl border border-amber-400/40 transition-colors ${
+                isDark ? 'text-amber-300 bg-white/5 hover:bg-white/10' : 'text-amber-800 bg-amber-50 hover:bg-amber-100'
+              }`}
+            >
+              Admin Portal
             </Link>
             <Link
               href="/quote"
-              className="btn-primary-glow text-sm !py-2.5 !px-6"
+              className="btn-primary-glow text-xs !py-2.5 !px-5"
             >
               Get a Quote →
             </Link>

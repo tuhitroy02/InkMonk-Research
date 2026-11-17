@@ -1,11 +1,16 @@
 import Link from 'next/link';
 import {
-  ResearchPaperRealIcon,
-  ThesisRealIcon,
   TurnitinShieldLogo,
   IndiaFlagLogo,
   UkFlagLogo,
 } from '@/components/RealIcons';
+
+import {
+  ResearchPaperRealWork,
+  HindiPaperRealWork,
+  ThesisRealWork,
+  TurnitinReportRealWork,
+} from '@/components/RealWorkImages';
 
 export const metadata = {
   title: 'Academic Writing Samples & Previews — InkMonk Research',
@@ -15,7 +20,7 @@ export const metadata = {
 const SAMPLES = [
   {
     id: 'sample-1',
-    logo: <ResearchPaperRealIcon className="w-10 h-10" />,
+    visual: <ResearchPaperRealWork className="w-full max-w-md h-48 mx-auto mb-4" />,
     title: 'Deep Residual Networks for Automated Pulmonary Radiograph Diagnostics',
     category: 'Research Paper',
     domain: 'Computer Science / Healthcare AI',
@@ -31,7 +36,7 @@ const SAMPLES = [
   },
   {
     id: 'sample-2',
-    logo: <IndiaFlagLogo className="w-10 h-10" />,
+    visual: <HindiPaperRealWork className="w-full max-w-md h-48 mx-auto mb-4" />,
     title: 'भारतीय संदर्भ में समावेशी शिक्षा और डिजिटल विभाजन का समाजशास्त्रीय अध्ययन',
     category: 'Review Paper',
     domain: 'Sociology & Educational Policy',
@@ -47,7 +52,7 @@ const SAMPLES = [
   },
   {
     id: 'sample-3',
-    logo: <ThesisRealIcon className="w-10 h-10" />,
+    visual: <ThesisRealWork className="w-full max-w-md h-48 mx-auto mb-4" />,
     title: 'Microgrid Energy Management System with Hybrid Solar-Wind Storage',
     category: 'Thesis Excerpt',
     domain: 'Electrical & Sustainable Energy Engineering',
@@ -63,7 +68,7 @@ const SAMPLES = [
   },
   {
     id: 'sample-4',
-    logo: <TurnitinShieldLogo className="w-10 h-10" />,
+    visual: <TurnitinReportRealWork className="w-full max-w-md h-48 mx-auto mb-4" />,
     title: 'Sample Turnitin Originality & AI Paraphrase Audit',
     category: 'Turnitin Report',
     domain: 'Plagiarism & AI Verification Audit',
@@ -104,7 +109,6 @@ export default function SamplesPage() {
             >
               <div className="flex flex-wrap items-center justify-between gap-3 mb-4 pb-4 border-b border-slate-100">
                 <div className="flex flex-wrap gap-2 items-center mx-auto sm:mx-0">
-                  <div className="mr-2">{sample.logo}</div>
                   <span className="px-3 py-1 bg-slate-100 text-[#0A1128] text-xs font-bold rounded-full">
                     {sample.category}
                   </span>
@@ -118,6 +122,11 @@ export default function SamplesPage() {
                 <div className="text-xs text-slate-500 font-bold mx-auto sm:mx-0">
                   {sample.format}
                 </div>
+              </div>
+
+              {/* Photorealistic Work Visual */}
+              <div className="my-4">
+                {sample.visual}
               </div>
 
               <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#0A1128] mb-3 text-center">

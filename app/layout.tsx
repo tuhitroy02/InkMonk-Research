@@ -45,10 +45,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${comicNeue.variable} scroll-smooth`}>
+    <html lang="en" className="scroll-smooth">
       <body
         className="min-h-screen bg-[#F9F7F4] text-[#1E293B] font-bold antialiased selection:bg-orange-500 selection:text-white"
-        style={{ fontFamily: '"Cavolini Condensed", "Cavolini", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif', fontWeight: 700 }}
+        style={{ fontFamily: '"Cavolini", "Cavolini Condensed", "Plus Jakarta Sans", sans-serif', fontWeight: 700 }}
       >
         <Navbar />
         <main className="min-h-screen pt-20">

@@ -6,19 +6,6 @@ import {
   UkFlagLogo,
   IndiaFlagLogo,
   TurnitinShieldLogo,
-  ResearchPaperRealIcon,
-  ThesisRealIcon,
-  BookRealIcon,
-  PresentationRealIcon,
-  CodeModelRealIcon,
-  SynopsisRealIcon,
-  LocationRealIcon,
-  WhatsAppRealIcon,
-  EmailRealIcon,
-  Step1Icon,
-  Step2Icon,
-  Step3Icon,
-  Step4Icon,
   AcademicLabCrestLogo,
   UpiShieldIcon,
   GoogleScholarRealIcon,
@@ -28,7 +15,28 @@ import {
   TerminalLogIcon,
   AuditTrailIcon,
   CalendarScheduleIcon,
+  Step1Icon,
+  Step2Icon,
+  Step3Icon,
+  Step4Icon,
+  LocationRealIcon,
+  WhatsAppRealIcon,
+  EmailRealIcon,
 } from '@/components/RealIcons';
+
+import {
+  ResearchPaperRealWork,
+  ThesisRealWork,
+  BookRealWork,
+  ReviewPaperRealWork,
+  ArticleRealWork,
+  PresentationRealWork,
+  ModelCodeRealWork,
+  SynopsisRealWork,
+  TurnitinReportRealWork,
+  HindiPaperRealWork,
+  HindiThesisRealWork,
+} from '@/components/RealWorkImages';
 
 import {
   InstantTurnitinModal,
@@ -42,75 +50,67 @@ import {
 
 const SERVICES = [
   {
-    icon: <ResearchPaperRealIcon className="w-12 h-12" />,
+    visual: <ResearchPaperRealWork className="w-full h-44 mb-4" />,
     title: 'Research Paper Writing',
-    price: 'From ₹3,500',
-    desc: 'IEEE, Springer, Elsevier standard manuscripts with structured methodology, experiments, and citations in English & Hindi.',
+    desc: 'IEEE, Springer, Elsevier standard manuscripts with structured methodology, empirical experiments, and citations in English & Hindi.',
     href: '/quote?service=RESEARCH_PAPER',
     badge: 'IEEE / Springer / Elsevier',
   },
   {
-    icon: <ThesisRealIcon className="w-12 h-12" />,
+    visual: <ThesisRealWork className="w-full h-44 mb-4" />,
     title: 'Thesis & Dissertation',
-    price: 'From ₹14,999 (4-Milestones)',
     desc: 'Master and Doctoral thesis drafting from literature review to conclusion, with optional computational model implementation.',
     href: '/quote?service=THESIS',
     badge: 'Milestone Escrow',
   },
   {
-    icon: <BookRealIcon className="w-12 h-12" />,
+    visual: <BookRealWork className="w-full h-44 mb-4" />,
     title: 'Book Writing (100–300 Pages)',
-    price: 'From ₹18,000',
     desc: 'Full-length scholarly book manuscripts, edited volumes, monographs, and book chapters formatted for ISBN publication.',
     href: '/quote?service=BOOK',
     badge: 'ISBN Standard',
   },
   {
-    icon: <ResearchPaperRealIcon className="w-12 h-12" />,
+    visual: <ReviewPaperRealWork className="w-full h-44 mb-4" />,
     title: 'Review Papers',
-    price: 'From ₹3,500',
     desc: 'Systematic literature reviews and bibliometric surveys mapping state-of-the-art developments across your discipline.',
     href: '/quote?service=REVIEW_PAPER',
     badge: 'PRISMA Guidelines',
   },
   {
-    icon: <SynopsisRealIcon className="w-12 h-12" />,
+    visual: <ArticleRealWork className="w-full h-44 mb-4" />,
     title: 'Article Writing',
-    price: '₹0.60–0.80 / word',
-    desc: 'Expertly researched academic, journal, and thought leadership articles at verified per-word rates with full citation rigor.',
+    desc: 'Expertly researched academic, journal, and thought leadership articles with verified word counts and full citation rigor.',
     href: '/quote?service=ARTICLE',
-    badge: 'Per-Word Transparency',
+    badge: 'Standardized Rates in Quote',
   },
   {
-    icon: <PresentationRealIcon className="w-12 h-12" />,
+    visual: <PresentationRealWork className="w-full h-44 mb-4" />,
     title: 'Academic PPT & Defense',
-    price: '₹120–170 / slide',
     desc: 'Engaging, professional thesis defense and conference presentation slide decks formatted for university evaluation panels.',
     href: '/quote?service=PPT',
     badge: 'Defense Ready',
   },
   {
-    icon: <CodeModelRealIcon className="w-12 h-12" />,
+    visual: <ModelCodeRealWork className="w-full h-44 mb-4" />,
     title: 'Model & Code Implementation',
-    price: 'From ₹4,999 (Deterministic)',
     desc: 'Machine learning, deep learning (PyTorch, TensorFlow), Python, and MATLAB code implementation with reproducible benchmarks.',
     href: '/quote?service=MODEL',
     badge: 'Docker & Git Handoff',
     isCode: true,
   },
   {
-    icon: <SynopsisRealIcon className="w-12 h-12" />,
+    visual: <SynopsisRealWork className="w-full h-44 mb-4" />,
     title: 'Synopsis & Research Proposals',
-    price: 'From ₹2,500',
     desc: 'Crisp, defensible research synopses for PhD registrations, grant applications, and institutional doctoral committees.',
     href: '/quote?service=SYNOPSIS',
     badge: 'DRC Committee Ready',
   },
   {
-    icon: <TurnitinShieldLogo className="w-12 h-12" />,
+    visual: <TurnitinReportRealWork className="w-full h-44 mb-4" />,
     title: 'Turnitin AI & Plagiarism Reports',
-    price: 'Fixed ₹200 / file',
-    desc: 'Instructor-tier Turnitin verification audits checking similarity index and AI writing percentages at flat rate.',
+    price: '₹200 per file flat',
+    desc: 'Instructor-tier Turnitin verification audits checking similarity index and AI writing percentages without saving to repository.',
     href: '/quote?type=TURNITIN',
     badge: 'Safe Non-Repository',
     isTurnitin: true,
@@ -121,13 +121,13 @@ const WORKFLOW_STEPS = [
   {
     num: '01',
     icon: <Step1Icon className="w-7 h-7" />,
-    title: 'Project Consultation & NDA',
+    title: 'Project Consultation & Scope',
     desc: 'Share your discipline, word count, rubric, and timeline. Pre-signed mutual NDA guarantees your data remains 100% private.',
   },
   {
     num: '02',
     icon: <Step2Icon className="w-7 h-7" />,
-    title: 'Milestone Quotation & Escrow',
+    title: 'Deterministic Quotation & Escrow',
     desc: 'Receive an immediate transparent estimate with a 4-stage chapter milestone payment plan. Zero 100% upfront lock-in.',
   },
   {
@@ -154,12 +154,10 @@ export default function HomePage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   return (
-    <div className="min-h-screen text-center">
+    <div className="min-h-screen text-center" style={{ fontFamily: '"Cavolini", "Cavolini Condensed", sans-serif' }}>
 
       {/* ─── Hero Section with Jitter "Split Reveal" Motion & Cyber HUD ───── */}
-      <section
-        className="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-28 text-white text-center bg-midnight"
-      >
+      <section className="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-28 text-white text-center bg-midnight">
         {/* Futuristic Cyber-Grid Background Layer */}
         <div className="absolute inset-0 cyber-grid-bg opacity-30 pointer-events-none" />
 
@@ -188,7 +186,7 @@ export default function HomePage() {
               <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 px-4 py-1.5 rounded-full backdrop-blur-md mb-5 shadow-lg">
                 <span className="w-2.5 h-2.5 rounded-full bg-orange-400 animate-ping"></span>
                 <span className="text-xs font-bold uppercase tracking-wider text-orange-300 font-mono">
-                  Premier Scholarly Research &amp; Writing Hub
+                  Academic Research &amp; Writing Hub
                 </span>
               </div>
 
@@ -216,9 +214,9 @@ export default function HomePage() {
                 <span>Strict 0% AI Assured • Plagiarism &lt; 10% • Safe Non-Repository Protocol</span>
               </div>
 
-              {/* Description Addressing Academic Integrity */}
+              {/* Description */}
               <p className="text-base sm:text-lg text-slate-300 max-w-xl mx-auto leading-relaxed mb-6 text-center font-bold">
-                Dedicated academic research, translation, and computational development in <strong className="text-white font-extrabold">English</strong> and <strong className="text-white font-extrabold">Hindi</strong>. Supervised by qualified subject-matter doctoral directors with verifiable publishing credentials.
+                Premier academic research, doctoral dissertation structuring, book writing, and Turnitin audits in <strong className="text-white font-extrabold">English</strong> and <strong className="text-white font-extrabold">Hindi</strong>. Supervised directly by qualified subject-matter doctoral directors.
               </p>
 
               {/* Primary Call to Actions & Instant Modals */}
@@ -246,7 +244,7 @@ export default function HomePage() {
                   className="btn-secondary-dark text-sm font-bold w-full sm:w-auto cursor-pointer"
                 >
                   <CalendarScheduleIcon className="w-4 h-4 text-orange-400" />
-                  <span>Book 1-on-1 Video Meet</span>
+                  <span>Book 1-on-1 Consultation</span>
                 </button>
               </div>
 
@@ -265,13 +263,13 @@ export default function HomePage() {
                 <div className="bg-white/5 border border-white/10 p-3 rounded-2xl backdrop-blur-md text-center flex flex-col items-center">
                   <UpiShieldIcon className="w-7 h-7 mb-1" />
                   <div className="text-amber-300 font-bold text-sm">Instant UPI</div>
-                  <div className="text-[10px] text-slate-300 font-bold">Zero Fee Payments</div>
+                  <div className="text-[10px] text-slate-300 font-bold">Direct Payments</div>
                 </div>
               </div>
 
             </div>
 
-            {/* Right Column: 3D Academic Research Lab Crest (Replaces Cartoon Mascot) */}
+            {/* Right Column: 3D Academic Research Lab Crest */}
             <div className="lg:col-span-5 flex justify-center items-center">
               <div className="relative animate-3d-float">
                 {/* Ambient Glow */}
@@ -314,7 +312,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── 3 Primary Pillars (English, Hindi & Turnitin) with Direct Pricing ─── */}
+      {/* ─── 3 Primary Pillars (English, Hindi & Turnitin) with Real Work Images ─── */}
       <section className="py-20 px-4 bg-white text-center" id="services">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -323,87 +321,72 @@ export default function HomePage() {
               Comprehensive Scholarly Solutions
             </h2>
             <p className="text-slate-600 text-base sm:text-lg text-center">
-              Tailored specifically to international publishing guidelines, doctoral requirements, and institutional rubrics.
+              Tailored specifically to international publishing guidelines, doctoral requirements, and institutional rubrics. No public price lists.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* English Card (English Specialists) */}
-            <div className="card-futuristic-3d p-8 flex flex-col justify-between border-t-4 border-t-[#1A2B6D] text-center relative">
+            {/* English Card (Real Journal Paper Preview) */}
+            <div className="card-futuristic-3d p-6 flex flex-col justify-between border-t-4 border-t-[#1A2B6D] text-center relative">
               <span className="absolute top-4 right-4 bg-[#1A2B6D] text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow">
                 English Specialists
               </span>
               <div>
-                <div className="flex justify-center mb-4">
-                  <UkFlagLogo className="w-16 h-16" />
-                </div>
+                <ResearchPaperRealWork className="w-full h-44 mb-4" />
                 <h3 className="font-serif text-2xl font-bold text-[#0A1128] mb-1 text-center">English Services</h3>
-                <div className="text-sm font-bold text-orange-600 mb-2">From ₹3,500 (Papers) • Milestone Pay</div>
-                <p className="text-slate-600 text-sm mb-6 text-center">
+                <p className="text-slate-600 text-xs mb-4 text-center">
                   Technical and non-technical manuscripts formatted to IEEE, Springer, Elsevier, APA, Harvard, and UGC standards.
                 </p>
-                {/* BULLETS: Left-aligned inside centered container */}
-                <div className="max-w-xs mx-auto mb-8">
-                  <ul className="space-y-2.5 text-sm text-slate-700 text-left">
+                <div className="max-w-xs mx-auto mb-6">
+                  <ul className="space-y-2 text-xs text-slate-700 text-left">
                     <li className="flex items-center gap-2">
-                      <span className="text-orange-500 font-bold">✓</span> Research &amp; Review Papers (From ₹3,500)
+                      <span className="text-orange-500 font-bold">✓</span> Research &amp; Review Papers
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="text-orange-500 font-bold">✓</span> Full Thesis (From ₹14,999 in 4 Milestones)
+                      <span className="text-orange-500 font-bold">✓</span> Master &amp; Doctoral Theses (with/without model)
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="text-orange-500 font-bold">✓</span> Book Writing (100, 200, 300 pages)
+                      <span className="text-orange-500 font-bold">✓</span> Scholarly Books (100–300 pages)
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="text-orange-500 font-bold">✓</span> Articles (₹0.60–0.70/word)
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-orange-500 font-bold">✓</span> Academic Presentations (₹120–150/slide)
+                      <span className="text-orange-500 font-bold">✓</span> Journal Articles &amp; Conference Slides
                     </li>
                   </ul>
                 </div>
               </div>
-              <Link href="/quote?lang=EN" className="btn-primary-glow text-sm w-full text-center">
+              <Link href="/quote?lang=EN" className="btn-primary-glow text-xs w-full text-center">
                 Configure English Quote →
               </Link>
             </div>
 
-            {/* Hindi Card (Hindi Specialists) */}
-            <div className="card-futuristic-3d p-8 flex flex-col justify-between border-t-4 border-t-orange-500 text-center relative">
+            {/* Hindi Card (Real Hindi Research Paper Preview) */}
+            <div className="card-futuristic-3d p-6 flex flex-col justify-between border-t-4 border-t-orange-500 text-center relative">
               <span className="absolute top-4 right-4 bg-orange-500 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow">
                 Hindi Specialists
               </span>
               <div>
-                <div className="flex justify-center mb-4">
-                  <IndiaFlagLogo className="w-16 h-16" />
-                </div>
+                <HindiPaperRealWork className="w-full h-44 mb-4" />
                 <h3 className="font-serif text-2xl font-bold text-[#0A1128] mb-1 text-center">Hindi Services</h3>
-                <div className="text-sm font-bold text-orange-600 mb-2">Authentic Devanagari Vocabulary</div>
-                <p className="text-slate-600 text-sm mb-6 text-center">
+                <p className="text-slate-600 text-xs mb-4 text-center">
                   Supervised by Sampreeti Mukherjee with standardized academic vocabulary, Shodhganga compliance, and zero automated translation shortcuts.
                 </p>
-                {/* BULLETS: Left-aligned inside centered container */}
-                <div className="max-w-xs mx-auto mb-6">
-                  <ul className="space-y-2.5 text-sm text-slate-700 text-left">
+                <div className="max-w-xs mx-auto mb-4">
+                  <ul className="space-y-2 text-xs text-slate-700 text-left">
                     <li className="flex items-center gap-2">
-                      <span className="text-orange-500 font-bold">✓</span> Shodh Patra / Research Papers
+                      <span className="text-orange-500 font-bold">✓</span> शोध पत्र / Research Papers
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="text-orange-500 font-bold">✓</span> Shodh Prabandh / Complete Thesis
+                      <span className="text-orange-500 font-bold">✓</span> शोध प्रबंध / Complete Thesis
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="text-orange-500 font-bold">✓</span> Academic Book Manuscripts
+                      <span className="text-orange-500 font-bold">✓</span> पुस्तक लेखन (100–300 पृष्ठ)
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="text-orange-500 font-bold">✓</span> Articles (₹0.75–0.80/word)
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-orange-500 font-bold">✓</span> Devanagari Slides (₹150–170/slide)
+                      <span className="text-orange-500 font-bold">✓</span> देवनागरी व्याख्यान एवं प्रस्तुतियाँ
                     </li>
                   </ul>
                 </div>
 
-                {/* Audit Trail Trigger */}
                 <button
                   onClick={() => setAuditModalOpen(true)}
                   className="text-xs text-orange-600 font-bold hover:underline mb-4 inline-flex items-center gap-1 cursor-pointer"
@@ -412,50 +395,31 @@ export default function HomePage() {
                   <span>View Vernacular Translation Audit Trail →</span>
                 </button>
               </div>
-              <Link href="/quote?lang=HI" className="btn-primary-glow text-sm w-full text-center">
+              <Link href="/quote?lang=HI" className="btn-primary-glow text-xs w-full text-center">
                 Configure Hindi Quote →
               </Link>
             </div>
 
-            {/* Turnitin Card (Instant ₹200 UPI Checkout & Sample) */}
-            <div className="card-futuristic-3d p-8 flex flex-col justify-between border-t-4 border-t-slate-800 text-center relative">
+            {/* Turnitin Card (Real Turnitin Report Preview) */}
+            <div className="card-futuristic-3d p-6 flex flex-col justify-between border-t-4 border-t-slate-800 text-center relative">
               <span className="absolute top-4 right-4 bg-emerald-600 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow">
                 Verified Originality
               </span>
               <div>
-                <div className="flex justify-center mb-4">
-                  <TurnitinShieldLogo className="w-16 h-16" />
-                </div>
+                <TurnitinReportRealWork className="w-full h-44 mb-4" />
                 <h3 className="font-serif text-2xl font-bold text-[#0A1128] mb-1 text-center">Turnitin Reports</h3>
-                <p className="text-slate-600 text-sm mb-4 text-center">
+                <p className="text-slate-600 text-xs mb-3 text-center">
                   Instructor-grade originality and AI writing detection report without saving your file to public repositories.
                 </p>
-                <div className="p-3 bg-orange-50 rounded-2xl border border-orange-200 mb-4 text-center">
-                  <div className="text-xs text-orange-700 font-bold uppercase tracking-wider">Fixed Flat Fee</div>
-                  <div className="font-serif text-3xl font-extrabold text-[#0A1128]">₹200</div>
-                  <div className="text-xs text-slate-500">per file scanned • rapid 15-min delivery</div>
-                </div>
-                {/* BULLETS: Left-aligned inside centered container */}
-                <div className="max-w-xs mx-auto mb-4">
-                  <ul className="space-y-2 text-xs sm:text-sm text-slate-700 text-left">
-                    <li className="flex items-center gap-2">
-                      <span className="text-emerald-600 font-bold">✓</span> Assured 0% AI Writing Score
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-emerald-600 font-bold">✓</span> Assured Plagiarism &lt; 10%
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-orange-500 font-bold">✓</span> Clickable Web &amp; Journal Matches
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-orange-500 font-bold">✓</span> Safe Non-Repository Protocol
-                    </li>
-                  </ul>
+                <div className="p-2.5 bg-orange-50 rounded-xl border border-orange-200 mb-3 text-center">
+                  <div className="text-[10px] text-orange-700 font-bold uppercase tracking-wider">Fixed Flat Fee</div>
+                  <div className="font-serif text-2xl font-extrabold text-[#0A1128]">₹200</div>
+                  <div className="text-[10px] text-slate-500">per file scanned • 15–30 min delivery</div>
                 </div>
 
                 <button
                   onClick={() => setSampleModalOpen(true)}
-                  className="text-xs text-slate-600 hover:text-orange-600 font-bold underline mb-4 block cursor-pointer"
+                  className="text-xs text-slate-600 hover:text-orange-600 font-bold underline mb-3 block cursor-pointer"
                 >
                   View Watermarked Sample Deliverable →
                 </button>
@@ -464,7 +428,7 @@ export default function HomePage() {
               <div className="flex flex-col gap-2">
                 <button
                   onClick={() => setTurnitinModalOpen(true)}
-                  className="btn-primary-glow text-sm w-full text-center cursor-pointer"
+                  className="btn-primary-glow text-xs w-full text-center cursor-pointer"
                 >
                   Upload &amp; Pay ₹200 via UPI →
                 </button>
@@ -474,23 +438,23 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── Milestone Payment Timeline Section (Floto Demands) ──────────── */}
+      {/* ─── Milestone Payment Timeline Section ───────────────────────────── */}
       <section className="py-16 px-4 bg-[#F5F2EC] text-center">
         <div className="max-w-6xl mx-auto">
           <MilestonePaymentTimeline />
         </div>
       </section>
 
-      {/* ─── 9-Service Grid with Real Visual Icons & Upfront Pricing ───────── */}
+      {/* ─── 9-Service Grid with REAL IMAGES OF THE WORKS ─────────────────── */}
       <section className="py-20 px-4 bg-white text-center">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="badge-pill-gold mb-3">Full Catalogue</span>
+            <span className="badge-pill-gold mb-3">Genuine Deliverable Previews</span>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#0A1128] mb-4 text-center">
               Explore Our Specific Capabilities
             </h2>
             <p className="text-slate-600 text-base text-center">
-              Upfront pricing, deterministic deliverables, and strict milestone escrow protections.
+              Real sample previews of our manuscripts, models, presentations, and reports.
             </p>
           </div>
 
@@ -498,23 +462,27 @@ export default function HomePage() {
             {SERVICES.map((s) => (
               <div
                 key={s.title}
-                className="card-futuristic-3d p-7 flex flex-col justify-between text-center items-center group relative"
+                className="card-futuristic-3d p-6 flex flex-col justify-between text-center items-center group relative"
               >
                 <span className="text-[10px] font-bold font-mono text-orange-600 bg-orange-50 border border-orange-200 px-2.5 py-0.5 rounded-full mb-3">
                   {s.badge}
                 </span>
 
-                <div className="flex flex-col items-center text-center">
-                  <div className="mb-4 transform group-hover:scale-110 transition-transform duration-300">
-                    {s.icon}
-                  </div>
+                {/* Real Image of the Work */}
+                <div className="w-full transform group-hover:scale-[1.02] transition-transform duration-300">
+                  {s.visual}
+                </div>
+
+                <div className="flex flex-col items-center text-center w-full">
                   <h3 className="font-serif font-bold text-lg text-[#0A1128] group-hover:text-orange-600 transition-colors mb-1 text-center">
                     {s.title}
                   </h3>
-                  <div className="text-xs font-bold text-slate-900 mb-2">
-                    {s.price}
-                  </div>
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 text-center">
+                  {s.price && (
+                    <div className="text-xs font-bold text-emerald-700 mb-1">
+                      {s.price}
+                    </div>
+                  )}
+                  <p className="text-slate-600 text-xs leading-relaxed mb-4 text-center">
                     {s.desc}
                   </p>
                 </div>
@@ -540,10 +508,10 @@ export default function HomePage() {
                       href={s.href}
                       className="text-xs font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1"
                     >
-                      <span>Configure Scope →</span>
+                      <span>Calculate Instant Quote →</span>
                     </Link>
                   )}
-                  <span className="text-[10px] text-slate-400 font-mono">UPI / Escrow</span>
+                  <span className="text-[10px] text-slate-400 font-mono">Server Calculated</span>
                 </div>
               </div>
             ))}
@@ -630,11 +598,11 @@ export default function HomePage() {
                   Founder &amp; Research Director
                 </p>
                 <p className="text-slate-600 text-sm leading-relaxed text-center mb-6">
-                  Directs technical research architectures, AI/ML computational implementations (PyTorch/CUDA), and IEEE/Scopus manuscript structuring.
+                  Directs technical research methodologies, AI/ML computational architectures (PyTorch/CUDA), and IEEE/Scopus manuscript structuring.
                 </p>
               </div>
 
-              {/* Verifiable Scholar Badges for Arjun */}
+              {/* Verifiable Scholar Badges */}
               <div className="w-full pt-4 border-t border-slate-100 flex items-center justify-center gap-4">
                 <a
                   href="https://scholar.google.com"
@@ -677,11 +645,11 @@ export default function HomePage() {
                   Co-Founder &amp; Editorial Director
                 </p>
                 <p className="text-slate-600 text-sm leading-relaxed text-center mb-6">
-                  Leads academic editorial refinement, humanities peer-review consultations, and our specialized Hindi research and dissertation division.
+                  Leads qualitative editorial refinement, humanities peer-review consultations, and our specialized Hindi research and dissertation division.
                 </p>
               </div>
 
-              {/* Editorial Badges for Dr. Sharma */}
+              {/* Editorial Badges */}
               <div className="w-full pt-4 border-t border-slate-100 flex items-center justify-center gap-4 text-xs text-slate-700 font-semibold">
                 <span className="flex items-center gap-1">
                   <span className="text-orange-500 font-bold">✓</span>
@@ -694,55 +662,6 @@ export default function HomePage() {
                 </span>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Vernacular Fieldwork & Integrity FAQ Section ────────────────── */}
-      <section className="py-16 px-4 bg-[#F5F2EC] text-center">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-10">
-            <span className="badge-pill-gold mb-2">Ethics &amp; Transparency</span>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#0A1128]">
-              Academic Integrity &amp; Vernacular Fieldwork FAQ
-            </h3>
-          </div>
-
-          <div className="space-y-3 text-left">
-            {[
-              {
-                q: 'How does InkMonk translate vernacular (Hindi) fieldwork into English without similarity flags?',
-                a: 'We never run raw field interviews through automated translation machines. Our bilingual scholars perform conceptual ethnographic paraphrasing: translating informant statements into peer-reviewed scholarly prose while preserving ethnographic nuances, providing standardized bracketed terms, and attaching formal attribution to ensure 0% plagiarism.',
-              },
-              {
-                q: 'How do you guarantee my drafts and raw data are never saved into Turnitin repositories?',
-                a: 'We operate registered institutional instructor accounts configured with the global setting "Standard Repository: NONE". Your draft is verified purely in volatile memory for similarity breakdown and AI writing scores, and zero institutional or global index copies are retained.',
-              },
-              {
-                q: 'Are your services ethical under university and UGC guidelines?',
-                a: 'Yes. InkMonk Research operates strictly under the Committee on Publication Ethics (COPE) guidelines for academic language refinement, statistical consulting, and computational reproducibility. We do not operate essay mills or ghostwrite deceptive credentials.',
-              },
-              {
-                q: 'Can I pay chapter-by-chapter rather than 100% upfront?',
-                a: 'Yes. All thesis and comprehensive research projects follow our 4-milestone escrow schedule. You pay for each chapter only after your university supervisor or doctoral committee approves the preceding chapter.',
-              },
-            ].map((faq, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-2xl border border-slate-200 p-5 cursor-pointer shadow-sm"
-                onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
-              >
-                <div className="flex items-center justify-between font-bold text-slate-900 text-sm">
-                  <span>{faq.q}</span>
-                  <span className="text-orange-500 text-lg ml-2">{activeFaq === idx ? '−' : '+'}</span>
-                </div>
-                {activeFaq === idx && (
-                  <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed pt-2 border-t border-slate-100">
-                    {faq.a}
-                  </p>
-                )}
-              </div>
-            ))}
           </div>
         </div>
       </section>
