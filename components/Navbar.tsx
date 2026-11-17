@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { motion } from 'framer-motion';
 import { AcademicLabCrestLogo } from '@/components/RealIcons';
 import { ThemeToggle } from '@/components/ThemeProvider';
 
@@ -23,31 +24,41 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+    function handleScroll() {
+      setScrolled(window.scrollY > 30);
+    }
   }, []);
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#030712]/95 dark:bg-[#030712]/95 backdrop-blur-xl border-b border-cyan-500/30 shadow-[0_4px_30px_rgba(0,0,0,0.8)]'
+          ? 'bg-[#030712]/95 dark:bg-[#030712]/95 backdrop-blur-2xl border-b border-cyan-500/30 shadow-[0_10px_35px_rgba(0,0,0,0.8)]'
           : 'bg-[#030712]/80 dark:bg-[#030712]/80 backdrop-blur-md border-b border-white/10'
       }`}
     >
+      {/* Bottom Glowing Laser Seam */}
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
 
-          {/* Logo & Brand Name */}
+          {/* Logo & Brand Name with 3D Hover Spring */}
           <Link href="/" className="flex items-center gap-3.5 group shrink-0">
-            <div className="relative w-12 h-12 shrink-0 rounded-2xl overflow-hidden bg-[#060B18] shadow-md border-2 border-cyan-400/40 group-hover:border-cyan-400 transition-colors flex items-center justify-center p-1">
+            <motion.div
+              whileHover={{ scale: 1.05, rotateZ: 2 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative w-12 h-12 shrink-0 rounded-2xl overflow-hidden bg-[#060B18] shadow-md border-2 border-cyan-400/40 group-hover:border-cyan-400 transition-colors flex items-center justify-center p-1"
+            >
               <AcademicLabCrestLogo className="w-10 h-10" />
-            </div>
+            </motion.div>
             <div className="flex flex-col text-left">
               <div className="flex items-center gap-1.5">
                 <span className="font-serif font-black text-xl tracking-tight leading-none text-white dark:text-white">
                   InkMonk
                 </span>
-                <span className="font-mono font-bold text-xs bg-cyan-500 text-black px-1.5 py-0.5 rounded leading-none">
+                <span className="font-mono font-bold text-xs bg-cyan-500 text-black px-1.5 py-0.5 rounded leading-none shadow-[0_0_10px_#00F2FE]">
                   RESEARCH
                 </span>
               </div>
@@ -57,7 +68,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Nav Links (FAQ Removed as requested) */}
+          {/* Desktop Nav Links with 3D Animated Indicator */}
           <nav className="hidden lg:flex items-center gap-1" aria-label="Main Navigation">
             {NAV_LINKS.map((link) => {
               const active = pathname === link.href;
@@ -65,13 +76,19 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-3 py-2 rounded-xl text-xs font-mono font-bold tracking-wider transition-all ${
+                  className={`relative px-3.5 py-2 rounded-xl text-xs font-mono font-bold tracking-wider transition-all ${
                     active
                       ? 'text-cyan-300 bg-cyan-950/70 border border-cyan-400/40 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
                       : 'text-slate-300 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   {link.label}
+                  {active && (
+                    <motion.div
+                      layoutId="active-nav-glow"
+                      className="absolute bottom-0 inset-x-2 h-[2px] bg-cyan-400 shadow-[0_0_8px_#00F2FE]"
+                    />
+                  )}
                 </Link>
               );
             })}
@@ -79,52 +96,60 @@ export default function Navbar() {
 
           {/* Right Action CTAs:
               1. Theme Toggle (Dark/Light)
-              2. CLIENT PORTAL (Single portal header - Admin Portal removed from header)
+              2. CLIENT PORTAL
               3. GET A QUOTE
-              4. ASK AI (After Get a Quote)
-              5. HOME (After AI option)
+              4. ASK AI
+              5. HOME
           */}
           <div className="hidden md:flex items-center gap-2">
             {/* Theme Toggle (Dark / Light Switcher) */}
             <ThemeToggle />
 
-            {/* Only 1 Header named Client Portal (Admin Portal removed from header) */}
-            <Link
-              href="/login"
-              className="text-xs font-mono font-bold px-3 py-2 rounded-xl text-slate-300 hover:text-cyan-300 hover:bg-white/5 transition-colors border border-transparent hover:border-cyan-500/30"
-              title="Client Portal (Includes Admin Portal option inside)"
-            >
-              CLIENT PORTAL
-            </Link>
+            {/* Single Client Portal link */}
+            <motion.div whileHover={{ scale: 1.03, y: -1 }} whileTap={{ scale: 0.97 }}>
+              <Link
+                href="/login"
+                className="text-xs font-mono font-bold px-3 py-2 rounded-xl text-slate-300 hover:text-cyan-300 hover:bg-white/5 transition-colors border border-transparent hover:border-cyan-500/30 block"
+                title="Client Portal (Includes Admin Portal option inside)"
+              >
+                CLIENT PORTAL
+              </Link>
+            </motion.div>
 
             {/* Get a Quote */}
-            <Link
-              href="/quote"
-              className="btn-primary-glow text-xs !py-2 !px-3.5 font-mono"
-            >
-              GET A QUOTE →
-            </Link>
+            <motion.div whileHover={{ scale: 1.04, y: -1 }} whileTap={{ scale: 0.96 }}>
+              <Link
+                href="/quote"
+                className="btn-primary-glow text-xs !py-2 !px-3.5 font-mono block shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+              >
+                GET A QUOTE →
+              </Link>
+            </motion.div>
 
             {/* AI Option After Get a Quote */}
-            <Link
-              href="/chat"
-              className="text-xs font-mono font-bold px-3 py-2 rounded-xl border border-cyan-400/60 bg-cyan-950/60 text-cyan-300 hover:bg-cyan-900/80 transition-all shadow-[0_0_15px_rgba(6,182,212,0.3)] flex items-center gap-1.5"
-            >
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-              <span>ASK AI</span>
-            </Link>
+            <motion.div whileHover={{ scale: 1.04, y: -1 }} whileTap={{ scale: 0.96 }}>
+              <Link
+                href="/chat"
+                className="text-xs font-mono font-bold px-3 py-2 rounded-xl border border-cyan-400/60 bg-cyan-950/60 text-cyan-300 hover:bg-cyan-900/80 transition-all shadow-[0_0_15px_rgba(6,182,212,0.3)] flex items-center gap-1.5"
+              >
+                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                <span>ASK AI</span>
+              </Link>
+            </motion.div>
 
             {/* Home Option After AI */}
-            <Link
-              href="/"
-              className={`text-xs font-mono font-bold px-3 py-2 rounded-xl transition-colors ${
-                pathname === '/'
-                  ? 'text-emerald-300 bg-emerald-950/60 border border-emerald-400/40'
-                  : 'text-slate-300 hover:text-white hover:bg-white/5 border border-slate-700/60'
-              }`}
-            >
-              HOME
-            </Link>
+            <motion.div whileHover={{ scale: 1.04, y: -1 }} whileTap={{ scale: 0.96 }}>
+              <Link
+                href="/"
+                className={`text-xs font-mono font-bold px-3 py-2 rounded-xl transition-colors block ${
+                  pathname === '/'
+                    ? 'text-emerald-300 bg-emerald-950/60 border border-emerald-400/40 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
+                    : 'text-slate-300 hover:text-white hover:bg-white/5 border border-slate-700/60'
+                }`}
+              >
+                HOME
+              </Link>
+            </motion.div>
           </div>
 
           {/* Mobile Right Bar: Theme Toggle + Menu Button */}
@@ -148,53 +173,56 @@ export default function Navbar() {
           </div>
 
         </div>
-      </div>
 
-      {/* Mobile Drawer */}
-      {mobileOpen && (
-        <div className="md:hidden bg-[#060B18] border-t border-cyan-500/30 px-6 py-5 shadow-2xl space-y-3">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="block text-slate-200 font-mono text-sm font-semibold py-2 hover:text-cyan-400"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <div className="pt-3 border-t border-slate-800 space-y-2">
-            <Link
-              href="/login"
-              onClick={() => setMobileOpen(false)}
-              className="block text-cyan-300 font-mono text-sm font-semibold py-2"
-            >
-              CLIENT PORTAL (ADMIN INSIDE)
-            </Link>
-            <Link
-              href="/quote"
-              onClick={() => setMobileOpen(false)}
-              className="btn-primary-glow w-full text-center font-mono block py-2.5"
-            >
-              GET A QUOTE →
-            </Link>
-            <Link
-              href="/chat"
-              onClick={() => setMobileOpen(false)}
-              className="w-full text-center font-mono block py-2 rounded-xl border border-cyan-400/50 bg-cyan-950/60 text-cyan-300 font-bold text-xs"
-            >
-              ⚡ ASK AI ASSISTANT
-            </Link>
-            <Link
-              href="/"
-              onClick={() => setMobileOpen(false)}
-              className="w-full text-center font-mono block py-2 rounded-xl border border-slate-700 bg-white/5 text-slate-300 font-bold text-xs"
-            >
-              🏠 HOME
-            </Link>
-          </div>
-        </div>
-      )}
+        {/* Mobile Dropdown Menu with 3D Entrance */}
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10, scaleY: 0.95 }}
+            animate={{ opacity: 1, y: 0, scaleY: 1 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="md:hidden py-4 border-t border-cyan-500/20 bg-[#030712]/98 backdrop-blur-2xl px-2 space-y-1"
+          >
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className={`block px-3 py-2 rounded-lg text-xs font-mono font-bold ${
+                  pathname === link.href ? 'text-cyan-300 bg-cyan-950/60' : 'text-slate-300'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            <div className="pt-3 border-t border-slate-800 flex flex-col gap-2">
+              <Link
+                href="/login"
+                onClick={() => setMobileOpen(false)}
+                className="w-full text-center py-2 text-xs font-mono font-bold bg-white/5 border border-white/10 rounded-lg text-slate-200"
+              >
+                CLIENT PORTAL
+              </Link>
+              <Link
+                href="/quote"
+                onClick={() => setMobileOpen(false)}
+                className="btn-primary-glow w-full text-center text-xs font-mono font-bold !py-2.5"
+              >
+                GET A QUOTE →
+              </Link>
+              <Link
+                href="/chat"
+                onClick={() => setMobileOpen(false)}
+                className="w-full text-center py-2 text-xs font-mono font-bold bg-cyan-950/60 border border-cyan-400/40 rounded-lg text-cyan-300 flex items-center justify-center gap-2"
+              >
+                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                <span>ASK AI</span>
+              </Link>
+            </div>
+          </motion.div>
+        )}
+
+      </div>
     </header>
   );
 }
