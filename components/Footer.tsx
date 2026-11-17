@@ -4,6 +4,7 @@ import {
   LocationRealIcon,
   EmailRealIcon,
   WhatsAppRealIcon,
+  AcademicLabCrestLogo,
 } from '@/components/RealIcons';
 
 const FOOTER_LINKS = {
@@ -71,8 +72,8 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4 flex flex-col items-center md:items-start text-center md:text-left">
             <div className="flex items-center gap-3">
-              <div className="relative w-11 h-11 rounded-2xl bg-white p-1">
-                <Image src="/logo.png" alt="InkMonk Logo" fill sizes="44px" className="object-contain" />
+              <div className="relative w-12 h-12 rounded-2xl bg-[#0A1128] border border-amber-400/50 p-1 flex items-center justify-center">
+                <AcademicLabCrestLogo className="w-10 h-10" />
               </div>
               <div className="text-left">
                 <div className="font-serif font-bold text-xl leading-none">InkMonk Research</div>

@@ -452,3 +452,206 @@ export function Step4Icon({ className = "w-8 h-8" }: { className?: string }) {
     </div>
   );
 }
+
+// 14. Academic Research Lab Crest / Seal (Replaces Cartoon Mascot)
+export function AcademicLabCrestLogo({ className = "w-36 h-36" }: { className?: string }) {
+  return (
+    <div className={`relative inline-flex items-center justify-center shrink-0 ${className}`}>
+      <svg viewBox="0 0 120 120" fill="none" className="w-full h-full drop-shadow-2xl">
+        <defs>
+          <linearGradient id="crestGold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFFBEB" />
+            <stop offset="30%" stopColor="#F59E0B" />
+            <stop offset="70%" stopColor="#D97706" />
+            <stop offset="100%" stopColor="#78350F" />
+          </linearGradient>
+          <linearGradient id="crestBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#1E3A8A" />
+            <stop offset="50%" stopColor="#0F172A" />
+            <stop offset="100%" stopColor="#020617" />
+          </linearGradient>
+          <linearGradient id="orbitGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#38BDF8" />
+            <stop offset="100%" stopColor="#F59E0B" />
+          </linearGradient>
+        </defs>
+
+        {/* Outer Hexagonal Shield */}
+        <polygon
+          points="60,6 108,30 108,90 60,114 12,90 12,30"
+          fill="url(#crestGold)"
+          stroke="#FDE68A"
+          strokeWidth="1.5"
+        />
+        {/* Inner Shield */}
+        <polygon
+          points="60,12 102,33 102,87 60,108 18,87 18,33"
+          fill="url(#crestBlue)"
+        />
+
+        {/* Laurels Wreath (Scholarly Excellence) */}
+        <g stroke="#F59E0B" strokeWidth="1.2" opacity="0.85" fill="none">
+          <path d="M30 40 C22 55, 24 75, 36 86 M30 44 L25 40 M28 54 L22 52 M28 65 L22 66 M32 76 L27 80" />
+          <path d="M90 40 C98 55, 96 75, 84 86 M90 44 L95 40 M92 54 L98 52 M92 65 L98 66 M88 76 L93 80" />
+        </g>
+
+        {/* Atom / Neural Computational Orbit (Model & Science) */}
+        <ellipse cx="60" cy="58" rx="26" ry="11" stroke="url(#orbitGlow)" strokeWidth="1.2" transform="rotate(-25 60 58)" opacity="0.75" />
+        <ellipse cx="60" cy="58" rx="26" ry="11" stroke="url(#orbitGlow)" strokeWidth="1.2" transform="rotate(25 60 58)" opacity="0.75" />
+
+        {/* Open Folio / Scholarly Manuscript */}
+        <path
+          d="M44 64 C50 61, 56 61, 60 63 C64 61, 70 61, 76 64 V78 C70 75, 64 75, 60 77 C56 75, 50 75, 44 78 Z"
+          fill="#FFFBEB"
+          stroke="#D97706"
+          strokeWidth="1"
+        />
+        <line x1="60" y1="63" x2="60" y2="77" stroke="#92400E" strokeWidth="1" />
+
+        {/* Quill Pen with Ink Drop */}
+        <path
+          d="M60 30 C64 36, 68 46, 60 56 C57 52, 56 42, 60 30 Z"
+          fill="url(#crestGold)"
+          stroke="#FFFBEB"
+          strokeWidth="0.8"
+        />
+        <circle cx="60" cy="57" r="1.5" fill="#38BDF8" />
+
+        {/* Academic Stars */}
+        <circle cx="60" cy="20" r="2" fill="#FDE68A" />
+        <circle cx="50" cy="23" r="1.5" fill="#FDE68A" />
+        <circle cx="70" cy="23" r="1.5" fill="#FDE68A" />
+
+        {/* Latin Scroll Inscription Banner */}
+        <rect x="28" y="93" width="64" height="13" rx="3" fill="#D97706" stroke="#FEF3C7" strokeWidth="1" />
+        <text
+          x="60"
+          y="102"
+          textAnchor="middle"
+          fill="#FFFBEB"
+          fontSize="6.5"
+          fontWeight="bold"
+          fontFamily="serif"
+          letterSpacing="1"
+        >
+          INKMONK LAB
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+// 15. UPI / BHIM Payment Shield
+export function UpiShieldIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <div className={`relative inline-flex items-center justify-center shrink-0 ${className}`}>
+      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+        <rect width="48" height="48" rx="10" fill="#0A1128" />
+        {/* UPI Arrows in Tricolor */}
+        <path d="M14 30 L22 14 L28 26 L23 26 L22 24 L18 24 L16 28 Z" fill="#FF9933" />
+        <path d="M26 30 L34 14 L40 26 L35 26 L34 24 L30 24 L28 28 Z" fill="#138808" />
+        <circle cx="27" cy="27" r="2" fill="#38BDF8" />
+      </svg>
+    </div>
+  );
+}
+
+// 16. Google Scholar Icon
+export function GoogleScholarRealIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <div className={`relative inline-flex items-center justify-center shrink-0 ${className}`}>
+      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+        <path d="M24 6 L4 18 L24 30 L44 18 Z" fill="#4285F4" />
+        <path d="M40 21 V33 C40 33, 37 36, 32 36 C27 36, 24 33, 24 33" stroke="#4285F4" strokeWidth="2.5" fill="none" />
+        <path d="M12 23 V34 C12 38, 17 42, 24 42 C31 42, 36 38, 36 34 V23" fill="#3367D6" opacity="0.9" />
+        <line x1="42" y1="20" x2="42" y2="35" stroke="#EA4335" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="42" cy="36" r="2" fill="#EA4335" />
+      </svg>
+    </div>
+  );
+}
+
+// 17. IEEE Xplore Icon
+export function IeeeXploreRealIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <div className={`relative inline-flex items-center justify-center shrink-0 ${className}`}>
+      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+        <polygon points="24,4 44,24 24,44 4,24" fill="#00629B" stroke="#00B5E2" strokeWidth="1.5" />
+        <circle cx="24" cy="24" r="8" fill="#FFFFFF" />
+        <circle cx="24" cy="24" r="4" fill="#00629B" />
+        <line x1="14" y1="24" x2="34" y2="24" stroke="#00B5E2" strokeWidth="2" />
+      </svg>
+    </div>
+  );
+}
+
+// 18. GitHub Icon
+export function GitHubRealIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <div className={`relative inline-flex items-center justify-center shrink-0 ${className}`}>
+      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+        <circle cx="24" cy="24" r="22" fill="#181717" />
+        <path
+          d="M24 10 C16.27 10 10 16.27 10 24 C10 30.19 14.02 35.43 19.59 37.28 C20.29 37.41 20.55 36.98 20.55 36.61 C20.55 36.28 20.54 35.22 20.53 34.06 C17 34.71 16.14 33.15 15.86 32.37 C15.71 31.98 15.06 30.79 14.49 30.48 C14.02 30.22 13.35 29.59 14.48 29.57 C15.53 29.56 16.28 30.54 16.53 30.94 C17.73 32.96 19.64 32.39 20.41 32.04 C20.53 31.17 20.88 30.58 21.27 30.24 C18.15 29.89 14.88 28.69 14.88 23.33 C14.88 21.8 15.43 20.55 16.33 19.57 C16.18 19.22 15.7 17.78 16.48 15.84 C16.48 15.84 17.65 15.47 20.31 17.27 C21.42 16.96 22.61 16.81 23.8 16.8 C24.99 16.81 26.18 16.96 27.29 17.27 C29.95 15.46 31.12 15.84 31.12 15.84 C31.9 17.78 31.42 19.22 31.27 19.57 C32.17 20.55 32.72 21.79 32.72 23.33 C32.72 28.71 29.44 29.88 26.31 30.23 C26.79 30.64 27.21 31.44 27.21 32.7 C27.21 34.51 27.19 35.97 27.19 36.61 C27.19 36.98 27.45 37.42 28.16 37.28 C33.72 35.43 37.74 30.18 37.74 24 C37.74 16.27 31.47 10 23.74 10 Z"
+          fill="#FFFFFF"
+        />
+      </svg>
+    </div>
+  );
+}
+
+// 19. NDA Shield / Legal Non-Disclosure Guarantee
+export function NdaShieldIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <div className={`relative inline-flex items-center justify-center shrink-0 ${className}`}>
+      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+        <path d="M24 4 L40 10 V22 C40 32 33 41 24 44 C15 41 8 32 8 22 V10 L24 4 Z" fill="#0A1128" stroke="#F59E0B" strokeWidth="2" />
+        <path d="M20 23 V19 C20 16.8 21.8 15 24 15 C26.2 15 28 16.8 28 19 V23 M17 23 H31 V33 H17 Z" stroke="#38BDF8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="24" cy="28" r="1.5" fill="#38BDF8" />
+      </svg>
+    </div>
+  );
+}
+
+// 20. Docker / Terminal Code Execution Log Icon
+export function TerminalLogIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <div className={`relative inline-flex items-center justify-center shrink-0 ${className}`}>
+      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+        <rect x="4" y="8" width="40" height="32" rx="8" fill="#0F172A" stroke="#38BDF8" strokeWidth="1.5" />
+        <circle cx="10" cy="14" r="1.5" fill="#EF4444" />
+        <circle cx="15" cy="14" r="1.5" fill="#F59E0B" />
+        <circle cx="20" cy="14" r="1.5" fill="#10B981" />
+        <path d="M12 24 L18 28 L12 32 M22 32 H32" stroke="#38BDF8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </div>
+  );
+}
+
+// 21. Academic Translation Audit Trail Icon
+export function AuditTrailIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <div className={`relative inline-flex items-center justify-center shrink-0 ${className}`}>
+      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+        <circle cx="24" cy="24" r="20" fill="#0A1128" stroke="#FF6B00" strokeWidth="1.5" />
+        <path d="M14 20 L20 14 M20 14 L26 20 M20 14 V34 M34 28 L28 34 M28 34 L22 28 M28 34 V14" stroke="#F5A623" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </div>
+  );
+}
+
+// 22. Calendar Consultation Icon
+export function CalendarScheduleIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <div className={`relative inline-flex items-center justify-center shrink-0 ${className}`}>
+      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+        <rect x="8" y="10" width="32" height="30" rx="6" fill="#FFFFFF" stroke="#D97706" strokeWidth="2" />
+        <path d="M8 18 H40 M16 6 V12 M32 6 V12" stroke="#D97706" strokeWidth="2.5" strokeLinecap="round" />
+        <circle cx="16" cy="26" r="2" fill="#FF6B00" />
+        <circle cx="24" cy="26" r="2" fill="#FF6B00" />
+        <circle cx="32" cy="26" r="2" fill="#FF6B00" />
+        <circle cx="24" cy="33" r="2" fill="#10B981" />
+      </svg>
+    </div>
+  );
+}

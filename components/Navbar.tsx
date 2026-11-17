@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { AcademicLabCrestLogo } from '@/components/RealIcons';
 
 const NAV_LINKS = [
   { href: '/services',     label: 'SERVICES' },
@@ -43,15 +44,8 @@ export default function Navbar() {
 
           {/* Logo & Brand Name */}
           <Link href="/" className="flex items-center gap-3.5 group">
-            <div className="relative w-12 h-12 shrink-0 rounded-2xl overflow-hidden bg-white shadow-md border-2 border-orange-500/20 group-hover:border-orange-500 transition-colors">
-              <Image
-                src="/logo.png"
-                alt="InkMonk Research Logo"
-                fill
-                sizes="48px"
-                className="object-contain !p-1.5"
-                priority
-              />
+            <div className="relative w-12 h-12 shrink-0 rounded-2xl overflow-hidden bg-[#0A1128] shadow-md border-2 border-amber-400/40 group-hover:border-amber-400 transition-colors flex items-center justify-center p-1">
+              <AcademicLabCrestLogo className="w-10 h-10" />
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5">

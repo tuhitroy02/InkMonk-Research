@@ -250,3 +250,177 @@ ul, ol, li, .bullet-point, .bullet-list {
   border-color: #FF6B00;
   box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
 }
+
+/* ─── Futuristic Split Reveal & Cyber Motion (Inspired by Jitter "The Edit") ─ */
+@keyframes splitTopSlide {
+  0% {
+    transform: translateY(-40px);
+    opacity: 0;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+@keyframes splitBottomSlide {
+  0% {
+    transform: translateY(40px);
+    opacity: 0;
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+@keyframes laserSplitSeam {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scaleX(1);
+    opacity: 1;
+    box-shadow: 0 0 20px #FF6B00, 0 0 40px #38BDF8;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0.75;
+  }
+}
+
+@keyframes scanlineSweep {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+@keyframes borderBeamSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-split-top {
+  animation: splitTopSlide 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-split-bottom {
+  animation: splitBottomSlide 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+}
+
+.animate-laser-seam {
+  animation: laserSplitSeam 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scanline {
+  animation: scanlineSweep 8s linear infinite;
+}
+
+/* Cyber Grid Background */
+.cyber-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(255, 107, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(circle at 50% 40%, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 40%, black 40%, transparent 80%);
+}
+
+/* Border Beam Effect */
+.border-beam-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: #0A1128;
+  padding: 1px;
+}
+
+.border-beam-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    transparent 0deg,
+    transparent 280deg,
+    #FF6B00 320deg,
+    #38BDF8 350deg,
+    #F59E0B 360deg
+  );
+  animation: borderBeamSpin 6s linear infinite;
+  z-index: 0;
+}
+
+.border-beam-content {
+  position: relative;
+  z-index: 1;
+  background: #0A1128;
+  border-radius: calc(1.5rem - 1px);
+}
+
+/* Tactical HUD Brackets */
+.hud-corner {
+  position: relative;
+}
+
+.hud-corner::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid #FF6B00;
+  border-left: 2px solid #FF6B00;
+  pointer-events: none;
+}
+
+.hud-corner::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 12px;
+  height: 12px;
+  border-bottom: 2px solid #38BDF8;
+  border-right: 2px solid #38BDF8;
+  pointer-events: none;
+}
+
+/* Turnitin Watermarked Sheet Styling */
+.turnitin-sheet-paper {
+  background: #FFFFFF;
+  background-image: radial-gradient(#E2E8F0 1px, transparent 1px);
+  background-size: 16px 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid #E2E8F0;
+}
+
+.watermark-diagonal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: rgba(226, 232, 240, 0.45);
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  user-select: none;
+}
