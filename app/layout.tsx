@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
-import { Comic_Neue } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
-
-const comicNeue = Comic_Neue({
-  subsets: ["latin"],
-  weight: ["300", "400", "700"],
-  variable: "--font-comic",
-  display: "swap",
-});
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -45,17 +38,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth dark-mode" data-theme="dark">
       <body
-        className="min-h-screen bg-[#F9F7F4] text-[#1E293B] font-bold antialiased selection:bg-orange-500 selection:text-white"
+        className="min-h-screen font-bold antialiased transition-colors duration-300"
         style={{ fontFamily: '"Cavolini", "Cavolini Condensed", "Plus Jakarta Sans", sans-serif', fontWeight: 700 }}
       >
-        <Navbar />
-        <main className="min-h-screen pt-20">
-          {children}
-        </main>
-        <Footer />
-        <ChatWidget />
+        <ThemeProvider>
+          <Navbar />
+          <main className="min-h-screen pt-20">
+            {children}
+          </main>
+          <Footer />
+          <ChatWidget />
+        </ThemeProvider>
       </body>
     </html>
   );

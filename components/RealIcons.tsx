@@ -655,3 +655,79 @@ export function CalendarScheduleIcon({ className = "w-6 h-6" }: { className?: st
     </div>
   );
 }
+
+
+// 23. Official Turnitin Real Brand Logo
+export function OfficialTurnitinLogo({ className = "w-8 h-8" }: { className?: string }) {
+  return (
+    <div className={`relative inline-flex items-center justify-center shrink-0 ${className}`}>
+      <svg viewBox="0 0 64 64" fill="none" className="w-full h-full drop-shadow-md">
+        <defs>
+          <linearGradient id="tiiOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#F97316" />
+            <stop offset="100%" stopColor="#EA580C" />
+          </linearGradient>
+          <linearGradient id="tiiRed" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#EF4444" />
+            <stop offset="100%" stopColor="#B91C1C" />
+          </linearGradient>
+        </defs>
+        {/* Background rounded badge */}
+        <rect width="64" height="64" rx="16" fill="#0C1322" stroke="#F97316" strokeWidth="1.5" />
+        {/* Authentic Turnitin Loop Ribbon */}
+        <path
+          d="M20 22 C20 16 26 12 33 12 C41 12 47 17 47 25 C47 34 39 37 32 40 C26 43 23 46 23 52 H47"
+          stroke="url(#tiiOrange)"
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <circle cx="32" cy="24" r="3.5" fill="#FFFFFF" />
+        <path d="M22 28 L30 36 L44 20" stroke="#10B981" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </div>
+  );
+}
+
+// 24. Step 05 Icon
+export function Step5Icon({ className = "w-8 h-8" }: { className?: string }) {
+  return (
+    <div className={`relative inline-flex items-center justify-center shrink-0 ${className}`}>
+      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+        <rect x="8" y="8" width="32" height="32" rx="10" fill="url(#s5g)" />
+        <defs>
+          <linearGradient id="s5g" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#06B6D4" />
+            <stop offset="100%" stopColor="#0891B2" />
+          </linearGradient>
+        </defs>
+        <path d="M16 24 L22 30 L32 18" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </div>
+  );
+}
+
+// 25. Publisher Logos: Springer Nature, Elsevier, Scopus, UGC-CARE
+export function SpringerLogo({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <div className={`relative inline-flex items-center justify-center shrink-0 ${className}`}>
+      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+        <circle cx="24" cy="24" r="22" fill="#003366" />
+        <path d="M14 34 C18 20 30 14 34 14 C32 20 28 26 22 28 C18 29 16 31 14 34 Z" fill="#F5A623" />
+        <circle cx="28" cy="18" r="3" fill="#FFFFFF" />
+      </svg>
+    </div>
+  );
+}
+
+export function ElsevierLogo({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <div className={`relative inline-flex items-center justify-center shrink-0 ${className}`}>
+      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
+        <circle cx="24" cy="24" r="22" fill="#E65100" />
+        {/* Tree of Knowledge */}
+        <path d="M24 36 V20 M24 24 C20 20 16 22 14 26 M24 22 C28 18 32 20 34 24 M24 28 C18 28 16 32 14 34 M24 27 C30 27 32 30 34 33" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    </div>
+  );
+}

@@ -7,8 +7,10 @@ import {
   WhatsAppRealIcon,
   EmailRealIcon,
   TurnitinShieldLogo,
+  OfficialTurnitinLogo,
 } from '@/components/RealIcons';
 import { Interactive3DCard } from '@/components/FuturisticScrollExperience';
+import FaqSection from '@/components/FaqSection';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -51,7 +53,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#030712] text-[#F8FAFC] py-20 px-4 text-center selection:bg-cyan-500 selection:text-black" style={{ fontFamily: '"Cavolini", "Cavolini Condensed", sans-serif' }}>
+    <div className="min-h-screen bg-[#030712] text-[#F8FAFC] py-16 px-4 text-center selection:bg-cyan-500 selection:text-black" style={{ fontFamily: '"Cavolini", "Cavolini Condensed", sans-serif' }}>
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
@@ -139,7 +141,7 @@ export default function ContactPage() {
 
               {submitted ? (
                 <div className="p-8 bg-emerald-950/80 rounded-2xl border border-emerald-500/50 text-center animate-3d-float">
-                  <TurnitinShieldLogo className="w-16 h-16 mx-auto mb-3" />
+                  <OfficialTurnitinLogo className="w-16 h-16 mx-auto mb-3" />
                   <h3 className="font-serif text-2xl font-bold text-white mb-2 text-center">
                     Message Dispatched Successfully!
                   </h3>
@@ -233,7 +235,7 @@ export default function ContactPage() {
 
                   <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-slate-800">
                     <div className="flex items-center gap-2 text-xs text-slate-400">
-                      <TurnitinShieldLogo className="w-4 h-4 text-emerald-400" />
+                      <OfficialTurnitinLogo className="w-4 h-4" />
                       <span>Strict Academic Non-Disclosure &amp; Confidentiality Assured</span>
                     </div>
                     <button
@@ -249,6 +251,11 @@ export default function ContactPage() {
             </div>
           </div>
 
+        </div>
+
+        {/* ─── Merged FAQ Section at the End of Contact (Requirement 3) ──── */}
+        <div className="mt-20 pt-16 border-t border-cyan-500/20">
+          <FaqSection />
         </div>
 
       </div>

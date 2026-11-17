@@ -6,16 +6,26 @@ import {
   UkFlagLogo,
   IndiaFlagLogo,
   TurnitinShieldLogo,
+  OfficialTurnitinLogo,
   AuditTrailIcon,
   CalendarScheduleIcon,
   NdaShieldIcon,
   UpiShieldIcon,
+  TerminalLogIcon,
 } from '@/components/RealIcons';
 
 import {
   ResearchPaperRealWork,
-  HindiPaperRealWork,
+  ThesisRealWork,
+  BookRealWork,
+  ReviewPaperRealWork,
+  ArticleRealWork,
+  PresentationRealWork,
+  ModelCodeRealWork,
+  SynopsisRealWork,
   TurnitinReportRealWork,
+  HindiPaperRealWork,
+  HindiThesisRealWork,
 } from '@/components/RealWorkImages';
 
 import {
@@ -28,8 +38,208 @@ import {
 } from '@/components/FuturisticInteractions';
 
 import { Interactive3DCard } from '@/components/FuturisticScrollExperience';
+import ResearchAreasSection from '@/components/ResearchAreasSection';
+
+export interface ServiceItem {
+  id: string;
+  category: string;
+  title: string;
+  badge: string;
+  visual: React.ReactNode;
+  desc: string;
+  features: string[];
+  href: string;
+  glowColor: 'cyan' | 'emerald' | 'indigo';
+  isCode?: boolean;
+  isTurnitin?: boolean;
+  isHindi?: boolean;
+  priceTag?: string;
+}
+
+const SERVICE_CATALOG: ServiceItem[] = [
+  // Category 1: Papers & Manuscripts
+  {
+    id: 'research-paper',
+    category: 'Manuscripts & Publications',
+    title: 'Research Paper Writing',
+    badge: 'IEEE / Springer / Elsevier',
+    visual: <ResearchPaperRealWork className="w-full h-44 mb-4" />,
+    desc: 'High-impact empirical and theoretical research manuscripts structured to international publication standards. Formatted to IEEE, Springer, Elsevier, or target UGC-CARE guidelines.',
+    features: [
+      'Original hypothesis formulation & literature synthesis',
+      'Accurate mathematical modeling & statistical data analysis',
+      'Full BibTeX / Mendeley / EndNote citation management',
+      'Target journal formatting (LaTeX template or Word)',
+    ],
+    href: '/quote?service=RESEARCH_PAPER',
+    glowColor: 'cyan',
+  },
+  {
+    id: 'review-paper',
+    category: 'Manuscripts & Publications',
+    title: 'Systematic Review Papers',
+    badge: 'PRISMA / Bibliometric',
+    visual: <ReviewPaperRealWork className="w-full h-44 mb-4" />,
+    desc: 'Comprehensive systematic literature reviews, state-of-the-art meta-analyses, and VOSviewer/Biblioshiny bibliometric mapping across your discipline.',
+    features: [
+      'PRISMA-compliant search strategy & inclusion flowchart',
+      'Systematic taxonomy matrices & comparative synthesis',
+      '100+ peer-reviewed primary study critical evaluation',
+      'Identification of research gaps and future directions',
+    ],
+    href: '/quote?service=REVIEW_PAPER',
+    glowColor: 'cyan',
+  },
+  {
+    id: 'academic-article',
+    category: 'Manuscripts & Publications',
+    title: 'Academic Articles & Chapters',
+    badge: 'Scopus / UGC-CARE',
+    visual: <ArticleRealWork className="w-full h-44 mb-4" />,
+    desc: 'Scholarly articles, edited book chapters, policy whitepapers, and conference proceedings with verified word count tiers and rigorous citation apparatus.',
+    features: [
+      'Available across 1,000 to 5,000+ word tiers',
+      'Standardized per-word rate schedule in quote calculator',
+      'Peer-reviewed standard APA, Harvard, MLA, or Chicago styling',
+      'Zero AI hallucinations and verified fact-checking',
+    ],
+    href: '/quote?service=ARTICLE',
+    glowColor: 'cyan',
+  },
+
+  // Category 2: Dissertations & Proposals
+  {
+    id: 'thesis-dissertation',
+    category: 'Dissertations & Proposals',
+    title: 'Ph.D. Thesis & Master Dissertation',
+    badge: 'Chapter Milestone Escrow',
+    visual: <ThesisRealWork className="w-full h-44 mb-4" />,
+    desc: 'End-to-end doctoral thesis drafting from Chapter 1 (Introduction) through literature review, methodology, results, and conclusion. Available with or without computational models.',
+    features: [
+      'Comprehensive 5-chapter or 6-chapter university structure',
+      'Chapter-by-chapter milestone review and payment schedule',
+      'Strict adherence to university thesis handbook and DRC rubric',
+      'Direct communication channel with your assigned Ph.D. director',
+    ],
+    href: '/quote?service=THESIS',
+    glowColor: 'cyan',
+  },
+  {
+    id: 'research-synopsis',
+    category: 'Dissertations & Proposals',
+    title: 'Synopsis & Ph.D. Proposals',
+    badge: 'DRC / Grant Ready',
+    visual: <SynopsisRealWork className="w-full h-44 mb-4" />,
+    desc: 'Crisp, defensible research synopses, doctoral registration proposals, and academic grant applications formulated to pass university screening committees.',
+    features: [
+      'Problem statement, research questions, and tentative hypotheses',
+      'Proposed methodology, sampling frame & data collection tools',
+      'Tentative chapter outline & chronological work-plan (Gantt)',
+      'Preliminary bibliography conforming to institutional norms',
+    ],
+    href: '/quote?service=SYNOPSIS',
+    glowColor: 'cyan',
+  },
+
+  // Category 3: Code & Computational Models
+  {
+    id: 'model-code',
+    category: 'Computational & Code Implementation',
+    title: 'Model & Code Implementation',
+    badge: 'PyTorch / MATLAB / Docker',
+    visual: <ModelCodeRealWork className="w-full h-44 mb-4" />,
+    desc: 'Machine learning, deep neural network (PyTorch, TensorFlow, CUDA), Python, and MATLAB simulation development with reproducible benchmarks and Git handoff.',
+    features: [
+      'Custom algorithm implementation & hyperparameter tuning',
+      'Clean, commented source code with README and Docker container',
+      'Validation curves, confusion matrices & AUC-ROC metrics',
+      'Private Git repository handoff directly to your client portal',
+    ],
+    href: '/quote?service=MODEL',
+    glowColor: 'emerald',
+    isCode: true,
+  },
+
+  // Category 4: Scholarly Books
+  {
+    id: 'book-writing',
+    category: 'Books & Monographs',
+    title: 'Scholarly Book Writing (100–300 pp)',
+    badge: 'ISBN Standard',
+    visual: <BookRealWork className="w-full h-44 mb-4" />,
+    desc: 'Full-length scholarly monographs, edited volumes, and reference textbooks prepared for academic publishers with ISBN registration support.',
+    features: [
+      'Structured 100-page, 200-page, and 300-page packages',
+      'Rigorous chapter-wise pedagogical or research structure',
+      'Front matter, preface, detailed index, and consolidated bibliography',
+      'Available in both English and Hindi',
+    ],
+    href: '/quote?service=BOOK',
+    glowColor: 'indigo',
+  },
+
+  // Category 5: Presentations & Defense
+  {
+    id: 'presentation-defense',
+    category: 'Presentations & Defense',
+    title: 'Academic PPT & Thesis Defense',
+    badge: 'Defense Ready',
+    visual: <PresentationRealWork className="w-full h-44 mb-4" />,
+    desc: 'Professional thesis defense slide decks, conference presentations, and seminar slides formatted to withstand tough academic committee inquiries.',
+    features: [
+      'Clean, widescreen 16:9 visual hierarchy with high-contrast figures',
+      'Concise bullet summaries paired with speaker notes',
+      'Custom methodology workflow diagrams and architecture schematics',
+      'Per-slide standardized rate in quote engine',
+    ],
+    href: '/quote?service=PPT',
+    glowColor: 'cyan',
+  },
+
+  // Category 6: Turnitin Reports
+  {
+    id: 'turnitin-audit',
+    category: 'Originality & Audits',
+    title: 'Turnitin AI & Plagiarism Reports',
+    badge: 'Safe Non-Repository',
+    visual: <TurnitinReportRealWork className="w-full h-44 mb-4" />,
+    desc: 'Instructor-tier Turnitin verification audits checking similarity index and AI writing percentages without saving your manuscript to public databases.',
+    features: [
+      'Flat fee of ₹200 per file scanned (15–30 min delivery)',
+      '100% Non-Repository deposit (Zero database retention guaranteed)',
+      'Full PDF report with color-coded passage citations and matching sources',
+      'Instant UPI payment and instant upload modal',
+    ],
+    href: '/quote?type=TURNITIN',
+    glowColor: 'emerald',
+    isTurnitin: true,
+    priceTag: '₹200 per file flat',
+  },
+
+  // Category 7: Hindi Specialists
+  {
+    id: 'hindi-research',
+    category: 'Hindi Academic Division (हिंदी शोध)',
+    title: 'Hindi Research & Thesis (हिंदी शोध पत्र एवं प्रबंध)',
+    badge: 'Devanagari Specialists',
+    visual: <HindiPaperRealWork className="w-full h-44 mb-4" />,
+    desc: 'Specialized academic research in Hindi supervised by Sampreeti Mukherjee with standard Devanagari terminology, Shodhganga compliance, and zero automated translation shortcuts.',
+    features: [
+      'शोध पत्र (Research Papers) & शोध प्रबंध (Complete Theses)',
+      'मानक पारिभाषिक शब्दावली (Standardized Academic Terminology)',
+      'यूजीसी-केयर (UGC-CARE) एवं शोधगंगा (Shodhganga) अनुरूप प्रारूप',
+      'तुलनात्मक साहित्य, मानविकी, भाषाविज्ञान एवं समाजशास्त्र',
+    ],
+    href: '/quote?lang=HI',
+    glowColor: 'emerald',
+    isHindi: true,
+  },
+];
 
 export default function ServicesPage() {
+  const [activeCategory, setActiveCategory] = useState<string>('ALL');
+
+  // Modals
   const [turnitinModalOpen, setTurnitinModalOpen] = useState(false);
   const [sampleModalOpen, setSampleModalOpen] = useState(false);
   const [ndaModalOpen, setNdaModalOpen] = useState(false);
@@ -37,168 +247,217 @@ export default function ServicesPage() {
   const [scopeBuilderOpen, setScopeBuilderOpen] = useState(false);
   const [auditModalOpen, setAuditModalOpen] = useState(false);
 
+  const categories = [
+    'ALL',
+    'Manuscripts & Publications',
+    'Dissertations & Proposals',
+    'Computational & Code Implementation',
+    'Books & Monographs',
+    'Presentations & Defense',
+    'Originality & Audits',
+    'Hindi Academic Division (हिंदी शोध)',
+  ];
+
+  const filteredServices = activeCategory === 'ALL'
+    ? SERVICE_CATALOG
+    : SERVICE_CATALOG.filter((s) => s.category === activeCategory);
+
   return (
-    <div className="min-h-screen bg-[#030712] text-[#F8FAFC] py-20 px-4 text-center selection:bg-cyan-500 selection:text-black" style={{ fontFamily: '"Cavolini", "Cavolini Condensed", sans-serif' }}>
+    <div className="min-h-screen bg-[#030712] text-[#F8FAFC] py-16 px-4 text-center selection:bg-cyan-500 selection:text-black" style={{ fontFamily: '"Cavolini", "Cavolini Condensed", sans-serif' }}>
       <div className="max-w-7xl mx-auto">
 
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="badge-pill-gold mb-3 font-mono">ACADEMIC EXCELLENCE &amp; COPE ETHICS</div>
-          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-4 text-center">
-            Our Research &amp; Writing Services
+        {/* ─── Hero Header ─────────────────────────────────────────────────── */}
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="badge-pill-gold mb-3 font-mono">
+            ACADEMIC CATALOGUE // RIGOROUS &amp; CONFIDENTIAL
+          </div>
+          <h1 className="font-serif text-4xl sm:text-6xl font-bold text-white mb-4 text-center">
+            Scholarly Services Catalogue
           </h1>
-          <p className="text-slate-400 text-base sm:text-lg text-center font-medium">
-            Rigorously formatted, 0% AI, and plagiarism-free academic scholarship in both <strong className="text-white">English</strong> and <strong className="text-white">Hindi</strong>.
+          <p className="text-slate-400 text-base sm:text-lg text-center font-medium leading-relaxed">
+            Rigorously formatted, 0% AI, and plagiarism-free academic scholarship in both <strong className="text-white">English</strong> and <strong className="text-white">Hindi</strong>. Evaluated transparently through our central server-side pricing engine.
           </p>
-          <div className="flex flex-wrap justify-center gap-3 mt-4 text-xs font-semibold text-slate-300">
-            <span className="flex items-center gap-1">
-              <UpiShieldIcon className="w-4 h-4 text-cyan-400" />
+
+          <div className="flex flex-wrap justify-center gap-3 mt-5 text-xs font-semibold text-slate-300 font-mono">
+            <span className="flex items-center gap-1.5 bg-cyan-950/60 border border-cyan-500/40 px-3 py-1 rounded-full text-cyan-300">
+              <UpiShieldIcon className="w-4 h-4" />
               <span>Instant UPI Accepted</span>
             </span>
-            <span className="text-slate-600">•</span>
-            <span className="flex items-center gap-1">
-              <NdaShieldIcon className="w-4 h-4 text-emerald-400" />
-              <span>100% IP &amp; NDA Assignment</span>
+            <span className="flex items-center gap-1.5 bg-emerald-950/60 border border-emerald-500/40 px-3 py-1 rounded-full text-emerald-300">
+              <NdaShieldIcon className="w-4 h-4" />
+              <span>100% IP &amp; Mutual NDA</span>
             </span>
-            <span className="text-slate-600">•</span>
-            <span className="text-cyan-300">Chapter-by-Chapter Milestone Escrow</span>
+            <span className="flex items-center gap-1.5 bg-slate-900 border border-slate-700 px-3 py-1 rounded-full text-slate-300">
+              <span>Chapter-by-Chapter Escrow</span>
+            </span>
           </div>
         </div>
 
-        {/* 3 Main Pillars with Real Work Images */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          
-          {/* English Services Card */}
-          <Interactive3DCard glowColor="cyan">
-            <div className="card-futuristic-3d p-6 flex flex-col justify-between border-t-4 border-t-cyan-500 text-center relative h-full">
-              <div className="absolute top-4 right-4 bg-cyan-950 text-cyan-300 border border-cyan-400/40 text-[11px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md font-mono">
-                English Specialists
-              </div>
-              <div>
-                <ResearchPaperRealWork className="w-full h-44 mb-4" />
-                <h2 className="font-serif text-2xl font-bold text-white mb-1 text-center">English Services</h2>
-                <p className="text-slate-400 text-xs mb-4 leading-relaxed text-center">
-                  Comprehensive support for international journals, doctoral dissertations, and technical documentation formatted to IEEE, Springer, and Elsevier standards.
-                </p>
-                <div className="max-w-xs mx-auto mb-6">
-                  <ul className="space-y-2 text-xs text-slate-300 text-left">
-                    <li className="flex items-center gap-2">
-                      <span className="text-cyan-400 font-bold">✓</span> Research &amp; Review Papers
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-cyan-400 font-bold">✓</span> Thesis Writing (With / Without Model)
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-cyan-400 font-bold">✓</span> Book Writing (100, 200, 300 pages)
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-cyan-400 font-bold">✓</span> Articles &amp; Presentations
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <Link href="/quote?lang=EN" className="btn-primary-glow text-xs w-full text-center font-mono">
-                Request English Quote →
-              </Link>
-            </div>
-          </Interactive3DCard>
-
-          {/* Hindi Services Card */}
-          <Interactive3DCard glowColor="emerald">
-            <div className="card-futuristic-3d p-6 flex flex-col justify-between border-t-4 border-t-emerald-500 text-center relative h-full">
-              <div className="absolute top-4 right-4 bg-emerald-950 text-emerald-300 border border-emerald-400/40 text-[11px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md font-mono">
-                Hindi Specialists
-              </div>
-              <div>
-                <HindiPaperRealWork className="w-full h-44 mb-4" />
-                <h2 className="font-serif text-2xl font-bold text-white mb-1 text-center">Hindi Services</h2>
-                <p className="text-slate-400 text-xs mb-4 leading-relaxed text-center">
-                  Dedicated Hindi academic division led by Sampreeti Mukherjee ensuring authentic scholarly vocabulary, correct Devanagari grammar, and zero automated translation flags.
-                </p>
-                <div className="max-w-xs mx-auto mb-4">
-                  <ul className="space-y-2 text-xs text-slate-300 text-left">
-                    <li className="flex items-center gap-2">
-                      <span className="text-emerald-400 font-bold">✓</span> Shodh Patra / Hindi Research Papers
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-emerald-400 font-bold">✓</span> Shodh Prabandh / Hindi Thesis
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-emerald-400 font-bold">✓</span> Hindi Book Writing (100–300 pages)
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-emerald-400 font-bold">✓</span> Devanagari Presentations
-                    </li>
-                  </ul>
-                </div>
-
-                <button
-                  onClick={() => setAuditModalOpen(true)}
-                  className="text-xs text-emerald-400 font-bold hover:underline mb-4 inline-flex items-center gap-1 cursor-pointer"
-                >
-                  <AuditTrailIcon className="w-4 h-4" />
-                  <span>View Vernacular Translation Audit Trail →</span>
-                </button>
-              </div>
-              <Link href="/quote?lang=HI" className="btn-primary-glow text-xs w-full text-center font-mono">
-                Request Hindi Quote →
-              </Link>
-            </div>
-          </Interactive3DCard>
-
-          {/* Turnitin Card */}
-          <Interactive3DCard glowColor="cyan">
-            <div className="card-futuristic-3d p-6 flex flex-col justify-between border-t-4 border-t-teal-400 text-center relative h-full">
-              <div className="absolute top-4 right-4 bg-teal-950 text-teal-300 border border-teal-400/40 text-[11px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md font-mono">
-                Verified Originality
-              </div>
-              <div>
-                <TurnitinReportRealWork className="w-full h-44 mb-4" />
-                <h2 className="font-serif text-2xl font-bold text-white mb-1 text-center">Turnitin Reports</h2>
-                <p className="text-slate-400 text-xs mb-3 leading-relaxed text-center">
-                  Verified instructor-grade Turnitin check with complete AI percentage detection and highlighted originality breakdown without repository retention.
-                </p>
-                <div className="p-3 bg-[#060B18] rounded-xl border border-cyan-500/30 mb-3 text-center">
-                  <span className="text-[10px] text-cyan-300 font-semibold block uppercase font-mono">Fixed Flat Fee</span>
-                  <span className="font-serif text-2xl font-bold text-white">₹200</span>
-                  <span className="text-[10px] text-slate-400 block">per scanned file • 15–30 min delivery</span>
-                </div>
-
-                <button
-                  onClick={() => setSampleModalOpen(true)}
-                  className="text-xs text-cyan-300 hover:text-white font-bold underline mb-3 block cursor-pointer"
-                >
-                  View Watermarked Sample Deliverable →
-                </button>
-              </div>
-              <button
-                onClick={() => setTurnitinModalOpen(true)}
-                className="btn-primary-glow text-xs w-full text-center cursor-pointer font-mono"
-              >
-                Upload &amp; Pay ₹200 via UPI →
-              </button>
-            </div>
-          </Interactive3DCard>
-
+        {/* ─── Category Filter Tabs ────────────────────────────────────────── */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12 font-mono">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                activeCategory === cat
+                  ? 'bg-cyan-950 text-cyan-300 border border-cyan-400/60 shadow-[0_0_15px_rgba(6,182,212,0.35)] scale-105'
+                  : 'bg-[#060B18] text-slate-400 hover:text-white border border-slate-800'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
 
-        {/* CTA */}
-        <div className="text-center flex flex-wrap justify-center gap-4">
-          <Link href="/quote" className="btn-primary-glow text-sm px-8 py-3.5 shadow-xl font-mono">
-            Start Your Custom Quotation →
-          </Link>
-          <button
-            onClick={() => setSchedulerModalOpen(true)}
-            className="btn-secondary-dark cursor-pointer text-xs"
-          >
-            <CalendarScheduleIcon className="w-4 h-4 text-cyan-400" />
-            <span>Book 1-on-1 Expert Video Meet →</span>
-          </button>
+        {/* ─── Redesigned Services Grid ────────────────────────────────────── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+          {filteredServices.map((service) => (
+            <Interactive3DCard key={service.id} glowColor={service.glowColor}>
+              <div className="card-futuristic-3d p-6 flex flex-col justify-between text-left h-full group relative border-t-4 border-t-cyan-500">
+                
+                {/* Badge & Category */}
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="text-[10px] font-mono font-bold uppercase text-cyan-300 bg-cyan-950/80 border border-cyan-500/40 px-2.5 py-1 rounded-full">
+                      {service.badge}
+                    </span>
+                    {service.priceTag && (
+                      <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-500/40 px-2.5 py-1 rounded-full">
+                        {service.priceTag}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Real Deliverable Image */}
+                  <div className="my-2 transform group-hover:scale-[1.02] transition-transform duration-300">
+                    {service.visual}
+                  </div>
+
+                  {/* Title & Desc */}
+                  <h3 className="font-serif text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-slate-400 text-xs leading-relaxed mb-4">
+                    {service.desc}
+                  </p>
+
+                  {/* Features Bullet List (Left-Aligned) */}
+                  <div className="pt-3 border-t border-slate-800 mb-6">
+                    <div className="text-[10px] font-mono text-cyan-400 font-bold uppercase mb-2">
+                      Key Deliverables &amp; Standards:
+                    </div>
+                    <ul className="space-y-1.5 text-xs text-slate-300">
+                      {service.features.map((feat, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="text-cyan-400 font-bold text-[11px] mt-0.5">✓</span>
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Card Action Buttons */}
+                <div className="pt-4 border-t border-slate-800 flex flex-col gap-2.5 mt-auto">
+                  {service.isCode ? (
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => setScopeBuilderOpen(true)}
+                        className="btn-primary-glow text-xs w-full font-mono py-2.5 flex items-center justify-center gap-1.5 cursor-pointer"
+                      >
+                        <TerminalLogIcon className="w-3.5 h-3.5" />
+                        <span>Interactive Code Scope Builder →</span>
+                      </button>
+                    </div>
+                  ) : service.isTurnitin ? (
+                    <div className="flex flex-col gap-2">
+                      <button
+                        onClick={() => setTurnitinModalOpen(true)}
+                        className="btn-primary-glow text-xs w-full font-mono py-2.5 cursor-pointer"
+                      >
+                        Upload &amp; Pay ₹200 via UPI →
+                      </button>
+                      <button
+                        onClick={() => setSampleModalOpen(true)}
+                        className="text-xs text-cyan-300 hover:text-white font-mono text-center underline cursor-pointer"
+                      >
+                        View Watermarked Sample Report
+                      </button>
+                    </div>
+                  ) : service.isHindi ? (
+                    <div className="flex flex-col gap-2">
+                      <Link
+                        href={service.href}
+                        className="btn-primary-glow text-xs w-full text-center font-mono py-2.5"
+                      >
+                        Configure Hindi Quote →
+                      </Link>
+                      <button
+                        onClick={() => setAuditModalOpen(true)}
+                        className="text-xs text-emerald-400 hover:underline inline-flex items-center justify-center gap-1 cursor-pointer font-mono"
+                      >
+                        <AuditTrailIcon className="w-3.5 h-3.5" />
+                        <span>View Vernacular Translation Audit</span>
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-between gap-2">
+                      <Link
+                        href={service.href}
+                        className="btn-primary-glow text-xs w-full text-center font-mono py-2.5"
+                      >
+                        Configure Instant Quote →
+                      </Link>
+                    </div>
+                  )}
+
+                  <div className="text-[10px] font-mono text-slate-500 text-center">
+                    Protected under Pre-Signed Mutual NDA
+                  </div>
+                </div>
+
+              </div>
+            </Interactive3DCard>
+          ))}
+        </div>
+
+        {/* ─── RESEARCH AREAS SUPPORTED (Immediately After Services as requested) ── */}
+        <div className="border-t border-cyan-500/20 pt-16">
+          <ResearchAreasSection />
+        </div>
+
+        {/* ─── Bottom CTA & Video Consultation Banner ──────────────────────── */}
+        <div className="mt-20 p-8 md:p-12 rounded-3xl bg-[#060B18] border border-cyan-500/30 text-white text-center shadow-2xl relative overflow-hidden">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="font-serif text-2xl sm:text-4xl font-bold mb-3 text-center">
+              Uncertain About Your Specific Requirements?
+            </h2>
+            <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto mb-8 text-center font-medium">
+              Schedule a 1-on-1 preliminary consultation with assigned doctoral directors Tuhit Roy and Sampreeti Mukherjee to evaluate rubrics and data reproducibility.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <button
+                onClick={() => setSchedulerModalOpen(true)}
+                className="btn-primary-glow font-mono text-xs uppercase cursor-pointer"
+              >
+                <CalendarScheduleIcon className="w-4 h-4" />
+                <span>Book 1-on-1 Consultation</span>
+              </button>
+              <button
+                onClick={() => setNdaModalOpen(true)}
+                className="btn-secondary-dark font-mono text-xs uppercase cursor-pointer"
+              >
+                <NdaShieldIcon className="w-4 h-4 text-cyan-400" />
+                <span>Preview Mutual NDA</span>
+              </button>
+            </div>
+          </div>
         </div>
 
       </div>
 
-      {/* Interactive Modals */}
+      {/* ─── Interactive Modals ───────────────────────────────────────────── */}
       <InstantTurnitinModal
         isOpen={turnitinModalOpen}
         onClose={() => setTurnitinModalOpen(false)}

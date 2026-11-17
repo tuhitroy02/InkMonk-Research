@@ -20,7 +20,7 @@ html, body, div, span, p, h1, h2, h3, h4, h5, h6, button, input, select, textare
   font-family: "Cavolini", "Cavolini Condensed", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif !important;
 }
 
-/* ─── Global Background & Base Theme: Kevlar, Chrome & Cyber Flare ─────────── */
+/* ─── Global Background & Base Theme: Dark (Default) & Light Mode ────────── */
 body {
   font-family: var(--font-cavolini) !important;
   background-color: #030712;
@@ -29,6 +29,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ─── Global Text Alignment Rule (Requirement 1) ────────────────────────── */
@@ -98,7 +99,7 @@ ul, ol, li, .bullet-point, .bullet-list {
   border-color: rgba(34, 211, 238, 0.6);
 }
 
-/* ─── Futuristic Step Numbers 1, 2, 3, 4 (Requirement 2) ─────────────────── */
+/* ─── Futuristic Step Numbers 1, 2, 3, 4, 5 ──────────────────────────────── */
 .step-number-futuristic {
   position: relative;
   width: 4rem;
@@ -273,7 +274,7 @@ ul, ol, li, .bullet-point, .bullet-list {
   box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.25);
 }
 
-/* ─── Futuristic Split Reveal & Cyber Motion (Inspired by Jitter "The Edit") ─ */
+/* ─── Futuristic Split Reveal & Cyber Motion ─────────────────────────────── */
 @keyframes splitTopSlide {
   0% {
     transform: translateY(-40px);
@@ -325,15 +326,6 @@ ul, ol, li, .bullet-point, .bullet-list {
   }
 }
 
-@keyframes borderBeamSpin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 .animate-split-top {
   animation: splitTopSlide 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -358,40 +350,6 @@ ul, ol, li, .bullet-point, .bullet-list {
   background-size: 36px 36px;
   mask-image: radial-gradient(circle at 50% 40%, black 40%, transparent 80%);
   -webkit-mask-image: radial-gradient(circle at 50% 40%, black 40%, transparent 80%);
-}
-
-/* Border Beam Effect */
-.border-beam-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 1.5rem;
-  background: #060B18;
-  padding: 1px;
-}
-
-.border-beam-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: conic-gradient(
-    transparent 0deg,
-    transparent 280deg,
-    #00F2FE 320deg,
-    #10B981 350deg,
-    #38BDF8 360deg
-  );
-  animation: borderBeamSpin 6s linear infinite;
-  z-index: 0;
-}
-
-.border-beam-content {
-  position: relative;
-  z-index: 1;
-  background: #080E1E;
-  border-radius: calc(1.5rem - 1px);
 }
 
 /* Tactical HUD Brackets */
@@ -445,4 +403,95 @@ ul, ol, li, .bullet-point, .bullet-list {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   user-select: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LIGHT THEME OVERRIDES (Requirement 8: Switchable Dark and Light Theme)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.light-mode body,
+[data-theme="light"] body {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+.light-mode .card-futuristic-3d,
+[data-theme="light"] .card-futuristic-3d {
+  background: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 0 15px rgba(6, 182, 212, 0.05) !important;
+  color: #0F172A !important;
+}
+
+.light-mode .card-futuristic-3d:hover,
+[data-theme="light"] .card-futuristic-3d:hover {
+  border-color: #06B6D4 !important;
+  box-shadow: 0 20px 35px -10px rgba(6, 182, 212, 0.25) !important;
+}
+
+.light-mode h1, .light-mode h2, .light-mode h3, .light-mode h4,
+[data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3, [data-theme="light"] h4 {
+  color: #0A1128 !important;
+}
+
+.light-mode p,
+[data-theme="light"] p {
+  color: #334155 !important;
+}
+
+.light-mode .text-slate-400, .light-mode .text-slate-300,
+[data-theme="light"] .text-slate-400, [data-theme="light"] .text-slate-300 {
+  color: #475569 !important;
+}
+
+.light-mode .bg-\[\#030712\],
+[data-theme="light"] .bg-\[\#030712\] {
+  background-color: #F8FAFC !important;
+}
+
+.light-mode .bg-\[\#060B18\],
+[data-theme="light"] .bg-\[\#060B18\] {
+  background-color: #F1F5F9 !important;
+}
+
+.light-mode .bg-midnight,
+[data-theme="light"] .bg-midnight {
+  background: radial-gradient(circle at 50% 20%, #E2E8F0 0%, #EDF2F7 50%, #F8FAFC 100%) !important;
+}
+
+.light-mode header,
+[data-theme="light"] header {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-bottom-color: #E2E8F0 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+}
+
+.light-mode header nav a,
+[data-theme="light"] header nav a {
+  color: #334155 !important;
+}
+
+.light-mode header nav a:hover,
+[data-theme="light"] header nav a:hover {
+  color: #0891B2 !important;
+  background-color: #F1F5F9 !important;
+}
+
+.light-mode .input-field,
+[data-theme="light"] .input-field {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  color: #0F172A !important;
+}
+
+.light-mode .btn-secondary-dark,
+[data-theme="light"] .btn-secondary-dark {
+  background-color: #F1F5F9 !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+.light-mode .btn-secondary-dark:hover,
+[data-theme="light"] .btn-secondary-dark:hover {
+  background-color: #E2E8F0 !important;
+  border-color: #06B6D4 !important;
 }

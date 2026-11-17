@@ -11,10 +11,15 @@ import {
   CyberParticleField,
 } from '@/components/FuturisticScrollExperience';
 
+import HorizontalHowItWorks from '@/components/HorizontalHowItWorks';
+import ResearchAreasSection from '@/components/ResearchAreasSection';
+import FaqSection from '@/components/FaqSection';
+
 import {
   UkFlagLogo,
   IndiaFlagLogo,
   TurnitinShieldLogo,
+  OfficialTurnitinLogo,
   AcademicLabCrestLogo,
   UpiShieldIcon,
   GoogleScholarRealIcon,
@@ -24,10 +29,6 @@ import {
   TerminalLogIcon,
   AuditTrailIcon,
   CalendarScheduleIcon,
-  Step1Icon,
-  Step2Icon,
-  Step3Icon,
-  Step4Icon,
   LocationRealIcon,
   WhatsAppRealIcon,
   EmailRealIcon,
@@ -44,7 +45,6 @@ import {
   SynopsisRealWork,
   TurnitinReportRealWork,
   HindiPaperRealWork,
-  HindiThesisRealWork,
 } from '@/components/RealWorkImages';
 
 import {
@@ -135,33 +135,6 @@ const SERVICES = [
   },
 ];
 
-const WORKFLOW_STEPS = [
-  {
-    num: '01',
-    icon: <Step1Icon className="w-7 h-7" />,
-    title: 'Project Consultation & Scope',
-    desc: 'Share your discipline, word count, rubric, and timeline. Pre-signed mutual NDA guarantees your data remains 100% private.',
-  },
-  {
-    num: '02',
-    icon: <Step2Icon className="w-7 h-7" />,
-    title: 'Deterministic Quotation & Escrow',
-    desc: 'Receive an immediate transparent estimate with a 4-stage chapter milestone payment plan. Zero 100% upfront lock-in.',
-  },
-  {
-    num: '03',
-    icon: <Step3Icon className="w-7 h-7" />,
-    title: 'Doctoral Expert Drafting',
-    desc: 'Assigned PhD domain researchers draft your chapters or develop containerized code strictly aligned to university rubrics.',
-  },
-  {
-    num: '04',
-    icon: <Step4Icon className="w-7 h-7" />,
-    title: 'Turnitin Audit & Git Handoff',
-    desc: 'Non-repository originality check (<10% Plagiarism, 0% AI) and private Git repository handoff delivered directly to your portal.',
-  },
-];
-
 export default function HomePage() {
   const [turnitinModalOpen, setTurnitinModalOpen] = useState(false);
   const [sampleModalOpen, setSampleModalOpen] = useState(false);
@@ -236,7 +209,7 @@ export default function HomePage() {
 
               {/* Assurance Ribbon with Real Shield Logo */}
               <div className="inline-flex items-center gap-2.5 bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs sm:text-sm font-bold px-4 py-2 rounded-full mb-6 shadow-[0_0_20px_rgba(16,185,129,0.25)] backdrop-blur-sm">
-                <TurnitinShieldLogo className="w-5 h-5" />
+                <OfficialTurnitinLogo className="w-5 h-5" />
                 <span>Strict 0% AI Assured • Plagiarism &lt; 10% • Safe Non-Repository Protocol</span>
               </div>
 
@@ -249,7 +222,7 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row justify-center items-center gap-3.5 mb-6 w-full">
                 <Link
                   href="/quote"
-                  className="btn-primary-glow text-sm font-bold shadow-xl w-full sm:w-auto"
+                  className="btn-primary-glow text-sm font-bold shadow-xl w-full sm:w-auto font-mono"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -259,18 +232,18 @@ export default function HomePage() {
 
                 <button
                   onClick={() => setTurnitinModalOpen(true)}
-                  className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm px-5 py-3 rounded-full shadow-[0_0_25px_rgba(16,185,129,0.4)] transition-all flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer"
+                  className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm px-5 py-3 rounded-full shadow-[0_0_25px_rgba(16,185,129,0.4)] transition-all flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer font-mono"
                 >
-                  <TurnitinShieldLogo className="w-4 h-4" />
+                  <OfficialTurnitinLogo className="w-4 h-4" />
                   <span>Instant Turnitin Scan (₹200)</span>
                 </button>
 
                 <button
                   onClick={() => setSchedulerModalOpen(true)}
-                  className="btn-secondary-dark text-sm font-bold w-full sm:w-auto cursor-pointer"
+                  className="btn-secondary-dark text-sm font-bold w-full sm:w-auto cursor-pointer font-mono"
                 >
                   <CalendarScheduleIcon className="w-4 h-4 text-cyan-400" />
-                  <span>Book 1-on-1 Consultation</span>
+                  <span>Book Consultation</span>
                 </button>
               </div>
 
@@ -295,7 +268,7 @@ export default function HomePage() {
 
             </div>
 
-            {/* Right Column: 3D Procedural Cyber Ecosystem (Michael Skripin / Zajno) */}
+            {/* Right Column: 3D Procedural Cyber Ecosystem */}
             <div className="lg:col-span-5 flex flex-col justify-center items-center gap-4">
               <div className="w-full">
                 <CyberEcosystem3D />
@@ -305,7 +278,7 @@ export default function HomePage() {
               <div className="flex items-center gap-3 w-full justify-center">
                 <button
                   onClick={() => setNdaModalOpen(true)}
-                  className="bg-[#060B18] text-cyan-300 border border-cyan-500/40 hover:border-cyan-400 text-xs font-bold px-4 py-2 rounded-xl shadow-xl flex items-center gap-2 hover:bg-cyan-950/40 transition-colors cursor-pointer"
+                  className="bg-[#060B18] text-cyan-300 border border-cyan-500/40 hover:border-cyan-400 text-xs font-bold px-4 py-2 rounded-xl shadow-xl flex items-center gap-2 hover:bg-cyan-950/40 transition-colors cursor-pointer font-mono"
                 >
                   <NdaShieldIcon className="w-4 h-4" />
                   <span>Mutual NDA Protected</span>
@@ -313,9 +286,9 @@ export default function HomePage() {
 
                 <button
                   onClick={() => setSampleModalOpen(true)}
-                  className="bg-emerald-950/80 text-emerald-300 border border-emerald-500/50 hover:border-emerald-400 text-xs font-bold px-4 py-2 rounded-xl shadow-xl flex items-center gap-2 hover:bg-emerald-900/60 transition-colors cursor-pointer"
+                  className="bg-emerald-950/80 text-emerald-300 border border-emerald-500/50 hover:border-emerald-400 text-xs font-bold px-4 py-2 rounded-xl shadow-xl flex items-center gap-2 hover:bg-emerald-900/60 transition-colors cursor-pointer font-mono"
                 >
-                  <TurnitinShieldLogo className="w-4 h-4" />
+                  <OfficialTurnitinLogo className="w-4 h-4" />
                   <span>Watermarked Sample →</span>
                 </button>
               </div>
@@ -332,7 +305,7 @@ export default function HomePage() {
       <section className="py-20 px-4 bg-[#030712] text-center relative" id="services">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="badge-pill-gold mb-3">Core Disciplines</span>
+            <span className="badge-pill-gold mb-3 font-mono">CORE DISCIPLINES</span>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-4 text-center">
               Comprehensive Scholarly Solutions
             </h2>
@@ -342,10 +315,10 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* English Card (Real Journal Paper Preview) */}
+            {/* English Card */}
             <Interactive3DCard glowColor="cyan">
               <div className="card-futuristic-3d p-6 flex flex-col justify-between border-t-4 border-t-cyan-500 text-center relative h-full">
-                <span className="absolute top-4 right-4 bg-cyan-950 text-cyan-300 border border-cyan-400/40 text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow">
+                <span className="absolute top-4 right-4 bg-cyan-950 text-cyan-300 border border-cyan-400/40 text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow font-mono">
                   English Specialists
                 </span>
                 <div>
@@ -371,16 +344,16 @@ export default function HomePage() {
                     </ul>
                   </div>
                 </div>
-                <Link href="/quote?lang=EN" className="btn-primary-glow text-xs w-full text-center">
+                <Link href="/quote?lang=EN" className="btn-primary-glow text-xs w-full text-center font-mono">
                   Configure English Quote →
                 </Link>
               </div>
             </Interactive3DCard>
 
-            {/* Hindi Card (Real Hindi Research Paper Preview) */}
+            {/* Hindi Card */}
             <Interactive3DCard glowColor="emerald">
               <div className="card-futuristic-3d p-6 flex flex-col justify-between border-t-4 border-t-emerald-500 text-center relative h-full">
-                <span className="absolute top-4 right-4 bg-emerald-950 text-emerald-300 border border-emerald-400/40 text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow">
+                <span className="absolute top-4 right-4 bg-emerald-950 text-emerald-300 border border-emerald-400/40 text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow font-mono">
                   Hindi Specialists
                 </span>
                 <div>
@@ -408,22 +381,22 @@ export default function HomePage() {
 
                   <button
                     onClick={() => setAuditModalOpen(true)}
-                    className="text-xs text-emerald-400 font-bold hover:underline mb-4 inline-flex items-center gap-1 cursor-pointer"
+                    className="text-xs text-emerald-400 font-bold hover:underline mb-4 inline-flex items-center gap-1 cursor-pointer font-mono"
                   >
                     <AuditTrailIcon className="w-4 h-4" />
                     <span>View Vernacular Translation Audit Trail →</span>
                   </button>
                 </div>
-                <Link href="/quote?lang=HI" className="btn-primary-glow text-xs w-full text-center">
+                <Link href="/quote?lang=HI" className="btn-primary-glow text-xs w-full text-center font-mono">
                   Configure Hindi Quote →
                 </Link>
               </div>
             </Interactive3DCard>
 
-            {/* Turnitin Card (Real Turnitin Report Preview) */}
+            {/* Turnitin Card */}
             <Interactive3DCard glowColor="cyan">
               <div className="card-futuristic-3d p-6 flex flex-col justify-between border-t-4 border-t-teal-400 text-center relative h-full">
-                <span className="absolute top-4 right-4 bg-teal-950 text-teal-300 border border-teal-400/40 text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow">
+                <span className="absolute top-4 right-4 bg-teal-950 text-teal-300 border border-teal-400/40 text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow font-mono">
                   Verified Originality
                 </span>
                 <div>
@@ -433,14 +406,14 @@ export default function HomePage() {
                     Instructor-grade originality and AI writing detection report without saving your file to public repositories.
                   </p>
                   <div className="p-3 bg-[#060B18] rounded-xl border border-cyan-500/30 mb-3 text-center">
-                    <div className="text-[10px] text-cyan-300 font-bold uppercase tracking-wider">Fixed Flat Fee</div>
+                    <div className="text-[10px] text-cyan-300 font-bold uppercase tracking-wider font-mono">Fixed Flat Fee</div>
                     <div className="font-serif text-2xl font-extrabold text-white">₹200</div>
                     <div className="text-[10px] text-slate-400">per file scanned • 15–30 min delivery</div>
                   </div>
 
                   <button
                     onClick={() => setSampleModalOpen(true)}
-                    className="text-xs text-cyan-300 hover:text-white font-bold underline mb-3 block cursor-pointer"
+                    className="text-xs text-cyan-300 hover:text-white font-bold underline mb-3 block cursor-pointer font-mono"
                   >
                     View Watermarked Sample Deliverable →
                   </button>
@@ -449,7 +422,7 @@ export default function HomePage() {
                 <div className="flex flex-col gap-2">
                   <button
                     onClick={() => setTurnitinModalOpen(true)}
-                    className="btn-primary-glow text-xs w-full text-center cursor-pointer"
+                    className="btn-primary-glow text-xs w-full text-center cursor-pointer font-mono"
                   >
                     Upload &amp; Pay ₹200 via UPI →
                   </button>
@@ -477,7 +450,7 @@ export default function HomePage() {
       <section className="py-20 px-4 bg-[#030712] text-center">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="badge-pill-gold mb-3">Genuine Deliverable Previews</span>
+            <span className="badge-pill-gold mb-3 font-mono">GENUINE DELIVERABLE PREVIEWS</span>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-4 text-center">
               Explore Our Specific Capabilities
             </h2>
@@ -517,7 +490,7 @@ export default function HomePage() {
                     {s.isCode ? (
                       <button
                         onClick={() => setScopeBuilderOpen(true)}
-                        className="text-xs font-bold text-cyan-400 hover:text-cyan-200 flex items-center gap-1 cursor-pointer"
+                        className="text-xs font-bold text-cyan-400 hover:text-cyan-200 flex items-center gap-1 cursor-pointer font-mono"
                       >
                         <TerminalLogIcon className="w-3.5 h-3.5" />
                         <span>Scope Builder →</span>
@@ -525,14 +498,14 @@ export default function HomePage() {
                     ) : s.isTurnitin ? (
                       <button
                         onClick={() => setTurnitinModalOpen(true)}
-                        className="text-xs font-bold text-emerald-400 hover:text-emerald-200 flex items-center gap-1 cursor-pointer"
+                        className="text-xs font-bold text-emerald-400 hover:text-emerald-200 flex items-center gap-1 cursor-pointer font-mono"
                       >
                         <span>Instant Scan →</span>
                       </button>
                     ) : (
                       <Link
                         href={s.href}
-                        className="text-xs font-bold text-cyan-400 hover:text-cyan-200 flex items-center gap-1"
+                        className="text-xs font-bold text-cyan-400 hover:text-cyan-200 flex items-center gap-1 font-mono"
                       >
                         <span>Calculate Instant Quote →</span>
                       </Link>
@@ -549,58 +522,14 @@ export default function HomePage() {
       {/* Cyber Circuit Spine */}
       <CyberCircuitSpine />
 
-      {/* ─── Redesigned 3D Futuristic 1, 2, 3, 4 Steps Section ─────────────── */}
-      <section className="py-20 px-4 bg-[#060B18] text-center border-y border-cyan-500/20" id="how-it-works">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="badge-pill-gold mb-3">Transparent Journey</span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-4 text-center">
-              How InkMonk Delivers Excellence
-            </h2>
-            <p className="text-slate-400 text-base text-center">
-              A transparent, 4-stage pipeline that ensures scholarly rigor, NDA protection, and zero guesswork.
-            </p>
-          </div>
+      {/* ─── RESEARCH AREAS SUPPORTED (AFTER SERVICES AS REQUESTED) ──────── */}
+      <ResearchAreasSection />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {WORKFLOW_STEPS.map((w) => (
-              <Interactive3DCard key={w.num} glowColor="cyan">
-                <div className="card-futuristic-3d p-7 flex flex-col items-center text-center group h-full">
-                  {/* 3D Holographic Step Badge */}
-                  <div className="relative mb-5">
-                    <div className="step-number-futuristic">
-                      {w.num}
-                    </div>
-                    <div className="absolute -bottom-2 -right-2 bg-[#030712] rounded-full p-1 shadow-md border border-cyan-500/40">
-                      {w.icon}
-                    </div>
-                  </div>
+      {/* Cyber Circuit Spine */}
+      <CyberCircuitSpine />
 
-                  <h3 className="font-serif font-bold text-lg text-white mb-2 text-center group-hover:text-cyan-300 transition-colors">
-                    {w.title}
-                  </h3>
-                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed text-center">
-                    {w.desc}
-                  </p>
-                </div>
-              </Interactive3DCard>
-            ))}
-          </div>
-
-          <div className="text-center mt-12 flex flex-wrap justify-center gap-4">
-            <Link href="/how-it-works" className="btn-primary-glow">
-              Explore Complete Methodology →
-            </Link>
-            <button
-              onClick={() => setNdaModalOpen(true)}
-              className="btn-secondary-dark cursor-pointer"
-            >
-              <NdaShieldIcon className="w-4 h-4 text-cyan-400" />
-              <span>Preview Mutual NDA →</span>
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* ─── HORIZONTAL HOW IT WORKS PIPELINE (HORIZONTAL NOT VERTICAL) ─── */}
+      <HorizontalHowItWorks />
 
       {/* Cyber Circuit Spine */}
       <CyberCircuitSpine />
@@ -609,11 +538,11 @@ export default function HomePage() {
       <section className="py-20 px-4 bg-[#030712] text-center" id="about">
         <div className="max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="badge-pill-gold mb-3">Academic Directorate</span>
+            <span className="badge-pill-gold mb-3 font-mono">ACADEMIC DIRECTORATE</span>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-4 text-center">
               Led by Dedicated Scholars
             </h2>
-            <p className="text-slate-400 text-base text-center">
+            <p className="text-slate-400 text-base text-center font-medium">
               Every project is directly overseen by our directors with verifiable academic publishing records.
             </p>
           </div>
@@ -627,7 +556,7 @@ export default function HomePage() {
                     TR
                   </div>
                   <h3 className="font-serif text-2xl font-bold text-white text-center">Tuhit Roy</h3>
-                  <p className="text-cyan-400 font-semibold text-xs uppercase tracking-wider mb-3 text-center">
+                  <p className="text-cyan-400 font-semibold text-xs uppercase tracking-wider mb-3 text-center font-mono">
                     Founder &amp; Research Director
                   </p>
                   <p className="text-slate-400 text-sm leading-relaxed text-center mb-6">
@@ -676,7 +605,7 @@ export default function HomePage() {
                     SM
                   </div>
                   <h3 className="font-serif text-2xl font-bold text-white text-center">Sampreeti Mukherjee</h3>
-                  <p className="text-emerald-400 font-semibold text-xs uppercase tracking-wider mb-3 text-center">
+                  <p className="text-emerald-400 font-semibold text-xs uppercase tracking-wider mb-3 text-center font-mono">
                     Co-Founder &amp; Editorial Director
                   </p>
                   <p className="text-slate-400 text-sm leading-relaxed text-center mb-6">
@@ -706,12 +635,12 @@ export default function HomePage() {
       <CyberCircuitSpine />
 
       {/* ─── Office & Contact Section ────────────────────────────────────── */}
-      <section className="py-20 px-4 bg-[#060B18] text-white text-center relative overflow-hidden border-t border-cyan-500/20">
+      <section className="py-20 px-4 bg-[#060B18] text-white text-center relative overflow-hidden border-t border-cyan-500/20" id="contact">
         <div className="max-w-5xl mx-auto flex flex-col items-center text-center gap-8 relative z-10">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 bg-cyan-950/70 border border-cyan-400/30 px-4 py-1.5 rounded-full backdrop-blur-md mb-4 shadow">
               <LocationRealIcon className="w-4 h-4" />
-              <span className="text-xs font-bold text-cyan-300 uppercase tracking-widest">
+              <span className="text-xs font-bold text-cyan-300 uppercase tracking-widest font-mono">
                 Physical Presence in Kolkata
               </span>
             </div>
@@ -746,15 +675,21 @@ export default function HomePage() {
               href="https://wa.me/917980470880"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-whatsapp-pill"
+              className="btn-whatsapp-pill font-mono text-xs uppercase"
             >
               <WhatsAppRealIcon className="w-5 h-5" />
               <span>Direct WhatsApp: +91 7980470880</span>
             </a>
-            <Link href="/contact" className="btn-secondary-dark">
+            <Link href="/contact" className="btn-secondary-dark font-mono text-xs uppercase">
               Send an Academic Inquiry →
             </Link>
           </div>
+
+          {/* ─── Merged FAQ at the end of Contact Section (Requirement 3) ── */}
+          <div className="w-full mt-16 pt-16 border-t border-slate-800">
+            <FaqSection />
+          </div>
+
         </div>
       </section>
 
