@@ -91,16 +91,16 @@ const SAMPLES = [
 
 export default function SamplesPage() {
   return (
-    <div className="min-h-screen bg-[#030712] text-[#F8FAFC] py-20 px-4 text-center selection:bg-cyan-500 selection:text-black" style={{ fontFamily: '"Cavolini", "Cavolini Condensed", sans-serif' }}>
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#030712] text-slate-900 dark:text-[#F8FAFC] py-20 px-4 text-center transition-colors duration-300 selection:bg-sky-500 selection:text-white">
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="badge-pill-gold mb-3 font-mono">DEMONSTRATED QUALITY</div>
-          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-4 text-center">
+          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4 text-center">
             Sample Work &amp; Redacted Previews
           </h1>
-          <p className="text-slate-400 text-base sm:text-lg text-center leading-relaxed font-medium">
+          <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg text-center leading-relaxed font-normal">
             To strictly protect client confidentiality and proprietary research data, all personal information, institutional affiliations, and unpublished findings have been redacted. Real samples are continuously updated.
           </p>
         </div>
@@ -109,20 +109,20 @@ export default function SamplesPage() {
         <div className="space-y-8 mb-16 text-center">
           {SAMPLES.map((sample) => (
             <Interactive3DCard key={sample.id} glowColor={sample.glowColor}>
-              <div className="card-futuristic-3d p-6 md:p-8 text-center">
-                <div className="flex flex-wrap items-center justify-between gap-3 mb-4 pb-4 border-b border-slate-800">
+              <div className="p-6 md:p-8 text-center">
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-4 pb-4 border-b border-slate-100 dark:border-slate-800">
                   <div className="flex flex-wrap gap-2 items-center mx-auto sm:mx-0">
-                    <span className="px-3 py-1 bg-cyan-950 text-cyan-300 border border-cyan-500/40 text-xs font-mono font-bold rounded-full">
+                    <span className="px-3 py-1 bg-sky-50 dark:bg-cyan-950 text-sky-800 dark:text-cyan-300 border border-sky-200 dark:border-cyan-500/40 text-xs font-mono font-bold rounded-full">
                       {sample.category}
                     </span>
-                    <span className="px-3 py-1 bg-emerald-950 text-emerald-300 border border-emerald-500/40 text-xs font-mono font-bold rounded-full">
+                    <span className="px-3 py-1 bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/40 text-xs font-mono font-bold rounded-full">
                       {sample.domain}
                     </span>
-                    <span className="px-3 py-1 bg-slate-800 text-slate-300 text-xs font-mono font-bold rounded-full">
+                    <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-mono font-bold rounded-full">
                       {sample.language}
                     </span>
                   </div>
-                  <div className="text-xs text-slate-400 font-mono font-bold mx-auto sm:mx-0">
+                  <div className="text-xs text-slate-500 dark:text-slate-400 font-mono font-bold mx-auto sm:mx-0">
                     {sample.format}
                   </div>
                 </div>
@@ -132,12 +132,12 @@ export default function SamplesPage() {
                   {sample.visual}
                 </div>
 
-                <h2 className="font-serif text-xl sm:text-2xl font-bold text-white mb-3 text-center">
+                <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-3 text-center">
                   {sample.title}
                 </h2>
 
-                <div className="mb-6 bg-[#060B18] p-5 rounded-2xl border border-cyan-500/25 text-sm text-slate-300 leading-relaxed text-center sm:text-left">
-                  <strong className="not-italic text-cyan-300 block mb-1 text-center sm:text-left font-mono">
+                <div className="mb-6 bg-slate-50 dark:bg-[#060B18] p-5 rounded-2xl border border-slate-200 dark:border-cyan-500/25 text-sm text-slate-700 dark:text-slate-300 leading-relaxed text-center sm:text-left">
+                  <strong className="not-italic text-sky-700 dark:text-cyan-300 block mb-1 text-center sm:text-left font-mono">
                     Abstract Preview:
                   </strong>
                   &ldquo;{sample.abstract}&rdquo;

@@ -9,6 +9,8 @@ import {
   Interactive3DCard,
   CyberParticleField,
   ScrollReveal3D,
+  Scroll3DParallaxSection,
+  FloatingScrollBadge,
 } from '@/components/FuturisticScrollExperience';
 import {
   ResearchPaper3DVisual,
@@ -152,31 +154,31 @@ export default function HomePage() {
   const [auditModalOpen, setAuditModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen text-center bg-[#030712] text-[#F8FAFC] relative selection:bg-cyan-500 selection:text-black" style={{ fontFamily: '"Cavolini", "Cavolini Condensed", sans-serif' }}>
+    <div className="min-h-screen text-center bg-[#F8FAFC] dark:bg-[#030712] text-slate-900 dark:text-[#F8FAFC] relative transition-colors duration-300 selection:bg-sky-500 selection:text-white">
 
       {/* ─── Fixed Top Laser Scroll Progress Scanner & HUD ─────────────── */}
       <ScrollProgressLaser />
 
       {/* ─── Hero Section with 3D Cyber Ecosystem & Kinetic Motion ────────── */}
-      <section className="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-28 text-white text-center bg-midnight border-b border-cyan-500/20">
-        {/* Futuristic Cyber-Grid Background Layer */}
-        <div className="absolute inset-0 cyber-grid-bg opacity-35 pointer-events-none" />
+      <section className="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-28 text-center bg-slate-50 dark:bg-midnight border-b border-slate-200 dark:border-cyan-500/20">
+        {/* Subtle Geometric Background Layer */}
+        <div className="absolute inset-0 cyber-grid-bg opacity-15 dark:opacity-35 pointer-events-none" />
 
-        {/* Ambient Holographic Glow Orb */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-to-tr from-cyan-600/20 via-teal-500/15 to-emerald-600/20 rounded-full blur-3xl pointer-events-none animate-holo-glow" />
+        {/* Ambient Soft Glow Orb */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-sky-400/15 via-teal-400/10 to-emerald-400/15 dark:from-cyan-600/20 dark:via-teal-500/15 dark:to-emerald-600/20 rounded-full blur-3xl pointer-events-none animate-holo-glow" />
 
-        {/* Floating Cyber Particle Field */}
+        {/* Floating Subtle Particle Field */}
         <CyberParticleField />
 
-        {/* Tactical HUD Coordinates Banner */}
+        {/* Tactical Coordinates Banner */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 relative z-10">
-          <div className="flex flex-wrap items-center justify-between text-[11px] font-mono text-cyan-300/80 bg-[#060B18]/80 border border-cyan-500/30 px-4 py-2 rounded-2xl backdrop-blur-xl shadow-[0_0_20px_rgba(6,182,212,0.15)]">
+          <div className="flex flex-wrap items-center justify-between text-[11px] font-mono text-slate-700 dark:text-cyan-300/80 bg-white/90 dark:bg-[#060B18]/80 border border-slate-200 dark:border-cyan-500/30 px-4 py-2 rounded-2xl backdrop-blur-xl shadow-sm dark:shadow-[0_0_20px_rgba(6,182,212,0.15)]">
             <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-              <strong className="text-white">LAB TELEMETRY:</strong> PROCEDURAL ECOSYSTEM ONLINE
+              <span className="w-2 h-2 rounded-full bg-sky-500 dark:bg-cyan-400 animate-ping"></span>
+              <strong className="text-slate-900 dark:text-white">LAB TELEMETRY:</strong> PROCEDURAL ECOSYSTEM ONLINE
             </span>
-            <span className="hidden sm:inline text-slate-400">COPE ETHICS COMPLIANT • ZERO REPOSITORY DEPOSIT</span>
-            <span className="text-emerald-400 font-bold">SALT LAKE SECTOR 2 • KOLKATA</span>
+            <span className="hidden sm:inline text-slate-500 dark:text-slate-400">COPE ETHICS COMPLIANT • ZERO REPOSITORY DEPOSIT</span>
+            <span className="text-emerald-600 dark:text-emerald-400 font-bold">SALT LAKE SECTOR 2 • KOLKATA</span>
           </div>
         </div>
 
@@ -187,9 +189,9 @@ export default function HomePage() {
             <div className="lg:col-span-7 flex flex-col items-center text-center">
 
               {/* Tagline Badge */}
-              <div className="inline-flex items-center gap-2 bg-cyan-950/70 border border-cyan-400/40 px-4 py-1.5 rounded-full backdrop-blur-md mb-5 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-                <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-300 font-mono">
+              <div className="inline-flex items-center gap-2 bg-sky-50 dark:bg-cyan-950/70 border border-sky-300/60 dark:border-cyan-400/40 px-4 py-1.5 rounded-full backdrop-blur-md mb-5 shadow-sm dark:shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                <span className="w-2 h-2 rounded-full bg-sky-500 dark:bg-cyan-400 animate-ping"></span>
+                <span className="text-xs font-bold uppercase tracking-wider text-sky-800 dark:text-cyan-300 font-mono">
                   Autonomous Scholarly Ecosystem
                 </span>
               </div>
@@ -197,30 +199,30 @@ export default function HomePage() {
               {/* Jitter-Style "Split Reveal" Kinetic Headline */}
               <div className="relative mb-3 overflow-hidden">
                 <div className="animate-split-top">
-                  <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] text-center">
+                  <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] text-slate-900 dark:text-white text-center">
                     InkMonk <span className="gradient-saffron-text">Research</span>
                   </h1>
                 </div>
 
                 {/* Laser Split Seam Beam */}
-                <div className="w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent my-1 animate-laser-seam shadow-[0_0_20px_#00F2FE]" />
+                <div className="w-full h-1 bg-gradient-to-r from-transparent via-sky-500 dark:via-cyan-400 to-transparent my-1 animate-laser-seam shadow-[0_0_15px_rgba(2,132,199,0.5)] dark:shadow-[0_0_20px_#00F2FE]" />
 
                 <div className="animate-split-bottom">
-                  <p className="text-xl sm:text-2xl font-serif italic text-cyan-100/90 font-bold text-center">
+                  <p className="text-xl sm:text-2xl font-serif italic text-slate-700 dark:text-cyan-100/90 font-bold text-center">
                     &ldquo;Research with care. Writing with clarity.&rdquo;
                   </p>
                 </div>
               </div>
 
               {/* Assurance Ribbon with Real Shield Logo */}
-              <div className="inline-flex items-center gap-2.5 bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs sm:text-sm font-bold px-4 py-2 rounded-full mb-6 shadow-[0_0_20px_rgba(16,185,129,0.25)] backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2.5 bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-500/40 text-emerald-800 dark:text-emerald-300 text-xs sm:text-sm font-bold px-4 py-2 rounded-full mb-6 shadow-sm dark:shadow-[0_0_20px_rgba(16,185,129,0.25)] backdrop-blur-sm">
                 <OfficialTurnitinLogo className="w-5 h-5" />
                 <span>Strict 0% AI Assured • Plagiarism &lt; 10% • Safe Non-Repository Protocol</span>
               </div>
 
               {/* Description */}
-              <p className="text-base sm:text-lg text-slate-300 max-w-xl mx-auto leading-relaxed mb-6 text-center font-bold">
-                Premier academic research, doctoral dissertation structuring, book writing, and Turnitin audits in <strong className="text-white font-extrabold">English</strong> and <strong className="text-white font-extrabold">Hindi</strong>. Supervised directly by qualified subject-matter doctoral directors.
+              <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-xl mx-auto leading-relaxed mb-6 text-center font-normal">
+                Premier academic research, doctoral dissertation structuring, book writing, and Turnitin audits in <strong className="text-slate-900 dark:text-white font-bold">English</strong> and <strong className="text-slate-900 dark:text-white font-bold">Hindi</strong>. Supervised directly by qualified subject-matter doctoral directors.
               </p>
 
               {/* Primary Call to Actions & Instant Modals */}
@@ -237,7 +239,7 @@ export default function HomePage() {
 
                 <button
                   onClick={() => setTurnitinModalOpen(true)}
-                  className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm px-5 py-3 rounded-full shadow-[0_0_25px_rgba(16,185,129,0.4)] transition-all flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer font-mono"
+                  className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm px-5 py-3 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer font-mono"
                 >
                   <OfficialTurnitinLogo className="w-4 h-4" />
                   <span>Instant Turnitin Scan (₹200)</span>
@@ -247,43 +249,45 @@ export default function HomePage() {
                   onClick={() => setSchedulerModalOpen(true)}
                   className="btn-secondary-dark text-sm font-bold w-full sm:w-auto cursor-pointer font-mono"
                 >
-                  <CalendarScheduleIcon className="w-4 h-4 text-cyan-400" />
+                  <CalendarScheduleIcon className="w-4 h-4 text-sky-600 dark:text-cyan-400" />
                   <span>Book Consultation</span>
                 </button>
               </div>
 
               {/* Quick Trust Badges with Real Emblems */}
               <div className="grid grid-cols-3 gap-3.5 max-w-lg mx-auto w-full">
-                <div className="bg-[#080E1E]/80 border border-cyan-500/25 p-3 rounded-2xl backdrop-blur-md text-center flex flex-col items-center shadow-lg">
+                <div className="bg-white dark:bg-[#080E1E]/80 border border-slate-200 dark:border-cyan-500/25 p-3 rounded-2xl backdrop-blur-md text-center flex flex-col items-center shadow-sm dark:shadow-lg">
                   <UkFlagLogo className="w-7 h-7 mb-1" />
-                  <div className="text-cyan-300 font-bold text-sm">English</div>
-                  <div className="text-[10px] text-slate-300 font-bold">Tech &amp; Non-Tech</div>
+                  <div className="text-sky-700 dark:text-cyan-300 font-bold text-sm">English</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-300 font-medium">Tech &amp; Non-Tech</div>
                 </div>
-                <div className="bg-[#080E1E]/80 border border-emerald-500/25 p-3 rounded-2xl backdrop-blur-md text-center flex flex-col items-center shadow-lg">
+                <div className="bg-white dark:bg-[#080E1E]/80 border border-slate-200 dark:border-emerald-500/25 p-3 rounded-2xl backdrop-blur-md text-center flex flex-col items-center shadow-sm dark:shadow-lg">
                   <IndiaFlagLogo className="w-7 h-7 mb-1" />
-                  <div className="text-emerald-300 font-bold text-sm">Hindi</div>
-                  <div className="text-[10px] text-slate-300 font-bold">Devanagari Specialists</div>
+                  <div className="text-emerald-700 dark:text-emerald-300 font-bold text-sm">Hindi</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-300 font-medium">Devanagari Specialists</div>
                 </div>
-                <div className="bg-[#080E1E]/80 border border-teal-500/25 p-3 rounded-2xl backdrop-blur-md text-center flex flex-col items-center shadow-lg">
+                <div className="bg-white dark:bg-[#080E1E]/80 border border-slate-200 dark:border-teal-500/25 p-3 rounded-2xl backdrop-blur-md text-center flex flex-col items-center shadow-sm dark:shadow-lg">
                   <UpiShieldIcon className="w-7 h-7 mb-1" />
-                  <div className="text-teal-300 font-bold text-sm">Instant UPI</div>
-                  <div className="text-[10px] text-slate-300 font-bold">Direct Payments</div>
+                  <div className="text-teal-700 dark:text-teal-300 font-bold text-sm">Instant UPI</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-300 font-medium">Direct Payments</div>
                 </div>
               </div>
 
             </div>
 
-            {/* Right Column: 3D InkMonk Research Core (Cinematic Sequence & Final Freeze) */}
+            {/* Right Column: 3D InkMonk Research Core with 3D Parallax Motion */}
             <div className="lg:col-span-5 flex flex-col justify-center items-center gap-4">
               <div className="w-full flex justify-center">
-                <InkMonkCinematicCore />
+                <FloatingScrollBadge speed={0.8} className="w-full flex justify-center">
+                  <InkMonkCinematicCore />
+                </FloatingScrollBadge>
               </div>
 
               {/* Interactive Badges */}
               <div className="flex flex-wrap items-center gap-2.5 w-full justify-center">
                 <button
                   onClick={() => setNdaModalOpen(true)}
-                  className="bg-[#060B18] text-cyan-300 border border-cyan-500/40 hover:border-cyan-400 text-xs font-bold px-3.5 py-1.5 rounded-xl shadow-xl flex items-center gap-2 hover:bg-cyan-950/40 transition-colors cursor-pointer font-mono"
+                  className="bg-white dark:bg-[#060B18] text-slate-700 dark:text-cyan-300 border border-slate-200 dark:border-cyan-500/40 hover:border-sky-400 text-xs font-bold px-3.5 py-1.5 rounded-xl shadow-sm dark:shadow-xl flex items-center gap-2 hover:bg-slate-50 dark:hover:bg-cyan-950/40 transition-colors cursor-pointer font-mono"
                 >
                   <NdaShieldIcon className="w-4 h-4" />
                   <span>Mutual NDA Protected</span>
@@ -291,7 +295,7 @@ export default function HomePage() {
 
                 <button
                   onClick={() => setSampleModalOpen(true)}
-                  className="bg-emerald-950/80 text-emerald-300 border border-emerald-500/50 hover:border-emerald-400 text-xs font-bold px-3.5 py-1.5 rounded-xl shadow-xl flex items-center gap-2 hover:bg-emerald-900/60 transition-colors cursor-pointer font-mono"
+                  className="bg-emerald-50 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/50 hover:border-emerald-400 text-xs font-bold px-3.5 py-1.5 rounded-xl shadow-sm dark:shadow-xl flex items-center gap-2 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 transition-colors cursor-pointer font-mono"
                 >
                   <OfficialTurnitinLogo className="w-4 h-4" />
                   <span>Watermarked Sample →</span>
@@ -305,7 +309,7 @@ export default function HomePage() {
                     }
                   }}
                   title="Replay the cinematic 3D entrance animation"
-                  className="bg-white/5 text-slate-400 hover:text-cyan-300 border border-white/10 hover:border-cyan-400/40 text-[11px] font-mono px-3 py-1.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5"
+                  className="bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-cyan-300 border border-slate-200 dark:border-white/10 text-[11px] font-mono px-3 py-1.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5"
                 >
                   <span>↺</span>
                   <span>Replay 3D Sequence</span>
@@ -320,16 +324,16 @@ export default function HomePage() {
       {/* Cyber Circuit Spine */}
       <CyberCircuitSpine />
 
-      {/* ─── 3 Primary Pillars (English, Hindi & Turnitin) with 3D Visuals & Real Work Images ─── */}
-      <section className="py-20 px-4 bg-[#030712] text-center relative" id="services">
-        <ScrollReveal3D>
+      {/* ─── 3 Primary Pillars (English, Hindi & Turnitin) with 3D Parallax ─── */}
+      <section className="py-20 px-4 bg-white dark:bg-[#030712] text-center relative transition-colors duration-300" id="services">
+        <Scroll3DParallaxSection offsetY={40}>
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="badge-pill-gold mb-3 font-mono">CORE DISCIPLINES</span>
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-4 text-center">
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4 text-center">
                 Comprehensive Scholarly Solutions
               </h2>
-              <p className="text-slate-400 text-base sm:text-lg text-center font-medium">
+              <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg text-center font-normal">
                 Tailored specifically to international publishing guidelines, doctoral requirements, and institutional rubrics. No public price lists.
               </p>
             </div>
@@ -337,29 +341,29 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* English Card */}
               <Interactive3DCard glowColor="cyan">
-                <div className="card-futuristic-3d p-6 flex flex-col justify-between border-t-4 border-t-cyan-500 text-center relative h-full">
-                  <span className="absolute top-4 right-4 bg-cyan-950 text-cyan-300 border border-cyan-400/40 text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow font-mono">
+                <div className="p-6 flex flex-col justify-between border-t-4 border-t-sky-500 dark:border-t-cyan-500 text-center relative h-full">
+                  <span className="absolute top-4 right-4 bg-sky-100 dark:bg-cyan-950 text-sky-800 dark:text-cyan-300 border border-sky-300 dark:border-cyan-400/40 text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow-sm font-mono">
                     English Specialists
                   </span>
                   <div>
                     <ResearchPaper3DVisual className="w-full h-44 mb-4" />
-                    <h3 className="font-serif text-2xl font-bold text-white mb-1 text-center">English Services</h3>
-                    <p className="text-slate-400 text-xs mb-4 text-center">
+                    <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white mb-1 text-center">English Services</h3>
+                    <p className="text-slate-600 dark:text-slate-400 text-xs mb-4 text-center">
                       Technical and non-technical manuscripts formatted to IEEE, Springer, Elsevier, APA, Harvard, and UGC standards.
                     </p>
                     <div className="max-w-xs mx-auto mb-6">
-                      <ul className="space-y-2 text-xs text-slate-300 text-left">
+                      <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-300 text-left">
                         <li className="flex items-center gap-2">
-                          <span className="text-cyan-400 font-bold">✓</span> Research &amp; Review Papers
+                          <span className="text-sky-600 dark:text-cyan-400 font-bold">✓</span> Research &amp; Review Papers
                         </li>
                         <li className="flex items-center gap-2">
-                          <span className="text-cyan-400 font-bold">✓</span> Master &amp; Doctoral Theses (with/without model)
+                          <span className="text-sky-600 dark:text-cyan-400 font-bold">✓</span> Master &amp; Doctoral Theses (with/without model)
                         </li>
                         <li className="flex items-center gap-2">
-                          <span className="text-cyan-400 font-bold">✓</span> Scholarly Books (100–300 pages)
+                          <span className="text-sky-600 dark:text-cyan-400 font-bold">✓</span> Scholarly Books (100–300 pages)
                         </li>
                         <li className="flex items-center gap-2">
-                          <span className="text-cyan-400 font-bold">✓</span> Journal Articles &amp; Conference Slides
+                          <span className="text-sky-600 dark:text-cyan-400 font-bold">✓</span> Journal Articles &amp; Conference Slides
                         </li>
                       </ul>
                     </div>
@@ -372,36 +376,36 @@ export default function HomePage() {
 
               {/* Hindi Card */}
               <Interactive3DCard glowColor="emerald">
-                <div className="card-futuristic-3d p-6 flex flex-col justify-between border-t-4 border-t-emerald-500 text-center relative h-full">
-                  <span className="absolute top-4 right-4 bg-emerald-950 text-emerald-300 border border-emerald-400/40 text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow font-mono">
+                <div className="p-6 flex flex-col justify-between border-t-4 border-t-emerald-500 text-center relative h-full">
+                  <span className="absolute top-4 right-4 bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-400/40 text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow-sm font-mono">
                     Hindi Specialists
                   </span>
                   <div>
                     <HindiPaperRealWork className="w-full h-44 mb-4" />
-                    <h3 className="font-serif text-2xl font-bold text-white mb-1 text-center">Hindi Services</h3>
-                    <p className="text-slate-400 text-xs mb-4 text-center">
+                    <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white mb-1 text-center">Hindi Services</h3>
+                    <p className="text-slate-600 dark:text-slate-400 text-xs mb-4 text-center">
                       Supervised by Sampreeti Mukherjee with standardized academic vocabulary, Shodhganga compliance, and zero automated translation shortcuts.
                     </p>
                     <div className="max-w-xs mx-auto mb-4">
-                      <ul className="space-y-2 text-xs text-slate-300 text-left">
+                      <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-300 text-left">
                         <li className="flex items-center gap-2">
-                          <span className="text-emerald-400 font-bold">✓</span> शोध पत्र / Research Papers
+                          <span className="text-emerald-600 dark:text-emerald-400 font-bold">✓</span> शोध पत्र / Research Papers
                         </li>
                         <li className="flex items-center gap-2">
-                          <span className="text-emerald-400 font-bold">✓</span> शोध प्रबंध / Complete Thesis
+                          <span className="text-emerald-600 dark:text-emerald-400 font-bold">✓</span> शोध प्रबंध / Complete Thesis
                         </li>
                         <li className="flex items-center gap-2">
-                          <span className="text-emerald-400 font-bold">✓</span> पुस्तक लेखन (100–300 पृष्ठ)
+                          <span className="text-emerald-600 dark:text-emerald-400 font-bold">✓</span> पुस्तक लेखन (100–300 पृष्ठ)
                         </li>
                         <li className="flex items-center gap-2">
-                          <span className="text-emerald-400 font-bold">✓</span> देवनागरी व्याख्यान एवं प्रस्तुतियाँ
+                          <span className="text-emerald-600 dark:text-emerald-400 font-bold">✓</span> देवनागरी व्याख्यान एवं प्रस्तुतियाँ
                         </li>
                       </ul>
                     </div>
 
                     <button
                       onClick={() => setAuditModalOpen(true)}
-                      className="text-xs text-emerald-400 font-bold hover:underline mb-4 inline-flex items-center gap-1 cursor-pointer font-mono"
+                      className="text-xs text-emerald-700 dark:text-emerald-400 font-bold hover:underline mb-4 inline-flex items-center gap-1 cursor-pointer font-mono"
                     >
                       <AuditTrailIcon className="w-4 h-4" />
                       <span>View Vernacular Translation Audit Trail →</span>
@@ -415,25 +419,25 @@ export default function HomePage() {
 
               {/* Turnitin Card */}
               <Interactive3DCard glowColor="cyan">
-                <div className="card-futuristic-3d p-6 flex flex-col justify-between border-t-4 border-t-teal-400 text-center relative h-full">
-                  <span className="absolute top-4 right-4 bg-teal-950 text-teal-300 border border-teal-400/40 text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow font-mono">
+                <div className="p-6 flex flex-col justify-between border-t-4 border-t-teal-500 text-center relative h-full">
+                  <span className="absolute top-4 right-4 bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300 border border-teal-300 dark:border-teal-400/40 text-[11px] font-bold px-3 py-1 rounded-full uppercase shadow-sm font-mono">
                     Verified Originality
                   </span>
                   <div>
                     <Turnitin3DVisual className="w-full h-44 mb-4" />
-                    <h3 className="font-serif text-2xl font-bold text-white mb-1 text-center">Turnitin Reports</h3>
-                    <p className="text-slate-400 text-xs mb-3 text-center">
+                    <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white mb-1 text-center">Turnitin Reports</h3>
+                    <p className="text-slate-600 dark:text-slate-400 text-xs mb-3 text-center">
                       Instructor-grade originality and AI writing detection report without saving your file to public repositories.
                     </p>
-                    <div className="p-3 bg-[#060B18] rounded-xl border border-cyan-500/30 mb-3 text-center">
-                      <div className="text-[10px] text-cyan-300 font-bold uppercase tracking-wider font-mono">Fixed Flat Fee</div>
-                      <div className="font-serif text-2xl font-extrabold text-white">₹200</div>
-                      <div className="text-[10px] text-slate-400">per file scanned • 15–30 min delivery</div>
+                    <div className="p-3 bg-slate-50 dark:bg-[#060B18] rounded-xl border border-slate-200 dark:border-cyan-500/30 mb-3 text-center">
+                      <div className="text-[10px] text-sky-700 dark:text-cyan-300 font-bold uppercase tracking-wider font-mono">Fixed Flat Fee</div>
+                      <div className="font-serif text-2xl font-extrabold text-slate-900 dark:text-white">₹200</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400">per file scanned • 15–30 min delivery • Direct UPI Accepted</div>
                     </div>
 
                     <button
                       onClick={() => setSampleModalOpen(true)}
-                      className="text-xs text-cyan-300 hover:text-white font-bold underline mb-3 block cursor-pointer font-mono"
+                      className="text-xs text-sky-700 dark:text-cyan-300 hover:underline font-bold mb-3 block cursor-pointer font-mono"
                     >
                       View Watermarked Sample Deliverable →
                     </button>
@@ -451,14 +455,14 @@ export default function HomePage() {
               </Interactive3DCard>
             </div>
           </div>
-        </ScrollReveal3D>
+        </Scroll3DParallaxSection>
       </section>
 
       {/* Cyber Circuit Spine */}
       <CyberCircuitSpine />
 
       {/* ─── Milestone Payment Timeline Section ───────────────────────────── */}
-      <section className="py-16 px-4 bg-[#060B18] text-center border-y border-cyan-500/20">
+      <section className="py-16 px-4 bg-slate-50 dark:bg-[#060B18] text-center border-y border-slate-200 dark:border-cyan-500/20 transition-colors duration-300">
         <ScrollReveal3D>
           <div className="max-w-6xl mx-auto">
             <MilestonePaymentTimeline />
@@ -470,15 +474,15 @@ export default function HomePage() {
       <CyberCircuitSpine />
 
       {/* ─── 9-Service Grid with REAL IMAGES & 3D VISUALS ─────────────────── */}
-      <section className="py-20 px-4 bg-[#030712] text-center">
-        <ScrollReveal3D>
+      <section className="py-20 px-4 bg-white dark:bg-[#030712] text-center transition-colors duration-300">
+        <Scroll3DParallaxSection offsetY={30}>
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="badge-pill-gold mb-3 font-mono">GENUINE DELIVERABLE PREVIEWS</span>
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-4 text-center">
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4 text-center">
                 Explore Our Specific Capabilities
               </h2>
-              <p className="text-slate-400 text-base text-center">
+              <p className="text-slate-600 dark:text-slate-400 text-base text-center">
                 Real sample previews of our manuscripts, models, presentations, and reports.
               </p>
             </div>
@@ -486,8 +490,8 @@ export default function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {SERVICES.map((s) => (
                 <Interactive3DCard key={s.title} glowColor={s.glowColor}>
-                  <div className="card-futuristic-3d p-6 flex flex-col justify-between text-center items-center group relative h-full">
-                    <span className="text-[10px] font-bold font-mono text-cyan-300 bg-cyan-950/80 border border-cyan-500/40 px-2.5 py-0.5 rounded-full mb-3">
+                  <div className="p-6 flex flex-col justify-between text-center items-center group relative h-full">
+                    <span className="text-[10px] font-bold font-mono text-sky-800 dark:text-cyan-300 bg-sky-50 dark:bg-cyan-950/80 border border-sky-200 dark:border-cyan-500/40 px-2.5 py-0.5 rounded-full mb-3">
                       {s.badge}
                     </span>
 
@@ -497,24 +501,24 @@ export default function HomePage() {
                     </div>
 
                     <div className="flex flex-col items-center text-center w-full">
-                      <h3 className="font-serif font-bold text-lg text-white group-hover:text-cyan-300 transition-colors mb-1 text-center">
+                      <h3 className="font-serif font-bold text-lg text-slate-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-cyan-300 transition-colors mb-1 text-center">
                         {s.title}
                       </h3>
                       {s.price && (
-                        <div className="text-xs font-bold text-emerald-400 mb-1">
+                        <div className="text-xs font-bold text-emerald-600 dark:text-emerald-400 mb-1">
                           {s.price}
                         </div>
                       )}
-                      <p className="text-slate-400 text-xs leading-relaxed mb-4 text-center">
+                      <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed mb-4 text-center">
                         {s.desc}
                       </p>
                     </div>
 
-                    <div className="w-full pt-3 border-t border-slate-800 flex items-center justify-between">
+                    <div className="w-full pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                       {s.isCode ? (
                         <button
                           onClick={() => setScopeBuilderOpen(true)}
-                          className="text-xs font-bold text-cyan-400 hover:text-cyan-200 flex items-center gap-1 cursor-pointer font-mono"
+                          className="text-xs font-bold text-sky-600 dark:text-cyan-400 hover:underline flex items-center gap-1 cursor-pointer font-mono"
                         >
                           <TerminalLogIcon className="w-3.5 h-3.5" />
                           <span>Scope Builder →</span>
@@ -522,26 +526,26 @@ export default function HomePage() {
                       ) : s.isTurnitin ? (
                         <button
                           onClick={() => setTurnitinModalOpen(true)}
-                          className="text-xs font-bold text-emerald-400 hover:text-emerald-200 flex items-center gap-1 cursor-pointer font-mono"
+                          className="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1 cursor-pointer font-mono"
                         >
                           <span>Instant Scan →</span>
                         </button>
                       ) : (
                         <Link
                           href={s.href}
-                          className="text-xs font-bold text-cyan-400 hover:text-cyan-200 flex items-center gap-1 font-mono"
+                          className="text-xs font-bold text-sky-600 dark:text-cyan-400 hover:underline flex items-center gap-1 font-mono"
                         >
                           <span>Calculate Instant Quote →</span>
                         </Link>
                       )}
-                      <span className="text-[10px] text-slate-500 font-mono">Server Calculated</span>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 font-mono">Server Calculated</span>
                     </div>
                   </div>
                 </Interactive3DCard>
               ))}
             </div>
           </div>
-        </ScrollReveal3D>
+        </Scroll3DParallaxSection>
       </section>
 
       {/* Cyber Circuit Spine */}
@@ -560,15 +564,15 @@ export default function HomePage() {
       <CyberCircuitSpine />
 
       {/* ─── Founders & Verifiable Doctoral Leadership Section ─────────────── */}
-      <section className="py-20 px-4 bg-[#030712] text-center" id="about">
-        <ScrollReveal3D>
+      <section className="py-20 px-4 bg-slate-50 dark:bg-[#030712] text-center transition-colors duration-300" id="about">
+        <Scroll3DParallaxSection offsetY={25}>
           <div className="max-w-5xl mx-auto">
             <div className="text-center max-w-2xl mx-auto mb-16">
               <span className="badge-pill-gold mb-3 font-mono">ACADEMIC DIRECTORATE</span>
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-4 text-center">
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4 text-center">
                 Led by Dedicated Scholars
               </h2>
-              <p className="text-slate-400 text-base text-center font-medium">
+              <p className="text-slate-600 dark:text-slate-400 text-base text-center font-normal">
                 Every project is directly overseen by our directors with verifiable academic publishing records.
               </p>
             </div>
@@ -576,27 +580,27 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Tuhit Roy */}
               <Interactive3DCard glowColor="cyan">
-                <div className="card-futuristic-3d p-8 text-center flex flex-col items-center justify-between h-full">
+                <div className="p-8 text-center flex flex-col items-center justify-between h-full">
                   <div>
-                    <div className="w-20 h-20 rounded-full bg-[#060B18] text-cyan-300 font-serif font-bold text-2xl flex items-center justify-center mx-auto mb-4 border-2 border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+                    <div className="w-20 h-20 rounded-full bg-slate-100 dark:bg-[#060B18] text-sky-700 dark:text-cyan-300 font-serif font-bold text-2xl flex items-center justify-center mx-auto mb-4 border-2 border-sky-400 dark:border-cyan-400 shadow-md">
                       TR
                     </div>
-                    <h3 className="font-serif text-2xl font-bold text-white text-center">Tuhit Roy</h3>
-                    <p className="text-cyan-400 font-semibold text-xs uppercase tracking-wider mb-3 text-center font-mono">
+                    <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white text-center">Tuhit Roy</h3>
+                    <p className="text-sky-700 dark:text-cyan-400 font-semibold text-xs uppercase tracking-wider mb-3 text-center font-mono">
                       Founder &amp; Research Director
                     </p>
-                    <p className="text-slate-400 text-sm leading-relaxed text-center mb-6">
+                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed text-center mb-6">
                       Directs technical research methodologies, AI/ML computational architectures (PyTorch/CUDA), and IEEE/Scopus manuscript structuring.
                     </p>
                   </div>
 
                   {/* Verifiable Scholar Badges */}
-                  <div className="w-full pt-4 border-t border-slate-800 flex items-center justify-center gap-4">
+                  <div className="w-full pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-center gap-4">
                     <a
                       href="https://scholar.google.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-xs text-slate-300 hover:text-cyan-300 font-semibold transition-colors"
+                      className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-cyan-300 font-semibold transition-colors"
                     >
                       <GoogleScholarRealIcon className="w-4 h-4" />
                       <span>Scholar</span>
@@ -605,7 +609,7 @@ export default function HomePage() {
                       href="https://ieeexplore.ieee.org"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-xs text-slate-300 hover:text-cyan-300 font-semibold transition-colors"
+                      className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-cyan-300 font-semibold transition-colors"
                     >
                       <IeeeXploreRealIcon className="w-4 h-4" />
                       <span>IEEE</span>
@@ -614,7 +618,7 @@ export default function HomePage() {
                       href="https://github.com/tuhitroy02"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-xs text-slate-300 hover:text-cyan-300 font-semibold transition-colors"
+                      className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-cyan-300 font-semibold transition-colors"
                     >
                       <GitHubRealIcon className="w-4 h-4" />
                       <span>GitHub</span>
@@ -625,29 +629,29 @@ export default function HomePage() {
 
               {/* Sampreeti Mukherjee */}
               <Interactive3DCard glowColor="emerald">
-                <div className="card-futuristic-3d p-8 text-center flex flex-col items-center justify-between h-full">
+                <div className="p-8 text-center flex flex-col items-center justify-between h-full">
                   <div>
-                    <div className="w-20 h-20 rounded-full bg-[#060B18] text-emerald-300 font-serif font-bold text-2xl flex items-center justify-center mx-auto mb-4 border-2 border-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.4)]">
+                    <div className="w-20 h-20 rounded-full bg-slate-100 dark:bg-[#060B18] text-emerald-700 dark:text-emerald-300 font-serif font-bold text-2xl flex items-center justify-center mx-auto mb-4 border-2 border-emerald-500 dark:border-emerald-400 shadow-md">
                       SM
                     </div>
-                    <h3 className="font-serif text-2xl font-bold text-white text-center">Sampreeti Mukherjee</h3>
-                    <p className="text-emerald-400 font-semibold text-xs uppercase tracking-wider mb-3 text-center font-mono">
+                    <h3 className="font-serif text-2xl font-bold text-slate-900 dark:text-white text-center">Sampreeti Mukherjee</h3>
+                    <p className="text-emerald-700 dark:text-emerald-400 font-semibold text-xs uppercase tracking-wider mb-3 text-center font-mono">
                       Co-Founder &amp; Editorial Director
                     </p>
-                    <p className="text-slate-400 text-sm leading-relaxed text-center mb-6">
+                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed text-center mb-6">
                       Leads qualitative editorial refinement, humanities peer-review consultations, and our specialized Hindi research and dissertation division.
                     </p>
                   </div>
 
                   {/* Editorial Badges */}
-                  <div className="w-full pt-4 border-t border-slate-800 flex items-center justify-center gap-4 text-xs text-slate-300 font-semibold">
+                  <div className="w-full pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-center gap-4 text-xs text-slate-600 dark:text-slate-300 font-semibold">
                     <span className="flex items-center gap-1">
-                      <span className="text-emerald-400 font-bold">✓</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-bold">✓</span>
                       <span>UGC-CARE Standards</span>
                     </span>
                     <span>•</span>
                     <span className="flex items-center gap-1">
-                      <span className="text-emerald-400 font-bold">✓</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-bold">✓</span>
                       <span>Comparative Literature</span>
                     </span>
                   </div>
@@ -655,46 +659,46 @@ export default function HomePage() {
               </Interactive3DCard>
             </div>
           </div>
-        </ScrollReveal3D>
+        </Scroll3DParallaxSection>
       </section>
 
       {/* Cyber Circuit Spine */}
       <CyberCircuitSpine />
 
       {/* ─── Office & Contact Section ────────────────────────────────────── */}
-      <section className="py-20 px-4 bg-[#060B18] text-white text-center relative overflow-hidden border-t border-cyan-500/20" id="contact">
+      <section className="py-20 px-4 bg-white dark:bg-[#060B18] text-slate-900 dark:text-white text-center relative overflow-hidden border-t border-slate-200 dark:border-cyan-500/20 transition-colors duration-300" id="contact">
         <ScrollReveal3D>
           <div className="max-w-5xl mx-auto flex flex-col items-center text-center gap-8 relative z-10">
             <div className="text-center">
-              <div className="inline-flex items-center gap-2 bg-cyan-950/70 border border-cyan-400/30 px-4 py-1.5 rounded-full backdrop-blur-md mb-4 shadow">
+              <div className="inline-flex items-center gap-2 bg-sky-50 dark:bg-cyan-950/70 border border-sky-200 dark:border-cyan-400/30 px-4 py-1.5 rounded-full backdrop-blur-md mb-4 shadow-sm">
                 <LocationRealIcon className="w-4 h-4" />
-                <span className="text-xs font-bold text-cyan-300 uppercase tracking-widest font-mono">
+                <span className="text-xs font-bold text-sky-800 dark:text-cyan-300 uppercase tracking-widest font-mono">
                   Physical Presence in Kolkata
                 </span>
               </div>
-              <h3 className="font-serif text-3xl sm:text-4xl font-bold mb-3 text-center">
+              <h3 className="font-serif text-3xl sm:text-4xl font-bold mb-3 text-center text-slate-900 dark:text-white">
                 Karunamoyee, Salt Lake Sector 2
               </h3>
-              <p className="text-slate-300 text-sm sm:text-base max-w-lg mx-auto text-center font-medium">
+              <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-lg mx-auto text-center font-normal">
                 Serving researchers across all Indian universities and international institutions. In-person visits by appointment.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-3xl">
-              <div className="bg-[#030712]/80 border border-cyan-500/25 p-6 rounded-2xl backdrop-blur-md flex flex-col items-center text-center shadow-lg">
+              <div className="bg-slate-50 dark:bg-[#030712]/80 border border-slate-200 dark:border-cyan-500/25 p-6 rounded-2xl backdrop-blur-md flex flex-col items-center text-center shadow-sm dark:shadow-lg">
                 <LocationRealIcon className="w-10 h-10 mb-3" />
-                <div className="text-sm font-bold text-white mb-1">Our Location</div>
-                <div className="text-xs text-slate-300">Sector 2, Salt Lake City, Kolkata 700091</div>
+                <div className="text-sm font-bold text-slate-900 dark:text-white mb-1">Our Location</div>
+                <div className="text-xs text-slate-500 dark:text-slate-300">Sector 2, Salt Lake City, Kolkata 700091</div>
               </div>
-              <div className="bg-[#030712]/80 border border-emerald-500/25 p-6 rounded-2xl backdrop-blur-md flex flex-col items-center text-center shadow-lg">
+              <div className="bg-slate-50 dark:bg-[#030712]/80 border border-slate-200 dark:border-emerald-500/25 p-6 rounded-2xl backdrop-blur-md flex flex-col items-center text-center shadow-sm dark:shadow-lg">
                 <WhatsAppRealIcon className="w-10 h-10 mb-3" />
-                <div className="text-sm font-bold text-white mb-1">WhatsApp Chat</div>
-                <div className="text-xs text-emerald-300 font-bold">+91 7980470880</div>
+                <div className="text-sm font-bold text-slate-900 dark:text-white mb-1">WhatsApp Chat</div>
+                <div className="text-xs text-emerald-700 dark:text-emerald-300 font-bold">+91 7980470880</div>
               </div>
-              <div className="bg-[#030712]/80 border border-cyan-500/25 p-6 rounded-2xl backdrop-blur-md flex flex-col items-center text-center shadow-lg">
+              <div className="bg-slate-50 dark:bg-[#030712]/80 border border-slate-200 dark:border-cyan-500/25 p-6 rounded-2xl backdrop-blur-md flex flex-col items-center text-center shadow-sm dark:shadow-lg">
                 <EmailRealIcon className="w-10 h-10 mb-3" />
-                <div className="text-sm font-bold text-white mb-1">Email Support</div>
-                <div className="text-xs text-cyan-300 font-bold">inkmonkresearch@gmail.com</div>
+                <div className="text-sm font-bold text-slate-900 dark:text-white mb-1">Email Support</div>
+                <div className="text-xs text-sky-700 dark:text-cyan-300 font-bold">inkmonkresearch@gmail.com</div>
               </div>
             </div>
 
@@ -713,8 +717,8 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* ─── Merged FAQ at the end of Contact Section (Requirement 3) ── */}
-            <div className="w-full mt-16 pt-16 border-t border-slate-800">
+            {/* ─── Merged FAQ at the end of Contact Section ── */}
+            <div className="w-full mt-16 pt-16 border-t border-slate-200 dark:border-slate-800">
               <FaqSection />
             </div>
 

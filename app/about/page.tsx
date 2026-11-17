@@ -18,48 +18,48 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#030712] text-[#F8FAFC] py-20 px-4 text-center selection:bg-cyan-500 selection:text-black" style={{ fontFamily: '"Cavolini", "Cavolini Condensed", sans-serif' }}>
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#030712] text-slate-900 dark:text-[#F8FAFC] py-20 px-4 text-center transition-colors duration-300 selection:bg-sky-500 selection:text-white">
       <div className="max-w-5xl mx-auto">
 
         {/* Hero Banner */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="badge-pill-gold mb-3 font-mono">OUR SCHOLARLY MISSION</div>
-          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-4 text-center">
+          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4 text-center">
             About InkMonk Research
           </h1>
-          <p className="text-cyan-400 font-serif italic text-2xl mb-4 text-center">
+          <p className="text-sky-700 dark:text-cyan-400 font-serif italic text-2xl mb-4 text-center font-bold">
             &ldquo;Research with care. Writing with clarity.&rdquo;
           </p>
-          <p className="text-slate-400 text-base sm:text-lg text-center leading-relaxed font-medium">
+          <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg text-center leading-relaxed font-normal">
             InkMonk Research was established to bridge rigorous empirical investigation with meticulous editorial craftsmanship. We support doctoral scholars, university faculties, and postgraduates across India and abroad in translating complex ideas into peer-recognized publications.
           </p>
         </div>
 
         {/* Research Lab Crest & Ethical Integrity Standard */}
-        <div className="card-futuristic-3d p-8 md:p-12 mb-16 text-center hud-corner border border-cyan-500/30">
+        <div className="card-futuristic-3d p-8 md:p-12 mb-16 text-center border border-slate-200 dark:border-cyan-500/30 bg-white dark:bg-[#080E1E] shadow-sm">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-center md:text-left">
             <div>
-              <div className="inline-flex items-center gap-2 bg-emerald-950 text-emerald-300 border border-emerald-500/40 text-xs font-mono font-bold px-3 py-1 rounded-full mb-3">
+              <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/40 text-xs font-mono font-bold px-3 py-1 rounded-full mb-3">
                 <TurnitinShieldLogo className="w-4 h-4" />
                 <span>COPE Ethics Compliant • Zero Essay Mills</span>
               </div>
-              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4 text-center md:text-left">
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-4 text-center md:text-left">
                 The InkMonk Academic Standard
               </h2>
-              <p className="text-slate-300 text-sm leading-relaxed mb-4 text-center md:text-left">
+              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4 text-center md:text-left">
                 The name <strong>InkMonk</strong> represents the focused, disciplined intellectual devotion of a scholarly monk coupled with the analytical precision of the modern researcher&apos;s pen.
               </p>
-              <p className="text-slate-300 text-sm leading-relaxed mb-4 text-center md:text-left">
+              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4 text-center md:text-left">
                 We strictly separate <strong>ethical consultation, language normalization, and reproducible code validation</strong> from ghostwriting shortcuts. Our laboratory operates strictly under Committee on Publication Ethics (COPE) principles: ensuring genuine intellectual authorship, verifiable benchmark reproducibility, and transparent citation attribution.
               </p>
-              <p className="text-slate-300 text-sm leading-relaxed text-center md:text-left">
+              <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed text-center md:text-left">
                 Every project is backed by a <strong>Pre-Signed Mutual Non-Disclosure Agreement (NDA)</strong> guaranteeing that all raw survey datasets, unpublished hypotheses, and thesis drafts remain the 100% exclusive intellectual property of the researcher.
               </p>
             </div>
             <div className="flex justify-center">
-              <div className="relative w-72 h-72 rounded-3xl bg-[#060B18] p-6 flex flex-col items-center justify-center border-2 border-cyan-400 shadow-[0_0_35px_rgba(6,182,212,0.35)] animate-3d-float hud-corner">
-                <AcademicLabCrestLogo className="w-48 h-48 drop-shadow-2xl" />
-                <span className="text-xs font-mono text-cyan-300 font-bold mt-2">
+              <div className="relative w-72 h-72 rounded-3xl bg-slate-50 dark:bg-[#060B18] p-6 flex flex-col items-center justify-center border-2 border-sky-400 dark:border-cyan-400 shadow-md dark:shadow-[0_0_35px_rgba(6,182,212,0.35)] animate-3d-float">
+                <AcademicLabCrestLogo className="w-48 h-48 drop-shadow-xl" />
+                <span className="text-xs font-mono text-sky-800 dark:text-cyan-300 font-bold mt-2">
                   OFFICIAL RESEARCH SEAL
                 </span>
               </div>
@@ -71,7 +71,7 @@ export default function AboutPage() {
         <div className="mb-16 text-center">
           <div className="text-center mb-10">
             <div className="badge-pill-gold mb-3 font-mono">ACADEMIC DIRECTORATE</div>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white text-center">
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white text-center">
               Meet the Academic Directors
             </h2>
           </div>

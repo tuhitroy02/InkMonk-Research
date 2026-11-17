@@ -73,10 +73,10 @@ export default function FaqSection({ className = "" }: { className?: string }) {
       {/* Header */}
       <div className="text-center mb-10">
         <div className="badge-pill-gold mb-3 font-mono">FREQUENTLY ASKED QUESTIONS</div>
-        <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-3 text-center">
+        <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3 text-center">
           Frequently Asked Academic Questions
         </h2>
-        <p className="text-slate-400 text-sm sm:text-base text-center leading-relaxed font-medium">
+        <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base text-center leading-relaxed font-normal">
           Clear, transparent answers about our academic workflows, pricing estimates, confidentiality protocols, and research standards.
         </p>
       </div>
@@ -89,8 +89,8 @@ export default function FaqSection({ className = "" }: { className?: string }) {
             onClick={() => setFilter(cat)}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               filter === cat
-                ? 'bg-cyan-950 text-cyan-300 border border-cyan-400/50 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-                : 'bg-[#060B18] text-slate-400 hover:text-white border border-slate-800'
+                ? 'bg-sky-100 dark:bg-cyan-950 text-sky-800 dark:text-cyan-300 border border-sky-300 dark:border-cyan-400/50 shadow-sm dark:shadow-[0_0_15px_rgba(6,182,212,0.3)]'
+                : 'bg-white dark:bg-[#060B18] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-800'
             }`}
           >
             {cat}
@@ -104,21 +104,21 @@ export default function FaqSection({ className = "" }: { className?: string }) {
           const isOpen = openIdx === idx;
           return (
             <Interactive3DCard key={idx} glowColor="cyan">
-              <div className="card-futuristic-3d overflow-hidden text-center">
+              <div className="overflow-hidden text-center">
                 <button
                   type="button"
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
-                  className="w-full text-center p-6 flex justify-between items-center gap-4 hover:bg-white/5 transition-colors cursor-pointer"
+                  className="w-full text-center p-6 flex justify-between items-center gap-4 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer"
                 >
-                  <span className="font-serif font-bold text-base sm:text-lg text-white text-left">
+                  <span className="font-serif font-bold text-base sm:text-lg text-slate-900 dark:text-white text-left">
                     {faq.q}
                   </span>
-                  <span className="w-8 h-8 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500/40 flex items-center justify-center shrink-0 text-sm font-bold font-mono">
+                  <span className="w-8 h-8 rounded-full bg-sky-50 dark:bg-cyan-950 text-sky-700 dark:text-cyan-300 border border-sky-200 dark:border-cyan-500/40 flex items-center justify-center shrink-0 text-sm font-bold font-mono">
                     {isOpen ? '−' : '+'}
                   </span>
                 </button>
                 {isOpen && (
-                  <div className="px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-slate-800 pt-4 text-left">
+                  <div className="px-6 pb-6 text-sm text-slate-700 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800 pt-4 text-left">
                     {faq.a}
                   </div>
                 )}
@@ -129,12 +129,12 @@ export default function FaqSection({ className = "" }: { className?: string }) {
       </div>
 
       {/* WhatsApp Callout */}
-      <div className="p-6 rounded-3xl bg-[#060B18] border border-cyan-500/30 text-white text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="p-6 rounded-3xl bg-slate-50 dark:bg-[#060B18] border border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white text-center flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
         <div className="text-left">
-          <div className="font-serif font-bold text-lg text-white">
+          <div className="font-serif font-bold text-lg text-slate-900 dark:text-white">
             Still Have an Unanswered Question?
           </div>
-          <div className="text-xs text-slate-400 mt-0.5">
+          <div className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
             Connect directly with founders Tuhit Roy and Sampreeti Mukherjee via WhatsApp.
           </div>
         </div>

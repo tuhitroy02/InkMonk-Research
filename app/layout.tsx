@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import Futuristic3DBackground from "@/components/Futuristic3DBackground";
 
 export const metadata: Metadata = {
   title: {
@@ -39,15 +38,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth dark-mode" data-theme="dark">
+    <html lang="en" className="scroll-smooth light-mode" data-theme="light">
       <body
-        className="min-h-screen font-bold antialiased transition-colors duration-300 relative bg-[#030712]"
-        style={{ fontFamily: '"Cavolini", "Cavolini Condensed", "Plus Jakarta Sans", sans-serif', fontWeight: 700 }}
+        className="min-h-screen font-sans font-medium antialiased transition-colors duration-300 relative bg-[#F8FAFC] text-[#0F172A]"
       >
         <ThemeProvider>
-          {/* Global Interactive 3D Particle & Neural Background */}
-          <Futuristic3DBackground />
-
           <Navbar />
           <main className="min-h-screen pt-20 relative z-10">
             {children}

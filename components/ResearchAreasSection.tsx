@@ -251,10 +251,10 @@ export default function ResearchAreasSection({ className = "" }: { className?: s
           <div className="badge-pill-gold mb-3 font-mono">
             DISCIPLINARY TAXONOMY // ALL SUBJECTS
           </div>
-          <h2 className="font-serif text-3xl sm:text-5xl font-bold text-white dark:text-white mb-4 text-center">
+          <h2 className="font-serif text-3xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4 text-center">
             Comprehensive Research Areas
           </h2>
-          <p className="text-slate-400 dark:text-slate-400 text-base sm:text-lg text-center leading-relaxed font-medium">
+          <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg text-center leading-relaxed font-normal">
             Subject-matter doctoral directors and researchers across every major scholarly discipline. Adhering strictly to your field’s publication ethics and citation norms.
           </p>
         </div>
@@ -267,8 +267,8 @@ export default function ResearchAreasSection({ className = "" }: { className?: s
               onClick={() => setSelectedCategory(cat)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 selectedCategory === cat
-                  ? 'bg-cyan-950 text-cyan-300 border border-cyan-400/60 shadow-[0_0_15px_rgba(6,182,212,0.35)] scale-105'
-                  : 'bg-[#060B18] text-slate-400 hover:text-white border border-slate-800'
+                  ? 'bg-sky-100 dark:bg-cyan-950 text-sky-800 dark:text-cyan-300 border border-sky-300 dark:border-cyan-400/60 shadow-sm dark:shadow-[0_0_15px_rgba(6,182,212,0.35)] scale-105'
+                  : 'bg-white dark:bg-[#060B18] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-800'
               }`}
             >
               {cat}
@@ -280,41 +280,41 @@ export default function ResearchAreasSection({ className = "" }: { className?: s
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((area) => (
             <Interactive3DCard key={area.id} glowColor={area.glowColor}>
-              <div className="card-futuristic-3d p-6 flex flex-col justify-between text-left h-full group relative">
+              <div className="p-6 flex flex-col justify-between text-left h-full group relative">
                 
                 {/* Top Badge & Icon */}
                 <div className="flex items-start justify-between gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-cyan-950/60 border border-cyan-500/40 flex items-center justify-center text-2xl shadow-inner shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-sky-50 dark:bg-cyan-950/60 border border-sky-200 dark:border-cyan-500/40 flex items-center justify-center text-2xl shadow-inner shrink-0">
                     {area.icon}
                   </div>
-                  <span className="text-[10px] font-mono font-bold uppercase text-cyan-300 bg-cyan-950/80 border border-cyan-500/40 px-2.5 py-1 rounded-full">
+                  <span className="text-[10px] font-mono font-bold uppercase text-sky-800 dark:text-cyan-300 bg-sky-50 dark:bg-cyan-950/80 border border-sky-200 dark:border-cyan-500/40 px-2.5 py-1 rounded-full">
                     {area.category}
                   </span>
                 </div>
 
                 {/* Title */}
                 <div>
-                  <h3 className="font-serif text-xl font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">
+                  <h3 className="font-serif text-xl font-bold text-slate-900 dark:text-white mb-1 group-hover:text-sky-600 dark:group-hover:text-cyan-300 transition-colors">
                     {area.name}
                   </h3>
                   {area.hindiName && (
-                    <div className="text-xs text-emerald-400 font-bold mb-2">
+                    <div className="text-xs text-emerald-600 dark:text-emerald-400 font-bold mb-2">
                       {area.hindiName}
                     </div>
                   )}
-                  <p className="text-slate-400 text-xs leading-relaxed mb-4">
+                  <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed mb-4">
                     {area.desc}
                   </p>
 
                   {/* Subfield Tags (Left-Aligned Bullet List) */}
-                  <div className="mb-4 pt-3 border-t border-slate-800">
-                    <div className="text-[11px] font-mono font-bold text-cyan-400 mb-2 uppercase">
+                  <div className="mb-4 pt-3 border-t border-slate-100 dark:border-slate-800">
+                    <div className="text-[11px] font-mono font-bold text-sky-700 dark:text-cyan-400 mb-2 uppercase">
                       Core Specialized Subfields:
                     </div>
-                    <ul className="space-y-1.5 text-xs text-slate-300">
+                    <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
                       {area.subfields.slice(0, 4).map((sub, i) => (
                         <li key={i} className="flex items-center gap-2">
-                          <span className="text-cyan-400 font-bold text-[10px]">●</span>
+                          <span className="text-sky-500 dark:text-cyan-400 font-bold text-[10px]">●</span>
                           <span className="truncate">{sub}</span>
                         </li>
                       ))}
@@ -323,14 +323,14 @@ export default function ResearchAreasSection({ className = "" }: { className?: s
                 </div>
 
                 {/* Footer with Standards & Action */}
-                <div className="pt-3 border-t border-slate-800 flex items-center justify-between text-xs mt-auto">
-                  <div className="text-[10px] font-mono text-slate-400">
-                    <span className="text-slate-500 block">STANDARD:</span>
-                    <span className="font-bold text-slate-300 truncate max-w-[140px] block">{area.standards}</span>
+                <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs mt-auto">
+                  <div className="text-[10px] font-mono text-slate-500 dark:text-slate-400">
+                    <span className="text-slate-400 dark:text-slate-500 block">STANDARD:</span>
+                    <span className="font-bold text-slate-700 dark:text-slate-300 truncate max-w-[140px] block">{area.standards}</span>
                   </div>
                   <Link
                     href={`/quote?domain=${encodeURIComponent(area.name)}`}
-                    className="text-xs font-mono font-bold text-cyan-400 hover:text-cyan-200 flex items-center gap-1 group-hover:underline"
+                    className="text-xs font-mono font-bold text-sky-600 dark:text-cyan-400 hover:text-sky-800 dark:hover:text-cyan-200 flex items-center gap-1 group-hover:underline"
                   >
                     <span>Request Quote →</span>
                   </Link>
@@ -342,12 +342,12 @@ export default function ResearchAreasSection({ className = "" }: { className?: s
         </div>
 
         {/* Bottom Banner */}
-        <div className="mt-14 p-6 rounded-3xl bg-[#060B18] border border-cyan-500/30 max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div className="mt-14 p-6 rounded-3xl bg-slate-50 dark:bg-[#060B18] border border-slate-200 dark:border-cyan-500/30 max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-sm">
           <div>
-            <div className="text-white font-serif font-bold text-lg">
+            <div className="text-slate-900 dark:text-white font-serif font-bold text-lg">
               Have an Interdisciplinary or Custom Topic?
             </div>
-            <div className="text-xs text-slate-400 mt-1">
+            <div className="text-xs text-slate-600 dark:text-slate-400 mt-1">
               Our directors evaluate cross-domain studies (e.g. AI in Healthcare, Econometrics of Climate Policy, Digital Humanities).
             </div>
           </div>

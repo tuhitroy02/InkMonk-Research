@@ -62,16 +62,16 @@ export default function FAQPage() {
   const filteredFaqs = filter === 'All' ? FAQS : FAQS.filter(f => f.category === filter);
 
   return (
-    <div className="min-h-screen bg-[#030712] text-[#F8FAFC] py-20 px-4 text-center selection:bg-cyan-500 selection:text-black" style={{ fontFamily: '"Cavolini", "Cavolini Condensed", sans-serif' }}>
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#030712] text-slate-900 dark:text-[#F8FAFC] py-20 px-4 text-center transition-colors duration-300 selection:bg-sky-500 selection:text-white">
       <div className="max-w-4xl mx-auto">
 
         {/* Header */}
         <div className="text-center mb-12">
           <div className="badge-pill-gold mb-3 font-mono">FREQUENTLY ASKED QUESTIONS</div>
-          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-4 text-center">
+          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4 text-center">
             Got Questions? We Have Answers
           </h1>
-          <p className="text-slate-400 text-base sm:text-lg text-center leading-relaxed font-medium">
+          <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg text-center leading-relaxed font-normal">
             Clear, transparent answers about our academic workflows, pricing estimates, confidentiality protocols, and research standards.
           </p>
         </div>
@@ -84,8 +84,8 @@ export default function FAQPage() {
               onClick={() => setFilter(cat)}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 filter === cat
-                  ? 'bg-cyan-950 text-cyan-300 border border-cyan-400/50 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-                  : 'bg-[#060B18] text-slate-400 hover:text-white border border-slate-800'
+                  ? 'bg-sky-100 dark:bg-cyan-950 text-sky-800 dark:text-cyan-300 border border-sky-300 dark:border-cyan-400/50 shadow-sm dark:shadow-[0_0_15px_rgba(6,182,212,0.3)]'
+                  : 'bg-white dark:bg-[#060B18] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-800'
               }`}
             >
               {cat}

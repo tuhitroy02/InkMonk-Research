@@ -263,7 +263,7 @@ export default function ServicesPage() {
     : SERVICE_CATALOG.filter((s) => s.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-[#030712] text-[#F8FAFC] py-16 px-4 text-center selection:bg-cyan-500 selection:text-black" style={{ fontFamily: '"Cavolini", "Cavolini Condensed", sans-serif' }}>
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#030712] text-slate-900 dark:text-[#F8FAFC] py-16 px-4 text-center transition-colors duration-300 selection:bg-sky-500 selection:text-white">
       <div className="max-w-7xl mx-auto">
 
         {/* ─── Hero Header ─────────────────────────────────────────────────── */}
@@ -271,23 +271,23 @@ export default function ServicesPage() {
           <div className="badge-pill-gold mb-3 font-mono">
             ACADEMIC CATALOGUE // RIGOROUS &amp; CONFIDENTIAL
           </div>
-          <h1 className="font-serif text-4xl sm:text-6xl font-bold text-white mb-4 text-center">
+          <h1 className="font-serif text-4xl sm:text-6xl font-bold text-slate-900 dark:text-white mb-4 text-center">
             Scholarly Services Catalogue
           </h1>
-          <p className="text-slate-400 text-base sm:text-lg text-center font-medium leading-relaxed">
-            Rigorously formatted, 0% AI, and plagiarism-free academic scholarship in both <strong className="text-white">English</strong> and <strong className="text-white">Hindi</strong>. Evaluated transparently through our central server-side pricing engine.
+          <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg text-center font-normal leading-relaxed">
+            Rigorously formatted, 0% AI, and plagiarism-free academic scholarship in both <strong className="text-slate-900 dark:text-white font-bold">English</strong> and <strong className="text-slate-900 dark:text-white font-bold">Hindi</strong>. Evaluated transparently through our central server-side pricing engine.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-3 mt-5 text-xs font-semibold text-slate-300 font-mono">
-            <span className="flex items-center gap-1.5 bg-cyan-950/60 border border-cyan-500/40 px-3 py-1 rounded-full text-cyan-300">
+          <div className="flex flex-wrap justify-center gap-3 mt-5 text-xs font-semibold text-slate-600 dark:text-slate-300 font-mono">
+            <span className="flex items-center gap-1.5 bg-sky-50 dark:bg-cyan-950/60 border border-sky-200 dark:border-cyan-500/40 px-3 py-1 rounded-full text-sky-800 dark:text-cyan-300">
               <UpiShieldIcon className="w-4 h-4" />
               <span>Instant UPI Accepted</span>
             </span>
-            <span className="flex items-center gap-1.5 bg-emerald-950/60 border border-emerald-500/40 px-3 py-1 rounded-full text-emerald-300">
+            <span className="flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-500/40 px-3 py-1 rounded-full text-emerald-800 dark:text-emerald-300">
               <NdaShieldIcon className="w-4 h-4" />
               <span>100% IP &amp; Mutual NDA</span>
             </span>
-            <span className="flex items-center gap-1.5 bg-slate-900 border border-slate-700 px-3 py-1 rounded-full text-slate-300">
+            <span className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-3 py-1 rounded-full text-slate-700 dark:text-slate-300">
               <span>Chapter-by-Chapter Escrow</span>
             </span>
           </div>
@@ -301,8 +301,8 @@ export default function ServicesPage() {
               onClick={() => setActiveCategory(cat)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeCategory === cat
-                  ? 'bg-cyan-950 text-cyan-300 border border-cyan-400/60 shadow-[0_0_15px_rgba(6,182,212,0.35)] scale-105'
-                  : 'bg-[#060B18] text-slate-400 hover:text-white border border-slate-800'
+                  ? 'bg-sky-100 dark:bg-cyan-950 text-sky-800 dark:text-cyan-300 border border-sky-300 dark:border-cyan-400/60 shadow-sm dark:shadow-[0_0_15px_rgba(6,182,212,0.35)] scale-105'
+                  : 'bg-white dark:bg-[#060B18] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-800'
               }`}
             >
               {cat}
@@ -314,16 +314,16 @@ export default function ServicesPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
           {filteredServices.map((service) => (
             <Interactive3DCard key={service.id} glowColor={service.glowColor}>
-              <div className="card-futuristic-3d p-6 flex flex-col justify-between text-left h-full group relative border-t-4 border-t-cyan-500">
+              <div className="p-6 flex flex-col justify-between text-left h-full group relative border-t-4 border-t-sky-500 dark:border-t-cyan-500">
                 
                 {/* Badge & Category */}
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="text-[10px] font-mono font-bold uppercase text-cyan-300 bg-cyan-950/80 border border-cyan-500/40 px-2.5 py-1 rounded-full">
+                    <span className="text-[10px] font-mono font-bold uppercase text-sky-800 dark:text-cyan-300 bg-sky-50 dark:bg-cyan-950/80 border border-sky-200 dark:border-cyan-500/40 px-2.5 py-1 rounded-full">
                       {service.badge}
                     </span>
                     {service.priceTag && (
-                      <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-500/40 px-2.5 py-1 rounded-full">
+                      <span className="text-xs font-mono font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-500/40 px-2.5 py-1 rounded-full">
                         {service.priceTag}
                       </span>
                     )}
@@ -335,22 +335,22 @@ export default function ServicesPage() {
                   </div>
 
                   {/* Title & Desc */}
-                  <h3 className="font-serif text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                  <h3 className="font-serif text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-sky-600 dark:group-hover:text-cyan-300 transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-slate-400 text-xs leading-relaxed mb-4">
+                  <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed mb-4">
                     {service.desc}
                   </p>
 
                   {/* Features Bullet List (Left-Aligned) */}
-                  <div className="pt-3 border-t border-slate-800 mb-6">
-                    <div className="text-[10px] font-mono text-cyan-400 font-bold uppercase mb-2">
+                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800 mb-6">
+                    <div className="text-[10px] font-mono text-sky-700 dark:text-cyan-400 font-bold uppercase mb-2">
                       Key Deliverables &amp; Standards:
                     </div>
-                    <ul className="space-y-1.5 text-xs text-slate-300">
+                    <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
                       {service.features.map((feat, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <span className="text-cyan-400 font-bold text-[11px] mt-0.5">✓</span>
+                          <span className="text-sky-600 dark:text-cyan-400 font-bold text-[11px] mt-0.5">✓</span>
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -428,12 +428,12 @@ export default function ServicesPage() {
         </div>
 
         {/* ─── Bottom CTA & Video Consultation Banner ──────────────────────── */}
-        <div className="mt-20 p-8 md:p-12 rounded-3xl bg-[#060B18] border border-cyan-500/30 text-white text-center shadow-2xl relative overflow-hidden">
+        <div className="mt-20 p-8 md:p-12 rounded-3xl bg-slate-50 dark:bg-[#060B18] border border-slate-200 dark:border-cyan-500/30 text-slate-900 dark:text-white text-center shadow-sm dark:shadow-2xl relative overflow-hidden">
           <div className="max-w-3xl mx-auto">
-            <h2 className="font-serif text-2xl sm:text-4xl font-bold mb-3 text-center">
+            <h2 className="font-serif text-2xl sm:text-4xl font-bold mb-3 text-center text-slate-900 dark:text-white">
               Uncertain About Your Specific Requirements?
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base max-w-xl mx-auto mb-8 text-center font-medium">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base max-w-xl mx-auto mb-8 text-center font-normal">
               Schedule a 1-on-1 preliminary consultation with assigned doctoral directors Tuhit Roy and Sampreeti Mukherjee to evaluate rubrics and data reproducibility.
             </p>
             <div className="flex flex-wrap justify-center gap-4">

@@ -832,15 +832,15 @@ export function MilestonePaymentTimeline() {
   ];
 
   return (
-    <div className="w-full bg-[#0A1128] text-white rounded-3xl border border-amber-500/30 p-6 sm:p-8 relative overflow-hidden hud-corner">
+    <div className="w-full bg-white dark:bg-[#0A1128] text-slate-900 dark:text-white rounded-3xl border border-slate-200 dark:border-amber-500/30 p-6 sm:p-8 relative overflow-hidden shadow-sm dark:shadow-xl">
       <div className="text-center max-w-2xl mx-auto mb-8">
-        <div className="inline-flex items-center gap-2 bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full mb-3 border border-amber-500/30">
+        <div className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 text-xs font-bold px-3 py-1 rounded-full mb-3 border border-amber-300 dark:border-amber-500/30">
           <span>ZERO 100% UPFRONT RISK</span>
         </div>
-        <h3 className="font-serif text-2xl sm:text-3xl font-bold mb-2">
+        <h3 className="font-serif text-2xl sm:text-3xl font-bold mb-2 text-slate-900 dark:text-white">
           Milestone-Based Chapter Payment Schedule
         </h3>
-        <p className="text-slate-300 text-xs sm:text-sm">
+        <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm">
           Pay strictly chapter-by-chapter as each deliverable is reviewed and validated by your supervisor.
         </p>
       </div>
@@ -853,34 +853,34 @@ export function MilestonePaymentTimeline() {
             onClick={() => setSelectedMilestone(m.step)}
             className={`p-5 rounded-2xl cursor-pointer transition-all border text-left flex flex-col justify-between ${
               selectedMilestone === m.step
-                ? 'bg-gradient-to-b from-amber-500/20 to-orange-500/10 border-amber-400 shadow-xl scale-[1.02]'
-                : 'bg-white/5 border-white/10 hover:border-white/20'
+                ? 'bg-amber-50/80 dark:bg-gradient-to-b dark:from-amber-500/20 dark:to-orange-500/10 border-amber-400 shadow-md scale-[1.02]'
+                : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20'
             }`}
           >
             <div>
               <div className="flex items-center justify-between mb-3">
-                <span className="w-8 h-8 rounded-xl bg-orange-600 text-white font-bold flex items-center justify-center text-sm">
+                <span className="w-8 h-8 rounded-xl bg-sky-600 dark:bg-orange-600 text-white font-bold flex items-center justify-center text-sm">
                   {m.step}
                 </span>
-                <span className="font-serif text-lg font-bold text-amber-300">
+                <span className="font-serif text-lg font-bold text-amber-600 dark:text-amber-300">
                   {m.pct}
                 </span>
               </div>
-              <h4 className="font-serif font-bold text-sm text-white mb-2">
+              <h4 className="font-serif font-bold text-sm text-slate-900 dark:text-white mb-2">
                 {m.title}
               </h4>
-              <p className="text-xs text-slate-300 leading-relaxed mb-4">
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
                 {m.desc}
               </p>
             </div>
-            <div className="text-[10px] text-amber-400 font-bold uppercase tracking-wider pt-2 border-t border-white/10">
+            <div className="text-[10px] text-amber-700 dark:text-amber-400 font-bold uppercase tracking-wider pt-2 border-t border-slate-200 dark:border-white/10">
               {m.payable}
             </div>
           </div>
         ))}
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-slate-300 pt-2 border-t border-white/10">
+      <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-slate-600 dark:text-slate-300 pt-2 border-t border-slate-200 dark:border-white/10">
         <span className="flex items-center gap-1.5">
           <UpiShieldIcon className="w-4 h-4" />
           <span>Local UPI (GPay, PhonePe, Paytm, BHIM) Accepted</span>

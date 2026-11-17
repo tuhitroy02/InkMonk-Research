@@ -5,11 +5,11 @@ import { motion } from 'framer-motion';
 import { OfficialTurnitinLogo, AcademicLabCrestLogo } from '@/components/RealIcons';
 
 /**
- * InkMonk Research — Distinct 3D Visual Identities for Each Service Category
- * Pure hardware-accelerated CSS 3D & SVG components with interactive hover depth.
+ * InkMonk Research — High-End Editorial Deliverable Visuals (Light & Dark Responsive)
+ * Clean, prestigious, photorealistic academic deliverables that build instant client trust.
  */
 
-// 1. Research Paper Writing: Floating layered manuscript pages with citations & formulas
+// 1. Research Paper: Pristine IEEE / Elsevier Manuscript Preview
 export function ResearchPaper3DVisual({ className = "w-full h-44 mb-4" }: { className?: string }) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
@@ -18,60 +18,50 @@ export function ResearchPaper3DVisual({ className = "w-full h-44 mb-4" }: { clas
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
         setTilt({
-          x: ((e.clientY - rect.top) / rect.height - 0.5) * -20,
-          y: ((e.clientX - rect.left) / rect.width - 0.5) * 20,
+          x: ((e.clientY - rect.top) / rect.height - 0.5) * -14,
+          y: ((e.clientX - rect.left) / rect.width - 0.5) * 14,
         });
       }}
       onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-      className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-[#0c101c] to-[#04060b] border border-cyan-500/30 p-4 select-none ${className}`}
+      className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-slate-50 dark:bg-[#070B16] border border-slate-200 dark:border-cyan-500/20 p-4 select-none ${className}`}
       style={{ perspective: '800px' }}
     >
-      {/* Background Laser Grid */}
-      <div className="absolute inset-0 cyber-grid-bg opacity-30" />
-
-      {/* Layered 3D Paper Stack */}
       <motion.div
         animate={{
-          rotateX: 14 + tilt.x,
-          rotateY: -16 + tilt.y,
-          rotateZ: -2,
+          rotateX: 8 + tilt.x,
+          rotateY: -10 + tilt.y,
         }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-        className="relative w-44 h-32 rounded-xl bg-slate-900 border border-cyan-400/50 shadow-[0_15px_30px_rgba(0,0,0,0.8),0_0_20px_rgba(6,182,212,0.25)] p-3 flex flex-col justify-between"
+        transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+        className="relative w-56 h-36 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 shadow-md p-3.5 flex flex-col justify-between text-left"
         style={{ transformStyle: 'preserve-3d' }}
       >
-        {/* Layer Underneath */}
-        <div
-          className="absolute inset-0 rounded-xl bg-slate-950 border border-slate-700/60"
-          style={{ transform: 'translateZ(-14px) rotateY(-6deg)' }}
-        />
-
-        {/* Top Header */}
-        <div className="flex items-center justify-between border-b border-cyan-500/30 pb-1.5 font-mono text-[9px]">
-          <span className="text-cyan-300 font-bold">IEEE / SCOPUS // MS-01</span>
-          <span className="text-emerald-400 font-bold">PEER-REVIEWED</span>
+        {/* Paper Header */}
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-1.5 font-sans text-[9px] text-slate-500">
+          <span className="font-bold text-[#0284C7] dark:text-cyan-400">IEEE TRANSACTIONS</span>
+          <span>DOI: 10.1109/INKMONK.2026</span>
         </div>
 
-        {/* Simulated Abstract & Formula */}
-        <div className="space-y-1.5 text-left font-mono">
-          <div className="h-1.5 w-5/6 bg-cyan-300/40 rounded-full" />
-          <div className="h-1.5 w-4/6 bg-cyan-300/30 rounded-full" />
-          <div className="p-1 rounded bg-cyan-950/60 border border-cyan-500/30 text-[9px] text-cyan-200 font-bold">
-            ∫_Ω (∇u · ∇v) dx = λ ∫_Ω uv dx
+        {/* Paper Title & Abstract */}
+        <div className="space-y-1.5 my-1">
+          <div className="text-[10px] font-serif font-bold text-slate-900 dark:text-white leading-tight">
+            Empirical Validation of Scalable Neural Architectures
+          </div>
+          <div className="text-[8px] text-slate-500 dark:text-slate-400 font-serif leading-relaxed line-clamp-2">
+            Abstract: Comprehensive methodology adhering to double-blind peer-review standards, full statistical rigor, and formatted citations.
           </div>
         </div>
 
-        {/* Citation Badges */}
-        <div className="flex items-center gap-1.5 text-[8px] font-mono text-slate-400 border-t border-cyan-500/20 pt-1">
-          <span className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10">[1] IEEE Xplore</span>
-          <span className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10">[2] Springer</span>
+        {/* Mathematical Formula Strip */}
+        <div className="px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-[9px] font-mono font-semibold text-slate-700 dark:text-slate-300 flex items-center justify-between">
+          <span>∇ · B = 0 &nbsp;|&nbsp; L_loss = -∑ y log(p)</span>
+          <span className="text-[8px] text-emerald-600 dark:text-emerald-400 font-bold">100% RIGOR</span>
         </div>
       </motion.div>
     </div>
   );
 }
 
-// 2. Thesis & Dissertation: Bound 3D Academic Manuscript with Doctoral Seal
+// 2. Thesis & Dissertation: Prestigious Navy & Gold Doctoral Volume
 export function Thesis3DVisual({ className = "w-full h-44 mb-4" }: { className?: string }) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
@@ -80,189 +70,179 @@ export function Thesis3DVisual({ className = "w-full h-44 mb-4" }: { className?:
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
         setTilt({
-          x: ((e.clientY - rect.top) / rect.height - 0.5) * -20,
-          y: ((e.clientX - rect.left) / rect.width - 0.5) * 20,
+          x: ((e.clientY - rect.top) / rect.height - 0.5) * -14,
+          y: ((e.clientX - rect.left) / rect.width - 0.5) * 14,
         });
       }}
       onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-      className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-[#0e111d] to-[#030509] border border-cyan-500/30 p-4 select-none ${className}`}
+      className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-slate-50 dark:bg-[#070B16] border border-slate-200 dark:border-cyan-500/20 p-4 select-none ${className}`}
       style={{ perspective: '800px' }}
     >
-      <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-transparent to-amber-500/10" />
-
-      {/* 3D Bound Thesis Volume */}
       <motion.div
         animate={{
-          rotateX: 18 + tilt.x,
-          rotateY: -22 + tilt.y,
-          rotateZ: -4,
+          rotateX: 10 + tilt.x,
+          rotateY: -14 + tilt.y,
         }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-        className="relative w-40 h-32 rounded-r-xl rounded-l-sm bg-gradient-to-r from-[#141a29] via-[#0d121f] to-[#080b14] border-2 border-cyan-400/60 shadow-[0_20px_40px_rgba(0,0,0,0.9),0_0_25px_rgba(6,182,212,0.3)] p-3 flex flex-col justify-between"
+        transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+        className="relative w-48 h-36 rounded-r-xl rounded-l-sm bg-[#0F172A] border-2 border-amber-500/40 shadow-lg p-3.5 flex flex-col justify-between text-center"
         style={{ transformStyle: 'preserve-3d' }}
       >
-        {/* Leather / Kevlar Spine */}
-        <div className="absolute left-0 top-0 bottom-0 w-3.5 bg-gradient-to-r from-cyan-950 via-cyan-800 to-cyan-900 border-r border-cyan-400/40 rounded-l-sm shadow-inner" />
+        {/* Leather Spine */}
+        <div className="absolute left-0 top-0 bottom-0 w-3 bg-slate-950 border-r border-amber-500/30 rounded-l-sm" />
 
         {/* Gold Ribbon Bookmark */}
-        <div className="absolute right-6 -bottom-3 w-3 h-8 bg-gradient-to-b from-amber-400 to-amber-600 shadow-md transform rotate-6 rounded-b" />
+        <div className="absolute right-5 -bottom-2.5 w-2.5 h-7 bg-amber-500 shadow transform rotate-6 rounded-b" />
 
-        {/* Golden Doctoral Seal */}
-        <div className="flex items-center justify-center mt-2">
-          <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-amber-600 via-amber-300 to-amber-700 border-2 border-amber-200 shadow-[0_0_15px_rgba(245,158,11,0.6)] flex items-center justify-center">
-            <span className="text-[14px]">🎓</span>
+        {/* Doctoral Seal */}
+        <div className="flex justify-center mt-1">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-600 via-amber-400 to-amber-700 border border-amber-300 flex items-center justify-center shadow-md">
+            <span className="text-sm">🎓</span>
           </div>
         </div>
 
-        {/* Embossed Text */}
-        <div className="text-center font-mono pl-3">
-          <div className="text-[9px] font-bold text-white tracking-widest uppercase">Ph.D. DISSERTATION</div>
-          <div className="text-[8px] text-cyan-300">5-CHAPTER ESCROW MATRIX</div>
+        {/* Embossed Gold Title */}
+        <div className="space-y-0.5">
+          <div className="text-[10px] font-serif font-bold text-amber-200 uppercase tracking-wider">
+            DOCTORAL DISSERTATION
+          </div>
+          <div className="text-[8px] font-sans text-slate-300">
+            5-Chapter Complete Volume
+          </div>
+        </div>
+
+        <div className="text-[8px] font-sans font-semibold text-emerald-400 border-t border-slate-800 pt-1">
+          University DRC Rubric Compliant
         </div>
       </motion.div>
     </div>
   );
 }
 
-// 3. AI & Machine Learning / Model & Code: Animated Neural Network Matrix
-export function ModelCode3DVisual({ className = "w-full h-44 mb-4" }: { className?: string }) {
-  return (
-    <div className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-[#06101c] to-[#02050a] border border-emerald-500/40 p-4 select-none ${className}`}>
-      {/* Background Grid */}
-      <div className="absolute inset-0 cyber-grid-bg opacity-35" />
-
-      {/* Central 3D Neural Perceptron Lattice */}
-      <div className="relative w-48 h-28 flex items-center justify-between px-3">
-        {/* Input Layer */}
-        <div className="flex flex-col justify-around h-full py-1">
-          {[0, 1, 2].map((i) => (
-            <div key={i} className="w-3.5 h-3.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#00F2FE] border border-white" />
-          ))}
-        </div>
-
-        {/* Hidden Layer (Central Pulses) */}
-        <div className="flex flex-col justify-around h-full">
-          {[0, 1, 2, 3].map((i) => (
-            <div key={i} className="w-4 h-4 rounded-full bg-emerald-400 shadow-[0_0_12px_#10B981] border border-white animate-pulse" />
-          ))}
-        </div>
-
-        {/* Output Layer */}
-        <div className="flex flex-col justify-around h-full py-2">
-          {[0, 1].map((i) => (
-            <div key={i} className="w-3.5 h-3.5 rounded-full bg-teal-300 shadow-[0_0_10px_#2DD4BF] border border-white" />
-          ))}
-        </div>
-
-        {/* Synaptic SVG Lines */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-50 stroke-cyan-400" strokeWidth="1">
-          <line x1="24" y1="20" x2="96" y2="15" />
-          <line x1="24" y1="56" x2="96" y2="45" />
-          <line x1="24" y1="92" x2="96" y2="75" />
-          <line x1="96" y1="45" x2="168" y2="35" />
-          <line x1="96" y1="75" x2="168" y2="75" />
-        </svg>
-      </div>
-
-      {/* Floating Badges */}
-      <div className="absolute bottom-2 inset-x-3 flex items-center justify-between text-[8px] font-mono font-bold text-emerald-300 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-400/40">
-        <span>PYTORCH // CUDA</span>
-        <span>DOCKER HANDOFF</span>
-      </div>
-    </div>
-  );
-}
-
-// 4. Turnitin 3D Holographic Originality Shield with Laser Sweep
+// 3. Turnitin Report: Authentic Clean Feedback Studio Deliverable Card
 export function Turnitin3DVisual({ className = "w-full h-44 mb-4" }: { className?: string }) {
   return (
-    <div className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-[#061817] via-[#020d0d] to-[#010606] border border-teal-400/50 p-4 select-none ${className}`}>
-      {/* Laser Scanning Line */}
-      <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-teal-300 to-transparent shadow-[0_0_15px_#2DD4BF] animate-scanline z-20 pointer-events-none" />
-
-      {/* Turnitin Shield with 3D Holographic Elevation */}
-      <motion.div
-        animate={{
-          scale: [1, 1.04, 1],
-        }}
-        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-        className="relative flex flex-col items-center justify-center"
-      >
-        <div className="w-16 h-16 rounded-2xl bg-teal-950/80 border-2 border-teal-400/80 shadow-[0_0_35px_rgba(45,212,191,0.5)] flex items-center justify-center p-2 mb-2">
-          <OfficialTurnitinLogo className="w-12 h-12" />
+    <div className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-slate-50 dark:bg-[#070B16] border border-slate-200 dark:border-teal-500/20 p-4 select-none ${className}`}>
+      {/* Turnitin Feedback Studio Document Card */}
+      <div className="w-56 rounded-xl bg-white border border-slate-300 shadow-md p-3 text-left">
+        {/* Studio Header */}
+        <div className="flex items-center justify-between border-b border-slate-200 pb-1.5 mb-2">
+          <div className="flex items-center gap-1.5">
+            <OfficialTurnitinLogo className="w-4 h-4" />
+            <span className="text-[10px] font-bold text-slate-800 font-sans">Feedback Studio</span>
+          </div>
+          <span className="text-[8px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">
+            NON-REPOSITORY
+          </span>
         </div>
 
-        <div className="text-center font-mono">
-          <div className="text-[11px] font-bold text-white tracking-widest">TURNITIN INSTRUCTOR</div>
-          <div className="text-[9px] text-teal-300 font-bold">NON-REPOSITORY // FLAT ₹200</div>
+        {/* Similarity & AI Writing Scores */}
+        <div className="grid grid-cols-2 gap-2 mb-2 text-center">
+          <div className="p-1.5 rounded-lg bg-sky-50 border border-sky-200">
+            <div className="text-[8px] text-slate-500 uppercase font-semibold">Similarity Index</div>
+            <div className="text-base font-bold text-sky-700">6%</div>
+            <div className="text-[7px] text-slate-400">&lt;10% Guaranteed</div>
+          </div>
+          <div className="p-1.5 rounded-lg bg-emerald-50 border border-emerald-200">
+            <div className="text-[8px] text-slate-500 uppercase font-semibold">AI Writing Score</div>
+            <div className="text-base font-bold text-emerald-700">0%</div>
+            <div className="text-[7px] text-slate-400">100% Human Writing</div>
+          </div>
         </div>
-      </motion.div>
+
+        {/* Matched Sources Info */}
+        <div className="text-[8px] text-slate-500 space-y-0.5">
+          <div className="flex justify-between">
+            <span>• IEEE Digital Library</span>
+            <span className="font-semibold text-slate-700">2% Match</span>
+          </div>
+          <div className="flex justify-between">
+            <span>• ScienceDirect / Elsevier</span>
+            <span className="font-semibold text-slate-700">2% Match</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
-// 5. Book Writing (100–300 pages) 3D Monograph Volume
-export function Book3DVisual({ className = "w-full h-44 mb-4" }: { className?: string }) {
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-
+// 4. Model & Code Implementation: Clean Developer Sandbox Terminal
+export function ModelCode3DVisual({ className = "w-full h-44 mb-4" }: { className?: string }) {
   return (
-    <div
-      onMouseMove={(e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        setTilt({
-          x: ((e.clientY - rect.top) / rect.height - 0.5) * -20,
-          y: ((e.clientX - rect.left) / rect.width - 0.5) * 20,
-        });
-      }}
-      onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-      className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-[#0e0f1c] to-[#040409] border border-indigo-500/30 p-4 select-none ${className}`}
-      style={{ perspective: '800px' }}
-    >
-      <motion.div
-        animate={{
-          rotateX: 16 + tilt.x,
-          rotateY: -20 + tilt.y,
-        }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-        className="relative w-40 h-32 rounded-r-xl rounded-l-sm bg-gradient-to-r from-[#171933] via-[#0f1124] to-[#090a16] border border-indigo-400/60 shadow-[0_20px_40px_rgba(0,0,0,0.9),0_0_25px_rgba(99,102,241,0.3)] p-3 flex flex-col justify-between"
-        style={{ transformStyle: 'preserve-3d' }}
-      >
-        <div className="absolute left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-indigo-900 to-indigo-950 border-r border-indigo-400/30" />
-        <div className="text-right font-mono text-[8px] text-indigo-300">ISBN READY</div>
-        <div className="text-center font-serif text-white font-bold text-sm">
-          Scholarly Book
-          <div className="text-[8px] font-mono text-slate-400 font-normal">100–300 Pages</div>
+    <div className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-slate-50 dark:bg-[#070B16] border border-slate-200 dark:border-emerald-500/20 p-4 select-none ${className}`}>
+      <div className="w-56 rounded-xl bg-slate-900 border border-slate-700 shadow-md p-3 text-left font-mono text-[9px]">
+        {/* Terminal Header */}
+        <div className="flex items-center justify-between border-b border-slate-800 pb-1.5 mb-2">
+          <div className="flex items-center gap-1.5">
+            <div className="w-2 h-2 rounded-full bg-red-500" />
+            <div className="w-2 h-2 rounded-full bg-amber-500" />
+            <div className="w-2 h-2 rounded-full bg-emerald-500" />
+          </div>
+          <span className="text-[8px] text-slate-400">pytorch_env:py311</span>
         </div>
-        <div className="text-[8px] font-mono text-slate-400 text-center border-t border-indigo-500/20 pt-1">
-          Full Monograph Layout
+
+        {/* Code Content */}
+        <div className="space-y-1 text-slate-300">
+          <div className="text-sky-400">import torch.nn as nn</div>
+          <div className="text-slate-400"># Model Architecture</div>
+          <div>out = model(inputs) <span className="text-emerald-400">// F1: 0.942</span></div>
+          <div className="text-amber-300">docker run -v ./weights:/app</div>
         </div>
-      </motion.div>
+
+        <div className="mt-2 pt-1 border-t border-slate-800 flex justify-between text-[8px] text-slate-400">
+          <span>CUDA 12.4 • A100 Tested</span>
+          <span className="text-emerald-400 font-bold">100% REPRODUCIBLE</span>
+        </div>
+      </div>
     </div>
   );
 }
 
-// 6. Presentation & PPT 3D Slide Deck Stage
+// 5. Book Writing (100–300 pp): Formal Academic Monograph Volume
+export function Book3DVisual({ className = "w-full h-44 mb-4" }: { className?: string }) {
+  return (
+    <div className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-slate-50 dark:bg-[#070B16] border border-slate-200 dark:border-indigo-500/20 p-4 select-none ${className}`}>
+      <div className="w-48 h-36 rounded-r-xl rounded-l-sm bg-gradient-to-r from-slate-900 to-indigo-950 border border-indigo-400/30 shadow-md p-3.5 flex flex-col justify-between text-center">
+        <div className="text-right text-[8px] font-mono text-amber-300">
+          ISBN 978-93-84192-04-1
+        </div>
+        <div className="space-y-1">
+          <div className="text-xs font-serif font-bold text-white leading-tight">
+            Scholarly Monograph Series
+          </div>
+          <div className="text-[8px] font-sans text-slate-400">
+            100–300 Pages • Complete Editorial Proofing
+          </div>
+        </div>
+        <div className="text-[8px] font-sans font-semibold text-indigo-300 border-t border-slate-800 pt-1">
+          Print &amp; Digital Publishing Ready
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// 6. Presentation & PPT: Clean Academic Defense Slide
 export function Presentation3DVisual({ className = "w-full h-44 mb-4" }: { className?: string }) {
   return (
-    <div className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a1224] to-[#03060d] border border-cyan-500/30 p-4 select-none ${className}`}>
-      <motion.div
-        animate={{ rotateX: [10, 14, 10], rotateY: [-10, -14, -10] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        className="relative w-44 h-28 rounded-xl bg-slate-900 border border-cyan-400/60 shadow-xl p-2.5 flex flex-col justify-between"
-      >
-        <div className="flex items-center justify-between text-[8px] font-mono text-cyan-300 border-b border-cyan-500/20 pb-1">
-          <span>DEFENSE SLIDE // 01</span>
-          <span>16:9 4K</span>
+    <div className={`relative flex items-center justify-center overflow-hidden rounded-2xl bg-slate-50 dark:bg-[#070B16] border border-slate-200 dark:border-cyan-500/20 p-4 select-none ${className}`}>
+      <div className="w-56 h-32 rounded-lg bg-white border border-slate-300 shadow-md p-3 flex flex-col justify-between text-left">
+        <div className="flex justify-between items-center border-b border-slate-100 pb-1 text-[8px] text-slate-500 font-sans">
+          <span>Doctoral Thesis Defense • Slide 12 of 35</span>
+          <span className="font-bold text-[#0284C7]">16:9 Widescreen</span>
         </div>
-        <div className="grid grid-cols-3 gap-1.5 my-1">
-          <div className="h-10 rounded bg-cyan-950/60 border border-cyan-500/20" />
-          <div className="h-10 rounded bg-cyan-950/60 border border-cyan-500/20" />
-          <div className="h-10 rounded bg-cyan-950/60 border border-cyan-500/20" />
+        <div>
+          <div className="text-[10px] font-serif font-bold text-slate-900 mb-1">
+            Proposed Mathematical Formulation
+          </div>
+          <div className="p-1.5 rounded bg-slate-50 text-[9px] font-mono text-slate-700">
+            L(θ) = -E [y log(p) + (1-y) log(1-p)] + λ ||W||²
+          </div>
         </div>
-        <div className="text-[8px] font-mono text-slate-400 text-center">
-          Conference &amp; Viva Voce Ready
+        <div className="flex justify-between text-[8px] text-slate-400 pt-1 border-t border-slate-100">
+          <span>University Committee Approved</span>
+          <span>Speaker Notes Included</span>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

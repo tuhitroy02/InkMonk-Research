@@ -1,30 +1,17 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: 'Cavolini';
-  src: local('Cavolini'), local('Cavolini-Regular'), local('Cavolini Regular'), local('Cavolini Condensed');
-  font-display: swap;
-}
-
 @layer base {
   :root {
-    --font-cavolini: "Cavolini", "Cavolini Condensed", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    --font-heading: "Playfair Display", Georgia, Cambria, "Times New Roman", serif;
+    --font-body: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 }
 
-* {
-  font-family: "Cavolini", "Cavolini Condensed", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif !important;
-}
-
-html, body, div, span, p, h1, h2, h3, h4, h5, h6, button, input, select, textarea, a, li, label, strong, em, b, u, i {
-  font-family: "Cavolini", "Cavolini Condensed", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif !important;
-}
-
-/* ─── Global Background & Base Theme: Dark (Default) & Light Mode ────────── */
-body {
-  font-family: var(--font-cavolini) !important;
-  background-color: #030712;
-  color: #F8FAFC;
+/* ─── Universal Typography (Elite Academic Editorial Standard) ───────────── */
+html, body {
+  font-family: var(--font-body);
+  background-color: #F8FAFC;
+  color: #0F172A;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -32,8 +19,13 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ─── Global Text Alignment Rule (Requirement 1) ────────────────────────── */
-/* All texts across the site are centered EXCEPT bullet lists */
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+/* ─── Global Text Alignment Rule ────────────────────────────────────────── */
+/* Headings & Descriptions Centered, Bullet Points Left-Aligned */
 p, h1, h2, h3, h4, h5, h6, .center-text-content {
   text-align: center;
 }
@@ -42,32 +34,256 @@ ul, ol, li, .bullet-point, .bullet-list {
   text-align: left !important;
 }
 
-/* ─── 3D Futuristic Animations & Effects (Requirement 10) ────────────────── */
-@keyframes float3d {
-  0%, 100% {
-    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px);
-  }
-  50% {
-    transform: perspective(1000px) rotateX(4deg) rotateY(-4deg) translateY(-12px);
-  }
+/* ─── Light Mode by Default: Crisp, Prestigious Academic Aesthetics ──────── */
+:root, [data-theme="light"], .light-mode {
+  --bg-primary: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-secondary: #F1F5F9;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --border-card: #E2E8F0;
+  --border-focus: #0284C7;
+  --card-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06), 0 0 1px 1px rgba(15, 23, 42, 0.05);
+  --accent-blue: #0284C7;
+  --accent-gold: #D97706;
+  --accent-emerald: #059669;
 }
 
-.animate-3d-float {
-  animation: float3d 6s ease-in-out infinite;
+/* ─── Dark Mode (Optional Switchable via Moon Icon) ──────────────────────── */
+[data-theme="dark"], .dark-mode {
+  --bg-primary: #030712;
+  --bg-card: #080E1E;
+  --bg-secondary: #060B18;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --border-card: rgba(56, 189, 248, 0.2);
+  --border-focus: #06B6D4;
+  --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 0 20px rgba(6, 182, 212, 0.08);
+  --accent-blue: #00F2FE;
+  --accent-gold: #F59E0B;
+  --accent-emerald: #10B981;
+}
+
+/* ─── Luxury 3D Cards (Light & Dark Responsive) ──────────────────────────── */
+.card-futuristic-3d {
+  position: relative;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 1.5rem;
+  box-shadow: var(--card-shadow);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   transform-style: preserve-3d;
+  color: var(--text-primary);
 }
 
-@keyframes holoGlow {
-  0%, 100% {
-    box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.35), 0 0 40px rgba(16, 185, 129, 0.15);
-  }
-  50% {
-    box-shadow: 0 15px 45px -5px rgba(6, 182, 212, 0.6), 0 0 60px rgba(16, 185, 129, 0.35);
-  }
+.card-futuristic-3d:hover {
+  transform: perspective(1000px) translateY(-6px) scale(1.015);
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.12), 0 0 0 1px var(--border-focus);
 }
 
-.animate-holo-glow {
-  animation: holoGlow 4s ease-in-out infinite;
+[data-theme="dark"] .card-futuristic-3d:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(6, 182, 212, 0.25);
+  border-color: rgba(6, 182, 212, 0.6);
+}
+
+/* ─── Professional Step Badges (Clean, Crisp, Professional) ───────────────── */
+.step-number-futuristic {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 1.15rem;
+  font-family: var(--font-body);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+  transition: all 0.3s ease;
+}
+
+.step-number-futuristic:hover {
+  transform: translateY(-2px) scale(1.08);
+  box-shadow: 0 8px 25px rgba(2, 132, 199, 0.45);
+}
+
+/* ─── Clean Academic Gradients & Surfaces ────────────────────────────────── */
+.bg-midnight {
+  background: radial-gradient(circle at 50% 20%, #F1F5F9 0%, #E2E8F0 50%, #F8FAFC 100%);
+}
+
+[data-theme="dark"] .bg-midnight {
+  background: radial-gradient(circle at 50% 20%, #0A1938 0%, #060B18 50%, #030712 100%);
+}
+
+.gradient-saffron-text {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="dark"] .gradient-saffron-text {
+  background: linear-gradient(135deg, #00F2FE 0%, #38BDF8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Professional Luxury Buttons ────────────────────────────────────────── */
+.btn-primary-glow {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.btn-primary-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(2, 132, 199, 0.45);
+  filter: brightness(1.05);
+}
+
+.btn-secondary-dark {
+  background-color: #FFFFFF;
+  color: #0F172A;
+  font-weight: 700;
+  border: 1px solid #CBD5E1;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.btn-secondary-dark:hover {
+  background-color: #F8FAFC;
+  border-color: #0284C7;
+  color: #0284C7;
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .btn-secondary-dark {
+  background-color: #060B18;
+  color: #F8FAFC;
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+[data-theme="dark"] .btn-secondary-dark:hover {
+  background-color: #0F172A;
+  border-color: #00F2FE;
+  color: #00F2FE;
+}
+
+.btn-whatsapp-pill {
+  background: #059669;
+  color: #FFFFFF;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.btn-whatsapp-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.45);
+  filter: brightness(1.06);
+}
+
+/* ─── Clean Academic Pill Badges ─────────────────────────────────────────── */
+.badge-pill-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #F0F9FF;
+  border: 1px solid #BAE6FD;
+  color: #0369A1;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 1.25rem;
+  border-radius: 9999px;
+}
+
+[data-theme="dark"] .badge-pill-gold {
+  background: rgba(6, 182, 212, 0.12);
+  border-color: rgba(34, 211, 238, 0.4);
+  color: #22D3EE;
+}
+
+/* ─── Form Inputs ────────────────────────────────────────────────────────── */
+.input-field {
+  width: 100%;
+  background-color: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #0F172A;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: #0284C7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+[data-theme="dark"] .input-field {
+  background-color: #060B18;
+  border-color: rgba(56, 189, 248, 0.25);
+  color: #F8FAFC;
+}
+
+[data-theme="dark"] .input-field:focus {
+  border-color: #00F2FE;
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+}
+
+/* ─── Subtle Background Grid ─────────────────────────────────────────────── */
+.cyber-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+[data-theme="dark"] .cyber-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(56, 189, 248, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ─── Scanline & Spin Keyframes ─────────────────────────────────────────── */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+.animate-scanline {
+  animation: scanline 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 @keyframes spinSlow {
@@ -79,419 +295,11 @@ ul, ol, li, .bullet-point, .bullet-list {
   animation: spinSlow 20s linear infinite;
 }
 
-/* ─── 3D Futuristic Cards (Kevlar Obsidian & Chrome Aesthetic) ───────────── */
-.card-futuristic-3d {
-  position: relative;
-  background: rgba(8, 14, 30, 0.85);
-  border: 1px solid rgba(56, 189, 248, 0.2);
-  border-radius: 1.5rem;
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 0 20px rgba(6, 182, 212, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  transform-style: preserve-3d;
-  color: #F8FAFC;
+@keyframes reverseSpin {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
 }
 
-.card-futuristic-3d:hover {
-  transform: perspective(1000px) translateY(-8px) rotateX(2deg) scale(1.015);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 35px rgba(6, 182, 212, 0.35);
-  border-color: rgba(34, 211, 238, 0.6);
-}
-
-/* ─── Futuristic Step Numbers 1, 2, 3, 4, 5 ──────────────────────────────── */
-.step-number-futuristic {
-  position: relative;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 1.25rem;
-  background: linear-gradient(135deg, #00F2FE 0%, #06B6D4 50%, #030712 100%);
-  color: #FFFFFF;
-  font-weight: 800;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.4);
-  border: 2px solid rgba(103, 232, 249, 0.6);
-  transform: perspective(600px) rotateX(10deg);
-  transition: all 0.3s ease;
-}
-
-.step-number-futuristic:hover {
-  transform: perspective(600px) rotateX(0deg) scale(1.1);
-  box-shadow: 0 15px 35px -5px rgba(6, 182, 212, 0.7);
-}
-
-/* ─── Futuristic Gradients & Surfaces ────────────────────────────────────── */
-.bg-midnight {
-  background: radial-gradient(circle at 50% 20%, #0A1938 0%, #060B18 50%, #030712 100%);
-}
-
-.bg-midnight-card {
-  background: rgba(8, 14, 30, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(56, 189, 248, 0.2);
-}
-
-.gradient-saffron {
-  background: linear-gradient(135deg, #00F2FE 0%, #06B6D4 100%);
-}
-
-.gradient-gold-text {
-  background: linear-gradient(135deg, #00F2FE 0%, #38BDF8 50%, #10B981 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.gradient-saffron-text {
-  background: linear-gradient(135deg, #00F2FE 0%, #38BDF8 50%, #10B981 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ─── Interactive Buttons (Cyber Glow & Platinum Chrome) ──────────────────── */
-.btn-primary-glow {
-  background: linear-gradient(135deg, #00F2FE 0%, #06B6D4 50%, #0891B2 100%);
-  color: #030712;
-  font-weight: 800;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.875rem 2rem;
-  border-radius: 9999px;
-  box-shadow: 0 10px 25px -5px rgba(6, 182, 212, 0.45), 0 0 20px rgba(6, 182, 212, 0.3);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-primary-glow:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 15px 35px -5px rgba(6, 182, 212, 0.65), 0 0 30px rgba(6, 182, 212, 0.5);
-  filter: brightness(1.1);
-  color: #000000;
-}
-
-.btn-secondary-dark {
-  background: rgba(255, 255, 255, 0.06);
-  color: #F8FAFC;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.875rem 1.875rem;
-  border-radius: 9999px;
-  border: 1px solid rgba(226, 232, 240, 0.25);
-  backdrop-filter: blur(12px);
-  transition: all 0.25s ease;
-  text-decoration: none;
-}
-
-.btn-secondary-dark:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(34, 211, 238, 0.5);
-  transform: translateY(-2px);
-  color: #FFFFFF;
-}
-
-.btn-whatsapp-pill {
-  background: #10B981;
-  color: #FFFFFF;
-  font-weight: 800;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.75rem;
-  border-radius: 9999px;
-  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.45), 0 0 20px rgba(16, 185, 129, 0.25);
-  transition: all 0.25s ease;
-  text-decoration: none;
-}
-
-.btn-whatsapp-pill:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 15px 30px -5px rgba(16, 185, 129, 0.65);
-  filter: brightness(1.1);
-}
-
-/* ─── Cyber Flare Badges ─────────────────────────────────────────────────── */
-.badge-pill-gold {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: rgba(6, 182, 212, 0.12);
-  border: 1px solid rgba(34, 211, 238, 0.4);
-  color: #22D3EE;
-  font-weight: 800;
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
-  padding: 0.4rem 1.25rem;
-  border-radius: 9999px;
-}
-
-/* ─── Chat Bubbles ───────────────────────────────────────────────────────── */
-.chat-bubble-bot {
-  background: rgba(8, 14, 30, 0.9);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  border-radius: 1.25rem 1.25rem 1.25rem 0.25rem;
-  padding: 1rem 1.25rem;
-  color: #F8FAFC;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-.chat-bubble-user {
-  background: linear-gradient(135deg, #00F2FE, #06B6D4);
-  border-radius: 1.25rem 1.25rem 0.25rem 1.25rem;
-  padding: 1rem 1.25rem;
-  color: #030712;
-  font-weight: 700;
-  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.35);
-}
-
-/* ─── Form Inputs ────────────────────────────────────────────────────────── */
-.input-field {
-  width: 100%;
-  padding: 0.875rem 1rem;
-  border-radius: 0.875rem;
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  background-color: rgba(8, 14, 30, 0.8);
-  color: #F8FAFC;
-  transition: all 0.2s ease;
-  font-family: inherit;
-}
-
-.input-field:focus {
-  outline: none;
-  border-color: #00F2FE;
-  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.25);
-}
-
-/* ─── Futuristic Split Reveal & Cyber Motion ─────────────────────────────── */
-@keyframes splitTopSlide {
-  0% {
-    transform: translateY(-40px);
-    opacity: 0;
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  }
-}
-
-@keyframes splitBottomSlide {
-  0% {
-    transform: translateY(40px);
-    opacity: 0;
-    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  }
-}
-
-@keyframes laserSplitSeam {
-  0% {
-    transform: scaleX(0);
-    opacity: 0;
-  }
-  50% {
-    transform: scaleX(1);
-    opacity: 1;
-    box-shadow: 0 0 25px #00F2FE, 0 0 50px #10B981;
-  }
-  100% {
-    transform: scaleX(1);
-    opacity: 0.85;
-  }
-}
-
-@keyframes scanlineSweep {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(1000%);
-  }
-}
-
-.animate-split-top {
-  animation: splitTopSlide 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-split-bottom {
-  animation: splitBottomSlide 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
-}
-
-.animate-laser-seam {
-  animation: laserSplitSeam 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-scanline {
-  animation: scanlineSweep 4s linear infinite;
-}
-
-/* Cyber Grid Background */
-.cyber-grid-bg {
-  background-image: 
-    linear-gradient(to right, rgba(6, 182, 212, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(16, 185, 129, 0.08) 1px, transparent 1px);
-  background-size: 36px 36px;
-  mask-image: radial-gradient(circle at 50% 40%, black 40%, transparent 80%);
-  -webkit-mask-image: radial-gradient(circle at 50% 40%, black 40%, transparent 80%);
-}
-
-/* Tactical HUD Brackets */
-.hud-corner {
-  position: relative;
-}
-
-.hud-corner::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  width: 12px;
-  height: 12px;
-  border-top: 2px solid #00F2FE;
-  border-left: 2px solid #00F2FE;
-  pointer-events: none;
-}
-
-.hud-corner::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  right: -2px;
-  width: 12px;
-  height: 12px;
-  border-bottom: 2px solid #10B981;
-  border-right: 2px solid #10B981;
-  pointer-events: none;
-}
-
-/* Turnitin Watermarked Sheet Styling */
-.turnitin-sheet-paper {
-  background: #FFFFFF;
-  background-image: radial-gradient(#E2E8F0 1px, transparent 1px);
-  background-size: 16px 16px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-  border: 1px solid #E2E8F0;
-}
-
-.watermark-diagonal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-30deg);
-  font-size: 3.5rem;
-  font-weight: 900;
-  color: rgba(226, 232, 240, 0.45);
-  pointer-events: none;
-  white-space: nowrap;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  user-select: none;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   LIGHT THEME OVERRIDES (Requirement 8: Switchable Dark and Light Theme)
-   ═══════════════════════════════════════════════════════════════════════════ */
-.light-mode body,
-[data-theme="light"] body {
-  background-color: #F8FAFC !important;
-  color: #0F172A !important;
-}
-
-.light-mode .card-futuristic-3d,
-[data-theme="light"] .card-futuristic-3d {
-  background: #FFFFFF !important;
-  border-color: #E2E8F0 !important;
-  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 0 15px rgba(6, 182, 212, 0.05) !important;
-  color: #0F172A !important;
-}
-
-.light-mode .card-futuristic-3d:hover,
-[data-theme="light"] .card-futuristic-3d:hover {
-  border-color: #06B6D4 !important;
-  box-shadow: 0 20px 35px -10px rgba(6, 182, 212, 0.25) !important;
-}
-
-.light-mode h1, .light-mode h2, .light-mode h3, .light-mode h4,
-[data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3, [data-theme="light"] h4 {
-  color: #0A1128 !important;
-}
-
-.light-mode p,
-[data-theme="light"] p {
-  color: #334155 !important;
-}
-
-.light-mode .text-slate-400, .light-mode .text-slate-300,
-[data-theme="light"] .text-slate-400, [data-theme="light"] .text-slate-300 {
-  color: #475569 !important;
-}
-
-.light-mode .bg-\[\#030712\],
-[data-theme="light"] .bg-\[\#030712\] {
-  background-color: #F8FAFC !important;
-}
-
-.light-mode .bg-\[\#060B18\],
-[data-theme="light"] .bg-\[\#060B18\] {
-  background-color: #F1F5F9 !important;
-}
-
-.light-mode .bg-midnight,
-[data-theme="light"] .bg-midnight {
-  background: radial-gradient(circle at 50% 20%, #E2E8F0 0%, #EDF2F7 50%, #F8FAFC 100%) !important;
-}
-
-.light-mode header,
-[data-theme="light"] header {
-  background-color: rgba(255, 255, 255, 0.95) !important;
-  border-bottom-color: #E2E8F0 !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
-}
-
-.light-mode header nav a,
-[data-theme="light"] header nav a {
-  color: #334155 !important;
-}
-
-.light-mode header nav a:hover,
-[data-theme="light"] header nav a:hover {
-  color: #0891B2 !important;
-  background-color: #F1F5F9 !important;
-}
-
-.light-mode .input-field,
-[data-theme="light"] .input-field {
-  background-color: #FFFFFF !important;
-  border-color: #CBD5E1 !important;
-  color: #0F172A !important;
-}
-
-.light-mode .btn-secondary-dark,
-[data-theme="light"] .btn-secondary-dark {
-  background-color: #F1F5F9 !important;
-  color: #0F172A !important;
-  border-color: #CBD5E1 !important;
-}
-
-.light-mode .btn-secondary-dark:hover,
-[data-theme="light"] .btn-secondary-dark:hover {
-  background-color: #E2E8F0 !important;
-  border-color: #06B6D4 !important;
+.animate-reverse-spin {
+  animation: reverseSpin 25s linear infinite;
 }
