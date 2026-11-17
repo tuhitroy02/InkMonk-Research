@@ -42,43 +42,43 @@ export function InstantTurnitinModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
-      <div className="relative w-full max-w-lg bg-[#0A1128] text-white rounded-3xl border border-amber-500/40 shadow-2xl p-6 sm:p-8 overflow-hidden hud-corner">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
+      <div className="relative w-full max-w-lg bg-[#0A0414] text-white rounded-3xl border border-purple-500/40 shadow-2xl p-6 sm:p-8 overflow-hidden">
         {/* Glow */}
-        <div className="absolute top-0 right-0 w-48 h-48 bg-orange-500/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl pointer-events-none" />
 
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors"
+          className="absolute top-4 right-4 text-purple-300 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors cursor-pointer"
         >
           ✕
         </button>
 
         {step === 'upload' && (
           <div className="flex flex-col items-center text-center">
-            <div className="w-14 h-14 rounded-2xl bg-emerald-950 border border-emerald-500/50 flex items-center justify-center mb-4 shadow-lg">
+            <div className="w-14 h-14 rounded-2xl bg-purple-950 border border-purple-400/50 flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(168,85,247,0.4)]">
               <TurnitinShieldLogo className="w-9 h-9" />
             </div>
 
             <h3 className="font-serif text-2xl font-bold text-white mb-1">
               Instant Turnitin Plagiarism &amp; AI Scan
             </h3>
-            <p className="text-xs sm:text-sm text-slate-300 mb-5">
-              Flat <span className="text-amber-400 font-bold">₹200</span> • Safe Non-Repository Protocol • Delivered in 15–30 Mins
+            <p className="text-xs sm:text-sm text-purple-200 mb-5">
+              Flat <span className="text-purple-400 font-bold font-mono">₹200</span> • Safe Non-Repository Protocol • Delivered in 15–30 Mins
             </p>
 
             {/* Non-Repository Guarantee Badge */}
-            <div className="w-full bg-emerald-900/40 border border-emerald-500/40 rounded-xl p-3 mb-5 text-left flex items-start gap-3">
-              <span className="text-emerald-400 text-lg">🛡️</span>
-              <div className="text-xs text-emerald-200">
+            <div className="w-full bg-purple-950/70 border border-purple-500/40 rounded-xl p-3 mb-5 text-left flex items-start gap-3">
+              <span className="text-purple-300 text-lg">🛡️</span>
+              <div className="text-xs text-purple-200">
                 <strong className="text-white block font-semibold">Zero-Repository Guarantee</strong>
                 Your manuscript is analyzed in private RAM and never deposited into Turnitin&apos;s global student paper database.
               </div>
             </div>
 
             {/* Upload Box */}
-            <label className="w-full border-2 border-dashed border-slate-600 hover:border-amber-400 rounded-2xl p-6 cursor-pointer flex flex-col items-center justify-center bg-white/5 hover:bg-white/10 transition-all mb-4">
+            <label className="w-full border-2 border-dashed border-purple-500/40 hover:border-purple-300 rounded-2xl p-6 cursor-pointer flex flex-col items-center justify-center bg-black/40 hover:bg-black/60 transition-all mb-4">
               <input
                 type="file"
                 accept=".docx,.pdf,.doc,.txt"
@@ -89,7 +89,7 @@ export function InstantTurnitinModal({
               />
               <span className="text-3xl mb-2">📄</span>
               {selectedFile ? (
-                <div className="text-sm text-amber-300 font-bold break-all">
+                <div className="text-sm text-purple-300 font-bold break-all">
                   {selectedFile.name} ({(selectedFile.size / 1024).toFixed(1)} KB)
                 </div>
               ) : (
@@ -97,7 +97,7 @@ export function InstantTurnitinModal({
                   <div className="text-sm font-bold text-white mb-1">
                     Drag &amp; drop or click to upload manuscript
                   </div>
-                  <div className="text-xs text-slate-400">Supports .DOCX, .PDF (Up to 50MB)</div>
+                  <div className="text-xs text-purple-300/80">Supports .DOCX, .PDF (Up to 50MB)</div>
                 </>
               )}
             </label>
@@ -108,7 +108,7 @@ export function InstantTurnitinModal({
               placeholder="Your Email ID for Report Delivery"
               value={userEmail}
               onChange={(e) => setUserEmail(e.target.value)}
-              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-amber-400 mb-5"
+              className="w-full bg-black/60 border border-purple-500/30 rounded-xl px-4 py-3 text-sm text-white placeholder-purple-300/50 focus:outline-none focus:border-purple-400 mb-5"
             />
 
             <button
@@ -123,33 +123,33 @@ export function InstantTurnitinModal({
 
         {step === 'pay' && (
           <div className="flex flex-col items-center text-center">
-            <div className="w-12 h-12 rounded-2xl bg-amber-950 border border-amber-500/50 flex items-center justify-center mb-3">
+            <div className="w-12 h-12 rounded-2xl bg-purple-950 border border-purple-400/50 flex items-center justify-center mb-3 shadow-[0_0_15px_rgba(168,85,247,0.4)]">
               <UpiShieldIcon className="w-8 h-8" />
             </div>
 
             <h3 className="font-serif text-xl font-bold text-white mb-1">
               Pay ₹200 via UPI
             </h3>
-            <p className="text-xs text-slate-300 mb-4">
+            <p className="text-xs text-purple-200 mb-4">
               Scan QR or copy UPI ID. Instant verification with zero transaction fee.
             </p>
 
             {/* Simulated UPI QR Code SVG */}
-            <div className="bg-white p-3 rounded-2xl shadow-xl border-4 border-amber-400 mb-4 flex flex-col items-center">
+            <div className="bg-white p-3 rounded-2xl shadow-xl border-4 border-purple-400 mb-4 flex flex-col items-center">
               <svg viewBox="0 0 160 160" className="w-36 h-36">
                 <rect width="160" height="160" fill="#FFFFFF" />
                 {/* QR Finder Corners */}
-                <rect x="10" y="10" width="40" height="40" fill="#0A1128" rx="6" />
+                <rect x="10" y="10" width="40" height="40" fill="#0A0414" rx="6" />
                 <rect x="16" y="16" width="28" height="28" fill="#FFFFFF" rx="3" />
-                <rect x="22" y="22" width="16" height="16" fill="#FF6B00" rx="2" />
+                <rect x="22" y="22" width="16" height="16" fill="#7E22CE" rx="2" />
 
-                <rect x="110" y="10" width="40" height="40" fill="#0A1128" rx="6" />
+                <rect x="110" y="10" width="40" height="40" fill="#0A0414" rx="6" />
                 <rect x="116" y="16" width="28" height="28" fill="#FFFFFF" rx="3" />
-                <rect x="122" y="22" width="16" height="16" fill="#FF6B00" rx="2" />
+                <rect x="122" y="22" width="16" height="16" fill="#7E22CE" rx="2" />
 
-                <rect x="10" y="110" width="40" height="40" fill="#0A1128" rx="6" />
+                <rect x="10" y="110" width="40" height="40" fill="#0A0414" rx="6" />
                 <rect x="16" y="116" width="28" height="28" fill="#FFFFFF" rx="3" />
-                <rect x="22" y="122" width="16" height="16" fill="#FF6B00" rx="2" />
+                <rect x="22" y="122" width="16" height="16" fill="#7E22CE" rx="2" />
 
                 {/* Data Matrix Dots */}
                 {[
@@ -160,23 +160,23 @@ export function InstantTurnitinModal({
                   [60, 90], [70, 100], [80, 90], [90, 100], [100, 90], [110, 100],
                   [60, 120], [80, 130], [90, 120], [100, 130], [120, 120], [130, 130]
                 ].map(([x, y], idx) => (
-                  <rect key={idx} x={x} y={y} width="7" height="7" fill="#0A1128" rx="1.5" />
+                  <rect key={idx} x={x} y={y} width="7" height="7" fill="#0A0414" rx="1.5" />
                 ))}
                 {/* Center Badge */}
-                <circle cx="80" cy="80" r="14" fill="#FF6B00" />
+                <circle cx="80" cy="80" r="14" fill="#9333EA" />
                 <text x="80" y="84" textAnchor="middle" fill="#FFFFFF" fontSize="9" fontWeight="bold">₹200</text>
               </svg>
-              <span className="text-[10px] font-bold text-slate-800 mt-1 uppercase tracking-wider">
+              <span className="text-[10px] font-bold text-black mt-1 uppercase tracking-wider font-mono">
                 Google Pay • PhonePe • Paytm • BHIM
               </span>
             </div>
 
             {/* UPI ID Pill with Copy */}
-            <div className="flex items-center gap-2 bg-white/10 border border-white/20 rounded-xl px-4 py-2 mb-4 w-full justify-between">
-              <span className="text-xs text-amber-300 font-mono font-bold">{upiId}</span>
+            <div className="flex items-center gap-2 bg-black/60 border border-purple-500/30 rounded-xl px-4 py-2 mb-4 w-full justify-between">
+              <span className="text-xs text-purple-300 font-mono font-bold">{upiId}</span>
               <button
                 onClick={handleCopyUpi}
-                className="text-xs bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded-lg transition-colors"
+                className="text-xs bg-purple-600 hover:bg-purple-500 text-white font-bold px-3 py-1 rounded-lg transition-colors cursor-pointer"
               >
                 {copiedUpi ? '✓ Copied!' : 'Copy UPI'}
               </button>
@@ -187,13 +187,13 @@ export function InstantTurnitinModal({
               placeholder="Enter 12-digit UPI Reference / UTR Number"
               value={utrNumber}
               onChange={(e) => setUtrNumber(e.target.value)}
-              className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-amber-400 mb-4"
+              className="w-full bg-black/60 border border-purple-500/30 rounded-xl px-4 py-2.5 text-xs text-white placeholder-purple-300/50 focus:outline-none focus:border-purple-400 mb-4"
             />
 
             <div className="flex gap-2 w-full">
               <button
                 onClick={() => setStep('upload')}
-                className="w-1/3 py-2.5 text-xs text-slate-300 hover:text-white bg-white/10 rounded-xl"
+                className="w-1/3 py-2.5 text-xs text-purple-200 hover:text-white bg-white/10 rounded-xl cursor-pointer"
               >
                 ← Back
               </button>
@@ -210,16 +210,16 @@ export function InstantTurnitinModal({
 
         {step === 'success' && (
           <div className="flex flex-col items-center text-center py-4">
-            <div className="w-16 h-16 rounded-full bg-emerald-500 text-white flex items-center justify-center text-3xl mb-4 shadow-xl">
+            <div className="w-16 h-16 rounded-full bg-purple-600 text-white flex items-center justify-center text-3xl mb-4 shadow-[0_0_20px_rgba(168,85,247,0.6)]">
               ✓
             </div>
             <h3 className="font-serif text-2xl font-bold text-white mb-2">
               Manuscript Queued for Audit!
             </h3>
-            <p className="text-sm text-slate-300 mb-4">
-              Your draft <strong className="text-amber-300">{selectedFile?.name}</strong> has been received under our Safe Non-Repository Protocol.
+            <p className="text-sm text-purple-200 mb-4">
+              Your draft <strong className="text-white">{selectedFile?.name}</strong> has been received under our Safe Non-Repository Protocol.
             </p>
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-xs text-slate-300 text-left mb-6 w-full space-y-1.5">
+            <div className="bg-black/60 border border-purple-500/30 rounded-2xl p-4 text-xs text-purple-200 text-left mb-6 w-full space-y-1.5 font-mono">
               <div>• <strong>Delivery Target:</strong> 15–30 minutes to {userEmail}</div>
               <div>• <strong>Included Deliverables:</strong> Full Turnitin PDF breakdown + AI Writing Score + Clickable Source Links</div>
               <div>• <strong>Reference ID:</strong> TRN-{Date.now().toString().slice(-6)}</div>
@@ -249,41 +249,37 @@ export function TurnitinSampleModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-fade-in overflow-y-auto">
-      <div className="relative w-full max-w-3xl bg-slate-900 text-slate-100 rounded-3xl border border-amber-500/40 shadow-2xl p-6 sm:p-8 my-8 hud-corner">
+      <div className="relative w-full max-w-3xl bg-[#0A0414] text-white rounded-3xl border border-purple-500/40 shadow-2xl p-6 sm:p-8 my-8">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors z-20"
+          className="absolute top-4 right-4 text-purple-300 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors z-20 cursor-pointer"
         >
           ✕
         </button>
 
         <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full mb-2">
+          <div className="inline-flex items-center gap-2 bg-purple-950/80 border border-purple-400/50 text-purple-300 text-xs font-bold px-3 py-1 rounded-full mb-2 font-mono">
             <TurnitinShieldLogo className="w-4 h-4" />
             <span>AUTHENTIC INSTRUCTOR REPORT SAMPLE</span>
           </div>
           <h3 className="font-serif text-2xl font-bold text-white">
             Watermarked Turnitin Feedback Studio Deliverable
           </h3>
-          <p className="text-xs sm:text-sm text-slate-400">
+          <p className="text-xs sm:text-sm text-purple-200/80">
             This is the exact high-definition breakdown our clients receive — no cyber-cafe summaries.
           </p>
         </div>
 
         {/* Turnitin Paper Container with Watermark */}
-        <div className="turnitin-sheet-paper relative rounded-2xl p-6 sm:p-8 text-slate-900 overflow-hidden shadow-inner border border-slate-300">
-          <div className="watermark-diagonal">
-            INKMONK VERIFIED SAMPLE
-          </div>
-
+        <div className="relative rounded-2xl p-6 sm:p-8 text-black bg-white overflow-hidden shadow-inner border border-purple-300">
           {/* Turnitin Header Bar */}
           <div className="flex flex-wrap items-center justify-between border-b border-slate-300 pb-4 mb-4 gap-2">
             <div className="flex items-center gap-2">
-              <span className="font-bold text-lg text-slate-900 tracking-tight">turnitin</span>
+              <span className="font-bold text-lg text-black tracking-tight">turnitin</span>
               <span className="text-xs bg-slate-200 px-2 py-0.5 rounded font-mono text-slate-700">Feedback Studio</span>
             </div>
             <div className="flex items-center gap-2 text-xs text-slate-600 font-mono">
-              <span>Non-Repository Mode: <strong className="text-emerald-700">ACTIVE</strong></span>
+              <span>Non-Repository Mode: <strong className="text-purple-700">ACTIVE</strong></span>
               <span>•</span>
               <span>Doc ID: #984210</span>
             </div>
@@ -291,39 +287,39 @@ export function TurnitinSampleModal({
 
           {/* Scores Ribbon */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-            <div className="bg-emerald-50 border-2 border-emerald-500 rounded-xl p-3 text-center">
-              <div className="text-[11px] font-bold text-emerald-800 uppercase">Overall Similarity</div>
-              <div className="font-serif text-3xl font-black text-emerald-600">6%</div>
-              <div className="text-[10px] text-emerald-700 font-semibold">Strictly &lt; 10% Guaranteed</div>
+            <div className="bg-purple-50 border-2 border-purple-500 rounded-xl p-3 text-center">
+              <div className="text-[11px] font-bold text-purple-900 uppercase font-mono">Overall Similarity</div>
+              <div className="font-serif text-3xl font-black text-purple-600">6%</div>
+              <div className="text-[10px] text-purple-700 font-semibold">&lt; 10% Guaranteed</div>
             </div>
 
-            <div className="bg-sky-50 border-2 border-sky-500 rounded-xl p-3 text-center">
-              <div className="text-[11px] font-bold text-sky-800 uppercase">AI Writing Score</div>
-              <div className="font-serif text-3xl font-black text-sky-600">0%</div>
-              <div className="text-[10px] text-sky-700 font-semibold">100% Human Authored</div>
+            <div className="bg-purple-50 border-2 border-purple-500 rounded-xl p-3 text-center">
+              <div className="text-[11px] font-bold text-purple-900 uppercase font-mono">AI Writing Score</div>
+              <div className="font-serif text-3xl font-black text-purple-600">0%</div>
+              <div className="text-[10px] text-purple-700 font-semibold">100% Human Authored</div>
             </div>
 
             <div className="bg-slate-100 border border-slate-300 rounded-xl p-3 text-center">
-              <div className="text-[11px] font-bold text-slate-700 uppercase">Internet Matches</div>
-              <div className="font-serif text-2xl font-bold text-slate-800">3%</div>
+              <div className="text-[11px] font-bold text-slate-700 uppercase font-mono">Internet Matches</div>
+              <div className="font-serif text-2xl font-bold text-black">3%</div>
               <div className="text-[10px] text-slate-500">Public web crawl</div>
             </div>
 
             <div className="bg-slate-100 border border-slate-300 rounded-xl p-3 text-center">
-              <div className="text-[11px] font-bold text-slate-700 uppercase">Journal Matches</div>
-              <div className="font-serif text-2xl font-bold text-slate-800">3%</div>
+              <div className="text-[11px] font-bold text-slate-700 uppercase font-mono">Journal Matches</div>
+              <div className="font-serif text-2xl font-bold text-black">3%</div>
               <div className="text-[10px] text-slate-500">IEEE, Elsevier, Springer</div>
             </div>
           </div>
 
           {/* Manuscript Excerpt with Color-Coded Matches */}
-          <div className="border border-slate-200 rounded-xl p-4 bg-white/90 text-left font-serif text-xs sm:text-sm leading-relaxed text-slate-800 mb-6">
-            <div className="font-sans text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+          <div className="border border-slate-200 rounded-xl p-4 bg-white text-left font-serif text-xs sm:text-sm leading-relaxed text-black mb-6">
+            <div className="font-sans text-[11px] font-bold text-purple-900 uppercase tracking-wider mb-2 font-mono">
               Manuscript Excerpt (Chapter 3: Methodology)
             </div>
             <p className="mb-2">
               The proposed algorithmic pipeline incorporates a bidirectional long short-term memory (Bi-LSTM) network integrated with self-attention layers to forecast non-linear temporal anomalies.
-              <span className="bg-red-100 border-b-2 border-red-500 text-red-900 font-sans px-1 text-xs mx-1">
+              <span className="bg-purple-100 border-b-2 border-purple-600 text-purple-900 font-sans px-1 text-xs mx-1">
                 [1] As demonstrated in Kumar et al. (2023), gradient vanishing in deep recurring cells is mitigated through orthogonal weight initialization.
               </span>
               Empirical validation across benchmark IEEE datasets demonstrated a root mean squared error reduction of 14.2% relative to baseline autoregressive models.
@@ -332,38 +328,31 @@ export function TurnitinSampleModal({
 
           {/* Clickable Match Breakdown Table */}
           <div className="border border-slate-200 rounded-xl overflow-hidden text-left mb-4">
-            <div className="bg-slate-100 px-4 py-2 text-xs font-bold text-slate-700 border-b border-slate-200">
+            <div className="bg-slate-100 px-4 py-2 text-xs font-bold text-black border-b border-slate-200 font-mono">
               Primary Matched Sources (Clickable Audit Breakdown)
             </div>
             <div className="divide-y divide-slate-100 text-xs">
-              <div className="p-3 flex items-center justify-between bg-white hover:bg-slate-50">
+              <div className="p-3 flex items-center justify-between bg-white hover:bg-purple-50">
                 <div className="flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-red-500 text-white font-bold flex items-center justify-center text-[10px]">1</span>
-                  <span className="font-medium text-slate-800">IEEE Xplore Digital Library — Document #9482103</span>
+                  <span className="w-5 h-5 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center text-[10px]">1</span>
+                  <span className="font-medium text-black">IEEE Xplore Digital Library — Document #9482103</span>
                 </div>
-                <span className="font-bold text-red-600">2% Match</span>
+                <span className="font-bold text-purple-700 font-mono">2% Match</span>
               </div>
-              <div className="p-3 flex items-center justify-between bg-white hover:bg-slate-50">
+              <div className="p-3 flex items-center justify-between bg-white hover:bg-purple-50">
                 <div className="flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-blue-500 text-white font-bold flex items-center justify-center text-[10px]">2</span>
-                  <span className="font-medium text-slate-800">ScienceDirect / Elsevier — Computers &amp; Electrical Eng.</span>
+                  <span className="w-5 h-5 rounded-full bg-purple-700 text-white font-bold flex items-center justify-center text-[10px]">2</span>
+                  <span className="font-medium text-black">ScienceDirect / Elsevier — Computers &amp; Electrical Eng.</span>
                 </div>
-                <span className="font-bold text-blue-600">2% Match</span>
-              </div>
-              <div className="p-3 flex items-center justify-between bg-white hover:bg-slate-50">
-                <div className="flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-emerald-500 text-white font-bold flex items-center justify-center text-[10px]">3</span>
-                  <span className="font-medium text-slate-800">arXiv.org — Computer Science / Machine Learning preprint</span>
-                </div>
-                <span className="font-bold text-emerald-600">2% Match</span>
+                <span className="font-bold text-purple-700 font-mono">2% Match</span>
               </div>
             </div>
           </div>
 
           {/* Official Verification Stamp */}
-          <div className="flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-200">
+          <div className="flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-200 font-mono">
             <span>Audit Authority: InkMonk Research Salt Lake Office</span>
-            <span className="font-mono text-emerald-800 font-bold">✓ Institutional Exemption Verified</span>
+            <span className="text-purple-700 font-bold">✓ Institutional Exemption Verified</span>
           </div>
         </div>
 
@@ -380,7 +369,7 @@ export function TurnitinSampleModal({
   );
 }
 
-/* ─── 3. Formal Non-Disclosure Agreement (NDA) Modal (Dr. Sharma / Arjun) ─── */
+/* ─── 3. Formal Non-Disclosure Agreement (NDA) Modal ─────────────────────── */
 export function FormalNdaModal({
   isOpen,
   onClose,
@@ -392,27 +381,27 @@ export function FormalNdaModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-fade-in overflow-y-auto">
-      <div className="relative w-full max-w-2xl bg-[#0A1128] text-slate-100 rounded-3xl border border-amber-500/50 shadow-2xl p-6 sm:p-8 my-8 hud-corner">
+      <div className="relative w-full max-w-2xl bg-[#0A0414] text-white rounded-3xl border border-purple-500/50 shadow-2xl p-6 sm:p-8 my-8">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors z-20"
+          className="absolute top-4 right-4 text-purple-300 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors z-20 cursor-pointer"
         >
           ✕
         </button>
 
         <div className="text-center mb-6">
-          <div className="w-14 h-14 rounded-2xl bg-amber-950 border border-amber-500/50 flex items-center justify-center mx-auto mb-3">
+          <div className="w-14 h-14 rounded-2xl bg-purple-950 border border-purple-400/50 flex items-center justify-center mx-auto mb-3 shadow-[0_0_15px_rgba(168,85,247,0.4)]">
             <NdaShieldIcon className="w-9 h-9" />
           </div>
           <h3 className="font-serif text-2xl font-bold text-white mb-1">
             InkMonk Scholarly Non-Disclosure Agreement
           </h3>
-          <p className="text-xs text-amber-300 font-semibold">
+          <p className="text-xs text-purple-300 font-semibold font-mono">
             Standard Mutual NDA &amp; 100% Intellectual Property Assignment
           </p>
         </div>
 
-        <div className="bg-slate-950/80 border border-white/10 rounded-2xl p-5 text-left text-xs leading-relaxed text-slate-300 space-y-4 max-h-80 overflow-y-auto font-sans">
+        <div className="bg-black/80 border border-purple-500/20 rounded-2xl p-5 text-left text-xs leading-relaxed text-purple-100 space-y-4 max-h-80 overflow-y-auto font-sans">
           <div>
             <strong className="text-white block mb-1">1. Absolute Confidentiality of Research Data</strong>
             InkMonk Research covenants that all raw ethnographic fieldwork, primary survey datasets, unpublished hypotheses, experimental logs, computational models, and thesis drafts submitted by the Researcher will remain strictly confidential and shall never be disseminated or disclosed to any third party.
@@ -431,9 +420,9 @@ export function FormalNdaModal({
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between mt-6 pt-4 border-t border-white/10 gap-3">
-          <div className="text-left text-[11px] text-slate-400">
-            <span className="text-emerald-400 font-bold block">✓ Pre-Signed by InkMonk Directorate</span>
+        <div className="flex flex-wrap items-center justify-between mt-6 pt-4 border-t border-purple-900/60 gap-3">
+          <div className="text-left text-[11px] text-purple-300 font-mono">
+            <span className="text-white font-bold block">✓ Pre-Signed by InkMonk Directorate</span>
             Tuhit Roy (Research Dir.) • Sampreeti Mukherjee (Editorial Dir.)
           </div>
           <button
@@ -448,7 +437,7 @@ export function FormalNdaModal({
   );
 }
 
-/* ─── 4. 1-on-1 Doctoral Consultation Scheduler Modal (Dr. Sharma) ───────── */
+/* ─── 4. 1-on-1 Doctoral Consultation Scheduler Modal ────────────────────── */
 export function ConsultationSchedulerModal({
   isOpen,
   onClose,
@@ -467,33 +456,33 @@ export function ConsultationSchedulerModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-fade-in overflow-y-auto">
-      <div className="relative w-full max-w-lg bg-[#0A1128] text-white rounded-3xl border border-amber-500/50 shadow-2xl p-6 sm:p-8 my-8 hud-corner">
+      <div className="relative w-full max-w-lg bg-[#0A0414] text-white rounded-3xl border border-purple-500/50 shadow-2xl p-6 sm:p-8 my-8">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors z-20"
+          className="absolute top-4 right-4 text-purple-300 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors z-20 cursor-pointer"
         >
           ✕
         </button>
 
         {!booked ? (
           <div className="text-center">
-            <div className="w-14 h-14 rounded-2xl bg-amber-950 border border-amber-500/50 flex items-center justify-center mx-auto mb-3">
+            <div className="w-14 h-14 rounded-2xl bg-purple-950 border border-purple-400/50 flex items-center justify-center mx-auto mb-3 shadow-[0_0_15px_rgba(168,85,247,0.4)]">
               <CalendarScheduleIcon className="w-9 h-9" />
             </div>
             <h3 className="font-serif text-2xl font-bold text-white mb-1">
               Book a 1-on-1 Video Consultation
             </h3>
-            <p className="text-xs text-slate-300 mb-6">
+            <p className="text-xs text-purple-200 mb-6">
               Confidential 20-minute preliminary session with an assigned discipline specialist via Google Meet.
             </p>
 
-            <div className="space-y-4 text-left text-xs">
+            <div className="space-y-4 text-left text-xs font-mono">
               <div>
-                <label className="block text-slate-300 font-bold mb-1.5">Select Academic Discipline:</label>
+                <label className="block text-white font-bold mb-1.5">Select Academic Discipline:</label>
                 <select
                   value={discipline}
                   onChange={(e) => setDiscipline(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-amber-400"
+                  className="w-full bg-black border border-purple-500/40 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-purple-400"
                 >
                   <option>Computer Science &amp; AI (ML / Deep Learning / IEEE)</option>
                   <option>Social Sciences &amp; Rural Sociology</option>
@@ -506,11 +495,11 @@ export function ConsultationSchedulerModal({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-300 font-bold mb-1.5">Date:</label>
+                  <label className="block text-white font-bold mb-1.5">Date:</label>
                   <select
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-amber-400"
+                    className="w-full bg-black border border-purple-500/40 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-purple-400"
                   >
                     <option>Tomorrow (Priority)</option>
                     <option>In 2 Days</option>
@@ -518,11 +507,11 @@ export function ConsultationSchedulerModal({
                   </select>
                 </div>
                 <div>
-                  <label className="block text-slate-300 font-bold mb-1.5">Time Slot (IST):</label>
+                  <label className="block text-white font-bold mb-1.5">Time Slot (IST):</label>
                   <select
                     value={slot}
                     onChange={(e) => setSlot(e.target.value)}
-                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-amber-400"
+                    className="w-full bg-black border border-purple-500/40 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-purple-400"
                   >
                     <option>11:30 AM - 12:00 PM</option>
                     <option>04:00 PM - 04:30 PM</option>
@@ -533,26 +522,26 @@ export function ConsultationSchedulerModal({
               </div>
 
               <div>
-                <label className="block text-slate-300 font-bold mb-1.5">Email for Calendar Invite:</label>
+                <label className="block text-white font-bold mb-1.5">Email for Calendar Invite:</label>
                 <input
                   type="email"
                   required
                   placeholder="scholar@university.ac.in"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-amber-400"
+                  className="w-full bg-black border border-purple-500/40 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-purple-400"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-300 font-bold mb-1.5">WhatsApp / Phone Number:</label>
+                <label className="block text-white font-bold mb-1.5">WhatsApp / Phone Number:</label>
                 <input
                   type="tel"
                   required
                   placeholder="+91 98765 43210"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-amber-400"
+                  className="w-full bg-black border border-purple-500/40 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-purple-400"
                 />
               </div>
             </div>
@@ -567,16 +556,16 @@ export function ConsultationSchedulerModal({
           </div>
         ) : (
           <div className="text-center py-4">
-            <div className="w-16 h-16 rounded-full bg-emerald-500 text-white flex items-center justify-center text-3xl mx-auto mb-4 shadow-xl">
+            <div className="w-16 h-16 rounded-full bg-purple-600 text-white flex items-center justify-center text-3xl mx-auto mb-4 shadow-[0_0_20px_rgba(168,85,247,0.6)]">
               ✓
             </div>
             <h3 className="font-serif text-2xl font-bold text-white mb-2">
               Consultation Confirmed!
             </h3>
-            <p className="text-sm text-slate-300 mb-4">
-              Google Meet invite sent to <strong className="text-amber-300">{email}</strong> for {date} at {slot}.
+            <p className="text-sm text-purple-200 mb-4">
+              Google Meet invite sent to <strong className="text-white">{email}</strong> for {date} at {slot}.
             </p>
-            <div className="bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-slate-300 text-left mb-6">
+            <div className="bg-black/60 border border-purple-500/30 rounded-xl p-3 text-xs text-purple-200 text-left mb-6 font-mono">
               <div>• <strong>Assigned Expert:</strong> Discipline Director ({discipline})</div>
               <div>• <strong>Protocol:</strong> Full NDA Protected Discussion</div>
             </div>
@@ -593,7 +582,7 @@ export function ConsultationSchedulerModal({
   );
 }
 
-/* ─── 5. Model & Code Interactive Scope Builder Modal (Arjun's Request) ──── */
+/* ─── 5. Model & Code Interactive Scope Builder Modal ────────────────────── */
 export function ModelCodeScopeBuilderModal({
   isOpen,
   onClose,
@@ -610,40 +599,40 @@ export function ModelCodeScopeBuilderModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-fade-in overflow-y-auto">
-      <div className="relative w-full max-w-2xl bg-[#0A1128] text-white rounded-3xl border border-cyan-500/50 shadow-2xl p-6 sm:p-8 my-8 hud-corner">
+      <div className="relative w-full max-w-2xl bg-[#0A0414] text-white rounded-3xl border border-purple-500/50 shadow-2xl p-6 sm:p-8 my-8">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors z-20"
+          className="absolute top-4 right-4 text-purple-300 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors z-20 cursor-pointer"
         >
           ✕
         </button>
 
         <div className="text-center mb-6">
-          <div className="w-14 h-14 rounded-2xl bg-cyan-950 border border-cyan-500/50 flex items-center justify-center mx-auto mb-3">
+          <div className="w-14 h-14 rounded-2xl bg-purple-950 border border-purple-400/50 flex items-center justify-center mx-auto mb-3 shadow-[0_0_15px_rgba(168,85,247,0.4)]">
             <TerminalLogIcon className="w-9 h-9" />
           </div>
           <h3 className="font-serif text-2xl font-bold text-white mb-1">
             Computational Model &amp; Code Scope Builder
           </h3>
-          <p className="text-xs text-cyan-300 font-mono">
+          <p className="text-xs text-purple-300 font-mono">
             Deterministic Reproducibility • Docker Containers • Private Git Handoff
           </p>
         </div>
 
-        <div className="space-y-4 text-left text-xs mb-6">
+        <div className="space-y-4 text-left text-xs mb-6 font-mono">
           {/* Framework Selector */}
           <div>
-            <label className="block text-slate-300 font-bold mb-2">Core Framework &amp; Language:</label>
+            <label className="block text-white font-bold mb-2">Core Framework &amp; Language:</label>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {['PyTorch', 'TensorFlow', 'MATLAB', 'JAX / Flax', 'Scikit-Learn', 'Python Data', 'R Bioconductor', 'CUDA C++'].map((fw) => (
                 <button
                   key={fw}
                   type="button"
                   onClick={() => setFramework(fw)}
-                  className={`px-3 py-2 rounded-xl font-mono text-xs font-bold transition-all ${
+                  className={`px-3 py-2 rounded-xl font-mono text-xs font-bold transition-all cursor-pointer ${
                     framework === fw
-                      ? 'bg-cyan-500 text-slate-950 shadow-lg scale-105'
-                      : 'bg-white/5 text-slate-300 hover:bg-white/10 border border-white/10'
+                      ? 'bg-purple-600 text-white shadow-[0_0_15px_rgba(168,85,247,0.6)] scale-105'
+                      : 'bg-black/60 text-purple-300 hover:bg-purple-950/40 border border-purple-500/30'
                   }`}
                 >
                   {fw}
@@ -654,11 +643,11 @@ export function ModelCodeScopeBuilderModal({
 
           {/* Compute Environment */}
           <div>
-            <label className="block text-slate-300 font-bold mb-2">Compute &amp; Training Spec:</label>
+            <label className="block text-white font-bold mb-2">Compute &amp; Training Spec:</label>
             <select
               value={compute}
               onChange={(e) => setCompute(e.target.value)}
-              className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-white font-mono focus:outline-none focus:border-cyan-400"
+              className="w-full bg-black border border-purple-500/40 rounded-xl px-3 py-2.5 text-white font-mono focus:outline-none focus:border-purple-400"
             >
               <option>CUDA 12.x / NVIDIA A100 / H100 Accelerated</option>
               <option>Google Colab Pro / TPU V4 Environment</option>
@@ -669,39 +658,39 @@ export function ModelCodeScopeBuilderModal({
 
           {/* Toggles */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-            <label className="flex items-center gap-3 bg-white/5 border border-white/10 p-3 rounded-xl cursor-pointer">
+            <label className="flex items-center gap-3 bg-black/60 border border-purple-500/30 p-3 rounded-xl cursor-pointer">
               <input
                 type="checkbox"
                 checked={dockerRequired}
                 onChange={(e) => setDockerRequired(e.target.checked)}
-                className="w-4 h-4 rounded text-cyan-500"
+                className="w-4 h-4 rounded text-purple-600"
               />
               <div>
                 <span className="font-bold text-white block">Dockerized Container</span>
-                <span className="text-[10px] text-slate-400">One-click reproducible Dockerfile</span>
+                <span className="text-[10px] text-purple-300/80">One-click reproducible Dockerfile</span>
               </div>
             </label>
 
-            <label className="flex items-center gap-3 bg-white/5 border border-white/10 p-3 rounded-xl cursor-pointer">
+            <label className="flex items-center gap-3 bg-black/60 border border-purple-500/30 p-3 rounded-xl cursor-pointer">
               <input
                 type="checkbox"
                 checked={gitHandoff}
                 onChange={(e) => setGitHandoff(e.target.checked)}
-                className="w-4 h-4 rounded text-cyan-500"
+                className="w-4 h-4 rounded text-purple-600"
               />
               <div>
                 <span className="font-bold text-white block">Private Git Handoff</span>
-                <span className="text-[10px] text-slate-400">GitHub/GitLab milestone commits</span>
+                <span className="text-[10px] text-purple-300/80">GitHub/GitLab milestone commits</span>
               </div>
             </label>
           </div>
 
           {/* Live Simulated Console Execution Preview */}
-          <div className="bg-slate-950 rounded-xl border border-slate-800 p-3 font-mono text-[11px] text-slate-300 space-y-1">
-            <div className="text-cyan-400 font-bold"># Live Reproducibility Telemetry</div>
-            <div className="text-slate-400">$ python train_benchmark.py --framework {framework} --seed 42</div>
-            <div className="text-emerald-400">✓ Random seeds locked. Deterministic validation: PASSED</div>
-            <div className="text-slate-400">✓ IEEE/Scopus formatting scan: 0 errors detected</div>
+          <div className="bg-black rounded-xl border border-purple-500/30 p-3 font-mono text-[11px] text-purple-200 space-y-1">
+            <div className="text-purple-400 font-bold"># Live Reproducibility Telemetry</div>
+            <div className="text-white/60">$ python train_benchmark.py --framework {framework} --seed 42</div>
+            <div className="text-purple-300">✓ Random seeds locked. Deterministic validation: PASSED</div>
+            <div className="text-white">✓ IEEE/Scopus formatting scan: 0 errors detected</div>
           </div>
         </div>
 
@@ -718,7 +707,7 @@ export function ModelCodeScopeBuilderModal({
   );
 }
 
-/* ─── 6. Academic Translation Audit Trail Modal (Dr. Sharma / Kabir) ─────── */
+/* ─── 6. Academic Translation Audit Trail Modal ──────────────────────────── */
 export function TranslationAuditModal({
   isOpen,
   onClose,
@@ -730,53 +719,53 @@ export function TranslationAuditModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-fade-in overflow-y-auto">
-      <div className="relative w-full max-w-2xl bg-[#0A1128] text-white rounded-3xl border border-amber-500/50 shadow-2xl p-6 sm:p-8 my-8 hud-corner">
+      <div className="relative w-full max-w-2xl bg-[#0A0414] text-white rounded-3xl border border-purple-500/50 shadow-2xl p-6 sm:p-8 my-8">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors z-20"
+          className="absolute top-4 right-4 text-purple-300 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors z-20 cursor-pointer"
         >
           ✕
         </button>
 
         <div className="text-center mb-6">
-          <div className="w-14 h-14 rounded-2xl bg-amber-950 border border-amber-500/50 flex items-center justify-center mx-auto mb-3">
+          <div className="w-14 h-14 rounded-2xl bg-purple-950 border border-purple-400/50 flex items-center justify-center mx-auto mb-3 shadow-[0_0_15px_rgba(168,85,247,0.4)]">
             <AuditTrailIcon className="w-9 h-9" />
           </div>
           <h3 className="font-serif text-2xl font-bold text-white mb-1">
             Vernacular Fieldwork Translation Audit Trail
           </h3>
-          <p className="text-xs text-amber-300 font-semibold">
+          <p className="text-xs text-purple-300 font-semibold font-mono">
             Preserving Ethnographic Authenticity with 0% Plagiarism &amp; Standardized Citation
           </p>
         </div>
 
         <div className="space-y-4 text-left text-xs mb-6">
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
-            <span className="text-[10px] font-bold text-orange-400 uppercase tracking-wider block mb-1">
+          <div className="bg-black/60 border border-purple-500/30 rounded-2xl p-4">
+            <span className="text-[10px] font-bold text-purple-400 uppercase tracking-wider block mb-1 font-mono">
               Step 1: Raw Rural Sociological Fieldwork (Devanagari Hindi)
             </span>
-            <p className="font-serif italic text-slate-200">
+            <p className="font-serif italic text-purple-100">
               &ldquo;गाँव की महिलाओं के अनुसार, स्वयं सहायता समूहों से जुड़ने के बाद उनके सामाजिक निर्णयों में भागीदारी बढ़ी है, यद्यपि ऋण अदायगी का दबाव भी बना रहता है।&rdquo;
             </p>
           </div>
 
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
-            <span className="text-[10px] font-bold text-sky-400 uppercase tracking-wider block mb-1">
+          <div className="bg-black/60 border border-purple-500/30 rounded-2xl p-4">
+            <span className="text-[10px] font-bold text-purple-300 uppercase tracking-wider block mb-1 font-mono">
               Step 2: Editorial Normalization &amp; Sociological Contextualization
             </span>
-            <p className="text-slate-300">
+            <p className="text-purple-200">
               Identifies nuanced vernacular idioms (e.g., intra-household bargaining, collective microcredit liabilities) rather than machine-translating literally.
             </p>
           </div>
 
-          <div className="bg-emerald-950/40 border border-emerald-500/40 rounded-2xl p-4">
-            <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block mb-1">
+          <div className="bg-purple-950/60 border border-purple-500/50 rounded-2xl p-4">
+            <span className="text-[10px] font-bold text-white uppercase tracking-wider block mb-1 font-mono">
               Step 3: Elsevier / Springer-Grade International Scholarly English
             </span>
             <p className="font-serif text-white font-medium">
               &ldquo;Ethnographic interviews revealed that participation in Self-Help Groups (SHGs) significantly reinforced female agency in intra-household decision-making, while concurrently introducing institutional pressures surrounding microcredit repayment cycles.&rdquo;
             </p>
-            <div className="mt-2 pt-2 border-t border-emerald-500/30 flex items-center justify-between text-[11px] text-emerald-300">
+            <div className="mt-2 pt-2 border-t border-purple-500/30 flex items-center justify-between text-[11px] text-purple-200 font-mono">
               <span>Similarity Index: 0%</span>
               <span>• Scopus Citation Format Preserved</span>
             </div>
@@ -832,15 +821,15 @@ export function MilestonePaymentTimeline() {
   ];
 
   return (
-    <div className="w-full bg-white dark:bg-[#0A1128] text-slate-900 dark:text-white rounded-3xl border border-slate-200 dark:border-amber-500/30 p-6 sm:p-8 relative overflow-hidden shadow-sm dark:shadow-xl">
+    <div className="w-full bg-white dark:bg-[#0A0414] text-black dark:text-white rounded-3xl border border-purple-200 dark:border-purple-500/40 p-6 sm:p-8 relative overflow-hidden shadow-sm dark:shadow-[0_0_35px_rgba(168,85,247,0.2)]">
       <div className="text-center max-w-2xl mx-auto mb-8">
-        <div className="inline-flex items-center gap-2 bg-amber-50 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 text-xs font-bold px-3 py-1 rounded-full mb-3 border border-amber-300 dark:border-amber-500/30">
+        <div className="inline-flex items-center gap-2 bg-purple-50 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 text-xs font-bold px-3 py-1 rounded-full mb-3 border border-purple-200 dark:border-purple-500/40 font-mono">
           <span>ZERO 100% UPFRONT RISK</span>
         </div>
-        <h3 className="font-serif text-2xl sm:text-3xl font-bold mb-2 text-slate-900 dark:text-white">
+        <h3 className="font-serif text-2xl sm:text-3xl font-bold mb-2 text-black dark:text-white">
           Milestone-Based Chapter Payment Schedule
         </h3>
-        <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm">
+        <p className="text-purple-900/70 dark:text-purple-200/80 text-xs sm:text-sm">
           Pay strictly chapter-by-chapter as each deliverable is reviewed and validated by your supervisor.
         </p>
       </div>
@@ -853,34 +842,34 @@ export function MilestonePaymentTimeline() {
             onClick={() => setSelectedMilestone(m.step)}
             className={`p-5 rounded-2xl cursor-pointer transition-all border text-left flex flex-col justify-between ${
               selectedMilestone === m.step
-                ? 'bg-amber-50/80 dark:bg-gradient-to-b dark:from-amber-500/20 dark:to-orange-500/10 border-amber-400 shadow-md scale-[1.02]'
-                : 'bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20'
+                ? 'bg-purple-50 dark:bg-gradient-to-b dark:from-purple-950/80 dark:to-purple-900/30 border-purple-500 shadow-md scale-[1.02]'
+                : 'bg-white dark:bg-black/60 border-purple-100 dark:border-purple-900/30 hover:border-purple-300 dark:hover:border-purple-500/40'
             }`}
           >
             <div>
               <div className="flex items-center justify-between mb-3">
-                <span className="w-8 h-8 rounded-xl bg-sky-600 dark:bg-orange-600 text-white font-bold flex items-center justify-center text-sm">
+                <span className="w-8 h-8 rounded-xl bg-purple-600 text-white font-bold flex items-center justify-center text-sm font-mono shadow-[0_0_10px_rgba(168,85,247,0.5)]">
                   {m.step}
                 </span>
-                <span className="font-serif text-lg font-bold text-amber-600 dark:text-amber-300">
+                <span className="font-serif text-lg font-bold text-purple-600 dark:text-purple-300">
                   {m.pct}
                 </span>
               </div>
-              <h4 className="font-serif font-bold text-sm text-slate-900 dark:text-white mb-2">
+              <h4 className="font-serif font-bold text-sm text-black dark:text-white mb-2">
                 {m.title}
               </h4>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+              <p className="text-xs text-slate-600 dark:text-purple-200/70 leading-relaxed mb-4">
                 {m.desc}
               </p>
             </div>
-            <div className="text-[10px] text-amber-700 dark:text-amber-400 font-bold uppercase tracking-wider pt-2 border-t border-slate-200 dark:border-white/10">
+            <div className="text-[10px] text-purple-700 dark:text-purple-300 font-bold uppercase tracking-wider pt-2 border-t border-purple-100 dark:border-purple-900/40 font-mono">
               {m.payable}
             </div>
           </div>
         ))}
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-slate-600 dark:text-slate-300 pt-2 border-t border-slate-200 dark:border-white/10">
+      <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-slate-600 dark:text-purple-200/80 pt-2 border-t border-purple-100 dark:border-purple-900/40 font-mono">
         <span className="flex items-center gap-1.5">
           <UpiShieldIcon className="w-4 h-4" />
           <span>Local UPI (GPay, PhonePe, Paytm, BHIM) Accepted</span>

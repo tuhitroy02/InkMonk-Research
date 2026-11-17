@@ -211,14 +211,16 @@ function QuoteWizard() {
   };
 
   return (
-    <div className="min-h-screen py-16 px-4 bg-ink-50">
+    <div className="min-h-screen py-16 px-4 bg-white dark:bg-[#000000] text-black dark:text-white transition-colors duration-300">
       <div className="max-w-4xl mx-auto">
 
         {/* Header */}
         <div className="text-center mb-10">
-          <div className="orange-badge">Guided Estimation</div>
-          <h1 className="section-heading mb-3">Custom Project Quotation</h1>
-          <p className="section-subheading">
+          <div className="badge-pill-purple mb-3">Guided Estimation</div>
+          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-black dark:text-white mb-3 text-center">
+            Custom Project Quotation
+          </h1>
+          <p className="text-slate-600 dark:text-purple-200/80 text-base max-w-xl mx-auto text-center leading-relaxed">
             Select your academic specifications below. Our server-side pricing engine calculates a precise, transparent estimate according to our exact business schedule.
           </p>
         </div>
@@ -235,23 +237,23 @@ function QuoteWizard() {
               <div
                 className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm transition-all ${
                   step === item.s
-                    ? 'quote-step-active'
+                    ? 'bg-purple-600 text-white shadow-[0_0_15px_rgba(168,85,247,0.5)] scale-110'
                     : step > item.s
-                    ? 'quote-step-done'
-                    : 'quote-step-pending'
+                    ? 'bg-purple-800 text-white'
+                    : 'bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800'
                 }`}
               >
                 {step > item.s ? '✓' : item.s}
               </div>
-              <span className="text-[11px] text-ink-600 font-medium mt-1">{item.label}</span>
+              <span className="text-[11px] text-slate-500 dark:text-purple-300/70 font-medium mt-1">{item.label}</span>
             </div>
           ))}
         </div>
 
         {/* Step 1: Select Language & Service Category */}
         {step === 1 && (
-          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-card border border-ink-100 animate-fade-in">
-            <h2 className="font-serif text-2xl font-bold text-navy-800 mb-6">Step 1: Select Category &amp; Language</h2>
+          <div className="card-futuristic-3d p-6 md:p-8 bg-purple-50/20 dark:bg-[#0A0414] border border-purple-200 dark:border-purple-500/30">
+            <h2 className="font-serif text-2xl font-bold text-black dark:text-white mb-6">Step 1: Select Category &amp; Language</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
               {[
@@ -270,22 +272,22 @@ function QuoteWizard() {
                       setService('RESEARCH_PAPER');
                     }
                   }}
-                  className={`p-5 rounded-2xl border-2 text-center flex flex-col items-center justify-center transition-all ${
+                  className={`p-5 rounded-2xl border-2 text-center flex flex-col items-center justify-center transition-all cursor-pointer ${
                     language === cat.id
-                      ? 'border-orange-500 bg-orange-50/50 shadow-md ring-2 ring-orange-500/20'
-                      : 'border-slate-200 hover:border-orange-200 bg-white'
+                      ? 'border-purple-500 bg-purple-50 dark:bg-purple-950/70 shadow-md ring-2 ring-purple-500/20'
+                      : 'border-purple-100 dark:border-purple-900/40 hover:border-purple-300 bg-white dark:bg-[#05020A]'
                   }`}
                 >
                   {cat.logo}
-                  <div className="font-serif font-bold text-lg text-[#0A1128] mb-1">{cat.title}</div>
-                  <div className="text-slate-500 text-xs">{cat.desc}</div>
+                  <div className="font-serif font-bold text-lg text-black dark:text-white mb-1">{cat.title}</div>
+                  <div className="text-slate-500 dark:text-purple-300/70 text-xs">{cat.desc}</div>
                 </button>
               ))}
             </div>
 
             {/* Service selector */}
             <div className="mb-8">
-              <label className="block text-sm font-semibold text-navy-800 mb-2">Service Type</label>
+              <label className="block text-sm font-semibold text-black dark:text-white mb-2">Service Type</label>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {getAvailableServices().map((s) => (
                   <button
@@ -293,7 +295,6 @@ function QuoteWizard() {
                     type="button"
                     onClick={() => {
                       setService(s.id);
-                      // Reset package defaults
                       if (s.id === 'RESEARCH_PAPER' || s.id === 'REVIEW_PAPER') {
                         setPackageType('UPTO_6000_WORDS');
                       } else if (s.id === 'THESIS') {
@@ -304,10 +305,10 @@ function QuoteWizard() {
                         setPackageType('SMALL');
                       }
                     }}
-                    className={`p-3.5 rounded-xl border text-left text-sm font-medium transition-all ${
+                    className={`p-3.5 rounded-xl border text-left text-sm font-medium transition-all cursor-pointer ${
                       service === s.id
-                        ? 'border-orange-500 bg-orange-50 text-orange-700 shadow-sm'
-                        : 'border-ink-200 hover:border-ink-300 text-ink-700 bg-white'
+                        ? 'border-purple-500 bg-purple-50 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 shadow-sm'
+                        : 'border-purple-100 dark:border-purple-900/40 hover:border-purple-300 text-slate-700 dark:text-purple-200 bg-white dark:bg-[#05020A]'
                     }`}
                   >
                     {s.name}
@@ -320,7 +321,7 @@ function QuoteWizard() {
               <button
                 type="button"
                 onClick={() => setStep(2)}
-                className="btn-primary"
+                className="btn-primary-glow font-mono text-xs cursor-pointer"
               >
                 Continue to Specifications →
               </button>
@@ -330,12 +331,12 @@ function QuoteWizard() {
 
         {/* Step 2: Service Specifications */}
         {step === 2 && (
-          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-card border border-ink-100 animate-fade-in">
-            <h2 className="font-serif text-2xl font-bold text-navy-800 mb-6">Step 2: Technical Specifications</h2>
+          <div className="card-futuristic-3d p-6 md:p-8 bg-purple-50/20 dark:bg-[#0A0414] border border-purple-200 dark:border-purple-500/30">
+            <h2 className="font-serif text-2xl font-bold text-black dark:text-white mb-6">Step 2: Technical Specifications</h2>
 
             {language !== 'TURNITIN' && (
               <div className="mb-6">
-                <label className="block text-sm font-semibold text-navy-800 mb-2">Technical vs. Non-Technical</label>
+                <label className="block text-sm font-semibold text-black dark:text-white mb-2">Technical vs. Non-Technical</label>
                 <div className="grid grid-cols-2 gap-4">
                   {[
                     { id: 'TECH', title: 'Technical', desc: 'Engineering, CS, AI/ML, Data Science, Medical, Sciences' },
@@ -345,14 +346,14 @@ function QuoteWizard() {
                       key={t.id}
                       type="button"
                       onClick={() => setWorkType(t.id as any)}
-                      className={`p-4 rounded-xl border text-left transition-all ${
+                      className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${
                         workType === t.id
-                          ? 'border-orange-500 bg-orange-50 text-navy-800 ring-2 ring-orange-500/20'
-                          : 'border-ink-200 hover:border-ink-300 text-ink-700'
+                          ? 'border-purple-500 bg-purple-50 dark:bg-purple-950/70 text-black dark:text-white ring-2 ring-purple-500/20'
+                          : 'border-purple-100 dark:border-purple-900/40 hover:border-purple-300 text-slate-700 dark:text-purple-200 bg-white dark:bg-[#05020A]'
                       }`}
                     >
                       <div className="font-bold text-sm mb-1">{t.title}</div>
-                      <div className="text-xs text-ink-500">{t.desc}</div>
+                      <div className="text-xs text-slate-500 dark:text-purple-300/70">{t.desc}</div>
                     </button>
                   ))}
                 </div>
@@ -362,17 +363,17 @@ function QuoteWizard() {
             {/* Package selector if applicable */}
             {getAvailablePackages().length > 0 && (
               <div className="mb-6">
-                <label className="block text-sm font-semibold text-navy-800 mb-2">Scope / Package Tier</label>
+                <label className="block text-sm font-semibold text-black dark:text-white mb-2">Scope / Package Tier</label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {getAvailablePackages().map((p) => (
                     <button
                       key={p.id}
                       type="button"
                       onClick={() => setPackageType(p.id)}
-                      className={`p-3.5 rounded-xl border text-left text-sm font-medium transition-all ${
+                      className={`p-3.5 rounded-xl border text-left text-sm font-medium transition-all cursor-pointer ${
                         packageType === p.id
-                          ? 'border-orange-500 bg-orange-50 text-orange-700 shadow-sm'
-                          : 'border-ink-200 hover:border-ink-300 text-ink-700'
+                          ? 'border-purple-500 bg-purple-50 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 shadow-sm'
+                          : 'border-purple-100 dark:border-purple-900/40 hover:border-purple-300 text-slate-700 dark:text-purple-200 bg-white dark:bg-[#05020A]'
                       }`}
                     >
                       {p.name}
@@ -385,7 +386,7 @@ function QuoteWizard() {
             {/* Quantity inputs if per-unit service */}
             {['ARTICLE', 'PPT', 'TURNITIN', 'ASSIGNMENT'].includes(service) && (
               <div className="mb-6">
-                <label className="block text-sm font-semibold text-navy-800 mb-2">
+                <label className="block text-sm font-semibold text-black dark:text-white mb-2">
                   {service === 'ARTICLE' || service === 'ASSIGNMENT'
                     ? 'Total Estimated Word Count'
                     : service === 'PPT'
@@ -401,7 +402,7 @@ function QuoteWizard() {
                     onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
                     className="input-field font-semibold text-lg"
                   />
-                  <span className="text-xs text-ink-500 mt-1 block">
+                  <span className="text-xs text-slate-500 dark:text-purple-300/70 mt-1 block">
                     {service === 'ARTICLE' || service === 'ASSIGNMENT'
                       ? 'Example: 1500 or 3000 words'
                       : service === 'PPT'
@@ -414,7 +415,7 @@ function QuoteWizard() {
 
             {/* Domain & Topic */}
             <div className="mb-6">
-              <label className="block text-sm font-semibold text-navy-800 mb-2">Domain / Subject Topic</label>
+              <label className="block text-sm font-semibold text-black dark:text-white mb-2">Domain / Subject Topic</label>
               <input
                 type="text"
                 value={domain}
@@ -426,7 +427,7 @@ function QuoteWizard() {
 
             {/* Deadline */}
             <div className="mb-8">
-              <label className="block text-sm font-semibold text-navy-800 mb-2">Target Completion Date / Urgency</label>
+              <label className="block text-sm font-semibold text-black dark:text-white mb-2">Target Completion Date / Urgency</label>
               <input
                 type="text"
                 value={deadline}
@@ -440,7 +441,7 @@ function QuoteWizard() {
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="text-sm font-semibold text-ink-600 hover:text-navy-800"
+                className="text-sm font-semibold text-slate-600 dark:text-purple-300 hover:text-black dark:hover:text-white cursor-pointer"
               >
                 ← Back
               </button>
@@ -448,7 +449,7 @@ function QuoteWizard() {
                 type="button"
                 onClick={handleCalculate}
                 disabled={isCalculating}
-                className="btn-primary"
+                className="btn-primary-glow font-mono text-xs cursor-pointer"
               >
                 {isCalculating ? 'Calculating Quote...' : 'Calculate Quote →'}
               </button>
@@ -458,47 +459,47 @@ function QuoteWizard() {
 
         {/* Step 3: Server Quote Calculation & Client Contact Info */}
         {step === 3 && calculatedQuote && (
-          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-card border border-ink-100 animate-fade-in">
-            <h2 className="font-serif text-2xl font-bold text-navy-800 mb-2">Step 3: Your Calculated Estimate</h2>
-            <p className="text-ink-600 text-sm mb-6">
+          <div className="card-futuristic-3d p-6 md:p-8 bg-purple-50/20 dark:bg-[#0A0414] border border-purple-200 dark:border-purple-500/30">
+            <h2 className="font-serif text-2xl font-bold text-black dark:text-white mb-2">Step 3: Your Calculated Estimate</h2>
+            <p className="text-slate-600 dark:text-purple-200/80 text-sm mb-6">
               Calculated automatically using InkMonk Research’s internal verified rate schedule.
             </p>
 
             {/* Quote Summary Box */}
-            <div className="gradient-navy rounded-2xl p-6 text-white mb-8 shadow-lg">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/15 pb-5 mb-5">
+            <div className="bg-purple-950/70 border border-purple-400/50 rounded-2xl p-6 text-white mb-8 shadow-xl">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-purple-400/20 pb-5 mb-5">
                 <div>
-                  <div className="text-xs text-orange-400 font-bold uppercase tracking-wider">
+                  <div className="text-xs text-purple-300 font-bold uppercase tracking-wider font-mono">
                     {calculatedQuote.languageName} • {calculatedQuote.workTypeName || 'Standard'}
                   </div>
-                  <div className="font-serif text-2xl font-bold mt-1">{calculatedQuote.serviceName}</div>
+                  <div className="font-serif text-2xl font-bold mt-1 text-white">{calculatedQuote.serviceName}</div>
                   {calculatedQuote.packageName && (
-                    <div className="text-white/70 text-sm">{calculatedQuote.packageName}</div>
+                    <div className="text-purple-200 text-sm">{calculatedQuote.packageName}</div>
                   )}
                 </div>
                 <div className="text-right">
-                  <div className="text-xs text-white/60">Estimated Total</div>
-                  <div className="text-3xl sm:text-4xl font-serif font-bold text-orange-400">
+                  <div className="text-xs text-purple-300/80">Estimated Total</div>
+                  <div className="text-3xl sm:text-4xl font-serif font-bold text-purple-300">
                     {calculatedQuote.formattedTotal}
                   </div>
                 </div>
               </div>
 
-              <div className="text-sm text-white/80 space-y-1">
-                <div className="font-medium text-white/95">Price Calculation Breakdown:</div>
-                <div className="text-white/70 font-mono text-xs">{calculatedQuote.breakdown}</div>
+              <div className="text-sm text-purple-200 space-y-1">
+                <div className="font-medium text-white">Price Calculation Breakdown:</div>
+                <div className="text-purple-300/90 font-mono text-xs">{calculatedQuote.breakdown}</div>
               </div>
             </div>
 
             {/* Contact details to finalize and reserve quote */}
             <form onSubmit={handleSubmitLead}>
-              <h3 className="font-serif text-lg font-bold text-navy-800 mb-4">
+              <h3 className="font-serif text-lg font-bold text-black dark:text-white mb-4">
                 Confirm Your Details to Lock-in this Estimate
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block text-xs font-semibold text-ink-700 mb-1">Full Name *</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-purple-200 mb-1">Full Name *</label>
                   <input
                     type="text"
                     required
@@ -509,7 +510,7 @@ function QuoteWizard() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-ink-700 mb-1">Email Address *</label>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-purple-200 mb-1">Email Address *</label>
                   <input
                     type="email"
                     required
@@ -522,7 +523,7 @@ function QuoteWizard() {
               </div>
 
               <div className="mb-4">
-                <label className="block text-xs font-semibold text-ink-700 mb-1">Phone / WhatsApp Number</label>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-purple-200 mb-1">Phone / WhatsApp Number</label>
                 <input
                   type="tel"
                   value={phone}
@@ -533,7 +534,7 @@ function QuoteWizard() {
               </div>
 
               <div className="mb-6">
-                <label className="block text-xs font-semibold text-ink-700 mb-1">Detailed Brief or Questions (Optional)</label>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-purple-200 mb-1">Detailed Brief or Questions (Optional)</label>
                 <textarea
                   rows={3}
                   value={requirements}
@@ -553,14 +554,14 @@ function QuoteWizard() {
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="text-sm font-semibold text-ink-600 hover:text-navy-800"
+                  className="text-sm font-semibold text-slate-600 dark:text-purple-300 hover:text-black dark:hover:text-white cursor-pointer"
                 >
                   ← Modify Parameters
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="btn-primary w-full sm:w-auto"
+                  className="btn-primary-glow font-mono text-xs w-full sm:w-auto cursor-pointer"
                 >
                   {isSubmitting ? 'Submitting...' : 'Confirm & Save Quotation →'}
                 </button>
@@ -571,17 +572,17 @@ function QuoteWizard() {
 
         {/* Step 4: Submission Confirmation */}
         {step === 4 && (
-          <div className="bg-white rounded-2xl p-8 md:p-12 shadow-card border border-ink-100 text-center animate-fade-in">
-            <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-6 shadow-inner">
+          <div className="card-futuristic-3d p-8 md:p-12 text-center bg-purple-50/20 dark:bg-[#0A0414] border border-purple-200 dark:border-purple-500/30">
+            <div className="w-16 h-16 bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-300 rounded-full flex items-center justify-center text-3xl mx-auto mb-6 shadow-inner border border-purple-300 dark:border-purple-600">
               ✓
             </div>
-            <h2 className="font-serif text-3xl font-bold text-navy-800 mb-3">
+            <h2 className="font-serif text-3xl font-bold text-black dark:text-white mb-3">
               Quotation Request Received!
             </h2>
-            <p className="text-ink-600 max-w-lg mx-auto text-base mb-6 leading-relaxed">
-              Thank you, <strong className="text-navy-800">{name}</strong>. Your project quote of{' '}
-              <strong className="text-orange-600 font-bold">{calculatedQuote?.formattedTotal}</strong> has been saved.
-              Our academic directors, <strong className="text-navy-800">Tuhit Roy</strong> and <strong className="text-navy-800">Sampreeti Mukherjee</strong>, will review your scope and get in touch shortly.
+            <p className="text-slate-600 dark:text-purple-200/80 max-w-lg mx-auto text-base mb-6 leading-relaxed">
+              Thank you, <strong className="text-black dark:text-white">{name}</strong>. Your project quote of{' '}
+              <strong className="text-purple-600 dark:text-purple-300 font-bold">{calculatedQuote?.formattedTotal}</strong> has been saved.
+              Our academic directors, <strong className="text-black dark:text-white">Tuhit Roy</strong> and <strong className="text-black dark:text-white">Sampreeti Mukherjee</strong>, will review your scope and get in touch shortly.
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
@@ -589,16 +590,16 @@ function QuoteWizard() {
                 href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-whatsapp text-sm py-3 px-6"
+                className="btn-whatsapp-pill font-mono text-xs"
               >
                 <span>Direct WhatsApp Confirmation</span>
               </a>
-              <Link href="/services" className="btn-secondary text-navy-800 border-navy-800 hover:bg-navy-50 text-sm py-3 px-6">
+              <Link href="/services" className="btn-secondary-dark font-mono text-xs">
                 Explore More Services
               </Link>
             </div>
 
-            <div className="text-xs text-ink-400">
+            <div className="text-xs text-slate-500 dark:text-purple-400 font-mono">
               Reference ID: {submittedLeadId || 'INKMONK-QUOTE'} • Karunamoyee, Salt Lake, Kolkata
             </div>
           </div>
@@ -613,8 +614,8 @@ export default function QuotePage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-ink-50 flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+        <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center">
+          <div className="w-10 h-10 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
         </div>
       }
     >

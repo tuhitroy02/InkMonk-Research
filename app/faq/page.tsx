@@ -62,16 +62,16 @@ export default function FAQPage() {
   const filteredFaqs = filter === 'All' ? FAQS : FAQS.filter(f => f.category === filter);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#030712] text-slate-900 dark:text-[#F8FAFC] py-20 px-4 text-center transition-colors duration-300 selection:bg-sky-500 selection:text-white">
+    <div className="min-h-screen bg-white dark:bg-[#000000] text-black dark:text-white py-20 px-4 text-center transition-colors duration-300 selection:bg-purple-600 selection:text-white">
       <div className="max-w-4xl mx-auto">
 
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="badge-pill-gold mb-3 font-mono">FREQUENTLY ASKED QUESTIONS</div>
-          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4 text-center">
+          <div className="badge-pill-purple mb-3 font-mono">FREQUENTLY ASKED QUESTIONS</div>
+          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-black dark:text-white mb-4 text-center">
             Got Questions? We Have Answers
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg text-center leading-relaxed font-normal">
+          <p className="text-slate-600 dark:text-purple-200/80 text-base sm:text-lg text-center leading-relaxed font-normal">
             Clear, transparent answers about our academic workflows, pricing estimates, confidentiality protocols, and research standards.
           </p>
         </div>
@@ -84,8 +84,8 @@ export default function FAQPage() {
               onClick={() => setFilter(cat)}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 filter === cat
-                  ? 'bg-sky-100 dark:bg-cyan-950 text-sky-800 dark:text-cyan-300 border border-sky-300 dark:border-cyan-400/50 shadow-sm dark:shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-                  : 'bg-white dark:bg-[#060B18] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-800'
+                  ? 'bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-200 border border-purple-300 dark:border-purple-400/50 shadow-sm dark:shadow-[0_0_15px_rgba(168,85,247,0.3)]'
+                  : 'bg-white dark:bg-[#0A0414] text-slate-600 dark:text-purple-300/70 hover:text-black dark:hover:text-white border border-purple-200 dark:border-purple-900/50'
               }`}
             >
               {cat}
@@ -98,22 +98,22 @@ export default function FAQPage() {
           {filteredFaqs.map((faq, idx) => {
             const isOpen = openIdx === idx;
             return (
-              <Interactive3DCard key={idx} glowColor="cyan">
-                <div className="card-futuristic-3d overflow-hidden text-center">
+              <Interactive3DCard key={idx} glowColor="purple">
+                <div className="card-futuristic-3d overflow-hidden text-center bg-purple-50/20 dark:bg-[#0A0414]">
                   <button
                     type="button"
                     onClick={() => setOpenIdx(isOpen ? null : idx)}
-                    className="w-full text-center p-6 flex justify-between items-center gap-4 hover:bg-white/5 transition-colors cursor-pointer"
+                    className="w-full text-center p-6 flex justify-between items-center gap-4 hover:bg-purple-50/50 dark:hover:bg-purple-950/30 transition-colors cursor-pointer"
                   >
-                    <span className="font-serif font-bold text-base sm:text-lg text-white text-left">
+                    <span className="font-serif font-bold text-base sm:text-lg text-black dark:text-white text-left">
                       {faq.q}
                     </span>
-                    <span className="w-8 h-8 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500/40 flex items-center justify-center shrink-0 text-sm font-bold font-mono">
+                    <span className="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-300 border border-purple-300 dark:border-purple-500/40 flex items-center justify-center shrink-0 text-sm font-bold font-mono">
                       {isOpen ? '−' : '+'}
                     </span>
                   </button>
                   {isOpen && (
-                    <div className="px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-slate-800 pt-4 text-left">
+                    <div className="px-6 pb-6 text-sm text-slate-700 dark:text-purple-200/80 leading-relaxed border-t border-purple-100 dark:border-purple-900/40 pt-4 text-left">
                       {faq.a}
                     </div>
                   )}
@@ -124,12 +124,12 @@ export default function FAQPage() {
         </div>
 
         {/* Still have questions */}
-        <div className="bg-[#060B18] border border-cyan-500/30 rounded-3xl p-8 md:p-10 text-white text-center shadow-2xl relative overflow-hidden">
+        <div className="bg-purple-50/40 dark:bg-[#0A0414] border border-purple-200 dark:border-purple-500/30 rounded-3xl p-8 md:p-10 text-black dark:text-white text-center shadow-xl relative overflow-hidden">
           <div className="relative z-10 flex flex-col items-center text-center">
             <h3 className="font-serif text-2xl sm:text-3xl font-bold mb-2 text-center">
               Have a Question Not Listed Here?
             </h3>
-            <p className="text-slate-300 text-sm max-w-md mx-auto mb-6 text-center font-medium">
+            <p className="text-slate-600 dark:text-purple-200/80 text-sm max-w-md mx-auto mb-6 text-center font-medium">
               Ask our instant local AI assistant or talk directly with our founders on WhatsApp.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">

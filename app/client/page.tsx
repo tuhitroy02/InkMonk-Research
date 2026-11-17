@@ -161,12 +161,12 @@ export default function ClientDashboard() {
             {user?.phone && (
               <div className="text-center">
                 <div className="text-[10px] text-slate-500 font-bold uppercase">Registered Mobile</div>
-                <div className="text-sm font-bold text-emerald-700">✓ {user.phone}</div>
+                <div className="text-sm font-bold text-purple-700">✓ {user.phone}</div>
               </div>
             )}
             <div className="text-center">
               <div className="text-[10px] text-slate-500 font-bold uppercase">Authentication Status</div>
-              <div className="text-sm font-bold text-emerald-600">Active &amp; Confidential</div>
+              <div className="text-sm font-bold text-purple-700">Active &amp; Confidential</div>
             </div>
           </div>
         )}
@@ -177,7 +177,7 @@ export default function ClientDashboard() {
             <ResearchPaperRealIcon className="w-10 h-10 mb-2" />
             <div className="text-xs font-bold text-slate-500 uppercase">Active Research Projects</div>
             <div className="font-serif text-3xl font-extrabold text-[#0A1128] mt-1">1</div>
-            <div className="text-xs text-emerald-600 font-bold mt-1">✓ In Progress on Schedule</div>
+            <div className="text-xs text-purple-600 font-bold mt-1">✓ In Progress on Schedule</div>
           </div>
 
           <div className="card-futuristic-3d p-6 flex flex-col items-center text-center">
@@ -191,7 +191,7 @@ export default function ClientDashboard() {
             <ThesisRealIcon className="w-10 h-10 mb-2" />
             <div className="text-xs font-bold text-slate-500 uppercase">Academic Supervisors</div>
             <div className="font-serif text-xl font-bold text-[#0A1128] mt-1">Tuhit Roy / Sampreeti M.</div>
-            <div className="text-xs text-orange-600 font-bold mt-1">Direct Advisory Channel Open</div>
+            <div className="text-xs text-purple-600 font-bold mt-1">Direct Advisory Channel Open</div>
           </div>
         </div>
 
@@ -208,7 +208,7 @@ export default function ClientDashboard() {
             {projects.map((p) => (
               <div
                 key={p.id}
-                className="p-6 rounded-2xl border border-slate-200 bg-slate-50/70 hover:bg-white hover:border-orange-300 transition-all text-center sm:text-left"
+                className="p-6 rounded-2xl border border-slate-200 bg-slate-50/70 hover:bg-white hover:border-purple-300 transition-all text-center sm:text-left"
               >
                 <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-3">
                   <div>
@@ -219,8 +219,8 @@ export default function ClientDashboard() {
                       <span
                         className={`text-xs px-3 py-0.5 rounded-full font-bold ${
                           p.status === 'COMPLETED'
-                            ? 'bg-emerald-100 text-emerald-800'
-                            : 'bg-orange-100 text-orange-800'
+                            ? 'bg-purple-100 text-purple-800'
+                            : 'bg-purple-50 text-purple-700'
                         }`}
                       >
                         {p.status}

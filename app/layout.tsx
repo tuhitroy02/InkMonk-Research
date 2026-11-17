@@ -1,9 +1,24 @@
 import type { Metadata } from "next";
+import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 import { ThemeProvider } from "@/components/ThemeProvider";
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+  weight: ["400", "600", "700", "800", "900"],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -38,9 +53,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth light-mode" data-theme="light">
+    <html
+      lang="en"
+      className={`scroll-smooth light-mode ${plusJakarta.variable} ${playfair.variable}`}
+      data-theme="light"
+    >
       <body
-        className="min-h-screen font-sans font-medium antialiased transition-colors duration-300 relative bg-[#F8FAFC] text-[#0F172A]"
+        className="min-h-screen font-sans font-medium antialiased transition-colors duration-300 relative bg-[#FFFFFF] dark:bg-[#000000] text-[#000000] dark:text-[#FFFFFF]"
       >
         <ThemeProvider>
           <Navbar />

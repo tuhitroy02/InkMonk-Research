@@ -8,10 +8,11 @@
 }
 
 /* ─── Universal Typography (Elite Academic Editorial Standard) ───────────── */
-html, body {
+html,
+body {
   font-family: var(--font-body);
-  background-color: #F8FAFC;
-  color: #0F172A;
+  background-color: #000000;
+  color: #FFFFFF;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -19,54 +20,76 @@ html, body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h1, h2, h3, h4, .font-serif {
+h1,
+h2,
+h3,
+h4,
+.font-serif {
   font-family: var(--font-heading);
   letter-spacing: -0.02em;
 }
 
 /* ─── Global Text Alignment Rule ────────────────────────────────────────── */
 /* Headings & Descriptions Centered, Bullet Points Left-Aligned */
-p, h1, h2, h3, h4, h5, h6, .center-text-content {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.center-text-content {
   text-align: center;
 }
 
-ul, ol, li, .bullet-point, .bullet-list {
+ul,
+ol,
+li,
+.bullet-point,
+.bullet-list {
   text-align: left !important;
 }
 
-/* ─── Light Mode by Default: Crisp, Prestigious Academic Aesthetics ──────── */
-:root, [data-theme="light"], .light-mode {
-  --bg-primary: #F8FAFC;
-  --bg-card: #FFFFFF;
-  --bg-secondary: #F1F5F9;
-  --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --text-muted: #64748B;
-  --border-card: #E2E8F0;
-  --border-focus: #0284C7;
-  --card-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06), 0 0 1px 1px rgba(15, 23, 42, 0.05);
-  --accent-blue: #0284C7;
-  --accent-gold: #D97706;
-  --accent-emerald: #059669;
+/* ─── Strict UI UX Palette: ONLY PURPLE, WHITE & BLACK ──────────────────── */
+
+/* Light Mode (Crisp White & Obsidian with Royal Purple Accents) */
+:root,
+[data-theme="light"],
+.light-mode {
+  --bg-primary: #FFFFFF;
+  --bg-card: #FAF5FF;
+  --bg-secondary: #F3E8FF;
+  --text-primary: #000000;
+  --text-secondary: #3B0764;
+  --text-muted: #6B21A8;
+  --border-card: #E9D5FF;
+  --border-focus: #9333EA;
+  --card-shadow: 0 10px 30px -5px rgba(88, 28, 135, 0.08), 0 0 1px 1px rgba(147, 51, 234, 0.15);
+  --accent-purple: #9333EA;
+  --accent-purple-light: #A855F7;
+  --accent-purple-dark: #6B21A8;
+  --accent-purple-glow: rgba(147, 51, 234, 0.35);
 }
 
-/* ─── Dark Mode (Optional Switchable via Moon Icon) ──────────────────────── */
-[data-theme="dark"], .dark-mode {
-  --bg-primary: #030712;
-  --bg-card: #080E1E;
-  --bg-secondary: #060B18;
-  --text-primary: #F8FAFC;
-  --text-secondary: #94A3B8;
-  --text-muted: #64748B;
-  --border-card: rgba(56, 189, 248, 0.2);
-  --border-focus: #06B6D4;
-  --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 0 20px rgba(6, 182, 212, 0.08);
-  --accent-blue: #00F2FE;
-  --accent-gold: #F59E0B;
-  --accent-emerald: #10B981;
+/* Dark Mode by Default: Deep Obsidian Black, Pure White, Vibrant Electric Violet */
+[data-theme="dark"],
+.dark-mode {
+  --bg-primary: #000000;
+  --bg-card: #0A0414;
+  --bg-secondary: #05020A;
+  --text-primary: #FFFFFF;
+  --text-secondary: #E9D5FF;
+  --text-muted: #C084FC;
+  --border-card: rgba(168, 85, 247, 0.25);
+  --border-focus: #C084FC;
+  --card-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.9), 0 0 30px rgba(168, 85, 247, 0.18);
+  --accent-purple: #A855F7;
+  --accent-purple-light: #C084FC;
+  --accent-purple-dark: #7E22CE;
+  --accent-purple-glow: rgba(168, 85, 247, 0.45);
 }
 
-/* ─── Luxury 3D Cards (Light & Dark Responsive) ──────────────────────────── */
+/* ─── Luxury 3D Cards (Strict Purple / White / Black) ────────────────────── */
 .card-futuristic-3d {
   position: relative;
   background-color: var(--bg-card);
@@ -80,66 +103,66 @@ ul, ol, li, .bullet-point, .bullet-list {
 
 .card-futuristic-3d:hover {
   transform: perspective(1000px) translateY(-6px) scale(1.015);
-  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.12), 0 0 0 1px var(--border-focus);
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5), 0 0 35px var(--accent-purple-glow);
+  border-color: var(--border-focus);
 }
 
-[data-theme="dark"] .card-futuristic-3d:hover {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(6, 182, 212, 0.25);
-  border-color: rgba(6, 182, 212, 0.6);
-}
-
-/* ─── Professional Step Badges (Clean, Crisp, Professional) ───────────────── */
+/* ─── Numbered Step Badges (01, 02, 03, 04, 05) in Glowing Purple & White ── */
 .step-number-futuristic {
   position: relative;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 1.1rem;
+  background: linear-gradient(135deg, #A855F7 0%, #7E22CE 50%, #4C1D95 100%);
   color: #FFFFFF;
   font-weight: 800;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   font-family: var(--font-body);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   transition: all 0.3s ease;
 }
 
 .step-number-futuristic:hover {
-  transform: translateY(-2px) scale(1.08);
-  box-shadow: 0 8px 25px rgba(2, 132, 199, 0.45);
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 0 30px rgba(192, 132, 252, 0.7), inset 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 /* ─── Clean Academic Gradients & Surfaces ────────────────────────────────── */
 .bg-midnight {
-  background: radial-gradient(circle at 50% 20%, #F1F5F9 0%, #E2E8F0 50%, #F8FAFC 100%);
+  background: radial-gradient(circle at 50% 20%, #17072E 0%, #0A0314 55%, #000000 100%);
 }
 
-[data-theme="dark"] .bg-midnight {
-  background: radial-gradient(circle at 50% 20%, #0A1938 0%, #060B18 50%, #030712 100%);
+[data-theme="light"] .bg-midnight {
+  background: radial-gradient(circle at 50% 20%, #FAF5FF 0%, #F3E8FF 55%, #FFFFFF 100%);
 }
 
-.gradient-saffron-text {
-  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+.gradient-saffron-text,
+.gradient-purple-text {
+  background: linear-gradient(135deg, #FFFFFF 0%, #E9D5FF 35%, #C084FC 70%, #A855F7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-[data-theme="dark"] .gradient-saffron-text {
-  background: linear-gradient(135deg, #00F2FE 0%, #38BDF8 100%);
+[data-theme="light"] .gradient-saffron-text,
+[data-theme="light"] .gradient-purple-text {
+  background: linear-gradient(135deg, #3B0764 0%, #7E22CE 50%, #A855F7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* ─── Professional Luxury Buttons ────────────────────────────────────────── */
+/* ─── Luxury Buttons (Strict Purple / White / Black) ─────────────────────── */
 .btn-primary-glow {
-  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  background: linear-gradient(135deg, #A855F7 0%, #7E22CE 50%, #581C87 100%);
   color: #FFFFFF;
   font-weight: 700;
   padding: 0.75rem 1.75rem;
   border-radius: 9999px;
-  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
@@ -150,18 +173,18 @@ ul, ol, li, .bullet-point, .bullet-list {
 
 .btn-primary-glow:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(2, 132, 199, 0.45);
-  filter: brightness(1.05);
+  box-shadow: 0 8px 30px rgba(192, 132, 252, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  filter: brightness(1.1);
 }
 
 .btn-secondary-dark {
-  background-color: #FFFFFF;
-  color: #0F172A;
+  background-color: #0A0414;
+  color: #FFFFFF;
   font-weight: 700;
-  border: 1px solid #CBD5E1;
+  border: 1px solid rgba(168, 85, 247, 0.35);
   padding: 0.75rem 1.75rem;
   border-radius: 9999px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
@@ -171,26 +194,27 @@ ul, ol, li, .bullet-point, .bullet-list {
 }
 
 .btn-secondary-dark:hover {
-  background-color: #F8FAFC;
-  border-color: #0284C7;
-  color: #0284C7;
+  background-color: #17072E;
+  border-color: #C084FC;
+  color: #FFFFFF;
   transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
 }
 
-[data-theme="dark"] .btn-secondary-dark {
-  background-color: #060B18;
-  color: #F8FAFC;
-  border-color: rgba(56, 189, 248, 0.3);
+[data-theme="light"] .btn-secondary-dark {
+  background-color: #FFFFFF;
+  color: #3B0764;
+  border-color: #D8B4FE;
 }
 
-[data-theme="dark"] .btn-secondary-dark:hover {
-  background-color: #0F172A;
-  border-color: #00F2FE;
-  color: #00F2FE;
+[data-theme="light"] .btn-secondary-dark:hover {
+  background-color: #FAF5FF;
+  border-color: #9333EA;
+  color: #7E22CE;
 }
 
 .btn-whatsapp-pill {
-  background: #059669;
+  background: linear-gradient(135deg, #7E22CE 0%, #4C1D95 100%);
   color: #FFFFFF;
   font-weight: 700;
   display: inline-flex;
@@ -199,87 +223,96 @@ ul, ol, li, .bullet-point, .bullet-list {
   gap: 0.5rem;
   padding: 0.75rem 1.75rem;
   border-radius: 9999px;
-  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+  box-shadow: 0 4px 15px rgba(126, 34, 206, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.25s ease;
   text-decoration: none;
 }
 
 .btn-whatsapp-pill:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.45);
-  filter: brightness(1.06);
+  box-shadow: 0 8px 25px rgba(168, 85, 247, 0.6);
+  filter: brightness(1.1);
 }
 
-/* ─── Clean Academic Pill Badges ─────────────────────────────────────────── */
-.badge-pill-gold {
+/* ─── Pill Badges (Purple, White & Black) ─────────────────────────────────── */
+.badge-pill-gold,
+.badge-pill-purple {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: #F0F9FF;
-  border: 1px solid #BAE6FD;
-  color: #0369A1;
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(192, 132, 252, 0.35);
+  color: #E9D5FF;
   font-weight: 700;
   font-size: 0.8rem;
   letter-spacing: 0.05em;
   padding: 0.35rem 1.25rem;
   border-radius: 9999px;
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);
 }
 
-[data-theme="dark"] .badge-pill-gold {
-  background: rgba(6, 182, 212, 0.12);
-  border-color: rgba(34, 211, 238, 0.4);
-  color: #22D3EE;
+[data-theme="light"] .badge-pill-gold,
+[data-theme="light"] .badge-pill-purple {
+  background: #FAF5FF;
+  border-color: #D8B4FE;
+  color: #6B21A8;
 }
 
 /* ─── Form Inputs ────────────────────────────────────────────────────────── */
 .input-field {
   width: 100%;
-  background-color: #FFFFFF;
-  border: 1px solid #CBD5E1;
+  background-color: #0A0414;
+  border: 1px solid rgba(168, 85, 247, 0.3);
   border-radius: 0.75rem;
   padding: 0.75rem 1rem;
-  color: #0F172A;
+  color: #FFFFFF;
   font-weight: 500;
   transition: all 0.2s ease;
   outline: none;
 }
 
 .input-field:focus {
-  border-color: #0284C7;
-  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+  border-color: #C084FC;
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.25);
 }
 
-[data-theme="dark"] .input-field {
-  background-color: #060B18;
-  border-color: rgba(56, 189, 248, 0.25);
-  color: #F8FAFC;
+[data-theme="light"] .input-field {
+  background-color: #FFFFFF;
+  border-color: #E9D5FF;
+  color: #000000;
 }
 
-[data-theme="dark"] .input-field:focus {
-  border-color: #00F2FE;
-  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+[data-theme="light"] .input-field:focus {
+  border-color: #9333EA;
+  box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.2);
 }
 
-/* ─── Subtle Background Grid ─────────────────────────────────────────────── */
+/* ─── Purple Cyber Grid & Volumetric Lighting ────────────────────────────── */
 .cyber-grid-bg {
-  background-image: 
-    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+  background-image:
+    linear-gradient(to right, rgba(168, 85, 247, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(168, 85, 247, 0.08) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
-[data-theme="dark"] .cyber-grid-bg {
-  background-image: 
-    linear-gradient(to right, rgba(56, 189, 248, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(56, 189, 248, 0.06) 1px, transparent 1px);
+[data-theme="light"] .cyber-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(147, 51, 234, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(147, 51, 234, 0.06) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
 /* ─── Scanline & Spin Keyframes ─────────────────────────────────────────── */
 @keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(1000%); }
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(1000%);
+  }
 }
 
 .animate-scanline {
@@ -287,8 +320,13 @@ ul, ol, li, .bullet-point, .bullet-list {
 }
 
 @keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .animate-spin-slow {
@@ -296,8 +334,13 @@ ul, ol, li, .bullet-point, .bullet-list {
 }
 
 @keyframes reverseSpin {
-  from { transform: rotate(360deg); }
-  to { transform: rotate(0deg); }
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
 }
 
 .animate-reverse-spin {

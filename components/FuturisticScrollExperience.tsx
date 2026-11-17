@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
 /**
  * InkMonk Research — Elite 3D Scroll Experience & Parallax System
- * Optimized for Light Mode (Default) & Dark Mode
+ * Strictly Purple, White, and Black Palette
  */
 
 /* ─── 1. Fixed Top Scroll Progress Scanner & HUD ────────────────────────── */
@@ -42,26 +42,26 @@ export function ScrollProgressLaser() {
   return (
     <>
       {/* Top Fixed Progress Bar */}
-      <div className="fixed top-0 left-0 right-0 z-50 h-[3px] bg-slate-200/60 dark:bg-slate-900/60 pointer-events-none">
+      <div className="fixed top-0 left-0 right-0 z-50 h-[3px] bg-black/60 pointer-events-none">
         <div
-          className="h-full bg-gradient-to-r from-sky-500 via-teal-500 to-emerald-500 dark:from-cyan-400 dark:via-teal-300 dark:to-emerald-400 transition-all duration-150 ease-out shadow-[0_0_12px_rgba(2,132,199,0.5)] dark:shadow-[0_0_15px_#00F2FE]"
+          className="h-full bg-gradient-to-r from-purple-600 via-purple-400 to-white transition-all duration-150 ease-out shadow-[0_0_15px_#A855F7]"
           style={{ width: `${percentage}%` }}
         />
         {/* Leading Flare */}
         <div
-          className="absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-white shadow-[0_0_15px_rgba(2,132,199,0.6)] dark:shadow-[0_0_20px_#00F2FE] pointer-events-none transition-all duration-150"
+          className="absolute top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-white shadow-[0_0_20px_#C084FC] pointer-events-none transition-all duration-150"
           style={{ left: `calc(${percentage}% - 7px)` }}
         />
       </div>
 
       {/* Floating Section Tracker Badge (Bottom Right on Desktop) */}
-      <div className="fixed bottom-6 right-6 z-40 hidden lg:flex items-center gap-3 bg-white/95 dark:bg-[#030712]/90 border border-slate-200 dark:border-cyan-500/40 px-4 py-2 rounded-full backdrop-blur-xl shadow-lg dark:shadow-[0_0_25px_rgba(6,182,212,0.3)] select-none pointer-events-none font-sans">
-        <span className="w-2.5 h-2.5 rounded-full bg-sky-500 dark:bg-cyan-400 animate-ping" />
-        <span className="text-[10px] text-slate-700 dark:text-cyan-300 font-bold uppercase tracking-wider font-mono">
+      <div className="fixed bottom-6 right-6 z-40 hidden lg:flex items-center gap-3 bg-black/90 border border-purple-500/40 px-4 py-2 rounded-full backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,0.35)] select-none pointer-events-none font-sans">
+        <span className="w-2.5 h-2.5 rounded-full bg-purple-400 animate-ping" />
+        <span className="text-[10px] text-purple-200 font-bold uppercase tracking-wider font-mono">
           {activeSection}
         </span>
-        <span className="text-[10px] text-slate-300 dark:text-slate-600">|</span>
-        <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold font-mono">
+        <span className="text-[10px] text-purple-500">|</span>
+        <span className="text-[10px] text-white font-bold font-mono">
           DEPTH: {percentage}%
         </span>
       </div>
@@ -75,17 +75,17 @@ export function CyberCircuitSpine({ className = '' }: { className?: string }) {
     <div className={`relative flex flex-col items-center justify-center my-8 pointer-events-none ${className}`}>
       {/* Upper Node */}
       <div className="relative flex items-center justify-center">
-        <div className="w-3 h-3 rounded-full bg-sky-500 dark:bg-cyan-400 shadow-[0_0_10px_rgba(2,132,199,0.4)] dark:shadow-[0_0_15px_#00F2FE]" />
-        <div className="absolute w-6 h-6 rounded-full border border-sky-400/40 dark:border-cyan-400/40 animate-ping" />
+        <div className="w-3 h-3 rounded-full bg-purple-400 shadow-[0_0_15px_#A855F7]" />
+        <div className="absolute w-6 h-6 rounded-full border border-purple-400/40 animate-ping" />
       </div>
 
       {/* Track */}
-      <div className="w-[2px] h-16 bg-gradient-to-b from-sky-400 via-teal-400 to-emerald-400 dark:from-cyan-400 dark:via-teal-400 dark:to-emerald-400 relative overflow-hidden my-1">
+      <div className="w-[2px] h-16 bg-gradient-to-b from-purple-500 via-purple-300 to-indigo-600 relative overflow-hidden my-1">
         <div className="absolute inset-0 bg-white/70 animate-scanline" />
       </div>
 
       {/* Lower Node */}
-      <div className="w-3 h-3 rounded-full bg-emerald-500 dark:bg-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.4)] dark:shadow-[0_0_15px_#10B981]" />
+      <div className="w-3 h-3 rounded-full bg-purple-300 shadow-[0_0_15px_#C084FC]" />
     </div>
   );
 }
@@ -94,11 +94,11 @@ export function CyberCircuitSpine({ className = '' }: { className?: string }) {
 export function Interactive3DCard({
   children,
   className = '',
-  glowColor = 'cyan',
+  glowColor = 'purple',
 }: {
   children: React.ReactNode;
   className?: string;
-  glowColor?: 'cyan' | 'emerald' | 'indigo';
+  glowColor?: 'purple' | 'white' | 'cyan' | 'emerald' | 'indigo';
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
@@ -123,18 +123,6 @@ export function Interactive3DCard({
     setSpotlight((prev) => ({ ...prev, opacity: 0 }));
   };
 
-  const glowStyles = {
-    cyan: 'border-slate-200/90 dark:border-cyan-500/30 hover:border-sky-400 dark:hover:border-cyan-400 hover:shadow-[0_20px_45px_-10px_rgba(2,132,199,0.15)] dark:hover:shadow-[0_25px_50px_-10px_rgba(6,182,212,0.35)]',
-    emerald: 'border-slate-200/90 dark:border-emerald-500/30 hover:border-emerald-400 dark:hover:border-emerald-400 hover:shadow-[0_20px_45px_-10px_rgba(16,185,129,0.15)] dark:hover:shadow-[0_25px_50px_-10px_rgba(16,185,129,0.35)]',
-    indigo: 'border-slate-200/90 dark:border-indigo-500/30 hover:border-indigo-400 dark:hover:border-indigo-400 hover:shadow-[0_20px_45px_-10px_rgba(99,102,241,0.15)] dark:hover:shadow-[0_25px_50px_-10px_rgba(99,102,241,0.35)]',
-  }[glowColor];
-
-  const spotlightColor = {
-    cyan: 'rgba(2, 132, 199, 0.08)',
-    emerald: 'rgba(16, 185, 129, 0.08)',
-    indigo: 'rgba(99, 102, 241, 0.08)',
-  }[glowColor];
-
   return (
     <motion.div
       ref={cardRef}
@@ -147,7 +135,7 @@ export function Interactive3DCard({
         y: spotlight.opacity ? -4 : 0,
       }}
       transition={{ type: 'spring', stiffness: 350, damping: 25, mass: 0.6 }}
-      className={`relative rounded-3xl border transition-all duration-300 overflow-hidden transform-gpu bg-white dark:bg-[#080E1E] shadow-sm dark:shadow-[0_10px_30px_rgba(0,0,0,0.6)] ${glowStyles} ${className}`}
+      className={`relative rounded-3xl border border-purple-500/25 hover:border-purple-400 hover:shadow-[0_25px_50px_-10px_rgba(168,85,247,0.4)] transition-all duration-300 overflow-hidden transform-gpu bg-white dark:bg-[#0A0414] shadow-sm dark:shadow-[0_10px_30px_rgba(0,0,0,0.8)] ${className}`}
       style={{
         perspective: '1200px',
         transformStyle: 'preserve-3d',
@@ -158,7 +146,7 @@ export function Interactive3DCard({
         className="pointer-events-none absolute -inset-px transition-opacity duration-300 z-10"
         style={{
           opacity: spotlight.opacity,
-          background: `radial-gradient(450px circle at ${spotlight.x}px ${spotlight.y}px, ${spotlightColor}, transparent 60%)`,
+          background: `radial-gradient(450px circle at ${spotlight.x}px ${spotlight.y}px, rgba(168, 85, 247, 0.15), transparent 60%)`,
         }}
       />
 
@@ -258,10 +246,10 @@ export function FloatingScrollBadge({
 export function CyberParticleField() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-60">
-      <div className="absolute top-1/4 left-1/6 w-2 h-2 rounded-full bg-sky-400/40 dark:bg-cyan-400 shadow-[0_0_10px_rgba(2,132,199,0.3)] animate-ping" />
-      <div className="absolute top-1/3 right-1/4 w-2 h-2 rounded-full bg-emerald-500/40 dark:bg-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.3)] animate-pulse" />
-      <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 rounded-full bg-teal-400/40 dark:bg-teal-300 shadow-[0_0_8px_rgba(45,212,191,0.3)] animate-ping" />
-      <div className="absolute top-3/4 right-1/6 w-2 h-2 rounded-full bg-indigo-400/30 dark:bg-cyan-300/60 shadow-[0_0_15px_rgba(99,102,241,0.3)] animate-pulse" />
+      <div className="absolute top-1/4 left-1/6 w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_12px_#A855F7] animate-ping" />
+      <div className="absolute top-1/3 right-1/4 w-2 h-2 rounded-full bg-purple-300 shadow-[0_0_15px_#C084FC] animate-pulse" />
+      <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_10px_#FFFFFF] animate-ping" />
+      <div className="absolute top-3/4 right-1/6 w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_15px_#7E22CE] animate-pulse" />
     </div>
   );
 }

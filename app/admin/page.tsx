@@ -116,15 +116,15 @@ export default function AdminDashboard() {
   // If Not Authenticated as Admin, show dedicated Admin Sign In Card
   if (authRequired) {
     return (
-      <div className="min-h-screen bg-[#F9F7F4] flex items-center justify-center p-4">
-        <div className="max-w-md w-full card-futuristic-3d p-8 bg-slate-900 text-white border-t-4 border-t-amber-400 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-slate-800 border border-amber-400/50 flex items-center justify-center mx-auto mb-4">
+      <div className="min-h-screen bg-white text-black flex items-center justify-center p-4">
+        <div className="max-w-md w-full card-futuristic-3d p-8 bg-black text-white border-t-4 border-t-purple-600 text-center shadow-2xl rounded-2xl">
+          <div className="w-16 h-16 rounded-2xl bg-purple-950/60 border border-purple-500/50 flex items-center justify-center mx-auto mb-4">
             <AcademicLabCrestLogo className="w-12 h-12" />
           </div>
           <h1 className="font-serif text-2xl font-bold text-white mb-1">
             InkMonk Director Console
           </h1>
-          <p className="text-xs text-slate-400 mb-6">
+          <p className="text-xs text-purple-200/80 mb-6">
             Authorized access for Tuhit Roy and Academic Directors
           </p>
 
@@ -136,27 +136,27 @@ export default function AdminDashboard() {
 
           <form onSubmit={handleInlineAdminLogin} className="space-y-4 text-left">
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1">Director Email</label>
+              <label className="block text-xs font-bold text-white mb-1">Director Email</label>
               <input
                 type="email"
                 required
                 value={adminEmail}
                 onChange={(e) => setAdminEmail(e.target.value)}
-                className="input-field !bg-slate-800 !text-white !border-slate-700 text-xs"
+                className="input-field !bg-zinc-900 !text-white !border-zinc-700 text-xs w-full p-3 rounded-xl"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1">Password</label>
+              <label className="block text-xs font-bold text-white mb-1">Password</label>
               <input
                 type="password"
                 required
                 value={adminPassword}
                 onChange={(e) => setAdminPassword(e.target.value)}
                 placeholder="Enter password"
-                className="input-field !bg-slate-800 !text-white !border-slate-700 text-xs"
+                className="input-field !bg-zinc-900 !text-white !border-zinc-700 text-xs w-full p-3 rounded-xl"
               />
-              <div className="text-[10px] text-amber-300/80 mt-1">
+              <div className="text-[10px] text-purple-300 mt-1">
                 Authorized: <code className="text-white font-bold">InkMonk@2026</code> (or <code className="text-white font-bold">admin123</code>)
               </div>
             </div>
@@ -164,14 +164,14 @@ export default function AdminDashboard() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary-glow w-full !py-3 text-xs font-bold !bg-gradient-to-r !from-amber-500 !to-orange-500"
+              className="w-full py-3 text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white rounded-xl shadow-lg transition-all"
             >
               {loading ? 'Verifying Admin Session…' : 'Open Management Console →'}
             </button>
           </form>
 
-          <div className="mt-6 pt-4 border-t border-slate-800 text-center">
-            <Link href="/" className="text-xs text-slate-400 hover:text-white">
+          <div className="mt-6 pt-4 border-t border-zinc-800 text-center">
+            <Link href="/" className="text-xs text-zinc-400 hover:text-white">
               ← Return to Public Website
             </Link>
           </div>
@@ -182,33 +182,33 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#F9F7F4] flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
-          <p className="text-xs font-semibold text-slate-600">Loading Management Console...</p>
+          <div className="w-10 h-10 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+          <p className="text-xs font-semibold text-black">Loading Management Console...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#F9F7F4] py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white text-black py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
 
         {/* Console Top Header */}
-        <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-md mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div className="bg-white rounded-3xl p-6 md:p-8 border border-purple-200 shadow-md mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-2xl bg-[#0A1128] border border-amber-400/50 flex items-center justify-center p-1">
+            <div className="w-12 h-12 rounded-2xl bg-black border border-purple-500/50 flex items-center justify-center p-1">
               <AcademicLabCrestLogo className="w-10 h-10" />
             </div>
             <div>
-              <div className="text-xs text-orange-600 font-bold uppercase tracking-wider">
+              <div className="text-xs text-purple-600 font-bold uppercase tracking-wider">
                 Director Administration Suite
               </div>
-              <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#0A1128]">
+              <h1 className="font-serif text-2xl sm:text-3xl font-bold text-black">
                 InkMonk Research Command Hub
               </h1>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-zinc-500">
                 Founders: Tuhit Roy &amp; Sampreeti Mukherjee • Salt Lake Sector 2, Kolkata
               </p>
             </div>
@@ -217,19 +217,19 @@ export default function AdminDashboard() {
           <div className="flex flex-wrap items-center gap-2">
             <Link
               href="/"
-              className="text-xs font-bold text-slate-700 hover:text-black px-4 py-2 rounded-xl border border-slate-200 bg-slate-50"
+              className="text-xs font-bold text-zinc-700 hover:text-black px-4 py-2 rounded-xl border border-zinc-200 bg-zinc-50"
             >
               Public Website ↗
             </Link>
             <Link
               href="/client"
-              className="text-xs font-bold text-orange-600 hover:text-orange-700 px-4 py-2 rounded-xl border border-orange-200 bg-orange-50"
+              className="text-xs font-bold text-purple-600 hover:text-purple-700 px-4 py-2 rounded-xl border border-purple-200 bg-purple-50"
             >
               Client View
             </Link>
             <button
               onClick={handleLogout}
-              className="text-xs font-bold text-red-600 hover:bg-red-50 px-4 py-2 rounded-xl border border-red-200"
+              className="text-xs font-bold text-zinc-600 hover:text-black hover:bg-zinc-100 px-4 py-2 rounded-xl border border-zinc-200"
             >
               Sign Out
             </button>
@@ -237,7 +237,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex flex-wrap gap-2 mb-6 border-b border-slate-200 pb-3">
+        <div className="flex flex-wrap gap-2 mb-6 border-b border-purple-100 pb-3">
           {[
             { id: 'LEADS', label: `Inquiries & Leads (${leads.length})` },
             { id: 'PROJECTS', label: 'Active Projects (Milestones)' },
@@ -249,8 +249,8 @@ export default function AdminDashboard() {
               onClick={() => setActiveTab(tab.id as any)}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                 activeTab === tab.id
-                  ? 'bg-orange-600 text-white shadow-md'
-                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                  ? 'bg-purple-600 text-white shadow-md'
+                  : 'bg-white text-zinc-700 hover:bg-purple-50 border border-zinc-200'
               }`}
             >
               {tab.label}
@@ -264,25 +264,25 @@ export default function AdminDashboard() {
             {/* Stats Row */}
             {stats && (
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-                <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm text-center">
-                  <div className="text-[10px] font-bold text-slate-500 uppercase">Total Enquiries</div>
-                  <div className="font-serif text-2xl font-bold text-[#0A1128] mt-1">{stats.totalLeads}</div>
+                <div className="bg-white p-4 rounded-2xl border border-zinc-200 shadow-sm text-center">
+                  <div className="text-[10px] font-bold text-zinc-500 uppercase">Total Enquiries</div>
+                  <div className="font-serif text-2xl font-bold text-black mt-1">{stats.totalLeads}</div>
                 </div>
-                <div className="bg-white p-4 rounded-2xl border border-orange-200 shadow-sm text-center">
-                  <div className="text-[10px] font-bold text-orange-600 uppercase">New Inquiries</div>
-                  <div className="font-serif text-2xl font-bold text-orange-600 mt-1">{stats.newLeads}</div>
+                <div className="bg-white p-4 rounded-2xl border border-purple-200 shadow-sm text-center">
+                  <div className="text-[10px] font-bold text-purple-600 uppercase">New Inquiries</div>
+                  <div className="font-serif text-2xl font-bold text-purple-600 mt-1">{stats.newLeads}</div>
                 </div>
-                <div className="bg-white p-4 rounded-2xl border border-blue-200 shadow-sm text-center">
-                  <div className="text-[10px] font-bold text-blue-600 uppercase">Contacted</div>
-                  <div className="font-serif text-2xl font-bold text-blue-700 mt-1">{stats.contactedLeads}</div>
+                <div className="bg-white p-4 rounded-2xl border border-zinc-200 shadow-sm text-center">
+                  <div className="text-[10px] font-bold text-zinc-600 uppercase">Contacted</div>
+                  <div className="font-serif text-2xl font-bold text-zinc-900 mt-1">{stats.contactedLeads}</div>
                 </div>
-                <div className="bg-white p-4 rounded-2xl border border-emerald-200 shadow-sm text-center">
-                  <div className="text-[10px] font-bold text-emerald-600 uppercase">Converted</div>
-                  <div className="font-serif text-2xl font-bold text-emerald-700 mt-1">{stats.convertedLeads}</div>
+                <div className="bg-white p-4 rounded-2xl border border-purple-200 shadow-sm text-center">
+                  <div className="text-[10px] font-bold text-purple-600 uppercase">Converted</div>
+                  <div className="font-serif text-2xl font-bold text-purple-700 mt-1">{stats.convertedLeads}</div>
                 </div>
-                <div className="bg-white p-4 rounded-2xl border border-indigo-200 shadow-sm text-center">
-                  <div className="text-[10px] font-bold text-indigo-600 uppercase">Chatbot Leads</div>
-                  <div className="font-serif text-2xl font-bold text-indigo-700 mt-1">{stats.chatLeads}</div>
+                <div className="bg-white p-4 rounded-2xl border border-zinc-200 shadow-sm text-center">
+                  <div className="text-[10px] font-bold text-zinc-600 uppercase">Chatbot Leads</div>
+                  <div className="font-serif text-2xl font-bold text-zinc-900 mt-1">{stats.chatLeads}</div>
                 </div>
                 <div className="bg-white p-4 rounded-2xl border border-purple-200 shadow-sm text-center">
                   <div className="text-[10px] font-bold text-purple-600 uppercase">Quote Form</div>
@@ -328,39 +328,37 @@ export default function AdminDashboard() {
                         <th className="p-4">Quick Action</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100">
+                    <tbody className="divide-y divide-zinc-100">
                       {filteredLeads.map((l) => (
-                        <tr key={l.id} className="hover:bg-slate-50/80">
+                        <tr key={l.id} className="hover:bg-purple-50/50">
                           <td className="p-4">
-                            <div className="font-bold text-[#0A1128]">{l.name || 'Anonymous Scholar'}</div>
-                            <div className="text-slate-500 text-[11px]">{l.email}</div>
+                            <div className="font-bold text-black">{l.name || 'Anonymous Scholar'}</div>
+                            <div className="text-zinc-500 text-[11px]">{l.email}</div>
                             {l.phone && (
-                              <div className="text-emerald-700 font-mono text-[11px] font-bold">{l.phone}</div>
+                              <div className="text-purple-700 font-mono text-[11px] font-bold">{l.phone}</div>
                             )}
                           </td>
                           <td className="p-4">
-                            <div className="font-bold text-slate-800">{l.service || 'Turnitin Scan'}</div>
-                            <div className="text-slate-500 text-[11px]">
+                            <div className="font-bold text-zinc-900">{l.service || 'Turnitin Scan'}</div>
+                            <div className="text-zinc-500 text-[11px]">
                               {l.language} • {l.domain || 'General Domain'}
                             </div>
                             {l.requirements && (
-                              <div className="text-[10px] text-slate-600 mt-1 line-clamp-1 italic">
+                              <div className="text-[10px] text-zinc-600 mt-1 line-clamp-1 italic">
                                 &ldquo;{l.requirements}&rdquo;
                               </div>
                             )}
                           </td>
                           <td className="p-4">
-                            <div className="font-serif font-black text-sm text-slate-900">
+                            <div className="font-serif font-black text-sm text-black">
                               {l.totalPaise ? `₹${(l.totalPaise / 100).toLocaleString('en-IN')}` : '₹200 (Turnitin)'}
                             </div>
                           </td>
-                          <td className="p-4 text-slate-600 font-medium">
+                          <td className="p-4 text-zinc-600 font-medium">
                             {l.deadline || 'Standard Feasibility'}
                           </td>
                           <td className="p-4">
-                            <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
-                              l.channel === 'CHAT' ? 'bg-indigo-100 text-indigo-800' : 'bg-purple-100 text-purple-800'
-                            }`}>
+                            <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-purple-100 text-purple-900">
                               {l.channel}
                             </span>
                           </td>
@@ -368,7 +366,7 @@ export default function AdminDashboard() {
                             <select
                               value={l.status}
                               onChange={(e) => updateStatus(l.id, e.target.value)}
-                              className="bg-white border border-slate-300 rounded-lg px-2 py-1 text-xs font-bold text-slate-700 focus:outline-none"
+                              className="bg-white border border-zinc-300 rounded-lg px-2 py-1 text-xs font-bold text-zinc-800 focus:outline-none focus:border-purple-600"
                             >
                               <option value="NEW">NEW</option>
                               <option value="CONTACTED">CONTACTED</option>
@@ -383,7 +381,7 @@ export default function AdminDashboard() {
                                 href={`https://wa.me/${l.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hello ${l.name || 'Scholar'}, this is Tuhit Roy from InkMonk Research regarding your academic inquiry.`)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-1.5 rounded-lg text-[11px]"
+                                className="inline-flex items-center gap-1.5 bg-purple-600 hover:bg-purple-700 text-white font-bold px-3 py-1.5 rounded-lg text-[11px]"
                               >
                                 <WhatsAppRealIcon className="w-3.5 h-3.5" />
                                 <span>WhatsApp</span>
@@ -391,7 +389,7 @@ export default function AdminDashboard() {
                             ) : (
                               <a
                                 href={`mailto:${l.email}?subject=InkMonk%20Research%20Consultation`}
-                                className="inline-flex items-center gap-1 bg-slate-800 hover:bg-slate-700 text-white font-bold px-3 py-1.5 rounded-lg text-[11px]"
+                                className="inline-flex items-center gap-1 bg-black hover:bg-zinc-800 text-white font-bold px-3 py-1.5 rounded-lg text-[11px]"
                               >
                                 <span>Email</span>
                               </a>
@@ -410,11 +408,11 @@ export default function AdminDashboard() {
         {/* ─── TAB 2: ACTIVE PROJECTS (MILESTONES) ─────────────────────────── */}
         {activeTab === 'PROJECTS' && (
           <div className="space-y-6">
-            <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
-              <h3 className="font-serif text-xl font-bold text-[#0A1128] mb-2">
+            <div className="bg-white rounded-3xl p-6 border border-zinc-200 shadow-sm">
+              <h3 className="font-serif text-xl font-bold text-black mb-2">
                 Active Client Projects &amp; Milestone Escrow
               </h3>
-              <p className="text-xs text-slate-500 mb-6">
+              <p className="text-xs text-zinc-500 mb-6">
                 All client projects tracked chapter-by-chapter according to Section 7 guidelines.
               </p>
 
@@ -441,37 +439,35 @@ export default function AdminDashboard() {
                     amount: '₹200',
                   },
                 ].map((p) => (
-                  <div key={p.id} className="p-5 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                  <div key={p.id} className="p-5 rounded-2xl border border-zinc-200 bg-purple-50/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-mono text-xs font-bold text-orange-600 bg-orange-100 px-2 py-0.5 rounded">
+                        <span className="font-mono text-xs font-bold text-purple-700 bg-purple-100 px-2 py-0.5 rounded">
                           {p.id}
                         </span>
-                        <span className="text-xs font-bold text-slate-700">{p.client}</span>
-                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
-                          p.status === 'DELIVERED' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800'
-                        }`}>
+                        <span className="text-xs font-bold text-zinc-800">{p.client}</span>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-900">
                           {p.status}
                         </span>
                       </div>
-                      <h4 className="font-serif font-bold text-sm text-[#0A1128] mb-1">{p.title}</h4>
-                      <div className="text-xs text-slate-500">{p.service}</div>
-                      <div className="text-xs text-amber-800 font-bold mt-2">
+                      <h4 className="font-serif font-bold text-sm text-black mb-1">{p.title}</h4>
+                      <div className="text-xs text-zinc-500">{p.service}</div>
+                      <div className="text-xs text-purple-800 font-bold mt-2">
                         • {p.currentMilestone}
                       </div>
                       {/* Progress Bar */}
-                      <div className="w-full bg-slate-200 rounded-full h-2 mt-2 max-w-md">
+                      <div className="w-full bg-zinc-200 rounded-full h-2 mt-2 max-w-md">
                         <div
-                          className="bg-orange-600 h-2 rounded-full"
+                          className="bg-purple-600 h-2 rounded-full"
                           style={{ width: `${p.progress}%` }}
                         />
                       </div>
                     </div>
 
                     <div className="text-right shrink-0">
-                      <div className="font-serif text-lg font-black text-slate-900">{p.amount}</div>
-                      <div className="text-[10px] text-slate-500">Escrow Allocated</div>
-                      <button className="mt-2 text-xs bg-slate-900 hover:bg-black text-white font-bold px-3 py-1.5 rounded-lg">
+                      <div className="font-serif text-lg font-black text-black">{p.amount}</div>
+                      <div className="text-[10px] text-zinc-500">Escrow Allocated</div>
+                      <button className="mt-2 text-xs bg-black hover:bg-zinc-800 text-white font-bold px-3 py-1.5 rounded-lg">
                         Manage Chapters →
                       </button>
                     </div>
@@ -484,84 +480,84 @@ export default function AdminDashboard() {
 
         {/* ─── TAB 3: CENTRAL SERVER PRICING CATALOGUE ──────────────────────── */}
         {activeTab === 'PRICING' && (
-          <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm">
+          <div className="bg-white rounded-3xl p-6 md:p-8 border border-zinc-200 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="font-serif text-xl font-bold text-[#0A1128]">
+                <h3 className="font-serif text-xl font-bold text-black">
                   Central Server-Side Pricing Engine
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-zinc-500">
                   Exact rates from Section 4 of master brief. Calculated in integer paise. Private to server.
                 </p>
               </div>
-              <span className="text-xs font-mono bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">
+              <span className="text-xs font-mono bg-purple-100 text-purple-900 font-bold px-3 py-1 rounded-full">
                 Single Source of Truth Active
               </span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
               {/* English Rates */}
-              <div className="p-5 rounded-2xl border border-slate-200 bg-slate-50">
-                <div className="font-serif font-bold text-sm text-[#1A2B6D] mb-3 border-b border-slate-200 pb-2">
+              <div className="p-5 rounded-2xl border border-zinc-200 bg-zinc-50">
+                <div className="font-serif font-bold text-sm text-purple-900 mb-3 border-b border-zinc-200 pb-2">
                   English Rates (Non-Tech / Tech)
                 </div>
                 <div className="space-y-2 text-xs">
                   <div className="flex justify-between">
                     <span>Research Paper:</span>
-                    <strong className="text-slate-900">₹4,999 (Non-Tech) / ₹8,998 (w/ Model)</strong>
+                    <strong className="text-black">₹4,999 (Non-Tech) / ₹8,998 (w/ Model)</strong>
                   </div>
                   <div className="flex justify-between">
                     <span>Review Paper:</span>
-                    <strong className="text-slate-900">₹3,999 (Non-Tech) / ₹4,499 (Tech)</strong>
+                    <strong className="text-black">₹3,999 (Non-Tech) / ₹4,499 (Tech)</strong>
                   </div>
                   <div className="flex justify-between">
                     <span>Synopsis:</span>
-                    <strong className="text-slate-900">₹3,999 (Non-Tech) / ₹4,499 (Tech)</strong>
+                    <strong className="text-black">₹3,999 (Non-Tech) / ₹4,499 (Tech)</strong>
                   </div>
                   <div className="flex justify-between">
                     <span>Thesis Writing:</span>
-                    <strong className="text-slate-900">₹19,999 (Non-Tech) / ₹28,998 (w/ Model)</strong>
+                    <strong className="text-black">₹19,999 (Non-Tech) / ₹28,998 (w/ Model)</strong>
                   </div>
                   <div className="flex justify-between">
                     <span>Book (100 / 200 / 300 pp):</span>
-                    <strong className="text-slate-900">₹3,999 / ₹7,499 / ₹10,999 (Non-Tech)</strong>
+                    <strong className="text-black">₹3,999 / ₹7,499 / ₹10,999 (Non-Tech)</strong>
                   </div>
                   <div className="flex justify-between">
                     <span>Articles (per word):</span>
-                    <strong className="text-slate-900">₹0.60 / word (Non-Tech) / ₹0.70 / word (Tech)</strong>
+                    <strong className="text-black">₹0.60 / word (Non-Tech) / ₹0.70 / word (Tech)</strong>
                   </div>
                   <div className="flex justify-between">
                     <span>PPT Making (per slide):</span>
-                    <strong className="text-slate-900">₹120 / slide (Non-Tech) / ₹150 / slide (Tech)</strong>
+                    <strong className="text-black">₹120 / slide (Non-Tech) / ₹150 / slide (Tech)</strong>
                   </div>
                 </div>
               </div>
 
               {/* Hindi & Turnitin Rates */}
-              <div className="p-5 rounded-2xl border border-slate-200 bg-slate-50">
-                <div className="font-serif font-bold text-sm text-orange-600 mb-3 border-b border-slate-200 pb-2">
+              <div className="p-5 rounded-2xl border border-zinc-200 bg-zinc-50">
+                <div className="font-serif font-bold text-sm text-purple-900 mb-3 border-b border-zinc-200 pb-2">
                   Hindi &amp; Turnitin Rates
                 </div>
                 <div className="space-y-2 text-xs">
                   <div className="flex justify-between">
                     <span>Hindi Research Paper:</span>
-                    <strong className="text-slate-900">₹6,999 (Non-Tech) / ₹10,998 (w/ Model)</strong>
+                    <strong className="text-black">₹6,999 (Non-Tech) / ₹10,998 (w/ Model)</strong>
                   </div>
                   <div className="flex justify-between">
                     <span>Hindi Thesis:</span>
-                    <strong className="text-slate-900">₹25,999 (Non-Tech) / ₹33,998 (w/ Model)</strong>
+                    <strong className="text-black">₹25,999 (Non-Tech) / ₹33,998 (w/ Model)</strong>
                   </div>
                   <div className="flex justify-between">
                     <span>Hindi Articles (per word):</span>
-                    <strong className="text-slate-900">₹0.75 / word (Non-Tech) / ₹0.80 / word (Tech)</strong>
+                    <strong className="text-black">₹0.75 / word (Non-Tech) / ₹0.80 / word (Tech)</strong>
                   </div>
                   <div className="flex justify-between">
                     <span>Hindi PPT (per slide):</span>
-                    <strong className="text-slate-900">₹150 / slide (Non-Tech) / ₹170 / slide (Tech)</strong>
+                    <strong className="text-black">₹150 / slide (Non-Tech) / ₹170 / slide (Tech)</strong>
                   </div>
-                  <div className="flex justify-between bg-emerald-50 p-2 rounded border border-emerald-200 mt-2">
-                    <span className="font-bold text-emerald-900">Turnitin Plagiarism + AI:</span>
-                    <strong className="text-emerald-900 font-black">₹200 / file flat</strong>
+                  <div className="flex justify-between bg-purple-50 p-2 rounded border border-purple-200 mt-2">
+                    <span className="font-bold text-purple-900">Turnitin Plagiarism + AI:</span>
+                    <strong className="text-purple-900 font-black">₹200 / file flat</strong>
                   </div>
                 </div>
               </div>

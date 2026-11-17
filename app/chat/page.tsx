@@ -173,8 +173,8 @@ export default function ChatPage() {
             )}
 
             {whatsappUrl && (
-              <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-center animate-fade-in my-2">
-                <div className="text-emerald-800 font-semibold text-sm mb-2">
+              <div className="p-4 bg-purple-50 dark:bg-purple-950/80 rounded-2xl border border-purple-200 dark:border-purple-500/40 text-center animate-fade-in my-2">
+                <div className="text-purple-900 dark:text-purple-200 font-semibold text-sm mb-2">
                   🎉 Your Quote is Ready for Instant WhatsApp Handover!
                 </div>
                 <a
