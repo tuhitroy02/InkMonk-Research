@@ -18,15 +18,18 @@ export async function POST(request: NextRequest) {
 
     const challenge = await db.emailLoginCode.findUnique({ where: { email: value } });
     
-    // Check if challenge is valid or if emergency fallback code 123456 was entered
-    const isMasterBypass = trimmedCode === '123456';
-    const isChallengeValid = challenge && challenge.codeHash === authHash(`${value}:${trimmedCode}`) && challenge.expiresAt > new Date();
+    // Cryptographically verify the challenge code against stored hash
+    const isChallengeValid = Boolean(
+      challenge &&
+      challenge.codeHash === authHash(`${value}:${trimmedCode}`) &&
+      challenge.expiresAt > new Date()
+    );
 
-    if (!isChallengeValid && !isMasterBypass) {
+    if (!isChallengeValid) {
       if (challenge) {
         await db.emailLoginCode.update({ where: { email: value }, data: { attempts: { increment: 1 } } });
       }
-      return NextResponse.json({ error: 'Invalid or expired code. Please use the code displayed on screen or request a new one.' }, { status: 401 });
+      return NextResponse.json({ error: 'Invalid or expired code. Please request a new verification code.' }, { status: 401 });
     }
 
     if (challenge) {

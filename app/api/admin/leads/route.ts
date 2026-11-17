@@ -28,16 +28,37 @@ export async function GET() {
 
 export async function PATCH(request: NextRequest) {
   try {
-    await requireRole('STAFF');
+    const session = await requireRole('STAFF');
     const { id, status, notes } = await request.json();
+
+    if (!id || typeof id !== 'string') {
+      return NextResponse.json({ error: 'Valid Lead ID required.' }, { status: 400 });
+    }
+
+    const existing = await db.lead.findUnique({ where: { id } });
+    if (!existing) {
+      return NextResponse.json({ error: 'Lead not found.' }, { status: 404 });
+    }
 
     const updated = await db.lead.update({
       where: { id },
       data: {
         ...(status && { status }),
-        ...(notes !== undefined && { notes }),
+        ...(notes !== undefined && { notes: String(notes).slice(0, 5000) }),
       },
     });
+
+    // Check 12: Record Admin Action to AuditLog
+    await db.auditLog.create({
+      data: {
+        entity: 'Lead',
+        entityId: id,
+        field: status ? 'status' : 'notes',
+        oldValue: status ? existing.status : (existing.notes || ''),
+        newValue: status || String(notes || ''),
+        changedBy: session.userId,
+      },
+    }).catch((err) => console.warn('AuditLog write notice:', err));
 
     return NextResponse.json({ success: true, lead: updated });
   } catch (error: any) {

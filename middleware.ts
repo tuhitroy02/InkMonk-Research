@@ -1,0 +1,85 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { jwtVerify } from 'jose';
+
+function sessionKey() {
+  const secret = process.env.JWT_SECRET || 'inkmonk_research_prod_secret_jwt_key_9283748293749823_secure';
+  return new TextEncoder().encode(secret.padEnd(32, '0'));
+}
+
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Check 8: Force HTTPS in production
+  if (
+    process.env.NODE_ENV === 'production' &&
+    request.headers.get('x-forwarded-proto') === 'http'
+  ) {
+    const httpsUrl = request.nextUrl.clone();
+    httpsUrl.protocol = 'https:';
+    return NextResponse.redirect(httpsUrl, 301);
+  }
+
+  // Check 14: Server-side route protection for Admin Dashboard
+  if (pathname.startsWith('/admin')) {
+    const token = request.cookies.get('inkmonk_session')?.value;
+    if (!token) {
+      const loginUrl = new URL('/login?portal=admin', request.url);
+      return NextResponse.redirect(loginUrl);
+    }
+
+    try {
+      const { payload } = await jwtVerify(token, sessionKey());
+      const role = (payload as { role?: string })?.role;
+      if (role !== 'ADMIN' && role !== 'STAFF') {
+        const loginUrl = new URL('/login?portal=admin&error=forbidden', request.url);
+        return NextResponse.redirect(loginUrl);
+      }
+    } catch {
+      const loginUrl = new URL('/login?portal=admin&error=expired', request.url);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+
+  // Check 14: Server-side route protection for Client Portal
+  if (pathname.startsWith('/client')) {
+    const token = request.cookies.get('inkmonk_session')?.value;
+    if (!token) {
+      const loginUrl = new URL('/login', request.url);
+      return NextResponse.redirect(loginUrl);
+    }
+
+    try {
+      await jwtVerify(token, sessionKey());
+    } catch {
+      const loginUrl = new URL('/login?error=expired', request.url);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+
+  const response = NextResponse.next();
+
+  // Check 18: Security Headers on all HTTP responses
+  response.headers.set('X-Frame-Options', 'DENY');
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  response.headers.set(
+    'Strict-Transport-Security',
+    'max-age=63072000; includeSubDomains; preload'
+  );
+
+  return response;
+}
+
+export const config = {
+  matcher: [
+    /*
+     * Match all request paths except for:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - public files (svg, png, jpg)
+     */
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+  ],
+};

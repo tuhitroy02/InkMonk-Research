@@ -66,8 +66,8 @@ export async function POST(request: NextRequest) {
 
       return NextResponse.json({
         success: true,
-        message: 'Verification code generated.',
-        codeHint: !apiKey ? code : undefined,
+        message: 'Verification code dispatched.',
+        codeHint: process.env.NODE_ENV !== 'production' && !apiKey ? code : undefined,
       });
     } else {
       const sid = process.env.TWILIO_ACCOUNT_SID;

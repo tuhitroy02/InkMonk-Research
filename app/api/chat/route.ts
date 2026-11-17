@@ -2,17 +2,29 @@ import { NextRequest, NextResponse } from 'next/server';
 import { processChat, buildWhatsAppMessage } from '@/lib/chatbot/engine';
 import type { ChatState, ChatContext } from '@/lib/chatbot/engine';
 import { db } from '@/lib/db';
+import { allowRate } from '@/lib/client-auth';
+import { sanitizeText, sanitizeEmail, sanitizePhone } from '@/lib/sanitize';
 import { z } from 'zod';
 
 const ChatSchema = z.object({
-  state: z.string(),
+  state: z.string().max(50),
   userMessage: z.string().max(2000),
   context: z.record(z.string(), z.unknown()),
-  sessionToken: z.string().optional(),
+  sessionToken: z.string().max(100).optional(),
 });
 
 export async function POST(request: NextRequest) {
   try {
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+
+    // Check 4: Rate limit chatbot turns (45 turns per minute per IP)
+    if (!await allowRate(`chat-ip:${ip}`, 45, 60 * 60_000)) {
+      return NextResponse.json(
+        { error: 'Chat rate limit reached. Please wait a moment before sending another message.' },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
     const parsed = ChatSchema.safeParse(body);
 
@@ -22,10 +34,13 @@ export async function POST(request: NextRequest) {
 
     const { state, userMessage, context, sessionToken } = parsed.data;
 
+    // Check 5: Sanitize userMessage before processing
+    const cleanUserMessage = sanitizeText(userMessage, 2000);
+
     // Process through chatbot FSM
     const turn = processChat(
       state as ChatState,
-      userMessage,
+      cleanUserMessage,
       context as ChatContext,
     );
 
@@ -33,34 +48,39 @@ export async function POST(request: NextRequest) {
     let leadId: string | undefined;
     if (turn.leadData && turn.leadData.email && turn.leadData.name) {
       try {
-        const lead = await db.lead.create({
-          data: {
-            channel: 'CHAT',
-            language: turn.leadData.language || undefined,
-            domain: turn.leadData.domain || undefined,
-            workType: turn.leadData.workType || undefined,
-            service: turn.leadData.service || undefined,
-            package: turn.leadData.package || undefined,
-            requirements: turn.leadData.requirements || undefined,
-            deadline: turn.leadData.deadline || undefined,
-            quantity: turn.leadData.quantity ?? undefined,
-            totalPaise: turn.leadData.totalPaise ?? undefined,
-            breakdown: turn.leadData.breakdown || undefined,
-            name: turn.leadData.name || undefined,
-            email: turn.leadData.email || undefined,
-            phone: turn.leadData.phone || undefined,
-            status: 'NEW',
-          },
-        });
-        leadId = lead.id;
+        const cleanName = sanitizeText(turn.leadData.name, 200);
+        const cleanEmail = sanitizeEmail(turn.leadData.email);
+        const cleanPhone = sanitizePhone(turn.leadData.phone || '');
 
-        // Track analytics event (no PII)
-        await db.analyticsEvent.create({
-          data: { event: 'CHAT_COMPLETE', channel: 'CHAT' },
-        });
+        if (cleanName && cleanEmail) {
+          const lead = await db.lead.create({
+            data: {
+              channel: 'CHAT',
+              language: turn.leadData.language || undefined,
+              domain: turn.leadData.domain ? sanitizeText(turn.leadData.domain, 200) : undefined,
+              workType: turn.leadData.workType || undefined,
+              service: turn.leadData.service ? sanitizeText(turn.leadData.service, 50) : undefined,
+              package: turn.leadData.package ? sanitizeText(turn.leadData.package, 50) : undefined,
+              requirements: turn.leadData.requirements ? sanitizeText(turn.leadData.requirements, 5000) : undefined,
+              deadline: turn.leadData.deadline ? sanitizeText(turn.leadData.deadline, 100) : undefined,
+              quantity: turn.leadData.quantity ?? undefined,
+              totalPaise: turn.leadData.totalPaise ?? undefined,
+              breakdown: turn.leadData.breakdown ? sanitizeText(turn.leadData.breakdown, 1000) : undefined,
+              name: cleanName,
+              email: cleanEmail,
+              phone: cleanPhone || undefined,
+              status: 'NEW',
+            },
+          });
+          leadId = lead.id;
+
+          // Track analytics event (no PII)
+          await db.analyticsEvent.create({
+            data: { event: 'CHAT_COMPLETE', channel: 'CHAT' },
+          });
+        }
       } catch (dbError) {
-        console.error('Lead save error:', dbError);
-        // Don't fail the chat on DB error
+        console.warn('Lead save notice in chat:', dbError);
       }
     }
 
