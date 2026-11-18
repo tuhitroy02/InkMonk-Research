@@ -3,9 +3,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeToggle } from '@/components/ThemeProvider';
+import { useSupabaseAuth } from '@/context/SupabaseAuthContext';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -13,6 +14,8 @@ export default function Navbar() {
   const [portalMenuOpen, setPortalMenuOpen] = useState(false);
   const portalDropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, openAuthModal, signOut } = useSupabaseAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -126,18 +129,36 @@ export default function Navbar() {
             <span>ASK AI</span>
           </Link>
 
-          {/* 3. CLIENT PORTAL with Integrated Admin Portal Dropdown */}
+          {/* 3. CLIENT PORTAL / USER SESSION SYNC */}
           <div className="relative shrink-0" ref={portalDropdownRef}>
-            <button
-              onClick={() => setPortalMenuOpen(!portalMenuOpen)}
-              className="btn-clay-portal flex items-center gap-1.5 cursor-pointer"
-              title="Scholar & Admin Portals"
-            >
-              <span>CLIENT PORTAL</span>
-              <span className="text-[9px] text-slate-400">▼</span>
-            </button>
+            {user ? (
+              /* Signed-In State: User Avatar / Email & Sign Out Dropdown */
+              <button
+                onClick={() => setPortalMenuOpen(!portalMenuOpen)}
+                className="btn-clay-portal flex items-center gap-1.5 cursor-pointer max-w-[160px] text-left"
+                title={`Signed in as ${user.email}`}
+              >
+                <span className="w-4 h-4 rounded-full bg-blue-500 text-white font-black text-[9px] flex items-center justify-center shrink-0">
+                  {user.email?.[0].toUpperCase() || 'U'}
+                </span>
+                <span className="truncate text-[10px]">
+                  {user.email?.split('@')[0]}
+                </span>
+                <span className="text-[9px] text-slate-400 shrink-0">▼</span>
+              </button>
+            ) : (
+              /* Signed-Out State: Opens Auth Modal or Portal Menu */
+              <button
+                onClick={() => setPortalMenuOpen(!portalMenuOpen)}
+                className="btn-clay-portal flex items-center gap-1.5 cursor-pointer"
+                title="Scholar & Admin Portals"
+              >
+                <span>CLIENT PORTAL</span>
+                <span className="text-[9px] text-slate-400">▼</span>
+              </button>
+            )}
 
-            {/* Dropdown containing Client Portal and Admin Portal option */}
+            {/* Dropdown Menu */}
             <AnimatePresence>
               {portalMenuOpen && (
                 <motion.div
@@ -145,38 +166,88 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 8, scale: 0.95 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute right-0 mt-2 w-60 rounded-2xl bg-white dark:bg-[#0F172A] border-2 border-slate-200 dark:border-slate-700 shadow-2xl p-2 z-50 text-center"
+                  className="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-[#0F172A] border-2 border-slate-200 dark:border-slate-700 shadow-2xl p-2 z-50 text-center"
                 >
-                  <div className="text-[10px] font-black uppercase text-slate-400 dark:text-slate-500 py-1 border-b border-slate-100 dark:border-slate-800 mb-1">
-                    Select Portal Destination
-                  </div>
-                  <Link
-                    href="/login?portal=client"
-                    onClick={() => setPortalMenuOpen(false)}
-                    className="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-orange-50 dark:hover:bg-slate-800 transition-colors group mb-1 text-center"
-                  >
-                    <div className="flex items-center gap-1.5 font-bold text-xs text-slate-900 dark:text-white group-hover:text-[#F95721]">
-                      <span>🎓</span>
-                      <span className="uppercase">Client Scholar Portal</span>
-                    </div>
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400">
-                      View deliverables, drafts &amp; status
-                    </span>
-                  </Link>
+                  {user ? (
+                    /* User Profile Dropdown when Logged In */
+                    <div>
+                      <div className="p-2 border-b border-slate-100 dark:border-slate-800 text-center">
+                        <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                          Authenticated Scholar
+                        </div>
+                        <div className="text-xs font-black text-slate-900 dark:text-white truncate">
+                          {user.email}
+                        </div>
+                      </div>
 
-                  <Link
-                    href="/login?portal=admin"
-                    onClick={() => setPortalMenuOpen(false)}
-                    className="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-blue-50 dark:hover:bg-slate-800 transition-colors group border-t border-slate-100 dark:border-slate-800 text-center"
-                  >
-                    <div className="flex items-center gap-1.5 font-bold text-xs text-slate-900 dark:text-white group-hover:text-[#2563EB]">
-                      <span>🛡️</span>
-                      <span className="uppercase">Admin Directorate Portal</span>
+                      <div className="py-1">
+                        <Link
+                          href="/client"
+                          onClick={() => setPortalMenuOpen(false)}
+                          className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-orange-50 dark:hover:bg-slate-800 text-xs font-bold text-slate-800 dark:text-white transition-colors"
+                        >
+                          <span>🎓</span>
+                          <span>My Client Portal</span>
+                        </Link>
+                        <Link
+                          href="/quote"
+                          onClick={() => setPortalMenuOpen(false)}
+                          className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-bold text-slate-800 dark:text-white transition-colors"
+                        >
+                          <span>📋</span>
+                          <span>My Estimates &amp; Scopes</span>
+                        </Link>
+                      </div>
+
+                      <div className="pt-1 border-t border-slate-100 dark:border-slate-800">
+                        <button
+                          onClick={async () => {
+                            setPortalMenuOpen(false);
+                            await signOut();
+                          }}
+                          className="w-full text-center p-2 rounded-xl text-xs font-black text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors uppercase cursor-pointer"
+                        >
+                          Sign Out
+                        </button>
+                      </div>
                     </div>
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400">
-                      Tuhit Roy &amp; Sampreeti Mukherjee
-                    </span>
-                  </Link>
+                  ) : (
+                    /* Sign In / Destination Menu when Logged Out */
+                    <div>
+                      <div className="text-[10px] font-black uppercase text-slate-400 dark:text-slate-500 py-1 border-b border-slate-100 dark:border-slate-800 mb-1">
+                        Select Portal Destination
+                      </div>
+                      <button
+                        onClick={() => {
+                          setPortalMenuOpen(false);
+                          openAuthModal(() => router.push('/client'));
+                        }}
+                        className="w-full flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-orange-50 dark:hover:bg-slate-800 transition-colors group mb-1 text-center cursor-pointer"
+                      >
+                        <div className="flex items-center gap-1.5 font-bold text-xs text-slate-900 dark:text-white group-hover:text-[#F95721]">
+                          <span>🎓</span>
+                          <span className="uppercase">Client Scholar Portal</span>
+                        </div>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400">
+                          Sign in with Google or 6-digit OTP
+                        </span>
+                      </button>
+
+                      <Link
+                        href="/login?portal=admin"
+                        onClick={() => setPortalMenuOpen(false)}
+                        className="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-blue-50 dark:hover:bg-slate-800 transition-colors group border-t border-slate-100 dark:border-slate-800 text-center"
+                      >
+                        <div className="flex items-center gap-1.5 font-bold text-xs text-slate-900 dark:text-white group-hover:text-[#2563EB]">
+                          <span>🛡️</span>
+                          <span className="uppercase">Admin Directorate Portal</span>
+                        </div>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400">
+                          Tuhit Roy &amp; Sampreeti Mukherjee
+                        </span>
+                      </Link>
+                    </div>
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -252,20 +323,49 @@ export default function Navbar() {
                 >
                   ASK AI ASSISTANT
                 </Link>
-                <Link
-                  href="/login?portal=client"
-                  onClick={() => setMobileOpen(false)}
-                  className="btn-clay-portal w-full !py-2 text-center text-xs"
-                >
-                  🎓 CLIENT SCHOLAR PORTAL
-                </Link>
-                <Link
-                  href="/login?portal=admin"
-                  onClick={() => setMobileOpen(false)}
-                  className="btn-clay-white w-full !py-2 text-center text-xs uppercase"
-                >
-                  🛡️ ADMIN DIRECTORATE PORTAL
-                </Link>
+                {user ? (
+                  <>
+                    <div className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-800 dark:text-white text-center">
+                      <span className="text-[10px] text-slate-500 block uppercase">Logged in as</span>
+                      <span className="truncate block font-black">{user.email}</span>
+                    </div>
+                    <Link
+                      href="/client"
+                      onClick={() => setMobileOpen(false)}
+                      className="btn-clay-portal w-full !py-2 text-center text-xs"
+                    >
+                      🎓 OPEN CLIENT PORTAL
+                    </Link>
+                    <button
+                      onClick={async () => {
+                        setMobileOpen(false);
+                        await signOut();
+                      }}
+                      className="w-full py-2 rounded-xl text-xs font-black text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40 border border-red-200 dark:border-red-800 text-center uppercase cursor-pointer"
+                    >
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => {
+                        setMobileOpen(false);
+                        openAuthModal(() => router.push('/client'));
+                      }}
+                      className="btn-clay-portal w-full !py-2 text-center text-xs cursor-pointer"
+                    >
+                      🎓 CLIENT SCHOLAR PORTAL
+                    </button>
+                    <Link
+                      href="/login?portal=admin"
+                      onClick={() => setMobileOpen(false)}
+                      className="btn-clay-white w-full !py-2 text-center text-xs uppercase"
+                    >
+                      🛡️ ADMIN DIRECTORATE PORTAL
+                    </Link>
+                  </>
+                )}
                 <Link
                   href="/"
                   onClick={() => setMobileOpen(false)}

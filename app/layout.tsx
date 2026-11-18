@@ -4,6 +4,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { SupabaseAuthProvider } from "@/context/SupabaseAuthContext";
+import SupabaseAuthModal from "@/components/SupabaseAuthModal";
 
 export const metadata: Metadata = {
   title: {
@@ -47,12 +49,15 @@ export default function RootLayout({
         className="min-h-screen antialiased transition-colors duration-300 relative bg-[#F8FAFC] dark:bg-[#0A0F1D] text-[#0F172A] dark:text-[#F8FAFC]"
       >
         <ThemeProvider>
-          <Navbar />
-          <main className="min-h-screen pt-20 relative z-10">
-            {children}
-          </main>
-          <Footer />
-          <ChatWidget />
+          <SupabaseAuthProvider>
+            <Navbar />
+            <main className="min-h-screen pt-20 relative z-10">
+              {children}
+            </main>
+            <Footer />
+            <ChatWidget />
+            <SupabaseAuthModal />
+          </SupabaseAuthProvider>
         </ThemeProvider>
       </body>
     </html>

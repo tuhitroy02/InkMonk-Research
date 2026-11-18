@@ -2,7 +2,9 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { useSupabaseAuth } from '@/context/SupabaseAuthContext';
 import {
   CurvedPointerArrow,
   NotepadPencilIcon,
@@ -24,6 +26,9 @@ const SCHOLAR_AVATARS = [
 ];
 
 export default function HeroClaymorphic() {
+  const router = useRouter();
+  const { user, openAuthModal } = useSupabaseAuth();
+
   // Calculator state
   const [selectedService, setSelectedService] = useState<'RESEARCH_PAPER' | 'THESIS' | 'LIT_REVIEW'>('RESEARCH_PAPER');
   const [stage, setStage] = useState('Just starting');
@@ -34,6 +39,26 @@ export default function HeroClaymorphic() {
     if (selectedService === 'RESEARCH_PAPER') return '14 Days';
     if (selectedService === 'THESIS') return '28 Days';
     return '10 Days';
+  };
+
+  // Auth gate triggers
+  const handleStartJourney = (e: React.MouseEvent) => {
+    if (!user) {
+      e.preventDefault();
+      openAuthModal(() => {
+        router.push('/quote');
+      });
+    }
+  };
+
+  const handleShowPricing = (e: React.MouseEvent) => {
+    const targetUrl = `/quote?service=${selectedService}&stage=${encodeURIComponent(stage)}&words=${encodeURIComponent(wordCount)}`;
+    if (!user) {
+      e.preventDefault();
+      openAuthModal(() => {
+        router.push(targetUrl);
+      });
+    }
   };
 
   return (
@@ -109,6 +134,7 @@ export default function HeroClaymorphic() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 w-full max-w-md mx-auto">
               <Link
                 href="/quote"
+                onClick={handleStartJourney}
                 className="btn-clay-orange text-center text-sm sm:text-base w-full sm:w-auto"
               >
                 <span>Start Your Journey</span>
@@ -256,6 +282,7 @@ export default function HeroClaymorphic() {
               {/* Main Button */}
               <Link
                 href={`/quote?service=${selectedService}&stage=${encodeURIComponent(stage)}&words=${encodeURIComponent(wordCount)}`}
+                onClick={handleShowPricing}
                 className="btn-clay-orange w-full !py-3 text-xs sm:text-sm font-extrabold shadow-lg"
               >
                 <span>Show Pricing &amp; Next Steps</span>

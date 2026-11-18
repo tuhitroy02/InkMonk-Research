@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import { supabase } from '@/lib/supabaseClient';
 import {
   TurnitinShieldLogo,
   ResearchPaperRealIcon,
@@ -73,12 +74,26 @@ export default function ClientDashboard() {
   useEffect(() => {
     async function checkAuth() {
       try {
+        // 1. Check Supabase Auth session first
+        const { data: { user: sbUser } } = await supabase.auth.getUser();
+        if (sbUser) {
+          setUser({
+            id: sbUser.id,
+            name: sbUser.user_metadata?.full_name || sbUser.email?.split('@')[0] || 'Scholar',
+            email: sbUser.email || '',
+            role: 'CLIENT',
+          });
+          setLoading(false);
+          return;
+        }
+
+        // 2. Check traditional session cookie
         const res = await fetch('/api/auth/me');
         if (res.ok) {
           const data = await res.json();
           setUser(data.user);
         } else {
-          // Fallback to local storage if available
+          // 3. Fallback to local storage if available
           const storedUser = localStorage.getItem('inkmonk_user');
           if (storedUser) {
             setUser(JSON.parse(storedUser));
@@ -107,7 +122,13 @@ export default function ClientDashboard() {
   }, [router]);
 
   const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' });
+    try {
+      await supabase.auth.signOut();
+    } catch {}
+    await fetch('/api/auth/logout', { method: 'POST' }).catch(() => {});
+    try {
+      localStorage.removeItem('inkmonk_user');
+    } catch {}
     router.push('/login');
   };
 
