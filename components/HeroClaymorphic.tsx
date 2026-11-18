@@ -108,25 +108,25 @@ export default function HeroClaymorphic() {
 
             {/* Authentic Tagline & Subhead */}
             <p className="font-serif italic text-lg sm:text-xl text-[#1E3A8A] font-bold mb-2">
-              &ldquo;Research with care. Writing with clarity.&rdquo;
+              &ldquo;Expert research and editorial support in English and Hindi.&rdquo;
             </p>
             <p className="text-slate-700 text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-xl mb-6">
               Premier academic research writing, PhD thesis development, peer-reviewed journal publishing, and Turnitin audits in English and Hindi.
             </p>
 
-            {/* Bullet Checklist with Professional Academic Diamonds (No Gemini Stars, No Ticks) */}
+            {/* Bullet Checklist with Professional Academic Diamonds */}
             <div className="space-y-3 mb-8 w-full max-w-md mx-auto">
               <div className="flex items-center justify-center gap-3 text-slate-800 font-bold text-sm sm:text-base">
                 <span className="text-[#F95721] text-base font-black shrink-0">◆</span>
-                <span>Done-for-you Formatting (LaTeX, APA, etc.)</span>
+                <span>Done-for-you Formatting (LaTeX, APA, IEEE, etc.)</span>
               </div>
               <div className="flex items-center justify-center gap-3 text-slate-800 font-bold text-sm sm:text-base">
                 <span className="text-[#2563EB] text-base font-black shrink-0">◆</span>
-                <span>Peer-Review Ready Checklist</span>
+                <span>Peer-Review Ready Manuscript Architecture</span>
               </div>
               <div className="flex items-center justify-center gap-3 text-slate-800 font-bold text-sm sm:text-base">
                 <span className="text-[#1E293B] text-base font-black shrink-0">◆</span>
-                <span>100% Confidentiality Guaranteed</span>
+                <span>Pre-Signed Mutual NDA &amp; 100% Confidentiality</span>
               </div>
             </div>
 
@@ -134,23 +134,22 @@ export default function HeroClaymorphic() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 w-full max-w-md mx-auto">
               <Link
                 href="/quote"
-                onClick={handleStartJourney}
                 className="btn-clay-orange text-center text-sm sm:text-base w-full sm:w-auto"
               >
-                <span>Start Your Journey</span>
+                <span>Get a Free Estimate</span>
                 <span className="text-lg">→</span>
               </Link>
 
               <Link
-                href="/how-it-works"
+                href="/samples"
                 className="btn-clay-white text-center text-sm sm:text-base w-full sm:w-auto"
               >
-                <span>See Our Process</span>
+                <span>See Sample Work</span>
                 <span className="text-lg">↓</span>
               </Link>
             </div>
 
-            {/* Social Proof: Avatars + Loved by Scholars */}
+            {/* Social Proof: Avatars + Grounded Directorate Rigor */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
               <div className="flex -space-x-3 overflow-hidden">
                 {SCHOLAR_AVATARS.map((src, i) => (
@@ -164,10 +163,10 @@ export default function HeroClaymorphic() {
               </div>
               <div className="text-center sm:text-left">
                 <div className="text-sm sm:text-base font-extrabold text-slate-900">
-                  Loved by 1,200+ Scholars
+                  Doctoral Academic Directorate
                 </div>
-                <div className="flex items-center justify-center sm:justify-start text-amber-500 text-xs">
-                  {'★'.repeat(5)} <span className="text-slate-500 text-[11px] font-semibold ml-1.5">(4.9/5 from Scopus authors)</span>
+                <div className="flex items-center justify-center sm:justify-start text-blue-600 text-xs font-bold">
+                  <span>IEEE, Scopus &amp; UGC-CARE Standard Reviewers</span>
                 </div>
               </div>
             </div>

@@ -105,31 +105,13 @@ export default function AboutPage() {
               {/* Verifiable Links */}
               <div className="w-full pt-4 border-t border-slate-100 flex items-center justify-center gap-4">
                 <a
-                  href="https://scholar.google.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-xs text-slate-700 hover:text-[#F95721] font-bold transition-colors"
-                >
-                  <GoogleScholarRealIcon className="w-4 h-4" />
-                  <span>Google Scholar</span>
-                </a>
-                <a
-                  href="https://ieeexplore.ieee.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-xs text-slate-700 hover:text-[#2563EB] font-bold transition-colors"
-                >
-                  <IeeeXploreRealIcon className="w-4 h-4" />
-                  <span>IEEE Xplore</span>
-                </a>
-                <a
                   href="https://github.com/tuhitroy02"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 text-xs text-slate-700 hover:text-black font-bold transition-colors"
                 >
                   <GitHubRealIcon className="w-4 h-4" />
-                  <span>GitHub</span>
+                  <span>GitHub Profile (@tuhitroy02)</span>
                 </a>
               </div>
             </div>

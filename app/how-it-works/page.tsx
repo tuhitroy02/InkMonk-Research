@@ -15,6 +15,19 @@ export default function HowItWorksPage() {
   return (
     <div className="min-h-screen bg-notebook-grid text-slate-900 py-16 px-4 text-center">
       
+      {/* ─── Page Title (Accessible H1) ─────────────────────────────────── */}
+      <div className="max-w-4xl mx-auto mb-8 text-center">
+        <div className="inline-block bg-orange-100 text-[#F95721] font-black text-xs uppercase px-4 py-1.5 rounded-full mb-3 shadow-sm border border-orange-200">
+          METHODOLOGY &amp; DELIVERY ROADMAP
+        </div>
+        <h1 className="font-serif text-3xl sm:text-5xl font-black text-slate-900 mb-3 text-center">
+          How InkMonk Research Works
+        </h1>
+        <p className="text-slate-600 text-sm sm:text-base max-w-xl mx-auto font-medium">
+          Our verified 5-stage academic pipeline with 4-installment milestone escrow (25% each), doctoral drafting, and safe non-repository Turnitin audits.
+        </p>
+      </div>
+
       {/* ─── Main Horizontal Pipeline Section ──────────────────────────────── */}
       <HorizontalHowItWorks />
 

@@ -53,18 +53,6 @@ export function ScrollProgressLaser() {
           style={{ left: `calc(${percentage}% - 7px)` }}
         />
       </div>
-
-      {/* Floating Section Tracker Badge (Bottom Right on Desktop) */}
-      <div className="fixed bottom-6 right-6 z-40 hidden lg:flex items-center gap-3 bg-black/90 border border-purple-500/40 px-4 py-2 rounded-full backdrop-blur-xl shadow-[0_0_25px_rgba(168,85,247,0.35)] select-none pointer-events-none font-sans">
-        <span className="w-2.5 h-2.5 rounded-full bg-purple-400 animate-ping" />
-        <span className="text-[10px] text-purple-200 font-bold uppercase tracking-wider font-mono">
-          {activeSection}
-        </span>
-        <span className="text-[10px] text-purple-500">|</span>
-        <span className="text-[10px] text-white font-bold font-mono">
-          DEPTH: {percentage}%
-        </span>
-      </div>
     </>
   );
 }

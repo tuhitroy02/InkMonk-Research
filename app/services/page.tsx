@@ -311,14 +311,38 @@ export default function ServicesPage() {
   const [scopeBuilderOpen, setScopeBuilderOpen] = useState(false);
   const [auditModalOpen, setAuditModalOpen] = useState(false);
 
-  // Read URL Hash on load
+  // Read URL Hash on load & hashchange
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    const handleHash = () => {
+      if (typeof window === 'undefined') return;
       const hash = window.location.hash.toLowerCase();
-      if (hash === '#english') setActiveCategory('ENGLISH SERVICES');
-      else if (hash === '#hindi') setActiveCategory('HINDI SERVICES');
-      else if (hash === '#turnitin') setActiveCategory('TURNITIN REPORTS');
-    }
+      if (hash === '#english') {
+        setActiveCategory('ENGLISH SERVICES');
+        setTimeout(() => document.getElementById('english')?.scrollIntoView({ behavior: 'smooth' }), 80);
+      } else if (hash === '#hindi') {
+        setActiveCategory('HINDI SERVICES');
+        setTimeout(() => document.getElementById('hindi')?.scrollIntoView({ behavior: 'smooth' }), 80);
+      } else if (hash === '#turnitin') {
+        setActiveCategory('TURNITIN REPORTS');
+        setTimeout(() => document.getElementById('turnitin')?.scrollIntoView({ behavior: 'smooth' }), 80);
+      } else if (hash === '#research-paper') {
+        setActiveCategory('ENGLISH SERVICES');
+        setTimeout(() => document.getElementById('research-paper')?.scrollIntoView({ behavior: 'smooth' }), 80);
+      } else if (hash === '#thesis') {
+        setActiveCategory('ENGLISH SERVICES');
+        setTimeout(() => document.getElementById('thesis')?.scrollIntoView({ behavior: 'smooth' }), 80);
+      } else if (hash === '#books') {
+        setActiveCategory('ENGLISH SERVICES');
+        setTimeout(() => document.getElementById('books')?.scrollIntoView({ behavior: 'smooth' }), 80);
+      } else if (hash === '#reviews') {
+        setActiveCategory('ENGLISH SERVICES');
+        setTimeout(() => document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' }), 80);
+      }
+    };
+
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
   }, []);
 
   const CATEGORIES: Array<'ENGLISH SERVICES' | 'HINDI SERVICES' | 'TURNITIN REPORTS'> = [
@@ -341,13 +365,13 @@ export default function ServicesPage() {
         {/* ─── Hero Header ─────────────────────────────────────────────────── */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-block bg-orange-100 text-[#F95721] font-black text-xs uppercase px-4 py-1.5 rounded-full mb-3 shadow-sm border border-orange-200">
-            CENTRAL PRICING &amp; SCHOLARLY CATALOGUE
+            CENTRAL SCHOLARLY SERVICES &amp; RESEARCH CATALOGUE
           </div>
           <h1 className="font-serif text-4xl sm:text-6xl font-black text-slate-900 mb-4 text-center">
-            Services &amp; Pricing Catalogue
+            Academic Services &amp; Research Catalogue
           </h1>
           <p className="text-slate-600 text-base sm:text-lg text-center font-medium leading-relaxed">
-            Transparent deterministic rates, 0% AI writing guarantee, and pre-signed mutual NDA protection across English, Hindi, and Turnitin audits.
+            Peer-reviewed doctoral rigor, comprehensive manuscript drafting, and pre-signed mutual NDA protection across English, Hindi, and Turnitin audits.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3 mt-5 text-xs font-bold text-slate-700">
@@ -367,13 +391,15 @@ export default function ServicesPage() {
         </div>
 
         {/* ─── Top 3 Primary Category Tabs (Default: ENGLISH SERVICES) ──────── */}
-        <div className="flex justify-center mb-12">
+        <div id="english" className="flex justify-center mb-12 scroll-mt-28">
           <div className="inline-flex p-1.5 rounded-2xl bg-white border-2 border-slate-200 shadow-md gap-1 sm:gap-2">
             {CATEGORIES.map((cat) => {
               const isActive = activeCategory === cat;
+              const tabAnchor = cat === 'ENGLISH SERVICES' ? 'english' : cat === 'HINDI SERVICES' ? 'hindi' : 'turnitin';
               return (
                 <button
                   key={cat}
+                  id={`tab-${tabAnchor}`}
                   onClick={() => setActiveCategory(cat)}
                   className={`px-5 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer whitespace-nowrap uppercase tracking-wider ${
                     isActive
@@ -389,7 +415,7 @@ export default function ServicesPage() {
         </div>
 
         {/* Active Category Overview Banner */}
-        <div className="mb-10 p-5 rounded-2xl bg-white border border-slate-200 shadow-sm max-w-4xl mx-auto text-center">
+        <div id={activeCategory === 'HINDI SERVICES' ? 'hindi' : activeCategory === 'TURNITIN REPORTS' ? 'turnitin' : undefined} className="mb-10 p-5 rounded-2xl bg-white border border-slate-200 shadow-sm max-w-4xl mx-auto text-center scroll-mt-28">
           {activeCategory === 'ENGLISH SERVICES' && (
             <div>
               <span className="text-[11px] font-black uppercase text-blue-600 tracking-wider">
@@ -424,8 +450,20 @@ export default function ServicesPage() {
 
         {/* ─── Services Grid ───────────────────────────────────────────────── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
-          {filteredServices.map((service) => (
-            <div key={service.id} className="card-clay-white p-6 flex flex-col justify-between text-center items-center h-full group relative">
+          {filteredServices.map((service) => {
+            const cardAnchor =
+              service.id === 'en-research-paper' ? 'research-paper' :
+              service.id === 'en-thesis' ? 'thesis' :
+              service.id === 'en-review-paper' ? 'reviews' :
+              service.id === 'en-book' || service.id === 'hi-book' ? 'books' :
+              service.id === 'turnitin-scan' ? 'turnitin-service' : service.id;
+
+            return (
+            <div
+              key={service.id}
+              id={cardAnchor}
+              className="card-clay-white p-6 flex flex-col justify-between text-center items-center h-full group relative scroll-mt-28"
+            >
               
               {/* Academic Badges (Zero Public Prices - Pure Scholarly Standards) */}
               <div className="w-full flex flex-col items-center">
@@ -457,14 +495,14 @@ export default function ServicesPage() {
                   {service.desc}
                 </p>
 
-                {/* Features Bullet List (Centered, 3 Concise & High-Impact Points) */}
-                <div className="w-full pt-3 border-t border-slate-100 dark:border-slate-800 mb-5 text-center">
+                {/* Features Bullet List (Center-aligned Heading with Left-aligned Bullets) */}
+                <div className="w-full pt-3 border-t border-slate-100 dark:border-slate-800 mb-5">
                   <div className="text-[10px] text-slate-800 dark:text-slate-200 font-bold uppercase mb-2 tracking-wider text-center">
                     {service.isHindi ? 'प्रमुख मानक एवं विशेषताएं:' : 'Key Deliverables & Standards:'}
                   </div>
-                  <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 font-medium flex flex-col items-center">
+                  <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 font-medium text-left max-w-sm mx-auto">
                     {service.features.map((feat, i) => (
-                      <li key={i} className={`flex items-start justify-center gap-2 text-center max-w-sm ${service.isHindi ? 'font-hindi' : ''}`}>
+                      <li key={i} className={`flex items-start gap-2 text-left ${service.isHindi ? 'font-hindi' : ''}`}>
                         <span className="text-[#F95721] font-bold text-xs shrink-0 mt-0.5">•</span>
                         <span className="leading-snug">{feat}</span>
                       </li>
@@ -539,7 +577,8 @@ export default function ServicesPage() {
               </div>
 
             </div>
-          ))}
+          );
+        })}
         </div>
 
         {/* ─── Bottom CTA & Video Consultation Banner ──────────────────────── */}

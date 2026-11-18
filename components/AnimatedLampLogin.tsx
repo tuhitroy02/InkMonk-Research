@@ -10,10 +10,10 @@ export default function AnimatedLampLogin() {
   const router = useRouter();
   const params = useSearchParams();
 
-  // Lamp State (ON / OFF) & Audio Toggle
+  // Lamp State (ON / OFF) & Audio Toggle (Sound OFF by default)
   const [lampOn, setLampOn] = useState<boolean>(true);
   const [isPulling, setIsPulling] = useState<boolean>(false);
-  const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
+  const [soundEnabled, setSoundEnabled] = useState<boolean>(false);
 
   // Portal Role: 'CLIENT' | 'ADMIN'
   const [portalRole, setPortalRole] = useState<'CLIENT' | 'ADMIN'>(
@@ -44,9 +44,9 @@ export default function AnimatedLampLogin() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  // Admin Specific
-  const [adminEmail, setAdminEmail] = useState('inkmonkresearch@gmail.com');
-  const [adminPassword, setAdminPassword] = useState('InkMonk@2026');
+  // Admin Specific (Zero Hardcoded Credentials)
+  const [adminEmail, setAdminEmail] = useState('');
+  const [adminPassword, setAdminPassword] = useState('');
 
   // Status & Feedback
   const [loading, setLoading] = useState(false);

@@ -308,7 +308,7 @@ export default function AdminDashboard() {
 
             {/* Filter Pills */}
             <div className="flex flex-wrap gap-2 mb-6">
-              {['ALL', 'NEW', 'CONTACTED', 'CONVERTED', 'CHAT', 'MANUAL'].map((f) => (
+              {['ALL', 'NEW', 'CONTACTED', 'CONVERTED', 'IN_PROGRESS', 'DELIVERED', 'CHAT', 'MANUAL'].map((f) => (
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
@@ -386,6 +386,8 @@ export default function AdminDashboard() {
                               <option value="NEW">NEW</option>
                               <option value="CONTACTED">CONTACTED</option>
                               <option value="CONVERTED">CONVERTED</option>
+                              <option value="IN_PROGRESS">IN_PROGRESS</option>
+                              <option value="DELIVERED">DELIVERED</option>
                               <option value="LOST">LOST</option>
                               <option value="SPAM">SPAM</option>
                             </select>

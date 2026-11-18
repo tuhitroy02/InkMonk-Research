@@ -66,12 +66,12 @@ export const HORIZONTAL_STEPS: WorkflowStep[] = [
   {
     step: '04',
     shortTitle: 'TURNITIN AUDIT',
-    badge: '0% AI VERIFIED',
+    badge: 'INSTRUCTOR AUDIT',
     title: 'Turnitin Audit & Originality Certification',
-    desc: 'Every milestone undergoes instructor-tier verification under non-repository protocols, ensuring 0% AI writing and <10% similarity.',
+    desc: 'Every milestone undergoes instructor-tier verification under safe non-repository protocols, verifying original research prose and complete citation integrity.',
     subpoints: [
       'Instructor-grade similarity scan with clickable source matches',
-      'AI writing probability analysis (Zero false-positive risk)',
+      'AI writing probability analysis & original phrasing verification',
       'Strict non-repository protocol (draft never indexed)',
       'Downloadable PDF audit certificate generated for each milestone',
     ],

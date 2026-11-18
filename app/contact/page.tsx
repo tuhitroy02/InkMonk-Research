@@ -136,14 +136,14 @@ export default function ContactPage() {
                 <div className="p-8 bg-orange-50 rounded-2xl border border-orange-200 text-center">
                   <OfficialTurnitinLogo className="w-16 h-16 mx-auto mb-3" />
                   <h3 className="font-serif text-2xl font-black text-slate-900 mb-2 text-center">
-                    Message Dispatched Successfully!
+                    Inquiry Sent Successfully!
                   </h3>
                   <p className="text-slate-700 text-sm max-w-md mx-auto mb-6 text-center leading-relaxed font-medium">
                     Thank you for reaching out to InkMonk Research. Founders Tuhit Roy and Sampreeti Mukherjee have received your submission and will review your specifications promptly.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="btn-clay-white text-xs py-2 px-6"
+                    className="btn-clay-white text-xs py-2 px-6 cursor-pointer"
                   >
                     Send Another Note
                   </button>
@@ -160,76 +160,81 @@ export default function ContactPage() {
                 >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="text-left">
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                      <label htmlFor="contactName" className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
                         Your Full Name *
                       </label>
                       <input
+                        id="contactName"
                         type="text"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="Dr. / Prof. / Scholar Name"
-                        className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner focus:outline-none focus:border-[#2563EB]"
+                        className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20"
                       />
                     </div>
                     <div className="text-left">
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                      <label htmlFor="contactEmail" className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
                         Email Address *
                       </label>
                       <input
+                        id="contactEmail"
                         type="email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="you@university.edu"
-                        className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner focus:outline-none focus:border-[#2563EB]"
+                        className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="text-left">
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                      <label htmlFor="contactPhone" className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
                         WhatsApp / Phone Number
                       </label>
                       <input
+                        id="contactPhone"
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="+91 9876543210"
-                        className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner focus:outline-none focus:border-[#2563EB]"
+                        className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20"
                       />
                     </div>
                     <div className="text-left">
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                      <label htmlFor="contactSubject" className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
                         Academic Discipline / Subject
                       </label>
                       <input
+                        id="contactSubject"
                         type="text"
                         value={formData.subject}
                         onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                         placeholder="e.g. PhD Thesis in Computer Science"
-                        className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner focus:outline-none focus:border-[#2563EB]"
+                        className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20"
                       />
                     </div>
                   </div>
 
                   <div className="text-left">
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
+                    <label htmlFor="contactMessage" className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
                       Project Requirements &amp; Scope *
                     </label>
                     <textarea
+                      id="contactMessage"
                       required
                       rows={5}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Outline your target word count, language (English/Hindi), model implementation needs, and deadlines..."
-                      className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner focus:outline-none focus:border-[#2563EB]"
+                      className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20"
                     />
                   </div>
 
                   {error && (
-                    <div className="p-3 bg-red-100 text-red-800 text-sm rounded-xl border border-red-300 text-center font-medium">
+                    <div role="alert" className="p-3 bg-red-100 text-red-800 text-sm rounded-xl border border-red-300 text-center font-medium">
                       {error}
                     </div>
                   )}
@@ -242,9 +247,9 @@ export default function ContactPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="btn-clay-orange w-full sm:w-auto text-sm px-8 font-black"
+                      className="btn-clay-orange w-full sm:w-auto text-sm px-8 font-black cursor-pointer"
                     >
-                      {isSubmitting ? 'Transmitting...' : 'Dispatch Inquiry →'}
+                      {isSubmitting ? 'Transmitting...' : 'Send Inquiry →'}
                     </button>
                   </div>
                 </form>
@@ -254,8 +259,8 @@ export default function ContactPage() {
 
         </div>
 
-        {/* ─── Merged FAQ Section at the End of Contact (Requirement 3) ──── */}
-        <div className="mt-20 pt-16 border-t-2 border-slate-200">
+        {/* ─── Merged FAQ Section at the End of Contact (Requirement 3 & 4) ──── */}
+        <div id="faq" className="mt-20 pt-16 border-t-2 border-slate-200 scroll-mt-28">
           <FaqSection />
         </div>
 
