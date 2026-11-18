@@ -20,21 +20,37 @@ export function authHash(value: string): string {
   return createHmac('sha256', secret).update(value).digest('hex');
 }
 
+const inMemoryRateLimits = new Map<string, { count: number; resetAt: number }>();
+
 export async function allowRate(key: string, max: number, durationMs: number): Promise<boolean> {
   const id = authHash(key);
   const now = new Date();
-  const record = await db.authRateLimit.findUnique({ where: { key: id } });
-  if (!record || record.resetAt <= now) {
-    await db.authRateLimit.upsert({
-      where: { key: id },
-      create: { key: id, count: 1, resetAt: new Date(now.getTime() + durationMs) },
-      update: { count: 1, resetAt: new Date(now.getTime() + durationMs) },
-    });
+
+  // Try database-backed rate limiting first
+  try {
+    const record = await db.authRateLimit.findUnique({ where: { key: id } });
+    if (!record || record.resetAt <= now) {
+      await db.authRateLimit.upsert({
+        where: { key: id },
+        create: { key: id, count: 1, resetAt: new Date(now.getTime() + durationMs) },
+        update: { count: 1, resetAt: new Date(now.getTime() + durationMs) },
+      });
+      return true;
+    }
+    if (record.count >= max) return false;
+    await db.authRateLimit.update({ where: { key: id }, data: { count: { increment: 1 } } });
+    return true;
+  } catch {
+    // Graceful in-memory fallback if database table is missing or locked
+    const entry = inMemoryRateLimits.get(id);
+    if (!entry || entry.resetAt <= now.getTime()) {
+      inMemoryRateLimits.set(id, { count: 1, resetAt: now.getTime() + durationMs });
+      return true;
+    }
+    if (entry.count >= max) return false;
+    entry.count += 1;
     return true;
   }
-  if (record.count >= max) return false;
-  await db.authRateLimit.update({ where: { key: id }, data: { count: { increment: 1 } } });
-  return true;
 }
 
 export async function clientSession(user: { id: string; name: string; email: string; role: string }) {
