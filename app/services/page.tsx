@@ -4,10 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
-  UkFlagLogo,
-  IndiaFlagLogo,
   TurnitinShieldLogo,
-  OfficialTurnitinLogo,
   AuditTrailIcon,
   CalendarScheduleIcon,
   NdaShieldIcon,
@@ -28,9 +25,10 @@ import FloatingLiveHelp from '@/components/FloatingLiveHelp';
 
 export interface ServiceItem {
   id: string;
-  category: string;
+  division: 'ENGLISH' | 'HINDI' | 'TURNITIN';
   title: string;
   badge: string;
+  priceTag: string;
   image: string;
   desc: string;
   features: string[];
@@ -38,16 +36,34 @@ export interface ServiceItem {
   isCode?: boolean;
   isTurnitin?: boolean;
   isHindi?: boolean;
-  priceTag?: string;
 }
 
-const SERVICE_CATALOG: ServiceItem[] = [
-  // Category 1: Papers & Manuscripts
+const FULL_SERVICE_CATALOG: ServiceItem[] = [
+  // ═══════════════════════════════════════════════════════════════════════════
+  // 1. ENGLISH SERVICES DIVISION
+  // ═══════════════════════════════════════════════════════════════════════════
   {
-    id: 'research-paper',
-    category: 'Manuscripts & Publications',
+    id: 'en-thesis',
+    division: 'ENGLISH',
+    title: 'Ph.D. Thesis & Master Dissertation',
+    badge: '4-STAGE MILESTONE ESCROW',
+    priceTag: 'Non-Tech: ₹19,999 | Tech: ₹28,998',
+    image: '/services/thesis-dissertation.jpg',
+    desc: 'End-to-end doctoral thesis drafting from Chapter 1 (Introduction) through literature review, methodology, results, and conclusion. Available with or without computational models.',
+    features: [
+      'Comprehensive 5-chapter or 6-chapter university structure',
+      'Chapter-by-chapter milestone review and payment schedule (25% per milestone)',
+      'Strict adherence to university thesis handbook and DRC rubric',
+      'Direct communication channel with your assigned Ph.D. director',
+    ],
+    href: '/quote?service=THESIS&lang=EN',
+  },
+  {
+    id: 'en-research-paper',
+    division: 'ENGLISH',
     title: 'Research Paper Writing',
-    badge: 'IEEE / Springer / Elsevier',
+    badge: 'IEEE / SPRINGER / SCOPUS',
+    priceTag: 'Non-Tech: ₹4,999 | Tech: ₹8,998',
     image: '/services/research-paper.jpg',
     desc: 'High-impact empirical and theoretical research manuscripts structured to international publication standards. Formatted to IEEE, Springer, Elsevier, or target UGC-CARE guidelines.',
     features: [
@@ -56,77 +72,62 @@ const SERVICE_CATALOG: ServiceItem[] = [
       'Full BibTeX / Mendeley / EndNote citation management',
       'Target journal formatting (LaTeX template or Word)',
     ],
-    href: '/quote?service=RESEARCH_PAPER',
+    href: '/quote?service=RESEARCH_PAPER&lang=EN',
   },
   {
-    id: 'review-paper',
-    category: 'Manuscripts & Publications',
+    id: 'en-review-paper',
+    division: 'ENGLISH',
     title: 'Systematic Review Papers',
-    badge: 'PRISMA / Bibliometric',
+    badge: 'PRISMA / BIBLIOMETRIC',
+    priceTag: 'Non-Tech: ₹3,999 | Tech: ₹4,499',
     image: '/services/review-paper.jpg',
-    desc: 'Comprehensive systematic literature reviews, state-of-the-art meta-analyses, and VOSviewer/Biblioshiny bibliometric mapping across your discipline.',
+    desc: 'Comprehensive systematic literature reviews, state-of-the-art meta-analyses, and VOSviewer/Biblioshiny bibliometric network mapping across your discipline.',
     features: [
       'PRISMA-compliant search strategy & inclusion flowchart',
       'Systematic taxonomy matrices & comparative synthesis',
       '100+ peer-reviewed primary study critical evaluation',
       'Identification of research gaps and future directions',
     ],
-    href: '/quote?service=REVIEW_PAPER',
+    href: '/quote?service=REVIEW_PAPER&lang=EN',
   },
   {
-    id: 'academic-article',
-    category: 'Manuscripts & Publications',
-    title: 'Academic Articles & Chapters',
-    badge: 'Scopus / UGC-CARE',
-    image: '/services/article-writing.jpg',
-    desc: 'Scholarly articles, edited book chapters, policy whitepapers, and conference proceedings with verified word count tiers and rigorous citation apparatus.',
-    features: [
-      'Available across 1,000 to 5,000+ word tiers',
-      'Standardized per-word rate schedule in quote calculator',
-      'Peer-reviewed standard APA, Harvard, MLA, or Chicago styling',
-      'Zero AI hallucinations and verified fact-checking',
-    ],
-    href: '/quote?service=ARTICLE',
-  },
-
-  // Category 2: Dissertations & Proposals
-  {
-    id: 'thesis-dissertation',
-    category: 'Dissertations & Proposals',
-    title: 'Ph.D. Thesis & Master Dissertation',
-    badge: 'Chapter Milestone Escrow',
-    image: '/services/thesis-dissertation.jpg',
-    desc: 'End-to-end doctoral thesis drafting from Chapter 1 (Introduction) through literature review, methodology, results, and conclusion. Available with or without computational models.',
-    features: [
-      'Comprehensive 5-chapter or 6-chapter university structure',
-      'Chapter-by-chapter milestone review and payment schedule',
-      'Strict adherence to university thesis handbook and DRC rubric',
-      'Direct communication channel with your assigned Ph.D. director',
-    ],
-    href: '/quote?service=THESIS',
-  },
-  {
-    id: 'research-synopsis',
-    category: 'Dissertations & Proposals',
+    id: 'en-synopsis',
+    division: 'ENGLISH',
     title: 'Synopsis & Ph.D. Proposals',
-    badge: 'DRC / Grant Ready',
+    badge: 'DRC / GRANT READY',
+    priceTag: 'Non-Tech: ₹3,999 | Tech: ₹4,499',
     image: '/services/synopsis-proposal.jpg',
     desc: 'Crisp, defensible research synopses, doctoral registration proposals, and academic grant applications formulated to pass university screening committees.',
     features: [
       'Problem statement, research questions, and tentative hypotheses',
       'Proposed methodology, sampling frame & data collection tools',
-      'Tentative chapter outline & chronological work-plan (Gantt)',
+      'Tentative chapter outline & chronological work-plan (Gantt chart)',
       'Preliminary bibliography conforming to institutional norms',
     ],
-    href: '/quote?service=SYNOPSIS',
+    href: '/quote?service=SYNOPSIS&lang=EN',
   },
-
-  // Category 3: Code & Computational Models
   {
-    id: 'model-code',
-    category: 'Computational & Code Implementation',
+    id: 'en-book',
+    division: 'ENGLISH',
+    title: 'Scholarly Book Writing (100–300 pp)',
+    badge: 'ISBN STANDARD',
+    priceTag: '₹3,999 – ₹11,999 (by page tier)',
+    image: '/services/book-monograph.jpg',
+    desc: 'Full-length scholarly monographs, edited volumes, and reference textbooks prepared for academic publishers with ISBN registration support.',
+    features: [
+      'Structured 100-page, 200-page, and 300-page volume packages',
+      'Rigorous chapter-wise pedagogical or research structure',
+      'Front matter, preface, detailed index, and consolidated bibliography',
+      'Print and digital publishing formatting support',
+    ],
+    href: '/quote?service=BOOK&lang=EN',
+  },
+  {
+    id: 'en-model',
+    division: 'ENGLISH',
     title: 'Model & Code Implementation',
-    badge: 'PyTorch / MATLAB / Docker',
+    badge: 'PYTORCH / MATLAB / DOCKER',
+    priceTag: '₹5,999 – ₹12,999 (by complexity)',
     image: '/services/computational-model.jpg',
     desc: 'Machine learning, deep neural network (PyTorch, TensorFlow, CUDA), Python, and MATLAB simulation development with reproducible benchmarks and Git handoff.',
     features: [
@@ -135,33 +136,31 @@ const SERVICE_CATALOG: ServiceItem[] = [
       'Validation curves, confusion matrices & AUC-ROC metrics',
       'Private Git repository handoff directly to your client portal',
     ],
-    href: '/quote?service=MODEL',
+    href: '/quote?service=MODEL&lang=EN',
     isCode: true,
   },
-
-  // Category 4: Scholarly Books
   {
-    id: 'book-writing',
-    category: 'Books & Monographs',
-    title: 'Scholarly Book Writing (100–300 pp)',
-    badge: 'ISBN Standard',
-    image: '/services/book-monograph.jpg',
-    desc: 'Full-length scholarly monographs, edited volumes, and reference textbooks prepared for academic publishers with ISBN registration support.',
+    id: 'en-article',
+    division: 'ENGLISH',
+    title: 'Academic Articles & Chapters',
+    badge: 'SCOPUS / UGC-CARE',
+    priceTag: 'Non-Tech: ₹0.60/word | Tech: ₹0.70/word',
+    image: '/services/article-writing.jpg',
+    desc: 'Scholarly articles, edited book chapters, policy whitepapers, and conference proceedings with verified word count tiers and rigorous citation apparatus.',
     features: [
-      'Structured 100-page, 200-page, and 300-page packages',
-      'Rigorous chapter-wise pedagogical or research structure',
-      'Front matter, preface, detailed index, and consolidated bibliography',
-      'Available in both English and Hindi',
+      'Available across 1,000 to 5,000+ word tiers',
+      'Standardized per-word rate schedule in quote calculator',
+      'Peer-reviewed standard APA, Harvard, MLA, or Chicago styling',
+      'Zero AI hallucinations and verified fact-checking',
     ],
-    href: '/quote?service=BOOK',
+    href: '/quote?service=ARTICLE&lang=EN',
   },
-
-  // Category 5: Presentations & Defense
   {
-    id: 'presentation-defense',
-    category: 'Presentations & Defense',
+    id: 'en-presentation',
+    division: 'ENGLISH',
     title: 'Academic PPT & Thesis Defense',
-    badge: 'Defense Ready',
+    badge: 'DEFENSE READY',
+    priceTag: 'Non-Tech: ₹120/slide | Tech: ₹150/slide',
     image: '/services/academic-presentation.jpg',
     desc: 'Professional thesis defense slide decks, conference presentations, and seminar slides formatted to withstand tough academic committee inquiries.',
     features: [
@@ -170,49 +169,157 @@ const SERVICE_CATALOG: ServiceItem[] = [
       'Custom methodology workflow diagrams and architecture schematics',
       'Per-slide standardized rate in quote engine',
     ],
-    href: '/quote?service=PPT',
+    href: '/quote?service=PPT&lang=EN',
   },
 
-  // Category 6: Turnitin Reports
+  // ═══════════════════════════════════════════════════════════════════════════
+  // 2. HINDI SERVICES DIVISION (हिंदी शोध एवं अकादमिक प्रभाग)
+  // ═══════════════════════════════════════════════════════════════════════════
   {
-    id: 'turnitin-audit',
-    category: 'Originality & Audits',
+    id: 'hi-thesis',
+    division: 'HINDI',
+    title: 'शोध प्रबंध / Ph.D. Thesis & Dissertation',
+    badge: 'शोधगंगा एवं यूजीसी मानक',
+    priceTag: 'Non-Tech: ₹25,999 | Tech: ₹33,998',
+    image: '/research-areas/hindi-sahitya.jpg',
+    desc: 'सम्प्रीति मुखर्जी मैम के प्रत्यक्ष पर्यवेक्षण में संपूर्ण 5-अध्यायी हिंदी शोध प्रबंध लेखन। शोधगंगा, यूजीसी-केयर एवं विश्वविद्यालय नियमावली के अनुरूप।',
+    features: [
+      '5-अध्यायी संपूर्ण शोध प्रबंध संरचना (प्रस्तावना, साहित्य समीक्षा, प्रविधि, विश्लेषण, निष्कर्ष)',
+      '4-चरणीय माइलस्टोन समीक्षा एवं एस्क्रो भुगतान व्यवस्था (25% प्रति चरण)',
+      'मानक पारिभाषिक शब्दावली (भारत सरकार वैज्ञानिक एवं तकनीकी शब्दावली आयोग अनुरूप)',
+      'मौखिक परीक्षा (Viva Voce) एवं शोध समिति प्रस्तुति हेतु संपूर्ण तैयारी',
+    ],
+    href: '/quote?service=THESIS&lang=HI',
+    isHindi: true,
+  },
+  {
+    id: 'hi-research-paper',
+    division: 'HINDI',
+    title: 'शोध पत्र / Research Paper Writing',
+    badge: 'यूजीसी-केयर सूचीबद्ध',
+    priceTag: 'Non-Tech: ₹6,999 | Tech: ₹10,998',
+    image: '/services/research-paper.jpg',
+    desc: 'यूजीसी-केयर (UGC-CARE) एवं समकक्ष प्रतिष्ठित शोध पत्रिकाओं हेतु उच्च स्तरीय मौलिक शोध पत्र लेखन, संदर्भ ग्रंथ सूची एवं शोध प्रविधि सहित।',
+    features: [
+      'प्रामाणिक परिकल्पना निर्माण एवं प्राथमिक/द्वितीयक स्रोतों का अध्ययन',
+      'मानकीकृत देवनागरी संदर्भ प्रणाली (MLA / APA / शिकागो प्रारूप)',
+      '0% AI लेखन एवं शत-प्रतिशत मौलिक बौद्धिक शोध',
+      'संपादकीय समीक्षा एवं पत्रिका संशोधन (Revision) में पूर्ण सहयोग',
+    ],
+    href: '/quote?service=RESEARCH_PAPER&lang=HI',
+    isHindi: true,
+  },
+  {
+    id: 'hi-review-paper',
+    division: 'HINDI',
+    title: 'समीक्षात्मक शोध / Systematic Review Papers',
+    badge: 'समालोचनात्मक सर्वेक्षण',
+    priceTag: 'Non-Tech: ₹5,499 | Tech: ₹5,999',
+    image: '/services/review-paper.jpg',
+    desc: 'हिंदी साहित्य, भाषाविज्ञान, इतिहास, समाजशास्त्र एवं दर्शनशास्त्र में समकालीन शोध प्रवृत्तियों का व्यापक समालोचनात्मक एवं ग्रंथपरक सर्वेक्षण।',
+    features: [
+      'समकालीन शोध प्रवृत्तियों का व्यापक समालोचनात्मक सर्वेक्षण',
+      'प्राथमिक एवं द्वितीयक स्रोतों का तुलनात्मक सैद्धांतिक विश्लेषण',
+      'शोध अंतराल (Research Gaps) एवं भावी शोध दिशाओं का स्पष्ट निरूपण',
+      'मानक देवनागरी पारिभाषिक शब्दावली का शुद्ध प्रयोग',
+    ],
+    href: '/quote?service=REVIEW_PAPER&lang=HI',
+    isHindi: true,
+  },
+  {
+    id: 'hi-synopsis',
+    division: 'HINDI',
+    title: 'शोध प्रस्ताव / Synopsis & Ph.D. Proposals',
+    badge: 'डीआरसी समिति स्वीकृत',
+    priceTag: 'Non-Tech: ₹5,499 | Tech: ₹5,999',
+    image: '/services/synopsis-proposal.jpg',
+    desc: 'पीएच.डी. पंजीकरण एवं विभागीय शोध समिति (DRC/RAC) हेतु तर्कसंगत, सुस्पष्ट एवं प्रामाणिक शोध प्रस्ताव (Synopsis) निर्माण।',
+    features: [
+      'सुस्पष्ट समस्या कथन, शोध प्रश्न, उद्देश्य एवं प्राक्कल्पनाएं',
+      'शोध क्षेत्र, प्रतिचयन (Sampling) एवं अध्ययन प्रविधि का प्रारूप',
+      'अध्यायीकरण की रूपरेखा एवं समयबद्ध कार्ययोजना (Gantt Chart)',
+      'प्रारंभिक संदर्भ ग्रंथ सूची एवं शोध समिति प्रस्तुति तैयारी',
+    ],
+    href: '/quote?service=SYNOPSIS&lang=HI',
+    isHindi: true,
+  },
+  {
+    id: 'hi-book',
+    division: 'HINDI',
+    title: 'पुस्तक लेखन / Scholarly Book Writing (100–300 पृष्ठ)',
+    badge: 'आईएसबीएन (ISBN) मानक',
+    priceTag: '₹4,999 – ₹15,999 (पृष्ठों के अनुसार)',
+    image: '/services/book-monograph.jpg',
+    desc: 'अकादमिक संदर्भ ग्रंथ, संपादित पुस्तकें, शोध मोनोग्राफ एवं पाठ्य-सामग्री का उच्च स्तरीय देवनागरी लेखन, आईएसबीएन प्रारूप सहित।',
+    features: [
+      '100, 200 एवं 300 पृष्ठों के सुव्यवस्थित अकादमिक ग्रंथ पैकेज',
+      'प्रस्तावना, भूमिका, विषय-विभाजन एवं विस्तृत अनुक्रमणिका',
+      'राष्ट्रीय एवं अंतरराष्ट्रीय प्रकाशकों हेतु मुद्रण-योग्य स्वरूप',
+      'शुद्ध देवनागरी वर्तनी एवं मानकीकृत व्याकरण',
+    ],
+    href: '/quote?service=BOOK&lang=HI',
+    isHindi: true,
+  },
+  {
+    id: 'hi-article',
+    division: 'HINDI',
+    title: 'देवनागरी लेख एवं अध्याय / Academic Articles & Chapters',
+    badge: 'प्रति-शब्द मानक दर',
+    priceTag: 'Non-Tech: ₹0.75/शब्द | Tech: ₹0.80/शब्द',
+    image: '/services/article-writing.jpg',
+    desc: 'विद्वत्तापूर्ण आलेख, संपादित पुस्तकों के अध्याय एवं शोध निबंध। शून्य मशीनी अनुवाद—पूर्णतः मानवीय एवं बौद्धिक लेखन।',
+    features: [
+      '1,000 से 5,000+ शब्दों के मानकीकृत प्रति-शब्द दर पर आधारित',
+      'शुद्ध वर्तनी, व्याकरण एवं उच्च स्तरीय बौद्धिक भाषा शैली',
+      'शून्य मशीनी अनुवाद (No Machine Translation Shortcuts)',
+      'संपादित पुस्तकों (Edited Books) हेतु विशेष शोध अध्याय',
+    ],
+    href: '/quote?service=ARTICLE&lang=HI',
+    isHindi: true,
+  },
+  {
+    id: 'hi-presentation',
+    division: 'HINDI',
+    title: 'देवनागरी प्रस्तुति एवं व्याख्यान / Academic PPT & Defense',
+    badge: 'मौखिक परीक्षा (VIVA) तैयार',
+    priceTag: 'Non-Tech: ₹150/स्लाइड | Tech: ₹170/स्लाइड',
+    image: '/services/academic-presentation.jpg',
+    desc: 'पीएच.डी. मौखिक परीक्षा, शोध संगोष्ठी (Seminar) एवं राष्ट्रीय सम्मेलनों हेतु आकर्षक 16:9 देवनागरी स्लाइड एवं वक्ता नोट्स।',
+    features: [
+      '16:9 उच्च-विभेदन देवनागरी स्लाइड प्रारूप (Devanagari Unicode)',
+      'प्रमुख शोध निष्कर्षों के बिंदुवार संक्षिप्त विवरण एवं वक्ता नोट्स',
+      'शोध प्रविधि एवं कार्यप्रणाली के स्पष्ट चार्ट एवं आरेख',
+      'मौखिक परीक्षा (Viva Voce) एवं राष्ट्रीय संगोष्ठियों हेतु तैयार',
+    ],
+    href: '/quote?service=PPT&lang=HI',
+    isHindi: true,
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // 3. TURNITIN REPORTS DIVISION
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: 'turnitin-scan',
+    division: 'TURNITIN',
     title: 'Turnitin AI & Plagiarism Reports',
-    badge: 'Safe Non-Repository',
+    badge: 'SAFE NON-REPOSITORY',
+    priceTag: '₹200 per file flat',
     image: '/services/turnitin-report.jpg',
     desc: 'Instructor-tier Turnitin verification audits checking similarity index and AI writing percentages without saving your manuscript to public databases.',
     features: [
-      'Flat fee of ₹200 per file scanned (15–30 min delivery)',
+      'Flat fee of ₹200 per file scanned (15–30 min express delivery)',
       '100% Non-Repository deposit (Zero database retention guaranteed)',
       'Full PDF report with color-coded passage citations and matching sources',
-      'Instant UPI payment and instant upload modal',
+      'Dedicated AI Writing detection percentage breakdown (0% AI guaranteed)',
     ],
     href: '/quote?type=TURNITIN',
     isTurnitin: true,
-    priceTag: '₹200 per file flat',
-  },
-
-  // Category 7: Hindi Specialists
-  {
-    id: 'hindi-research',
-    category: 'Hindi Academic Division (हिंदी शोध)',
-    title: 'Hindi Research & Thesis (हिंदी शोध पत्र एवं प्रबंध)',
-    badge: 'Devanagari Specialists',
-    image: '/research-areas/hindi-sahitya.jpg',
-    desc: 'Specialized academic research in Hindi supervised by Sampreeti Mukherjee with standard Devanagari terminology, Shodhganga compliance, and zero automated translation shortcuts.',
-    features: [
-      'शोध पत्र (Research Papers) & शोध प्रबंध (Complete Theses)',
-      'मानक पारिभाषिक शब्दावली (Standardized Academic Terminology)',
-      'यूजीसी-केयर (UGC-CARE) एवं शोधगंगा (Shodhganga) अनुरूप प्रारूप',
-      'तुलनात्मक साहित्य, मानविकी, भाषाविज्ञान एवं समाजशास्त्र',
-    ],
-    href: '/quote?lang=HI',
-    isHindi: true,
   },
 ];
 
 export default function ServicesPage() {
-  const [activeCategory, setActiveCategory] = useState<string>('ENGLISH SERVICES');
+  // Top 3 categories with ENGLISH SERVICES as default
+  const [activeCategory, setActiveCategory] = useState<'ENGLISH SERVICES' | 'HINDI SERVICES' | 'TURNITIN REPORTS'>('ENGLISH SERVICES');
 
   // Modals
   const [turnitinModalOpen, setTurnitinModalOpen] = useState(false);
@@ -232,27 +339,16 @@ export default function ServicesPage() {
     }
   }, []);
 
-  // 1stly the 3 primary options in the top, followed by specific catalog categories
-  const categories = [
+  const CATEGORIES: Array<'ENGLISH SERVICES' | 'HINDI SERVICES' | 'TURNITIN REPORTS'> = [
     'ENGLISH SERVICES',
     'HINDI SERVICES',
     'TURNITIN REPORTS',
-    'ALL SERVICES',
-    'DISSERTATIONS & PROPOSALS',
-    'COMPUTATIONAL & CODE IMPLEMENTATION',
-    'BOOKS & MONOGRAPHS',
-    'PRESENTATIONS & DEFENSE',
   ];
 
-  const filteredServices = SERVICE_CATALOG.filter((s) => {
-    if (activeCategory === 'ALL SERVICES') return true;
-    if (activeCategory === 'ENGLISH SERVICES') return !s.isHindi && !s.isTurnitin;
-    if (activeCategory === 'HINDI SERVICES') return s.isHindi === true;
-    if (activeCategory === 'TURNITIN REPORTS') return s.isTurnitin === true;
-    if (activeCategory === 'DISSERTATIONS & PROPOSALS') return s.category === 'Dissertations & Proposals';
-    if (activeCategory === 'COMPUTATIONAL & CODE IMPLEMENTATION') return s.category === 'Computational & Code Implementation';
-    if (activeCategory === 'BOOKS & MONOGRAPHS') return s.category === 'Books & Monographs';
-    if (activeCategory === 'PRESENTATIONS & DEFENSE') return s.category === 'Presentations & Defense';
+  const filteredServices = FULL_SERVICE_CATALOG.filter((s) => {
+    if (activeCategory === 'ENGLISH SERVICES') return s.division === 'ENGLISH';
+    if (activeCategory === 'HINDI SERVICES') return s.division === 'HINDI';
+    if (activeCategory === 'TURNITIN REPORTS') return s.division === 'TURNITIN';
     return true;
   });
 
@@ -261,15 +357,15 @@ export default function ServicesPage() {
       <div className="max-w-7xl mx-auto">
 
         {/* ─── Hero Header ─────────────────────────────────────────────────── */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-block bg-orange-100 text-[#F95721] font-black text-xs uppercase px-4 py-1.5 rounded-full mb-3 shadow-sm border border-orange-200">
-            ACADEMIC CATALOGUE // RIGOROUS &amp; CONFIDENTIAL
+            CENTRAL PRICING &amp; SCHOLARLY CATALOGUE
           </div>
           <h1 className="font-serif text-4xl sm:text-6xl font-black text-slate-900 mb-4 text-center">
-            Scholarly Services Catalogue
+            Services &amp; Pricing Catalogue
           </h1>
           <p className="text-slate-600 text-base sm:text-lg text-center font-medium leading-relaxed">
-            Rigorously formatted, 0% AI, and plagiarism-free academic scholarship in both <strong className="text-slate-900 font-bold">English</strong> and <strong className="text-slate-900 font-bold">Hindi</strong>. Evaluated transparently through our central server-side pricing engine.
+            Transparent deterministic rates, 0% AI writing guarantee, and pre-signed mutual NDA protection across English, Hindi, and Turnitin audits.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3 mt-5 text-xs font-bold text-slate-700">
@@ -279,48 +375,85 @@ export default function ServicesPage() {
             </span>
             <span className="flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full shadow-sm">
               <NdaShieldIcon className="w-4 h-4 text-[#2563EB]" />
-              <span>100% IP &amp; Mutual NDA</span>
+              <span>100% Pre-Signed Mutual NDA</span>
             </span>
             <span className="flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full shadow-sm">
               <span className="text-blue-600 font-bold">◆</span>
-              <span>Chapter-by-Chapter Escrow</span>
+              <span>4-Stage Milestone Escrow</span>
             </span>
           </div>
         </div>
 
-        {/* ─── Category Filter Tabs ────────────────────────────────────────── */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12 font-sans">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                activeCategory === cat
-                  ? 'bg-[#F95721] text-white shadow-[0_4px_0_#C43B00,0_8px_16px_rgba(249,87,33,0.3)] scale-105'
-                  : 'bg-white text-slate-700 hover:text-[#F95721] border-2 border-slate-200 shadow-sm'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+        {/* ─── Top 3 Primary Category Tabs (Default: ENGLISH SERVICES) ──────── */}
+        <div className="flex justify-center mb-12">
+          <div className="inline-flex p-1.5 rounded-2xl bg-white border-2 border-slate-200 shadow-md gap-1 sm:gap-2">
+            {CATEGORIES.map((cat) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-5 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer whitespace-nowrap uppercase tracking-wider ${
+                    isActive
+                      ? 'bg-[#F95721] text-white shadow-[0_4px_0_#C43B00,0_8px_18px_rgba(249,87,33,0.35)] scale-105'
+                      : 'text-slate-700 hover:text-[#F95721] hover:bg-slate-50'
+                  }`}
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* ─── Redesigned Services Grid ────────────────────────────────────── */}
+        {/* Active Category Overview Banner */}
+        <div className="mb-10 p-5 rounded-2xl bg-white border border-slate-200 shadow-sm max-w-4xl mx-auto text-center">
+          {activeCategory === 'ENGLISH SERVICES' && (
+            <div>
+              <span className="text-[11px] font-black uppercase text-blue-600 tracking-wider">
+                ENGLISH RESEARCH DIVISION // GLOBAL PUBLICATION RIGOR
+              </span>
+              <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
+                Structured to IEEE, Springer, Elsevier, APA, Harvard, and Scopus standards with milestone payment escrow and containerized code benchmarks.
+              </p>
+            </div>
+          )}
+          {activeCategory === 'HINDI SERVICES' && (
+            <div>
+              <span className="text-[11px] font-black uppercase text-[#F95721] tracking-wider font-hindi">
+                हिंदी शोध एवं अकादमिक प्रभाग // सम्प्रीति मुखर्जी (सह-संस्थापक एवं संपादकीय निदेशक)
+              </span>
+              <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium font-hindi">
+                मानक पारिभाषिक शब्दावली, शोधगंगा एवं यूजीसी-केयर अनुरूप संपूर्ण शोध प्रबंध, शोध पत्र, समीक्षा एवं ग्रंथ लेखन। शून्य मशीनी अनुवाद।
+              </p>
+            </div>
+          )}
+          {activeCategory === 'TURNITIN REPORTS' && (
+            <div>
+              <span className="text-[11px] font-black uppercase text-emerald-600 tracking-wider">
+                VERIFIED ORIGINALITY AUDITS // SAFE NON-REPOSITORY PROTOCOL
+              </span>
+              <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
+                Instructor-tier Turnitin originality and AI probability checks. Files are never stored or indexed in any repository database. Delivery within 15–30 minutes.
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* ─── Services Grid ───────────────────────────────────────────────── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
           {filteredServices.map((service) => (
             <div key={service.id} className="card-clay-white p-6 flex flex-col justify-between text-center items-center h-full group relative">
               
-              {/* Badge & Category */}
+              {/* Badge & Price Tag */}
               <div className="w-full flex flex-col items-center">
                 <div className="flex items-center justify-between w-full gap-2 mb-3">
                   <span className="text-[10px] font-black uppercase text-[#2563EB] bg-blue-50 border border-blue-200 px-3 py-1 rounded-full">
                     {service.badge}
                   </span>
-                  {service.priceTag && (
-                    <span className="text-xs font-black text-[#F95721] bg-orange-50 border border-orange-200 px-3 py-1 rounded-full">
-                      {service.priceTag}
-                    </span>
-                  )}
+                  <span className="text-xs font-black text-[#F95721] bg-orange-50 border border-orange-200 px-3 py-1 rounded-full">
+                    {service.priceTag}
+                  </span>
                 </div>
 
                 {/* Real High-Resolution Deliverable Photograph */}
@@ -335,21 +468,21 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Title & Desc */}
-                <h3 className="font-serif text-xl font-black text-slate-900 mb-2 group-hover:text-[#F95721] transition-colors text-center">
+                <h3 className={`font-serif text-xl font-black text-slate-900 mb-2 group-hover:text-[#F95721] transition-colors text-center ${service.isHindi ? 'font-hindi' : ''}`}>
                   {service.title}
                 </h3>
-                <p className="text-slate-600 text-xs font-medium leading-relaxed mb-4 text-center">
+                <p className={`text-slate-600 text-xs font-medium leading-relaxed mb-4 text-center ${service.isHindi ? 'font-hindi' : ''}`}>
                   {service.desc}
                 </p>
 
                 {/* Features Bullet List (Centered) */}
                 <div className="w-full pt-3 border-t border-slate-100 mb-6 text-center">
                   <div className="text-[10px] text-slate-800 font-bold uppercase mb-2 tracking-wider text-center">
-                    Key Deliverables &amp; Standards:
+                    {service.isHindi ? 'प्रमुख मानक एवं विशेषताएं:' : 'Key Deliverables & Standards:'}
                   </div>
                   <ul className="space-y-1.5 text-xs text-slate-700 font-medium flex flex-col items-center">
                     {service.features.map((feat, i) => (
-                      <li key={i} className="flex items-center justify-center gap-2 text-center">
+                      <li key={i} className={`flex items-center justify-center gap-2 text-center ${service.isHindi ? 'font-hindi' : ''}`}>
                         <span className="text-[#F95721] font-black text-[11px]">◆</span>
                         <span>{feat}</span>
                       </li>
@@ -359,9 +492,9 @@ export default function ServicesPage() {
               </div>
 
               {/* Card Action Buttons */}
-              <div className="pt-4 border-t border-slate-100 flex flex-col gap-2.5 mt-auto">
+              <div className="pt-4 border-t border-slate-100 flex flex-col gap-2.5 mt-auto w-full">
                 {service.isCode ? (
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-col gap-2">
                     <button
                       onClick={() => setScopeBuilderOpen(true)}
                       className="btn-clay-orange text-xs w-full py-2.5 flex items-center justify-center gap-1.5 cursor-pointer"
@@ -369,6 +502,12 @@ export default function ServicesPage() {
                       <TerminalLogIcon className="w-3.5 h-3.5" />
                       <span>Interactive Code Scope Builder →</span>
                     </button>
+                    <Link
+                      href={service.href}
+                      className="text-xs font-bold text-[#2563EB] hover:underline text-center"
+                    >
+                      Calculate Custom Code Quote
+                    </Link>
                   </div>
                 ) : service.isTurnitin ? (
                   <div className="flex flex-col gap-2">
@@ -391,7 +530,7 @@ export default function ServicesPage() {
                       href={service.href}
                       className="btn-clay-orange text-xs w-full text-center py-2.5"
                     >
-                      Configure Hindi Quote →
+                      कोटेशन कॉन्फ़िगर करें / Calculate Quote →
                     </Link>
                     <button
                       onClick={() => setAuditModalOpen(true)}
@@ -402,7 +541,7 @@ export default function ServicesPage() {
                     </button>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-between gap-2">
+                  <div className="flex flex-col gap-2">
                     <Link
                       href={service.href}
                       className="btn-clay-orange text-xs w-full text-center py-2.5"
@@ -422,7 +561,7 @@ export default function ServicesPage() {
         </div>
 
         {/* ─── Bottom CTA & Video Consultation Banner ──────────────────────── */}
-        <div className="mt-20 p-8 md:p-12 rounded-3xl card-clay-white text-slate-900 text-center shadow-lg relative overflow-hidden">
+        <div className="mt-12 p-8 md:p-12 rounded-3xl card-clay-white text-slate-900 text-center shadow-lg relative overflow-hidden">
           <div className="max-w-3xl mx-auto">
             <h2 className="font-serif text-2xl sm:text-4xl font-black mb-3 text-center text-slate-900">
               Uncertain About Your Specific Requirements?

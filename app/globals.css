@@ -36,7 +36,7 @@ body {
 /* ─── Tactile Academic Graph Paper Grid ─────────────────────────────────── */
 .bg-notebook-grid {
   background-color: #F8FAFC;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(203, 213, 225, 0.45) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(203, 213, 225, 0.45) 1px, transparent 1px);
   background-size: 32px 32px;
@@ -45,7 +45,7 @@ body {
 [data-theme="dark"] .bg-notebook-grid,
 .dark-mode .bg-notebook-grid {
   background-color: #0B1120;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(30, 41, 59, 0.6) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(30, 41, 59, 0.6) 1px, transparent 1px);
 }
@@ -127,7 +127,7 @@ td {
   font-weight: 800;
   border-radius: 9999px;
   padding: 0.45rem 0.95rem;
-  box-shadow: 
+  box-shadow:
     0 3px 0 #C43B00,
     0 8px 16px rgba(245, 82, 4, 0.3),
     inset 0 1px 1px rgba(255, 255, 255, 0.6);
@@ -150,7 +150,7 @@ td {
 .btn-clay-orange:hover {
   background: linear-gradient(180deg, #FF843D 0%, #FA5E11 100%);
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 5px 0 #C43B00,
     0 12px 22px rgba(245, 82, 4, 0.4),
     inset 0 1px 2px rgba(255, 255, 255, 0.8);
@@ -158,7 +158,7 @@ td {
 
 .btn-clay-orange:active {
   transform: translateY(2px);
-  box-shadow: 
+  box-shadow:
     0 1px 0 #C43B00,
     0 4px 8px rgba(245, 82, 4, 0.3),
     inset 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -172,7 +172,7 @@ td {
   font-weight: 800;
   border-radius: 9999px;
   padding: 0.45rem 0.85rem;
-  box-shadow: 
+  box-shadow:
     0 3px 0 #1E40AF,
     0 8px 16px rgba(37, 99, 235, 0.3),
     inset 0 1px 1px rgba(255, 255, 255, 0.6);
@@ -195,7 +195,7 @@ td {
 .btn-clay-ai:hover {
   background: linear-gradient(180deg, #3B82F6 0%, #2563EB 100%);
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 5px 0 #1E40AF,
     0 12px 22px rgba(37, 99, 235, 0.4),
     inset 0 1px 2px rgba(255, 255, 255, 0.8);
@@ -203,7 +203,7 @@ td {
 
 .btn-clay-ai:active {
   transform: translateY(2px);
-  box-shadow: 
+  box-shadow:
     0 1px 0 #1E40AF,
     0 4px 8px rgba(37, 99, 235, 0.3),
     inset 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -217,7 +217,7 @@ td {
   font-weight: 800;
   border-radius: 9999px;
   padding: 0.45rem 0.85rem;
-  box-shadow: 
+  box-shadow:
     0 3px 0 #020617,
     0 8px 16px rgba(15, 23, 42, 0.3),
     inset 0 1px 1px rgba(255, 255, 255, 0.3);
@@ -240,14 +240,14 @@ td {
 .btn-clay-portal:hover {
   background: linear-gradient(180deg, #334155 0%, #1E293B 100%);
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 5px 0 #020617,
     0 12px 22px rgba(15, 23, 42, 0.4);
 }
 
 .btn-clay-portal:active {
   transform: translateY(2px);
-  box-shadow: 
+  box-shadow:
     0 1px 0 #020617,
     0 4px 8px rgba(15, 23, 42, 0.3);
 }
@@ -260,7 +260,7 @@ td {
   font-weight: 800;
   border-radius: 9999px;
   padding: 0.45rem 0.85rem;
-  box-shadow: 
+  box-shadow:
     0 3px 0 #CBD5E1,
     0 8px 14px rgba(15, 23, 42, 0.08),
     inset 0 1px 2px #FFFFFF;
@@ -285,14 +285,14 @@ td {
   transform: translateY(-2px);
   border-color: #2563EB;
   color: #2563EB !important;
-  box-shadow: 
+  box-shadow:
     0 6px 0 #93C5FD,
     0 14px 22px rgba(37, 99, 235, 0.18);
 }
 
 .btn-clay-home:active {
   transform: translateY(3px);
-  box-shadow: 
+  box-shadow:
     0 1px 0 #CBD5E1,
     0 4px 6px rgba(15, 23, 42, 0.1);
 }
@@ -305,7 +305,7 @@ td {
   border-radius: 9999px;
   padding: 0.85rem 1.85rem;
   border: 2px solid #CBD5E1;
-  box-shadow: 
+  box-shadow:
     0 4px 0 #94A3B8,
     0 10px 20px rgba(15, 23, 42, 0.08),
     inset 0 2px 2px #FFFFFF;
@@ -324,7 +324,7 @@ td {
   background: #FFFFFF;
   border-color: #94A3B8;
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 6px 0 #94A3B8,
     0 14px 24px rgba(15, 23, 42, 0.12),
     inset 0 2px 2px #FFFFFF;
@@ -332,7 +332,7 @@ td {
 
 .btn-clay-white:active {
   transform: translateY(3px);
-  box-shadow: 
+  box-shadow:
     0 1px 0 #94A3B8,
     0 3px 8px rgba(15, 23, 42, 0.08),
     inset 0 2px 4px rgba(0, 0, 0, 0.08);
@@ -346,7 +346,7 @@ td {
   border-radius: 9999px;
   padding: 0.65rem 1.35rem;
   border: 1.5px solid #CBD5E1;
-  box-shadow: 
+  box-shadow:
     0 3px 0 #94A3B8,
     0 6px 14px rgba(0, 0, 0, 0.06),
     inset 0 1px 1px #FFFFFF;
@@ -366,7 +366,7 @@ td {
   border-color: #38BDF8;
   color: #0284C7 !important;
   transform: translateY(-1px);
-  box-shadow: 
+  box-shadow:
     0 4px 0 #0284C7,
     0 8px 18px rgba(2, 132, 199, 0.2),
     inset 0 1px 1px #FFFFFF;
@@ -383,7 +383,7 @@ td {
   background-color: #FFFFFF;
   border-radius: 1.75rem;
   border: 2px solid #E2E8F0;
-  box-shadow: 
+  box-shadow:
     0 16px 36px -6px rgba(15, 23, 42, 0.08),
     0 4px 10px -2px rgba(15, 23, 42, 0.04),
     inset 0 2px 4px #FFFFFF;
@@ -395,7 +395,7 @@ td {
 .dark-mode .card-clay-white {
   background-color: #0F172A;
   border-color: #1E293B;
-  box-shadow: 
+  box-shadow:
     0 20px 40px -8px rgba(0, 0, 0, 0.6),
     inset 0 1px 2px rgba(255, 255, 255, 0.08);
 }
@@ -403,7 +403,7 @@ td {
 .card-clay-white:hover {
   transform: translateY(-4px);
   border-color: #CBD5E1;
-  box-shadow: 
+  box-shadow:
     0 24px 48px -8px rgba(15, 23, 42, 0.12),
     0 8px 16px -4px rgba(15, 23, 42, 0.06),
     inset 0 2px 4px #FFFFFF;
@@ -414,7 +414,7 @@ td {
   background-color: #FFFFFF;
   border-radius: 2rem;
   border: 4px solid #2563EB;
-  box-shadow: 
+  box-shadow:
     0 8px 0 #1D4ED8,
     0 22px 45px rgba(37, 99, 235, 0.22),
     inset 0 2px 4px #FFFFFF;
@@ -425,7 +425,7 @@ td {
 .dark-mode .card-clay-blue-frame {
   background-color: #0F172A;
   border-color: #38BDF8;
-  box-shadow: 
+  box-shadow:
     0 8px 0 #0284C7,
     0 24px 50px rgba(0, 0, 0, 0.8),
     inset 0 1px 2px rgba(255, 255, 255, 0.1);
@@ -437,7 +437,7 @@ td {
   border: 1.5px solid #CBD5E1;
   border-radius: 1rem;
   padding: 0.65rem 1.4rem;
-  box-shadow: 
+  box-shadow:
     0 4px 0 #94A3B8,
     0 8px 16px rgba(15, 23, 42, 0.06),
     inset 0 1px 2px #FFFFFF;
@@ -452,7 +452,7 @@ td {
 
 .badge-clay-embossed:hover {
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 6px 0 #94A3B8,
     0 12px 22px rgba(15, 23, 42, 0.1),
     inset 0 1px 2px #FFFFFF;
@@ -575,8 +575,13 @@ td {
 
 /* ─── Animations ────────────────────────────────────────────────────────── */
 @keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .animate-spin-slow {

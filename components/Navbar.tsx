@@ -33,13 +33,11 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Navigation Links strictly ordered as requested:
-  // ENGLISH SERVICES -> HINDI SERVICES -> TURNITIN REPORTS -> SAMPLES -> HOW IT WORKS -> ABOUT -> CONTACT & FAQ
+  // Navigation Links:
+  // SERVICES -> SAMPLES -> HOW IT WORKS -> ABOUT -> CONTACT & FAQ
   // All in CAPITAL LETTERS
   const NAV_LINKS = [
-    { href: '/services#english', label: 'ENGLISH SERVICES' },
-    { href: '/services#hindi', label: 'HINDI SERVICES' },
-    { href: '/services#turnitin', label: 'TURNITIN REPORTS' },
+    { href: '/services', label: 'SERVICES' },
     { href: '/samples', label: 'SAMPLES' },
     { href: '/how-it-works', label: 'HOW IT WORKS' },
     { href: '/about', label: 'ABOUT' },
@@ -83,7 +81,7 @@ export default function Navbar() {
           aria-label="Main Navigation"
         >
           {NAV_LINKS.map((link) => {
-            const active = pathname === link.href || (link.href.startsWith('/services#') && pathname === '/services');
+            const active = pathname === link.href || (link.href === '/services' && pathname.startsWith('/services'));
             return (
               <Link
                 key={link.label}
