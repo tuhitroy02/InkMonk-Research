@@ -37,10 +37,11 @@ export default function Navbar() {
   }, []);
 
   // Navigation Links:
-  // SERVICES -> SAMPLES -> HOW IT WORKS -> ABOUT -> CONTACT & FAQ
+  // SERVICES -> RESEARCH AREAS -> SAMPLES -> HOW IT WORKS -> ABOUT -> CONTACT & FAQ
   // All in CAPITAL LETTERS
   const NAV_LINKS = [
     { href: '/services', label: 'SERVICES' },
+    { href: '/research-areas', label: 'RESEARCH AREAS' },
     { href: '/samples', label: 'SAMPLES' },
     { href: '/how-it-works', label: 'HOW IT WORKS' },
     { href: '/about', label: 'ABOUT' },
@@ -80,16 +81,16 @@ export default function Navbar() {
 
         {/* Center: Equal-Distance Main Navigation Links in CAPITAL LETTERS */}
         <nav
-          className="hidden xl:flex items-center justify-center gap-1 2xl:gap-2 flex-1 px-1 min-w-0"
+          className="hidden xl:flex items-center justify-center gap-0.5 2xl:gap-1.5 flex-1 px-1 min-w-0"
           aria-label="Main Navigation"
         >
           {NAV_LINKS.map((link) => {
-            const active = pathname === link.href || (link.href === '/services' && pathname.startsWith('/services'));
+            const active = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
             return (
               <Link
                 key={link.label}
                 href={link.href}
-                className={`text-[10px] 2xl:text-[11px] font-black tracking-wider uppercase whitespace-nowrap transition-colors py-1.5 px-1.5 2xl:px-2.5 text-center rounded-lg hover:bg-slate-100/60 dark:hover:bg-slate-800/60 ${
+                className={`text-[9.5px] 2xl:text-[11px] font-black tracking-wider uppercase whitespace-nowrap transition-colors py-1.5 px-1.5 2xl:px-2.5 text-center rounded-lg hover:bg-slate-100/60 dark:hover:bg-slate-800/60 ${
                   active
                     ? 'text-[#F95721]'
                     : 'text-slate-700 dark:text-slate-200 hover:text-[#F95721]'
