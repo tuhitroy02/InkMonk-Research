@@ -231,7 +231,7 @@ How can I assist your scholarship today?
                   </div>
                   <div className="flex items-center gap-1.5 text-[11px] text-blue-100 font-medium">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                    <span>100% Local AI • Zero API Lag</span>
+                    <span>Private Scholarly Concierge • Instant</span>
                   </div>
                 </div>
               </div>

@@ -4,10 +4,48 @@
  * Comprehensive Academic Writing Knowledge Base for InkMonk Research (https://inkmonkresearch.com)
  */
 
+import { calculateQuote, SERVICE_DISPLAY_NAMES } from '@/lib/pricing/catalogue';
+
 export interface StellaResponse {
   botMessage: string;
   suggestedChips?: string[];
   actionLink?: { label: string; href: string; isExternal?: boolean };
+}
+
+export type BookingStep =
+  | 'IDLE'
+  | 'LANGUAGE'
+  | 'SERVICE'
+  | 'WORK_TYPE'
+  | 'TOPIC'
+  | 'DEADLINE'
+  | 'REMARKS'
+  | 'SUMMARY'
+  | 'TURNITIN_FILES';
+
+export interface BookingState {
+  step: BookingStep;
+  language?: 'EN' | 'HI' | 'TURNITIN';
+  service?: string;
+  workType?: 'TECH' | 'NON_TECH' | 'NA';
+  package?: string;
+  domain?: string;
+  topic?: string;
+  deadline?: string;
+  remarks?: string;
+  quantity?: number;
+  history?: {
+    step: BookingStep;
+    language?: 'EN' | 'HI' | 'TURNITIN';
+    service?: string;
+    workType?: 'TECH' | 'NON_TECH' | 'NA';
+    package?: string;
+    domain?: string;
+    topic?: string;
+    deadline?: string;
+    remarks?: string;
+    quantity?: number;
+  }[];
 }
 
 export interface StellaContext {
@@ -15,6 +53,7 @@ export interface StellaContext {
   lastTopic?: string;
   serviceInterest?: string;
   citationStyle?: string;
+  booking?: BookingState;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1250,7 +1289,474 @@ Would you like an exact milestone timeline or customized project quotation for t
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 4. MAIN PROCESSOR (SEMANTIC INTENT MATCHING + CONTEXT TRACKING)
+// 4. CONVERSATIONAL BOOKING & ESTIMATE STATE ENGINE
+// ─────────────────────────────────────────────────────────────────────────────
+
+function handleBookingFlow(query: string, context: StellaContext): StellaResponse {
+  if (!context.booking) {
+    context.booking = { step: 'LANGUAGE', history: [] };
+  }
+
+  const booking = context.booking;
+  const lq = query.toLowerCase();
+
+  // Global commands within booking flow
+  if (lq.includes('start over') || lq.includes('restart') || lq.includes('reset')) {
+    context.booking = { step: 'LANGUAGE', history: [] };
+    return {
+      botMessage: `### 🔄 Quotation Wizard Reset
+
+Let's start fresh. I will guide you one question at a time to calculate your transparent estimate.
+
+**Step 1 of 6: Which language will your research or manuscript be conducted in?**`,
+      suggestedChips: [
+        'English Academic Writing',
+        'Hindi Academic Research (हिंदी)',
+        'Turnitin AI & Plagiarism Scan',
+      ],
+    };
+  }
+
+  if (lq === 'back' || lq === '← back' || lq.includes('previous step')) {
+    if (booking.history && booking.history.length > 0) {
+      const prev = booking.history.pop()!;
+      booking.step = prev.step;
+      booking.language = prev.language;
+      booking.service = prev.service;
+      booking.workType = prev.workType;
+      booking.package = prev.package;
+      booking.domain = prev.domain;
+      booking.topic = prev.topic;
+      booking.deadline = prev.deadline;
+      booking.remarks = prev.remarks;
+      booking.quantity = prev.quantity;
+    } else {
+      booking.step = 'LANGUAGE';
+    }
+  }
+
+  // ─── STEP: LANGUAGE ────────────────────────────────────────────────────────
+  if (booking.step === 'LANGUAGE') {
+    if (lq.includes('turnitin') || lq.includes('plagiarism')) {
+      booking.history = booking.history || [];
+      booking.history.push({ ...booking });
+      booking.language = 'TURNITIN';
+      booking.service = 'TURNITIN_REPORT';
+      booking.workType = 'NA';
+      booking.step = 'TURNITIN_FILES';
+      return {
+        botMessage: `### 🛡️ Turnitin Originality & AI Writing Audit
+
+Our scans utilize official **instructor-tier, 100% safe non-repository accounts** (your manuscript is never deposited or indexed in university databases).
+
+**How many manuscripts or files would you like verified?** (Rate: ₹200 per file)`,
+        suggestedChips: [
+          '1 File (₹200)',
+          '2 Files (₹400)',
+          '3 Files (₹600)',
+          '5 Files (₹1,000)',
+          '← Back',
+        ],
+      };
+    }
+
+    if (lq.includes('hindi') || lq.includes('हिंदी')) {
+      booking.history = booking.history || [];
+      booking.history.push({ ...booking });
+      booking.language = 'HI';
+      booking.step = 'SERVICE';
+      return {
+        botMessage: `### 📚 शोध सेवा का चयन करें (हिंदी शोध प्रभाग)
+
+InkMonk Research के विशिष्ट **हिंदी एवं देवनागरी शोध प्रभाग** में आपका स्वागत है।
+
+**चरण 2/6: आपको किस अकादमिक सेवा की आवश्यकता है?**`,
+        suggestedChips: [
+          'शोध पत्र (Research Paper)',
+          'शोध प्रबंध (Ph.D. Thesis / Dissertation)',
+          'समीक्षा पत्र (Review Paper)',
+          'सिनॉप्सिस / शोध प्रस्ताव (Synopsis)',
+          'पुस्तक लेखन (Book Writing)',
+          'देवनागरी लेख (Article Writing)',
+          'अकादमिक प्रस्तुति (PPT Making)',
+          '← Back',
+          '🔄 Start Over',
+        ],
+      };
+    }
+
+    // Default to English
+    booking.history = booking.history || [];
+    booking.history.push({ ...booking });
+    booking.language = 'EN';
+    booking.step = 'SERVICE';
+    return {
+      botMessage: `### 📚 Select Academic Service
+**Step 2 of 6: Which scholarly service do you require?**
+- **Research Paper:** Empirical / theoretical draft conforming to IEEE, Springer, Elsevier, or Scopus.
+- **Ph.D. Thesis / Dissertation:** Complete 5-chapter doctoral thesis with 4-stage milestone escrow.
+- **Review Paper:** PRISMA 2020 systematic review & bibliometric meta-analysis.
+- **Synopsis / Proposal:** Ph.D. registration proposal for university DRC committees.
+- **Book Writing:** Full academic monograph (100–300 pages) with ISBN formatting.
+- **Article Writing:** Peer-reviewed scholarly article or book chapter.`,
+      suggestedChips: [
+        'Research Paper Writing',
+        'Review Paper Writing',
+        'Thesis Writing',
+        'Book Writing',
+        'Synopsis / Proposal',
+        'Article Writing',
+        'PPT Making',
+        'Model Implementation',
+        '← Back',
+        '🔄 Start Over',
+      ],
+    };
+  }
+
+  // ─── STEP: TURNITIN FILES ──────────────────────────────────────────────────
+  if (booking.step === 'TURNITIN_FILES') {
+    const fileMatch = query.match(/\d+/);
+    const files = fileMatch ? Math.max(1, parseInt(fileMatch[0], 10)) : 1;
+    booking.quantity = files;
+    booking.step = 'SUMMARY';
+
+    const quote = calculateQuote({
+      language: 'TURNITIN',
+      service: 'TURNITIN_REPORT',
+      quantity: files,
+    });
+
+    const waText = encodeURIComponent(
+      `Hello InkMonk Research Team,\n\nI want to request Turnitin scan verification:\n- Files: ${files}\n- Estimated Fee: ${quote.totalFormatted}\n- Protocol: Safe Non-Repository\n\nPlease confirm report turnaround time.`
+    );
+
+    return {
+      botMessage: `### 💎 Official Turnitin Project Quotation
+
+#### 📋 Audit Specifications:
+- **Service:** Turnitin AI & Plagiarism Verification Audit
+- **Files Scanned:** ${files} ${files > 1 ? 'files' : 'file'}
+- **Total Estimated Price:** **${quote.totalFormatted}** (₹200/file)
+- **Turnaround:** Express 15–30 minutes
+- **Database Protocol:** 100% Safe Non-Repository (Manuscripts are NEVER indexed or submitted to public databases)
+
+#### 🛡️ Deliverables Included:
+- Official instructor-grade color-coded similarity PDF
+- Turnitin proprietary AI-generated writing percentage indicator
+- Clickable primary source matches and cross-repository verification
+
+Would you like to connect directly on WhatsApp to submit your files, or configure online?`,
+      suggestedChips: [
+        '💬 Chat on WhatsApp with Directors',
+        '📄 Open Full Quotation on Site',
+        '🔄 Start Over',
+      ],
+      actionLink: {
+        label: 'Open Turnitin Scan Order →',
+        href: `/quote?type=TURNITIN&quantity=${files}`,
+      },
+    };
+  }
+
+  // ─── STEP: SERVICE ─────────────────────────────────────────────────────────
+  if (booking.step === 'SERVICE') {
+    let selectedSvc = 'RESEARCH_PAPER';
+    let defaultPkg: string | undefined = 'UPTO_6000_WORDS';
+
+    if (lq.includes('thesis') || lq.includes('dissertation') || lq.includes('प्रबंध')) {
+      selectedSvc = 'THESIS';
+      defaultPkg = 'WITH_MODEL';
+    } else if (lq.includes('review') || lq.includes('समीक्षा')) {
+      selectedSvc = 'REVIEW_PAPER';
+      defaultPkg = 'UPTO_6000_WORDS';
+    } else if (lq.includes('book') || lq.includes('पुस्तक')) {
+      selectedSvc = 'BOOK';
+      defaultPkg = 'BOOK_100';
+    } else if (lq.includes('synopsis') || lq.includes('proposal') || lq.includes('प्रस्ताव')) {
+      selectedSvc = 'SYNOPSIS';
+      defaultPkg = undefined;
+    } else if (lq.includes('article') || lq.includes('लेख')) {
+      selectedSvc = 'ARTICLE';
+      booking.quantity = 2000;
+      defaultPkg = undefined;
+    } else if (lq.includes('ppt') || lq.includes('presentation') || lq.includes('प्रस्तुति')) {
+      selectedSvc = 'PPT';
+      booking.quantity = 15;
+      defaultPkg = undefined;
+    } else if (lq.includes('model') || lq.includes('code') || lq.includes('मॉडल')) {
+      selectedSvc = 'MODEL';
+      defaultPkg = 'MODEL_SMALL';
+    }
+
+    booking.history = booking.history || [];
+    booking.history.push({ ...booking });
+    booking.service = selectedSvc;
+    booking.package = defaultPkg;
+    booking.step = 'WORK_TYPE';
+
+    const isHindi = booking.language === 'HI';
+    return {
+      botMessage: isHindi
+        ? `### 🔬 विषय क्षेत्र एवं तकनीकी स्तर का चयन
+**चरण 3/6: आपका शोध क्षेत्र क्या है? क्या आपके शोध में तकनीकी मॉडल / कोडिंग शामिल है अथवा यह गैर-तकनीकी (सैद्धांतिक, मानविकी, सामाजिक विज्ञान या विधि) है?**`
+        : `### 🔬 Academic Domain & Complexity
+**Step 3 of 6: What is your academic domain or subject discipline? Is your study technical (with code, algorithms, or simulation) or non-technical (theoretical, social sciences, humanities, or law)?**`,
+      suggestedChips: isHindi
+        ? [
+            'गैर-तकनीकी (मानविकी, समाजशास्त्र, साहित्य, विधि)',
+            'तकनीकी (कंप्यूटर साइंस, AI/ML, इंजीनियरिंग, डेटा)',
+            'Skip',
+            '← Back',
+            '🔄 Start Over',
+          ]
+        : [
+            'Non-Technical (Humanities, Social Sciences, Law, Mgmt)',
+            'Technical (Computer Science, AI/ML, Engineering, Data)',
+            'Life Sciences / Medical',
+            'Skip',
+            '← Back',
+            '🔄 Start Over',
+          ],
+    };
+  }
+
+  // ─── STEP: WORK_TYPE (DOMAIN) ──────────────────────────────────────────────
+  if (booking.step === 'WORK_TYPE') {
+    let wt: 'TECH' | 'NON_TECH' = 'NON_TECH';
+    if (lq.includes('tech') && !lq.includes('non-tech') && !lq.includes('गैर-तकनीकी')) {
+      wt = 'TECH';
+    } else if (lq.includes('computer') || lq.includes('ai') || lq.includes('engineering') || lq.includes('data')) {
+      wt = 'TECH';
+    }
+
+    booking.history = booking.history || [];
+    booking.history.push({ ...booking });
+    booking.workType = wt;
+    booking.domain = query !== 'Skip' ? query : 'General Academic Domain';
+    booking.step = 'TOPIC';
+
+    const isHindi = booking.language === 'HI';
+    return {
+      botMessage: isHindi
+        ? `### 🎯 शोध विषय / शीर्षक (Topic)
+**चरण 4/6: आपके शोध पत्र या प्रबंध का प्रस्तावित शीर्षक या विषय क्या है?**
+*(आप अपना विषय नीचे टाइप कर सकते हैं, अथवा विषय निर्धारण हेतु परामर्श ले सकते हैं):*`
+        : `### 🎯 Research Topic / Working Title
+**Step 4 of 6: What is your proposed research topic, title, or hypothesis?**
+*(You can type your exact topic below, or skip if you want our directors to assist in topic formulation):*`,
+      suggestedChips: isHindi
+        ? [
+            'Education policy',
+            'विषय निर्धारण परामर्श चाहिए',
+            'Skip topic for now',
+            '← Back',
+            '🔄 Start Over',
+          ]
+        : [
+            'Education policy',
+            'Need topic scoping consultation',
+            'Skip topic for now',
+            '← Back',
+            '🔄 Start Over',
+          ],
+    };
+  }
+
+  // ─── STEP: TOPIC ───────────────────────────────────────────────────────────
+  if (booking.step === 'TOPIC') {
+    let topic = query.trim();
+    if (lq.includes('skip') || lq.includes('consultation') || lq.includes('परामर्श')) {
+      topic = 'Topic scoping consultation requested';
+    }
+
+    booking.history = booking.history || [];
+    booking.history.push({ ...booking });
+    booking.topic = topic;
+    booking.step = 'DEADLINE';
+
+    const isHindi = booking.language === 'HI';
+    return {
+      botMessage: isHindi
+        ? `### ⏱️ पूर्णता समय-सीमा (Target Deadline)
+**चरण 5/6: आपके शोध को पूर्ण करने की लक्षित समय-सीमा क्या है?**`
+        : `### ⏱️ Target Completion Deadline
+**Step 5 of 6: What is your target completion timeline or deadline?**`,
+      suggestedChips: isHindi
+        ? [
+            '21 days',
+            'मानक (15–21 दिन)',
+            'अति-आवश्यक (7–10 दिन)',
+            'विस्तृत (30+ दिन)',
+            '← Back',
+            'Skip',
+            '🔄 Start Over',
+          ]
+        : [
+            '21 days',
+            'Standard (15–21 days)',
+            'Urgent (7–10 days)',
+            'Extended (30+ days)',
+            '← Back',
+            'Skip',
+            '🔄 Start Over',
+          ],
+    };
+  }
+
+  // ─── STEP: DEADLINE ────────────────────────────────────────────────────────
+  if (booking.step === 'DEADLINE') {
+    let dl = query.trim();
+    if (lq.includes('skip') || !dl) {
+      dl = '21 days';
+    }
+
+    booking.history = booking.history || [];
+    booking.history.push({ ...booking });
+    booking.deadline = dl;
+    booking.step = 'REMARKS';
+
+    const isHindi = booking.language === 'HI';
+    return {
+      botMessage: isHindi
+        ? `### 📝 विशिष्ट निर्देश एवं प्रारूप (Remarks & Guidelines)
+**चरण 6/6: क्या आपकी कोई विशिष्ट पत्रिका दिशानिर्देश (जैसे UGC-CARE, Scopus), शब्द सीमा या अतिरिक्त निर्देश हैं?**`
+        : `### 📝 Specific Guidelines & Remarks
+**Step 6 of 6: Do you have any specific formatting requirements, target journals (e.g. Scopus, IEEE, UGC-CARE), word counts, or extra remarks?**`,
+      suggestedChips: isHindi
+        ? [
+            'मानक यूजीसी केयर प्रारूप',
+            'Scopus / Web of Science दिशानिर्देश',
+            'Skip extra remarks',
+            '← Back',
+            '🔄 Start Over',
+          ]
+        : [
+            'Standard Journal Guidelines',
+            'Target Scopus / IEEE',
+            'Target UGC-CARE',
+            'Skip extra remarks',
+            '← Back',
+            '🔄 Start Over',
+          ],
+    };
+  }
+
+  // ─── STEP: REMARKS -> GENERATE FINAL ESTIMATE ──────────────────────────────
+  if (booking.step === 'REMARKS' || booking.step === 'SUMMARY') {
+    if (query !== 'Skip extra remarks' && !lq.includes('skip')) {
+      booking.remarks = query.trim();
+    }
+    booking.step = 'SUMMARY';
+
+    const lang = booking.language || 'EN';
+    const wt = booking.workType || 'NON_TECH';
+    const svc = booking.service || 'RESEARCH_PAPER';
+    const pkg = booking.package || (svc === 'RESEARCH_PAPER' ? 'UPTO_6000_WORDS' : undefined);
+    const qty = booking.quantity || (['ARTICLE', 'ASSIGNMENTS'].includes(svc) ? 2000 : svc === 'PPT' ? 15 : undefined);
+
+    let quoteRes;
+    try {
+      quoteRes = calculateQuote({
+        language: lang,
+        workType: wt,
+        service: svc,
+        package: pkg,
+        quantity: qty,
+      });
+    } catch {
+      // Graceful fallback to default catalogue price if params slightly diverge
+      quoteRes = {
+        totalPaise: lang === 'HI' ? 699900 : wt === 'TECH' ? 899800 : 499900,
+        totalFormatted: lang === 'HI' ? '₹6,999' : wt === 'TECH' ? '₹8,998' : '₹4,999',
+        breakdown: [{ label: `${SERVICE_DISPLAY_NAMES[svc] || svc} Writing`, amountPaise: 499900 }],
+      };
+    }
+
+    const refCode = `IMR-EST-${Math.floor(1000 + Math.random() * 9000)}`;
+    const topicText = booking.topic || 'Education policy';
+    const deadlineText = booking.deadline || '21 days';
+    const svcDisplay = SERVICE_DISPLAY_NAMES[svc] || svc;
+    const isHindi = lang === 'HI';
+
+    const breakdownLines = quoteRes.breakdown
+      .map((b) => `${b.label}: ₹${(b.amountPaise / 100).toLocaleString('en-IN')}`)
+      .join(' + ');
+
+    const waText = encodeURIComponent(
+      `Hello InkMonk Research Team,\n\nI configured an estimate with Stella:\n- Ref: ${refCode}\n- Service: ${svcDisplay}\n- Language: ${isHindi ? 'Hindi' : 'English'}\n- Tier: ${wt === 'TECH' ? 'Technical' : 'Non-Technical'}\n- Topic: ${topicText}\n- Deadline: ${deadlineText}\n- Estimated Total: ${quoteRes.totalFormatted}\n\nPlease confirm availability.`
+    );
+
+    const quotePageUrl = `/quote?lang=${lang}&service=${svc}&workType=${wt}&domain=${encodeURIComponent(topicText)}&deadline=${encodeURIComponent(deadlineText)}${pkg ? `&package=${pkg}` : ''}`;
+
+    return {
+      botMessage: isHindi
+        ? `### 💎 आधिकारिक परियोजना कोटेशन एवं कार्ययोजना
+**कोटेशन संदर्भ कोड:** \`${refCode}\`
+
+#### 📋 परियोजना विनिर्देश:
+- **भाषा:** हिंदी शोध प्रभाग (मानक देवनागरी)
+- **सेवा:** ${svcDisplay}
+- **प्रकार:** ${wt === 'TECH' ? 'तकनीकी (मॉडल/कोडिंग सहित)' : 'गैर-तकनीकी (सैद्धांतिक एवं शोध समीक्षा)'}
+- **विषय:** ${topicText}
+- **लक्षित समय-सीमा:** ${deadlineText}
+
+#### 💰 निर्धारित शुल्क एवं भुगतान:
+- **कुल अनुमानित शुल्क:** **${quoteRes.totalFormatted}**
+- **विस्तृत दर विभाजन:** ${breakdownLines}
+- **चरणबद्ध भुगतान:** 4 किश्तों में समीक्षा आधारित एस्क्रो (25% प्रति चरण)
+- **समय-सीमा:** आपके निर्धारित ${deadlineText} के भीतर पूर्ण
+
+#### 🛡️ अकादमिक निष्ठा एवं सुरक्षा:
+- **संशोधन:** सुपुर्दगी के 30 दिनों के भीतर 2 चरणबद्ध संशोधन सम्मिलित
+- **मौलिकता:** टर्निटिन सुरक्षित नॉन-रिपॉजिटरी जांच (0% AI योगदान)
+- **गोपनीयता:** पूर्व-हस्ताक्षरित परस्पर गोपनीयता समझौते (NDA) द्वारा सुरक्षित
+
+क्या आप निदेशकों से WhatsApp पर तुरंत चर्चा करना चाहते हैं अथवा वेबसाइट पर कोटेशन सुरक्षित करना चाहते हैं?`
+        : `### 💎 Official Project Quotation & Milestone Summary
+**Quotation Reference:** \`${refCode}\`
+
+#### 📋 Project Specifications:
+- **Language:** English Academic Writing
+- **Service:** ${svcDisplay}
+- **Technical Tier:** ${wt === 'TECH' ? 'Technical (With Model/Computational Implementation)' : 'Non-Technical (Theoretical / Editorial Rigor)'}
+- **Topic:** ${topicText}
+- **Target Deadline:** ${deadlineText}
+- **Guidelines:** ${booking.remarks || 'Standard International Journal Guidelines'}
+
+#### 💰 Calculated Fee & Schedule:
+- **Total Estimated Fee:** **${quoteRes.totalFormatted}**
+- **Itemized Breakdown:** ${breakdownLines}
+- **Milestone Structure:** 4-stage chapter milestone escrow (25% per verified milestone)
+- **Turnaround:** Delivered within your stated ${deadlineText} target
+
+#### 🛡️ Academic Guarantees:
+- **Revisions:** 2 rounds of peer-review revisions included within 30 days of delivery
+- **Originality:** Zero generative AI writing with verified Turnitin originality receipt
+- **Confidentiality:** 100% intellectual property ownership under pre-signed mutual NDA
+
+Would you like to connect directly with our directors on WhatsApp or open this quotation on our website?`,
+      suggestedChips: [
+        '💬 Chat on WhatsApp with Directors',
+        '📄 Open Full Quotation on Site',
+        '🔄 Start Over',
+      ],
+      actionLink: {
+        label: 'Open & Save Quote on Site →',
+        href: quotePageUrl,
+      },
+    };
+  }
+
+  // Safety fallback
+  return {
+    botMessage: `Please select an option to proceed with your quotation, or click 'Start Over' to reset.`,
+    suggestedChips: ['← Back', '🔄 Start Over'],
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 5. MAIN PROCESSOR (CONVERSATIONAL BOOKING + SEMANTIC INTENT MATCHING)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export function processStellaQuery(
@@ -1284,7 +1790,61 @@ How can I assist your scholarly journey today?`,
     };
   }
 
-  // Multi-pass semantic matcher: calculate best scoring rule
+  // 1. Check if user is currently inside an active booking flow
+  if (context.booking && context.booking.step !== 'IDLE') {
+    // If user asks a totally off-flow ethical question, let ethics guardrail take precedence
+    for (const pattern of UNETHICAL_PATTERNS) {
+      if (pattern.test(lowerQuery)) {
+        return INTENT_RULES[0].handler(query, context);
+      }
+    }
+    return handleBookingFlow(query, context);
+  }
+
+  // 2. Check if user wants to start the booking conversation or greeting
+  const isGreetingOrBooking =
+    lowerQuery === 'hi' ||
+    lowerQuery === 'hello' ||
+    lowerQuery === 'hey' ||
+    lowerQuery === 'hola' ||
+    lowerQuery === 'namaste' ||
+    lowerQuery === 'नमस्ते' ||
+    lowerQuery === 'start' ||
+    lowerQuery === 'book' ||
+    lowerQuery === 'booking' ||
+    lowerQuery === 'quote' ||
+    lowerQuery === 'estimate' ||
+    lowerQuery === 'pricing' ||
+    lowerQuery === 'cost' ||
+    lowerQuery.includes('get a project estimate') ||
+    lowerQuery.includes('open interactive estimator') ||
+    lowerQuery.includes('calculate quote') ||
+    lowerQuery.includes('start quote');
+
+  if (isGreetingOrBooking) {
+    context.booking = { step: 'LANGUAGE', history: [] };
+    const isHindi = lowerQuery.includes('namaste') || lowerQuery.includes('नमस्ते') || lowerQuery.includes('हिंदी');
+    return {
+      botMessage: isHindi
+        ? `### 👋 नमस्ते! मैं स्टेला हूँ — आपकी अकादमिक सलाहकार
+
+**InkMonk Research** में आपका स्वागत है। मैं आपके शोध कार्य के लिए पारदर्शी कोटेशन तैयार करने में आपकी सहायता करूँगी।
+
+**चरण 1/6: आपका शोध या पांडुलिपि किस भाषा में तैयार की जानी है?**`
+        : `### 👋 Greetings from Stella • Academic Concierge
+
+Welcome to **InkMonk Research**! I will assist you in configuring your project scope and calculate an exact, transparent estimate according to our schedule.
+
+**Step 1 of 6: Which language will your research or manuscript be conducted in?**`,
+      suggestedChips: [
+        'English Academic Writing',
+        'Hindi Academic Research (हिंदी)',
+        'Turnitin AI & Plagiarism Scan',
+      ],
+    };
+  }
+
+  // 3. Multi-pass semantic matcher: calculate best scoring rule across encyclopedic knowledge base
   let bestRule: IntentRule | null = null;
   let bestScore = 0;
 

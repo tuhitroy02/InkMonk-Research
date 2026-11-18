@@ -36,9 +36,9 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="font-serif text-xl font-bold text-navy-800 mb-2">3. Local AI Engine Privacy Guarantee</h2>
+            <h2 className="font-serif text-xl font-bold text-navy-800 mb-2">3. Academic AI Concierge Privacy Guarantee</h2>
             <p>
-              Our website features a proprietary, deterministic, server-hosted local AI assistant. Unlike typical AI chatbots, <strong>no chat transcripts or project details are ever transmitted to external commercial AI APIs</strong> (such as OpenAI, Google Gemini, or Anthropic). All logic runs locally on our dedicated server infrastructure.
+              Our website features a proprietary, deterministic academic concierge (Stella). Unlike typical AI chatbots, <strong>no chat transcripts or project details are ever transmitted to external commercial AI APIs</strong> (such as OpenAI, Google Gemini, or Anthropic). All conversational logic processes privately in your browser, and project quotation inquiries are transmitted securely to our dedicated infrastructure under pre-signed non-disclosure protection.
             </p>
           </section>
 

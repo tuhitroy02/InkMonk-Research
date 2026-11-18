@@ -177,7 +177,7 @@ How can I assist your scholarly journey today?
                 </span>
               </div>
               <p className="text-blue-100 text-xs sm:text-sm font-medium mt-0.5">
-                100% Local Intelligence Engine • Zero API Cost • Zero Network Errors
+                Private Client-Side Intelligence • Instant Scholar Guidance • Zero External Data Sharing
               </p>
             </div>
           </div>
