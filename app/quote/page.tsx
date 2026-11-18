@@ -493,8 +493,15 @@ function QuoteWizard() {
               </div>
             </div>
 
-            {/* Contact details to finalize and reserve quote */}
-            <form onSubmit={handleSubmitLead}>
+            {/* Contact details to finalize and reserve quote (WebMCP Enabled) */}
+            <form
+              onSubmit={handleSubmitLead}
+              // @ts-expect-error WebMCP browser standard annotations
+              toolname="calculate_research_estimate"
+              tooldescription="Calculate exact customized pricing and turnaround milestones for academic research papers, theses, and Turnitin checks"
+              data-toolname="calculate_research_estimate"
+              data-tooldescription="Calculate exact customized pricing and turnaround milestones for academic research papers, theses, and Turnitin checks"
+            >
               <h3 className="font-serif text-lg font-black text-slate-900 mb-4">
                 Confirm Your Details to Lock-in this Estimate
               </h3>

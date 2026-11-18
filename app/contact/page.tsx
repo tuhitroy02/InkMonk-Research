@@ -149,7 +149,15 @@ export default function ContactPage() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5 text-center">
+                <form
+                  onSubmit={handleSubmit}
+                  // @ts-expect-error WebMCP browser standard annotations
+                  toolname="submit_research_inquiry"
+                  tooldescription="Submit inquiry and contact InkMonk Research founders for custom academic proposals and NDA consultation"
+                  data-toolname="submit_research_inquiry"
+                  data-tooldescription="Submit inquiry and contact InkMonk Research founders for custom academic proposals and NDA consultation"
+                  className="space-y-5 text-center"
+                >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="text-left">
                       <label className="block text-xs font-bold text-slate-700 mb-1.5 text-left">
