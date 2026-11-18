@@ -1,7 +1,7 @@
 /**
- * Stella — Academic & Website Concierge Intelligence Engine
+ * Stella — Encyclopedic Academic & Website Concierge Intelligence Engine
  * 100% Client-side, Zero-API-Key, Zero External Network Dependency
- * InkMonk Research (https://inkmonkresearch.com)
+ * Comprehensive Academic Writing Knowledge Base for InkMonk Research (https://inkmonkresearch.com)
  */
 
 export interface StellaResponse {
@@ -31,6 +31,7 @@ const UNETHICAL_PATTERNS = [
   /exam.*proxy/i,
   /do.*(quiz|test|assignment for me)/i,
   /fake.*(peer|review)/i,
+  /ghostwrite.*exam/i,
 ];
 
 const OFF_TOPIC_PATTERNS = [
@@ -42,7 +43,6 @@ const OFF_TOPIC_PATTERNS = [
   /relationship.*advice/i,
   /dating.*tips/i,
   /crypto|bitcoin/i,
-  /write.*poem/i,
   /video.*game/i,
   /horoscope|astrology/i,
 ];
@@ -56,16 +56,16 @@ const GUARANTEE_PATTERNS = [
 ];
 
 const MEDICAL_LEGAL_FINANCIAL = [
-  /diagnos(e|is)/i,
-  /symptom.*of/i,
-  /legal.*advice/i,
-  /sue.*my/i,
-  /invest.*in.*stock/i,
-  /prescri(be|ption)/i,
+  /diagnos(e|is)\s+my/i,
+  /what\s+disease\s+do\s+i\s+have/i,
+  /legal\s+advice\s+for\s+my\s+lawsuit/i,
+  /should\s+i\s+sue/i,
+  /which\s+stock\s+to\s+buy/i,
+  /prescribe\s+medicine/i,
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 2. KNOWLEDGE GRAPH & INTENT MAPPINGS
+// 2. ENCYCLOPEDIC INTENT RULES & SCHOLARLY KNOWLEDGE GRAPH
 // ─────────────────────────────────────────────────────────────────────────────
 
 interface IntentRule {
@@ -80,27 +80,27 @@ const INTENT_RULES: IntentRule[] = [
     id: 'academic_integrity',
     keywords: UNETHICAL_PATTERNS,
     handler: () => ({
-      botMessage: `### 🛡️ Commitment to Academic Integrity
+      botMessage: `### 🛡️ Ethical Research & Academic Integrity Standards
 
-At **InkMonk Research**, we strictly adhere to international publication ethics and the **COPE (Committee on Publication Ethics)** guidelines. 
+At **InkMonk Research**, our leadership and doctoral fellows adhere strictly to international publication ethics and the **COPE (Committee on Publication Ethics)** principles:
 
-- We **do not** engage in exam cheating, ghost-sitting, data fabrication, or falsifying research outcomes.
-- We **do not** employ deceptive tactics to "trick" similarity detection algorithms.
+- We **do not** write exams, falsify laboratory empirical datasets, or invent fraudulent results.
+- We **do not** engage in deceitful tactics to artificially "bypass" or "trick" similarity detection algorithms.
 
-**How we assist ethically:**
-1. **Structural & Editorial Mentoring:** Refining clarity, argumentation flow, and academic tone.
-2. **Methodological Framing:** Validating statistical tests, sample calculations, and experimental setups.
-3. **Plagiarism & Similarity Audits:** Utilizing instructor-level safe non-repository Turnitin checking to help you cite correctly and eliminate inadvertent plagiarism.
-4. **Journal Formatting:** Precision formatting to IEEE, Springer, Elsevier, or university thesis guidelines.
+#### How We Provide Legitimate Scholarly Support:
+1. **Methodological Rigor & Statistical Consultation:** Guiding your sampling design, hypothesis tests, and empirical models in R, Python, SPSS, or MATLAB.
+2. **Structural & Editorial Mentoring:** Transforming rough drafts into high-caliber, peer-reviewed prose adhering to IMRaD, IEEE, APA 7th, or university DRC rubrics.
+3. **Turnitin Originality Audits:** Utilizing instructor-licensed non-repository accounts to verify true citation originality and prevent accidental self-plagiarism.
+4. **Peer Review & Rebuttal Navigation:** Formulating diplomatic, point-by-point response matrices for Reviewer 1 and Reviewer 2.
 
-How can we help strengthen the genuine scholarship of your manuscript today?`,
+How can our doctoral team assist in strengthening your authentic academic research?`,
       suggestedChips: [
         'Journal Formatting (IEEE/APA)',
         'Thesis & IMRaD Structure',
         'Plagiarism & AI-Check Standards',
         'Get a Project Estimate',
       ],
-      actionLink: { label: 'Explore Ethical Services', href: '/services' },
+      actionLink: { label: 'Explore Ethical Services →', href: '/services' },
     }),
   },
 
@@ -109,39 +109,39 @@ How can we help strengthen the genuine scholarship of your manuscript today?`,
     id: 'acceptance_guarantee',
     keywords: GUARANTEE_PATTERNS,
     handler: () => ({
-      botMessage: `### ⚖️ Transparency on Journal Acceptance
+      botMessage: `### ⚖️ The Reality of Peer-Reviewed Journal Acceptance
 
-**No ethical research consultancy can honestly guarantee 100% acceptance in legitimate peer-reviewed journals (such as Scopus, IEEE, Springer, or SCI/WoS).**
+**No legitimate academic consultancy can promise "100% guaranteed acceptance" in authentic Scopus, Web of Science (SCIE/SSCI), IEEE, Springer, or Elsevier journals.**
 
-Independent journal editors and blind peer reviewers maintain complete editorial independence. Any service claiming "100% guaranteed Scopus indexing" is typically referring to predatory journals that risk university blacklisting.
+Independent journal editors and blind peer reviewers hold absolute editorial sovereignty. Any commercial agency claiming "guaranteed publication" is almost certainly sending manuscripts to **predatory journals** that risk your university degree and academic credibility.
 
-**What InkMonk Research guarantees:**
-- **Zero Desk-Rejections due to Formatting/Language:** Flawless technical English/Hindi, camera-ready LaTeX/Word formatting, and verified reference standards.
-- **Methodological Rigor:** Robust data presentation, PRISMA/IMRaD compliance, and deep literature gap positioning.
-- **Turnitin Verified:** Clean non-repository originality verification.
-- **Rebuttal & Revision Support:** In-depth assistance addressing reviewer critiques throughout your revision rounds.
+#### What InkMonk Research Guarantees:
+- **Zero Desk-Rejections for Format or Language:** Error-free technical syntax, camera-ready LaTeX/Word formatting, and verified citation references.
+- **Methodological Soundness:** Defensible research questions, validated empirical frameworks, and clear research gap positioning.
+- **Originality Assurance:** 100% non-repository Turnitin originality verification with complete citation auditing.
+- **Continuous Revision Mentorship:** In-depth revision support to address all reviewer critiques throughout multiple peer review rounds.
 
-Would you like an editorial assessment of your manuscript before submission?`,
+Would you like an editorial assessment of your manuscript before journal submission?`,
       suggestedChips: [
         'Peer-Review Rebuttal Support',
-        'Get a Project Estimate',
         'Journal Formatting (IEEE/APA)',
-        'Plagiarism & AI-Check Standards',
+        'Avoiding Predatory Journals',
+        'Get a Project Estimate',
       ],
-      actionLink: { label: 'Calculate Instant Estimate', href: '/quote' },
+      actionLink: { label: 'Calculate Instant Estimate →', href: '/quote' },
     }),
   },
 
-  // ─── Guardrails: Medical / Legal / Financial Advice ────────────────────────
+  // ─── Guardrails: Medical / Legal / Financial Boundaries ────────────────────
   {
     id: 'medical_legal_financial',
     keywords: MEDICAL_LEGAL_FINANCIAL,
     handler: () => ({
-      botMessage: `### ⚠️ Notice on Professional Boundaries
+      botMessage: `### ⚠️ Professional Scope & Boundary Notice
 
-I am **Stella**, an Academic & Research Concierge at InkMonk Research. I cannot provide clinical, legal, or financial advisory services. 
+I am **Stella**, an Academic Concierge at InkMonk Research. I cannot provide individual clinical diagnoses, personal legal representation, or financial investment advice.
 
-However, if you are conducting an academic literature review, systematic survey, or doctoral thesis in **medical sciences, healthcare policy, legal jurisprudence, or financial economics**, our subject-matter scholars can assist with scholarly structuring, statistical tests, and publication formatting!`,
+However, if you are conducting an academic literature review, clinical trial analysis, or doctoral dissertation in **clinical medicine, public health epidemiology, jurisprudence, or financial econometrics**, our subject-matter doctoral directors can provide full methodology framing, statistical validation, and publication formatting!`,
       suggestedChips: [
         'Thesis & IMRaD Structure',
         'Statistical Data Analysis',
@@ -150,132 +150,515 @@ However, if you are conducting an academic literature review, systematic survey,
     }),
   },
 
-  // ─── Guardrails: Off-Topic ──────────────────────────────────────────────────
+  // ─── Abstract Writing & Title Engineering ──────────────────────────────────
   {
-    id: 'off_topic',
-    keywords: OFF_TOPIC_PATTERNS,
-    handler: () => ({
-      botMessage: `### 🎓 Let's Refocus on Your Academic Goals
+    id: 'abstract_writing',
+    keywords: [
+      'abstract', 'write abstract', 'how to write abstract', 'executive summary',
+      'title of paper', 'paper title', 'catchy title', 'graphical abstract',
+      'keywords', 'indexing keywords',
+    ],
+    handler: (query) => {
+      const q = query.toLowerCase();
+      if (q.includes('title')) {
+        return {
+          botMessage: `### 🏷️ Engineering an Academic Paper Title for Maximum Citations
 
-I am programmed specifically as InkMonk Research's **Academic & Website Concierge**. While I enjoy general knowledge, my expertise lies in:
+An effective scholarly title must balance **declarative clarity**, **methodological precision**, and **search engine / Scopus indexing SEO**:
 
-- **Manuscript Writing & Review Papers** (English & Hindi)
-- **Doctoral Theses & Dissertations** (5-Chapter compliance)
-- **Formatting & Citation Engineering** (IEEE, APA, Harvard, LaTeX/BibTeX)
-- **Originality Audits** (Turnitin Instructor Non-Repository)
-- **Statistical Analysis & Computational Code** (SPSS, R, Python, MATLAB)
+#### The 3-Part Scholarly Title Architecture:
+\`[Core Phenomenon / Topic]: [Methodological Approach or Empirical Context] in [Domain / Population]\`
 
-How can I help you with your manuscript or project quotation today?`,
-      suggestedChips: [
-        'Journal Formatting (IEEE/APA)',
-        'Thesis & IMRaD Structure',
-        'Get a Project Estimate',
-        'Plagiarism & AI-Check Standards',
-      ],
-      actionLink: { label: 'Explore Academic Services', href: '/services' },
-    }),
+#### Key Principles:
+1. **Avoid Vague Openings:** Eliminate "A Study on...", "An Investigation into...", or "Observations regarding...". Begin directly with the core scientific construct.
+2. **Embed High-Value Indexing Terms:** Include your primary variable names (e.g., *"Convolutional Attention Transformers"*, *"Panel Econometric Analysis"*, *"PRISMA Systematic Review"*).
+3. **Length Constraint:** Keep between **10 to 15 words**. Titles under 12 words historically receive higher citation counts across Scopus and Web of Science.
+4. **Hyphenated Subtitles:** Use a colon or hyphen to separate the conceptual contribution from the empirical application:
+   - *Example:* *"Quantum Annealing for Combinatorial Portfolio Optimization: An Empirical Benchmark on High-Frequency S&P 500 Data"*.`,
+          suggestedChips: [
+            'How to Write an Abstract',
+            'Full IMRaD Structure',
+            'Get a Project Estimate',
+          ],
+          actionLink: { label: 'Get Title & Abstract Scoped', href: '/quote' },
+        };
+      }
+
+      return {
+        botMessage: `### 🎯 Anatomy of a High-Impact Abstract (200–250 Words)
+
+Your abstract is the single most scrutinized section of your manuscript. Editors and peer reviewers make their initial "desk-reject" decision within 90 seconds of reading it:
+
+#### The Universal 4-Move Structure:
+1. **Background & Unresolved Gap (1–2 sentences, ~40 words):**
+   - Introduce the broader scientific context and pinpoint the critical limitation of current literature.
+   - *Example:* *"While deep neural networks achieve state-of-the-art accuracy in medical imaging, their black-box nature and computational latency hinder deployment on edge diagnostic hardware."*
+2. **Methodology & Experimental Design (2–3 sentences, ~60 words):**
+   - State what you did, the dataset or sample size ($N$), and the experimental tools or theoretical models employed.
+   - *Example:* *"We propose a lightweight, quantized attention framework evaluated on a multimodal benchmark of 45,000 radiograms using 5-fold cross-validation."*
+3. **Quantified Empirical Findings (2–3 sentences, ~70 words):**
+   - **Always quantify results!** Avoid vague adjectives like *"accuracy improved"*; provide exact metrics, p-values, or effect sizes.
+   - *Example:* *"Experimental evaluations demonstrate a 34.2% reduction in inference latency with a negligible 0.3% degradation in Top-1 accuracy (p < 0.001) compared to ResNet-50."*
+4. **Conclusion & Broader Scholarly Impact (1–2 sentences, ~30 words):**
+   - Conclude with the practical or theoretical takeaway for your academic field.
+   - *Example:* *"These findings establish a reproducible blueprint for low-power clinical edge diagnostics in rural healthcare systems."*
+
+#### Critical Abstract Rules:
+- Zero citations (\`[1]\` or author-date) inside the abstract.
+- No undefined acronyms or abbreviations.
+- Select 5–6 specialized keywords conforming to target journal vocabulary (e.g., IEEE Keywords, MeSH headings, or ACM Computing Classification).`,
+        suggestedChips: [
+          'Full IMRaD Structure',
+          'Introduction & Research Gap',
+          'Journal Formatting (IEEE/APA)',
+          'Get a Project Estimate',
+        ],
+        actionLink: { label: 'Get Abstract Proofed →', href: '/quote' },
+      };
+    },
   },
 
-  // ─── Estimator & Pricing Guidance ──────────────────────────────────────────
+  // ─── Introduction, Problem Statement & Research Gaps ───────────────────────
   {
-    id: 'pricing_estimator',
+    id: 'introduction_gaps',
     keywords: [
-      'estimate', 'quote', 'cost', 'pricing', 'price', 'rate', 'fees',
-      'how much', 'charge', 'calculator', 'package', 'discount',
+      'introduction', 'research gap', 'problem statement', 'statement of problem',
+      'research question', 'hypothesis', 'null hypothesis', 'alternative hypothesis',
+      'cars model', 'swales', 'finer', 'picot', 'hypotheses',
+    ],
+    handler: (query) => {
+      const q = query.toLowerCase();
+
+      if (q.includes('hypothesis') || q.includes('hypotheses')) {
+        return {
+          botMessage: `### 🔬 Formulating Testable Academic Hypotheses
+
+A scholarly hypothesis is a formal, testable prediction regarding the empirical relationship between two or more operationalized variables:
+
+#### 1. Null Hypothesis ($H_0$) vs Alternative Hypothesis ($H_1$ or $H_a$)
+- **Null Hypothesis ($H_0$):** States that there is **no significant relationship, difference, or effect** between variables.
+  - *Example:* *$H_0$: There is no significant difference in diagnostic latency between quantized attention networks and baseline CNN models ($p \ge 0.05$).*
+- **Alternative Hypothesis ($H_a$):** States that an empirical relationship, difference, or effect **does exist**.
+  - *Directional:* *$H_1$: Quantized attention networks exhibit significantly lower inference latency than baseline CNN models.*
+  - *Non-Directional:* *$H_1$: There is a significant difference in latency between the two architectures.*
+
+#### 2. Hypothesis Testing Criteria:
+- **Type I Error ($\alpha$):** Rejecting $H_0$ when it is actually true (False Positive). Standard threshold is $\alpha = 0.05$.
+- **Type II Error ($\beta$):** Failing to reject $H_0$ when it is false (False Negative). Statistical Power is defined as $1 - \beta$ (standard $\ge 0.80$).
+- **Measurable & Falsifiable:** Every variable in your hypothesis must have an explicit operational definition (e.g., measured on a 5-point Likert scale, milliseconds, or percentage yield).`,
+          suggestedChips: [
+            'Statistical Data Analysis',
+            'Full IMRaD Structure',
+            'Problem Statement Guide',
+            'Get a Project Estimate',
+          ],
+          actionLink: { label: 'Consult on Methodology', href: '/quote' },
+        };
+      }
+
+      if (q.includes('problem statement') || q.includes('research gap')) {
+        return {
+          botMessage: `### 🎯 How to Articulate a Defensible Research Gap & Problem Statement
+
+Examiners and Scopus reviewers reject papers primarily when the author fails to convince them that the problem is **scholarly significant** and **unresolved**:
+
+#### The 4 Major Types of Research Gaps:
+1. **Empirical Gap:** Findings or data in the existing literature are contradictory, incomplete, or absent for a specific population or condition.
+2. **Methodological Gap:** Prior studies used suboptimal designs, outdated instrumentation, inadequate sample sizes, or non-reproducible code.
+3. **Theoretical Gap:** A phenomenon has not been investigated through an established theoretical lens (e.g., evaluating digital adoption through the UTAUT-2 model).
+4. **Contextual / Geographic Gap:** An established model validated in Western or high-resource contexts has not been tested in emerging economies or unique institutional setups.
+
+#### The 3-Sentence Problem Statement Blueprint:
+1. **The Established Ideal:** *"The successful implementation of distributed solar microgrids requires reliable real-time load forecasting to prevent frequency instability."*
+2. **The Critical Complication (The Gap):** *"However, existing ARIMA and LSTM models exhibit high forecast errors under extreme weather anomalies, failing to account for localized microclimatic shifts."*
+3. **The Urgent Consequence:** *"Without addressing this stochastic volatility, microgrid operators face avoidable blackout cascades, curtailing rural renewable adoption."*`,
+          suggestedChips: [
+            'Hypothesis Formulation',
+            'Theoretical vs Conceptual Framework',
+            'Literature Review Matrix',
+            'Get a Project Estimate',
+          ],
+          actionLink: { label: 'Get Research Gap Formulated', href: '/quote' },
+        };
+      }
+
+      return {
+        botMessage: `### 🏛️ Writing a High-Impact Introduction (Swales CARS Model)
+
+International publication standards (IEEE, Elsevier, Springer) recommend the **CARS (Create A Research Space)** funnel model by John Swales:
+
+#### Move 1: Establishing a Scholarly Territory
+- Emphasize the importance, centrality, and active current interest in your research area.
+- Review key foundational and state-of-the-art studies from the last 3–5 years.
+
+#### Move 2: Establishing a Niche (The Crucial Pivot)
+- State directly where existing scholarship stops or conflicts.
+- Classic transition phrases:
+  - *"However, these empirical models remain limited by..."*
+  - *"Despite these advancements, few studies have systematically analyzed..."*
+  - *"A critical unresolved question is whether..."*
+
+#### Move 3: Occupying the Niche (Your Paper's Contributions)
+- Announce the specific purpose and scope of your study.
+- **Provide 3–4 explicit, bulleted contributions:**
+  - *1. Theoretical:* Formulation of a unified analytical framework.
+  - *2. Methodological:* Development of a novel open-source benchmarking pipeline.
+  - *3. Empirical:* Primary validation across a multi-institution dataset of $N = 1,200$.
+- Provide a brief roadmap of the remaining sections of the paper.`,
+        suggestedChips: [
+          'Problem Statement & Research Gap',
+          'Hypothesis Formulation',
+          'Literature Review Matrix',
+          'Get a Project Estimate',
+        ],
+        actionLink: { label: 'Structure My Introduction →', href: '/quote' },
+      };
+    },
+  },
+
+  // ─── Theoretical vs Conceptual Frameworks ──────────────────────────────────
+  {
+    id: 'frameworks_theoretical_conceptual',
+    keywords: [
+      'theoretical framework', 'conceptual framework', 'theory', 'tam', 'utaut',
+      'framework difference', 'independent variable', 'dependent variable',
+      'moderator', 'mediator', 'conceptual model',
     ],
     handler: () => ({
-      botMessage: `### 💰 Transparent Academic Estimator & Pricing
+      botMessage: `### 🧭 Theoretical vs. Conceptual Framework: The Definitive Guide
 
-InkMonk Research provides deterministic, transparent milestone pricing with zero hidden fees. Both English and Hindi disciplines are supported:
+Many doctoral scholars confuse these two foundational pillars. Here is how institutional review boards and Scopus editors distinguish them:
 
-#### 1. English Non-Technical
-- **Research Paper Writing:** ₹4,999 (Full peer-reviewed draft)
-- **Review Paper Writing:** ₹3,999 (PRISMA systematic literature review)
-- **Synopsis / Proposal:** ₹3,999 (DRC committee approved structure)
-- **Complete Doctoral Thesis:** ₹19,999 (Full 5-chapter volume)
-- **Monograph Books:** ₹3,999 (100 pp) | ₹7,499 (200 pp) | ₹10,999 (300 pp)
-- **PPT Decks:** ₹120/slide | **Articles:** ₹0.60/word
+| Dimension | **Theoretical Framework** | **Conceptual Framework** |
+| :--- | :--- | :--- |
+| **Origin** | Derived from existing, validated theories in your field. | Developed by **you** (the researcher) for this specific inquiry. |
+| **Nature** | Broad, well-established theoretical paradigm. | Narrow, operationalized model of relationships. |
+| **Components** | Formal grand/mid-range theories (e.g., TAM, Bandura’s Social Cognitive Theory, Resource-Based View). | Specific Independent Variables (IV), Dependent Variables (DV), Mediators, and Moderators. |
+| **Visual Role** | Explains *why* the phenomenon exists conceptually. | Illustrated as a box-and-arrow schematic showing hypothesized pathways. |
 
-#### 2. English Technical (with Code / Computational Model)
-- **Research Paper with Computational Model:** ₹8,998 (Writing + Code)
-- **Technical Thesis with Model:** ₹28,998 (Complete implementation)
-- **Standalone Models (PyTorch / MATLAB / ML):** ₹5,999 (Small) | ₹8,999 (Big) | ₹12,999 (Web App + Model)
+#### Operationalizing Variables in Your Conceptual Model:
+- **Independent Variable (IV):** The presumed cause or antecedent (e.g., *Algorithmic Transparency*).
+- **Dependent Variable (DV):** The presumed effect or outcome (e.g., *Clinician Adoption Rate*).
+- **Mediating Variable (M):** The psychological or operational mechanism *through which* IV impacts DV (e.g., *Perceived Diagnostic Trust*).
+- **Moderating Variable (W):** A factor that changes the strength or direction of the relationship (e.g., *Years of Clinical Experience*).
 
-#### 3. Hindi Academic Work (हिंदी शोध कार्य)
-- **Hindi Research Paper:** ₹3,999 | **Hindi Thesis:** ₹14,999 | **Review:** ₹2,999
-
-Use our interactive on-site estimator for an instant timeline and customized breakdown:`,
+InkMonk Research designs publication-ready conceptual diagrams and theoretical justifications tailored to your target journal.`,
       suggestedChips: [
-        'Open Interactive Estimator',
+        'Hypothesis Formulation',
+        'Statistical Data Analysis',
         'Thesis & IMRaD Structure',
-        'Plagiarism & AI-Check Standards',
-        'Contact via WhatsApp',
+        'Get a Project Estimate',
       ],
-      actionLink: { label: 'Calculate Your Instant Estimate →', href: '/quote' },
+      actionLink: { label: 'Design Conceptual Framework →', href: '/quote' },
     }),
   },
 
-  // ─── Turnitin & Plagiarism / AI Standards ───────────────────────────────────
+  // ─── Literature Review & Synthesis Matrix ───────────────────────────────────
   {
-    id: 'plagiarism_turnitin',
+    id: 'literature_review_matrix',
     keywords: [
-      'turnitin', 'plagiarism', 'similarity', 'ithenticate', 'ai check',
-      'ai detection', 'safe check', 'repository', 'originality',
+      'literature review', 'lit review', 'synthesis matrix', 'matrix method',
+      'thematic review', 'chronological review', 'how to write lit review',
+      'reviewing literature', 'synthesize literature',
     ],
     handler: () => ({
-      botMessage: `### 🛡️ Turnitin Originality & AI-Check Standards
+      botMessage: `### 📚 How to Write a Critical Academic Literature Review
 
-At InkMonk Research, we process all similarity checks exclusively through **Licensed Instructor Non-Repository Turnitin Accounts**.
+A doctoral literature review is **not** a chronological list of book reports (*"Author A said this, then Author B said that"*). It must be a **critical, thematic synthesis**:
 
-#### Why this is essential for scholars:
-- **Zero Repository Indexing Guaranteed:** Your manuscript is **never** added to Turnitin's global comparative database. When your university or supervisor subsequently submits it, it will **not** trigger a 100% false self-plagiarism match.
-- **Detailed PDF Similarity Report:** Includes complete highlighted source matches, internet references, and student paper match breakdowns.
-- **AI-Generated Writing Probability:** Provides modern sentence-level detection insights across GPT-4, Claude, and Gemini text signatures.
-- **Paraphrasing & Citation Repair:** If your similarity index exceeds your university threshold (e.g., >10% or >15%), our editors assist in rewriting matched passive text into original scholarly syntax.
+#### 1. The Literature Synthesis Matrix Method:
+Build a multi-column comparative table before writing a single paragraph:
+- **Column 1:** Author(s) & Year
+- **Column 2:** Theoretical Framework
+- **Column 3:** Methodology & Sampling ($N$, context)
+- **Column 4:** Key Empirical Findings
+- **Column 5:** Inconsistencies, Biases, or Unaddressed Gaps
 
-Would you like to schedule a confidential originality review?`,
+#### 2. Three Legitimate Ways to Structure Your Review:
+- **Thematic Structuring (Recommended):** Organize by conceptual themes or sub-problems (e.g., *The Role of Trust*, *Security Vulnerabilities*, *Regulatory Barriers*).
+- **Methodological Structuring:** Compare studies based on quantitative vs qualitative vs computational modeling paradigms.
+- **Chronological Structuring:** Trace the historical evolution of a paradigm, culminating in modern controversies.
+
+#### 3. Synthesizing Conflicting Evidence:
+- Group studies that agree: *"Several scholars demonstrate that decentralized consensus accelerates throughput [3], [7], [12]..."*
+- Contrast with opposing literature: *"Conversely, recent empirical benchmarks [15], [18] challenge this premise by illustrating latency degradation under high concurrency..."*
+- Position your study: *"This conflicting evidence underscores the necessity of our proposed hybrid architecture."*`,
       suggestedChips: [
+        'PRISMA Systematic Review',
+        'Theoretical vs Conceptual Framework',
+        'Problem Statement & Research Gap',
         'Get a Project Estimate',
-        'Journal Formatting (IEEE/APA)',
-        'Thesis & IMRaD Structure',
-        'Contact via WhatsApp',
       ],
-      actionLink: { label: 'Request Turnitin Verification', href: '/quote?service=turnitin' },
+      actionLink: { label: 'Get Literature Review Drafted →', href: '/quote' },
     }),
   },
 
-  // ─── Citation & Referencing Styles (IEEE, APA, Harvard, MLA, etc.) ─────────
+  // ─── PRISMA 2020 Systematic Reviews & Meta-Analyses ────────────────────────
   {
-    id: 'citation_styles',
+    id: 'prisma_systematic_review',
     keywords: [
-      'cite', 'citation', 'reference', 'referencing', 'apa', 'ieee',
-      'harvard', 'mla', 'chicago', 'vancouver', 'ama', 'bibtex', 'latex citation',
+      'prisma', 'systematic review', 'meta-analysis', 'scoping review',
+      'prospero', 'cochrane', 'vosviewer', 'biblioshiny', 'bibliometric',
+      'forest plot', 'funnel plot', 'rob 2', 'risk of bias',
+    ],
+    handler: (query) => {
+      const q = query.toLowerCase();
+
+      if (q.includes('scoping') || q.includes('difference')) {
+        return {
+          botMessage: `### 🔍 Systematic Review vs. Scoping Review vs. Meta-Analysis
+
+| Review Type | Primary Scholarly Objective | Synthesis Method | Protocol Standard |
+| :--- | :--- | :--- | :--- |
+| **Systematic Review** | Answer a specific, narrow research question with comprehensive evidence synthesis. | Qualitative narrative synthesis & risk of bias appraisal. | PRISMA 2020 & PROSPERO registration. |
+| **Meta-Analysis** | Mathematically aggregate quantitative effect sizes across multiple randomized or empirical trials. | Statistical pooling (Forest plots, $I^2$ heterogeneity, Odds Ratios). | PRISMA & Cochrane Handbook. |
+| **Scoping Review** | Map the key concepts, boundaries, and types of evidence available in an emerging broad topic. | Descriptive thematic charting; risk of bias optional. | PRISMA-ScR (Scoping Reviews extension). |
+| **Bibliometric Review** | Quantify publication trends, author networks, and intellectual clustering over decades. | Algorithmic network mapping via VOSviewer or R Bibliometrix. | Science mapping protocols. |`,
+          suggestedChips: [
+            'PRISMA 2020 Flowchart Guide',
+            'Risk of Bias & Quality Tools',
+            'Bibliometric VOSviewer Guide',
+            'Get a Project Estimate',
+          ],
+          actionLink: { label: 'Scope My Review Paper →', href: '/quote' },
+        };
+      }
+
+      return {
+        botMessage: `### 📊 PRISMA 2020 Protocol for High-Impact Systematic Reviews
+
+To publish in Scopus Q1 or Web of Science indexed review journals, your study must adhere to the **PRISMA 2020 27-item statement**:
+
+#### The 4-Phase PRISMA Flowchart Architecture:
+1. **Identification:**
+   - Run exact Boolean search strings across $\ge 3$ international indexing databases (Scopus, PubMed, Web of Science, IEEE Xplore).
+   - Document duplicate removal (using Mendeley/Zotero or Covidence).
+2. **Screening:**
+   - Double-blind title and abstract screening by at least two independent researchers.
+   - Record exact exclusion reasons (e.g., non-peer reviewed, wrong population, non-English).
+3. **Eligibility:**
+   - Retrieve full-text PDFs for eligible records.
+   - Thoroughly document exclusions at the full-text stage with unambiguous categories.
+4. **Included:**
+   - Final set of primary studies subjected to systematic data extraction, risk-of-bias evaluation, and qualitative/quantitative synthesis.
+
+#### Essential Quality Appraisal Tools:
+- **Randomized Controlled Trials:** Cochrane RoB 2 (Risk of Bias 2).
+- **Non-Randomized Observational Studies:** ROBINS-I.
+- **Observational / Cohort Studies:** Newcastle-Ottawa Scale (NOS).
+
+InkMonk Research produces complete PRISMA search strings, flowcharts, extraction tables, and VOSviewer cluster maps.`,
+        suggestedChips: [
+          'Scoping Review vs Systematic',
+          'Statistical Data Analysis',
+          'Bibliometric VOSviewer Guide',
+          'Get a Project Estimate',
+        ],
+        actionLink: { label: 'Get PRISMA Review Support →', href: '/quote' },
+      };
+    },
+  },
+
+  // ─── Sampling Methods & Sample Size Formulas ───────────────────────────────
+  {
+    id: 'sampling_sample_size',
+    keywords: [
+      'sampling', 'sample size', 'sample size calculation', 'yamane', 'cochran',
+      'krejcie', 'g*power', 'gpower', 'stratified sampling', 'purposive sampling',
+      'snowball sampling', 'cluster sampling', 'sampling technique',
+    ],
+    handler: () => ({
+      botMessage: `### 🎯 Scientific Sampling Techniques & Sample Size Formulas
+
+Reviewers will immediately reject empirical papers if the sample size is inadequate or unjustified. Here is the mathematical standard:
+
+#### 1. Sample Size Formulas:
+- **Taro Yamane's Formula (Finite Known Population $N$):**
+  $$n = \\frac{N}{1 + N(e^2)}$$
+  *Where $N$ = Population size, $e$ = Margin of error (typically $0.05$ for 95% confidence).*
+  *Example: For $N = 5,000$ and $e = 0.05$, $n = \\frac{5000}{1 + 5000(0.0025)} = 370.37 \\approx 371$ participants.*
+
+- **Cochran’s Formula (Infinite or Unknown Population):**
+  $$n_0 = \\frac{Z^2 \\cdot p \\cdot q}{e^2}$$
+  *Where $Z = 1.96$ (for 95% CI), $p = 0.5$ (maximum variability assumption), $q = 1 - p = 0.5$, $e = 0.05$. This yields $n_0 = 384.16 \\approx 385$.*
+
+- **G*Power Statistical Power Analysis:**
+  For regression, ANOVA, or SEM, calculate sample size based on **Alpha ($\alpha = 0.05$)**, **Statistical Power ($1 - \beta = 0.80$ or $0.95$)**, and **Effect Size ($f^2 = 0.15$ medium)**.
+
+#### 2. Sampling Techniques:
+- **Probability Sampling (Generalizable):**
+  - *Simple Random:* Every element has equal probability via random number generators.
+  - *Stratified Random:* Population divided into homogeneous strata (e.g., by gender, department), then sampled proportionally.
+  - *Cluster:* Naturally occurring geographic or institutional clusters chosen at random.
+- **Non-Probability Sampling (Qualitative / Exploratory):**
+  - *Purposive / Judgmental:* Selected deliberately based on defined expertise or inclusion criteria.
+  - *Snowball:* Key informants recruit subsequent participants (ideal for hidden or elite populations).`,
+      suggestedChips: [
+        'Statistical Data Analysis',
+        'Hypothesis Formulation',
+        'Theoretical vs Conceptual Framework',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Consult on Sample Size Calculation', href: '/quote' },
+    }),
+  },
+
+  // ─── Statistical Tests & Quantitative Analysis ─────────────────────────────
+  {
+    id: 'statistical_tests_guide',
+    keywords: [
+      'statistical test', 'which test to use', 't-test', 'anova', 'manova',
+      'regression', 'logistic regression', 'chi-square', 'mann-whitney',
+      'wilcoxon', 'kruskal-wallis', 'p-value', 'cronbach', 'normality',
+      'spss', 'sem', 'pls-sem', 'amos', 'correlation', 'pearson', 'spearman',
+    ],
+    handler: (query) => {
+      const q = query.toLowerCase();
+
+      return {
+        botMessage: `### 📈 Statistical Test Selection Matrix
+
+Selecting the correct statistical test depends on your **research objective**, the **number of groups**, and whether your data satisfies **normality assumptions**:
+
+#### 1. Comparing Means Across Groups:
+| Research Question | Parametric (Normal Distribution) | Non-Parametric (Non-Normal / Ordinal) |
+| :--- | :--- | :--- |
+| **2 Independent Groups** (e.g., Treatment vs Control) | **Independent Samples t-test** | **Mann-Whitney U Test** |
+| **2 Paired / Related Groups** (Pre-test vs Post-test) | **Paired Samples t-test** | **Wilcoxon Signed-Rank Test** |
+| **3 or More Independent Groups** | **One-Way ANOVA** (+ Tukey HSD Post-Hoc) | **Kruskal-Wallis H Test** (+ Dunn's Test) |
+| **3 or More Repeated Measures** | **Repeated Measures ANOVA** | **Friedman Test** |
+| **Multiple Dependent Variables** | **MANOVA** | Non-parametric MANOVA |
+
+#### 2. Examining Relationships & Associations:
+- **Continuous Variables (Linear):** **Pearson Correlation Coefficient ($r$)**.
+- **Ordinal / Ranked / Non-normal Variables:** **Spearman Rank Correlation ($\\rho$)**.
+- **Categorical vs. Categorical Variables:** **Chi-Square Test of Independence ($\\chi^2$)** (or Fisher’s Exact Test if expected cell count $<5$).
+
+#### 3. Prediction & Structural Modeling:
+- **Continuous Outcome:** **Multiple Linear Regression** (check collinearity VIF $<5$, homoscedasticity, Durbin-Watson).
+- **Binary Outcome (Yes/No, Pass/Fail):** **Binary Logistic Regression** (reporting Odds Ratios and 95% CI).
+- **Complex Latent Constructs & Paths:** **Structural Equation Modeling (PLS-SEM with SmartPLS** or **CB-SEM with AMOS**).
+
+#### 4. Instrument Reliability & Validity:
+- **Cronbach’s Alpha ($\\alpha$):** $\ge 0.70$ acceptable, $\ge 0.80$ good for Likert-scale surveys.
+- **Convergent Validity:** Composite Reliability (CR $\ge 0.70$), Average Variance Extracted (AVE $\ge 0.50$).`,
+        suggestedChips: [
+          'Sampling & Sample Size Formulas',
+          'Hypothesis Formulation',
+          'Results vs Discussion Section',
+          'Get a Project Estimate',
+        ],
+        actionLink: { label: 'Get Statistical Consultation →', href: '/quote' },
+      };
+    },
+  },
+
+  // ─── Qualitative Research & Thematic Analysis ──────────────────────────────
+  {
+    id: 'qualitative_thematic_analysis',
+    keywords: [
+      'qualitative', 'thematic analysis', 'braun and clarke', 'grounded theory',
+      'phenomenology', 'interview coding', 'nvivo', 'atlas.ti', 'coding data',
+      'inductive coding', 'deductive coding', 'triangulation', 'member checking',
+    ],
+    handler: () => ({
+      botMessage: `### 🎙️ Qualitative Research & Thematic Analysis Guide
+
+In qualitative research, credibility and rigor stem from transparent methodological audit trails. The premier standard is **Braun & Clarke's 6-Phase Thematic Analysis Framework**:
+
+#### The 6 Phases of Thematic Analysis:
+1. **Familiarization:** Transcribing verbatim, active reading, and initial reflexive memoing across transcriptions.
+2. **Generating Initial Codes:** Systematic coding of interesting features across the entire dataset (using NVivo, ATLAS.ti, or manual highlighting).
+3. **Searching for Themes:** Clustering candidate codes into overarching conceptual themes and sub-themes.
+4. **Reviewing Themes:** Checking candidate themes against coded extracts and the entire dataset (generating a thematic map).
+5. **Defining & Naming Themes:** Refining the conceptual essence of each theme, formulating authoritative names, and defining boundaries.
+6. **Producing the Scholarly Report:** Selecting rich, illustrative direct quotes with participant pseudonyms and synthesizing with theoretical literature.
+
+#### Ensuring Qualitative Trustworthiness (Lincoln & Guba Criteria):
+- **Credibility:** Member checking (returning transcripts to interviewees) and data source triangulation.
+- **Transferability:** Thick, detailed description of context, institutional settings, and participant demographics.
+- **Dependability:** Comprehensive codebook development and clear audit trails of all analytical choices.
+- **Confirmability:** Epistemic reflexivity statements articulating the researcher’s background and potential biases.`,
+      suggestedChips: [
+        'Theoretical vs Conceptual Framework',
+        'Results vs Discussion Section',
+        'Thesis & IMRaD Structure',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Consult on Qualitative Analysis', href: '/quote' },
+    }),
+  },
+
+  // ─── Results vs. Discussion Sections ───────────────────────────────────────
+  {
+    id: 'results_vs_discussion',
+    keywords: [
+      'results', 'discussion', 'results section', 'discussion section',
+      'how to write discussion', 'interpreting findings', 'limitations',
+      'future scope', 'implications',
+    ],
+    handler: () => ({
+      botMessage: `### ⚖️ Writing the Results vs. Discussion Section
+
+The most common critique by reviewers is **mixing interpretation into the Results section** or **failing to contextualize findings in the Discussion**:
+
+#### The Results Section (Objective Presentation):
+- **Tone:** Purely objective, factual, and past tense.
+- **Function:** Present what the data shows without editorial interpretation or citing outside literature.
+- **Formatting:** Lead with the central trend, cite the table or figure in parentheses (*"(see Table 3)"*), and provide exact statistical parameters ($F(2, 142) = 8.45, p < 0.001, \\eta_p^2 = 0.11$).
+- **Rule:** Never say *"These remarkable results prove our hypothesis..."* in the Results section!
+
+#### The Discussion Section (The Reverse Funnel Model):
+1. **Immediate Answer to Research Question (Paragraph 1):** State plainly whether your primary hypotheses were supported or refuted.
+2. **Dialogue with Existing Literature:** Contrast your findings with prior publications:
+   - *Where your data aligns:* *"This finding corroborates previous empirical observations by Smith et al. [14]..."*
+   - *Where your data diverges:* *"However, this outcome contrasts with Zhang [19], who reported... This discrepancy may be attributed to our larger sample size and real-world edge deployment."*
+3. **Theoretical & Practical Implications:** Explain how your results modify existing theory or inform clinical/engineering practice.
+4. **Frank Acknowledgment of Limitations:** Every study has limitations (e.g., cross-sectional design, specific geographic sample). Disclosing them proactively demonstrates scholarly maturity.
+5. **Concrete Future Directions:** Offer 2–3 actionable avenues for subsequent research.`,
+      suggestedChips: [
+        'Full IMRaD Structure',
+        'Statistical Data Analysis',
+        'Peer-Review Rebuttal Support',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Get Discussion Section Refined', href: '/quote' },
+    }),
+  },
+
+  // ─── All International Citation Manuals (IEEE, APA, Harvard, Chicago, etc.) 
+  {
+    id: 'citation_styles_master',
+    keywords: [
+      'cite', 'citation', 'reference', 'referencing', 'apa', 'apa 7th', 'ieee',
+      'harvard', 'mla', 'mla 9th', 'chicago', 'turabian', 'vancouver', 'ama',
+      'oscola', 'bibtex', 'latex citation', 'endnote', 'zotero', 'mendeley',
     ],
     handler: (query) => {
       const q = query.toLowerCase();
 
       if (q.includes('ieee') || q.includes('bibtex')) {
         return {
-          botMessage: `### 📐 IEEE Citation & Referencing Guide
+          botMessage: `### 📐 IEEE Citation & BibTeX Guide
 
-IEEE format is a numeric system where citations appear in square brackets (e.g., \`[1]\`) consecutively in the order they appear in the text.
+IEEE is a numeric citation system widely used in Engineering, Computer Science, and Physics:
 
 #### In-Text Citations:
-- Single source: *"As demonstrated in recent deep learning benchmarks [1]..."*
-- Multiple sources: *"Prior studies [2], [4]–[7] have documented..."* (Note: comma between separate brackets, en-dash for continuous ranges).
-- With authors: *"According to Zhang and Li [3], convolutional layers..."*
+- Numbers enclosed in square brackets: \`[1]\`, \`[2]\`.
+- Multiple citations: \`[1], [3], [5]–[8]\` (use commas between single numbers, en-dashes for ranges).
+- In a sentence: *"As proved by Roy and Mukherjee in [4], quantization preserves feature fidelity..."*
 
 #### Reference List Format:
 \`\`\`text
-[1] J. K. Author, "Title of paper," IEEE Trans. Neural Netw. Learn. Syst., vol. 34, no. 5, pp. 2450–2462, May 2023, doi: 10.1109/TNNLS.2022.3150000.
-[2] R. E. Smith and T. Roy, Principles of Scalable Computation, 2nd ed. New York, NY, USA: IEEE Press, 2024.
+[1] J. K. Author and R. E. Smith, "Title of paper," IEEE Trans. Neural Netw. Learn. Syst., vol. 34, no. 5, pp. 2450–2462, May 2024, doi: 10.1109/TNNLS.2023.3150000.
+[2] T. Roy, Principles of Scalable Deep Learning Architectures, 2nd ed. Piscataway, NJ, USA: IEEE Press, 2024.
 \`\`\`
 
-#### BibTeX Template for LaTeX:
+#### LaTeX BibTeX Template:
 \`\`\`bibtex
 @article{roy2024scalable,
   author  = {Roy, Tuhit and Mukherjee, Sampreeti},
-  title   = {Empirical Validation of Scalable Neural Architectures},
+  title   = {Empirical Validation of Distributed Neural Attention},
   journal = {IEEE Transactions on Knowledge and Data Engineering},
   year    = {2024},
   volume  = {36},
@@ -283,15 +666,14 @@ IEEE format is a numeric system where citations appear in square brackets (e.g.,
   pages   = {1120--1135},
   doi     = {10.1109/TKDE.2024.1000000}
 }
-\`\`\`
-
-InkMonk Research provides 100% camera-ready IEEE LaTeX template formatting. Would you like our editorial team to format your manuscript?`,
+\`\`\``,
           suggestedChips: [
-            'Journal Formatting (IEEE/APA)',
-            'Thesis & IMRaD Structure',
+            'APA 7th Referencing Guide',
+            'Harvard Citation Style',
+            'Chicago & MLA Style',
             'Get a Project Estimate',
           ],
-          actionLink: { label: 'Get Formatting Quote', href: '/quote' },
+          actionLink: { label: 'Get IEEE LaTeX Formatting →', href: '/quote' },
         };
       }
 
@@ -299,268 +681,447 @@ InkMonk Research provides 100% camera-ready IEEE LaTeX template formatting. Woul
         return {
           botMessage: `### 📚 APA 7th Edition Referencing Standard
 
-APA (American Psychological Association) 7th Edition uses the **Author-Date** citation method with a hanging indent reference list.
+APA 7th uses the **Author-Date** citation method and a hanging-indent reference list:
 
 #### In-Text Citations:
 - **Parenthetical:** *(Roy & Mukherjee, 2024)* or *(Smith et al., 2023)* for three or more authors.
-- **Narrative:** *Roy and Mukherjee (2024) established that...*
-- **Direct Quote:** *(Roy, 2024, p. 45)*.
+- **Narrative:** *Roy and Mukherjee (2024) observed that...*
+- **Direct Quotation with Page:** *(Roy, 2024, p. 112)*.
 
 #### Reference List Formats:
-- **Journal Article (with DOI):**
+- **Journal Article (with DOI as URL):**
   \`\`\`text
-  Mukherjee, S., & Roy, T. (2024). Methodological frameworks in South Asian higher education. Journal of Educational Rigor, 18(2), 145–162. https://doi.org/10.1016/j.jer.2024.01.005
+  Mukherjee, S., & Roy, T. (2024). Methodological frameworks in higher education. Journal of Scholarly Rigor, 18(2), 145–162. https://doi.org/10.1016/j.jsr.2024.01.005
   \`\`\`
 - **Authored Book:**
   \`\`\`text
-  Roy, T. (2023). Empirical foundations of scholarly writing. Academic Press.
+  Roy, T. (2023). Empirical foundations of academic writing. Academic Press.
   \`\`\`
-- **Edited Book Chapter:**
+- **Chapter in an Edited Book:**
   \`\`\`text
-  Sharma, P. (2024). Plagiarism prevention in the AI era. In T. Roy (Ed.), Scholarly Publishing Protocols (pp. 89–114). Academic Press.
+  Sharma, P. (2024). Ethical publishing in AI. In T. Roy (Ed.), Scholarly Publishing Protocols (pp. 89–114). Elsevier.
   \`\`\`
-
-*Key Rule in APA 7:* Include DOIs for all journal articles formatted as active \`https://doi.org/...\` URLs. Never put a period after the DOI.`,
+*Key APA 7 Rule:* Never put a period after the DOI URL!`,
           suggestedChips: [
-            'IEEE Citation Style',
+            'IEEE Citation Guide',
+            'Harvard Citation Style',
+            'Chicago & MLA Style',
+            'Get a Project Estimate',
+          ],
+          actionLink: { label: 'Format My Manuscript to APA →', href: '/quote' },
+        };
+      }
+
+      if (q.includes('harvard') || q.includes('chicago') || q.includes('mla') || q.includes('vancouver')) {
+        return {
+          botMessage: `### 📖 Harvard, Chicago, MLA, & Vancouver Manuals
+
+InkMonk Research formats manuscripts to every major global manual:
+
+- **Harvard Style (Author-Date):**
+  - In-text: \`(Roy 2024, p. 45)\`
+  - Reference: \`Roy, T. (2024) Principles of Scholarly Writing. London: Academic Press.\`
+- **Chicago 17th Manual of Style:**
+  - *Notes & Bibliography:* Superscript numbers in text (\`¹\`) with footnotes/endnotes giving full publication details.
+  - *Author-Date:* In-text \`(Roy 2024, 45)\` with alphabetical bibliography.
+- **MLA 9th Edition (Humanities & Literature):**
+  - In-text: \`(Roy 45)\` (Author and page, **no comma**, no "p.").
+  - Uses the "Container" model in the Works Cited section.
+- **Vancouver / NLM (Biomedical & Medicine):**
+  - Numeric in order of appearance: \`(1)\` or superscript \`¹\`.
+  - Journal titles abbreviated according to the NLM Catalog (Index Medicus), without periods.`,
+          suggestedChips: [
+            'IEEE Citation Guide',
+            'APA 7th Referencing Guide',
             'Thesis & IMRaD Structure',
             'Get a Project Estimate',
           ],
-          actionLink: { label: 'Format My Manuscript to APA', href: '/quote' },
+          actionLink: { label: 'Get Citation Proofing →', href: '/quote' },
         };
       }
 
       return {
-        botMessage: `### 📖 Academic Citation & Referencing Systems
+        botMessage: `### 📖 Universal Scholarly Referencing & Citation Engines
 
-InkMonk Research supports all major international academic citation manuals:
+InkMonk Research provides 100% verified citation engineering across all international guidelines:
 
-| Style | Primary Disciplines | In-Text Pattern | Reference Ordering |
+| System | Format Type | Disciplines | In-Text Pattern |
 | :--- | :--- | :--- | :--- |
-| **IEEE** | Engineering, Computer Science, IT | \`[1]\`, \`[2]\` (Bracketed numeric) | Chronological by citation order |
-| **APA 7th** | Social Sciences, Psychology, Business | \`(Roy & Mukherjee, 2024)\` | Alphabetical by author surname |
-| **Harvard** | Economics, Humanities, Management | \`(Roy 2024: 45)\` | Alphabetical |
-| **Chicago (Turabian)** | History, Fine Arts, Social Sciences | Notes & Bib (Footnotes \`^1\`) or Author-Date | Footnote numbers or Alphabetical |
-| **MLA 9th** | Literature, Cultural Studies, Languages | \`(Roy 42)\` (Author-page, no comma) | Works Cited (Alphabetical) |
-| **Vancouver** | Medicine, Nursing, Biomedical Sciences | \`(1)\` or Superscript \`^1\` | Numeric in order of appearance |
-| **AMA** | Medical Journals, Clinical Trials | Superscript numbers without spaces (\`^1,^2\`) | Numeric in order of appearance |
+| **IEEE** | Numeric | Engineering, Computing, Telecom | \`[1]\`, \`[2]\` |
+| **APA 7th** | Author-Date | Psychology, Social Sciences, Business | \`(Roy & Mukherjee, 2024)\` |
+| **Harvard** | Author-Date | Economics, Management, UK Universities | \`(Roy 2024: 45)\` |
+| **Chicago** | Footnotes / Author-Date | History, Humanities, Fine Arts | Footnote \`^1\` or \`(Roy 2024)\` |
+| **MLA 9th** | Author-Page | Literature, Cultural Studies, Arts | \`(Roy 45)\` |
+| **Vancouver**| Sequential Numeric | Clinical Medicine, Pharmacy, Nursing | \`(1)\` or \`^1\` |
+| **OSCOLA** | Footnotes | International Law, Treaties, Jurisprudence | Footnotes with neutral citations |
 
-**LaTeX & Zotero/Mendeley Support:** We also build clean, error-free \`.bib\` databases and debug Overleaf compilation errors!`,
+We also build clean BibTeX databases and resolve LaTeX Overleaf compile warnings.`,
         suggestedChips: [
           'IEEE Citation Guide',
-          'APA 7th Guide',
-          'Thesis & IMRaD Structure',
+          'APA 7th Referencing Guide',
+          'Harvard Citation Style',
           'Get a Project Estimate',
         ],
-        actionLink: { label: 'Get Expert Citation Proofing', href: '/quote' },
+        actionLink: { label: 'Configure Citation Scope →', href: '/quote' },
       };
     },
   },
 
-  // ─── Manuscript Architecture (IMRaD & Abstract) ────────────────────────────
+  // ─── Doctoral Dissertations (5-Chapter Framework & DRC Defense) ─────────────
   {
-    id: 'imrad_architecture',
+    id: 'phd_thesis_framework',
     keywords: [
-      'imrad', 'structure', 'abstract', 'introduction', 'methodology',
-      'literature review', 'research gap', 'problem statement', 'hypothesis',
-      'results', 'discussion', 'conclusion', 'title',
+      'thesis', 'dissertation', 'phd', 'ph.d', 'doctoral', '5 chapter',
+      'synopsis', 'drc', 'rac', 'thesis chapter', 'chapter 1', 'chapter 2',
+      'chapter 3', 'chapter 4', 'chapter 5', 'viva', 'defense',
     ],
     handler: (query) => {
       const q = query.toLowerCase();
 
-      if (q.includes('abstract')) {
+      if (q.includes('viva') || q.includes('defense')) {
         return {
-          botMessage: `### 🎯 Anatomy of a High-Impact Abstract (200–250 Words)
+          botMessage: `### 🎓 Mastering the Doctoral Viva Voce / Thesis Defense
 
-A compelling journal abstract must function as a standalone executive summary. Follow this proven 4-part formula:
+The doctoral oral defense is your opportunity to defend your empirical contributions before an external evaluation committee. Here is how to prepare:
 
-1. **Background & Context (1–2 sentences):**
-   - Introduce the domain and pinpoint the critical problem or unresolved research gap.
-   - *Example:* *"While convolutional neural networks excel at spatial feature extraction, their computational cost restricts real-time deployment on edge hardware."*
-2. **Methodology / Proposed Approach (2–3 sentences):**
-   - State what you did, your dataset/sample size, and key tools or experimental models used.
-   - *Example:* *"This paper introduces a quantized pruning pipeline evaluated on a benchmark dataset of 50,000 multimodal medical scans."*
-3. **Key Findings / Results (2–3 sentences):**
-   - **Quantify your outcomes!** Never say "results were improved"; state exact percentages, p-values, or F1-scores.
-   - *Example:* *"Empirical evaluations show a 34.2% reduction in latency with a negligible 0.4% drop in top-1 accuracy (p < 0.01)."*
-4. **Conclusion & Practical Implications (1 sentence):**
-   - Why this matters to the scholarly community or industry.
-   - *Example:* *"These findings provide a reproducible blueprint for low-power clinical diagnostic instruments."*
+#### The Top 5 Most Common Examiner Questions:
+1. *"What is the single most original, novel contribution of your doctoral work?"*
+   - **How to Answer:** Summarize in 2 sentences your exact conceptual or empirical contribution, separating your findings from previous baseline models.
+2. *"Why did you select this specific methodology over alternative approaches?"*
+   - **How to Answer:** Defend why your chosen design (e.g., PLS-SEM over Multiple Regression, or mixed-methods over purely qualitative) is best suited to your operationalized variables.
+3. *"What are the key limitations of your empirical findings?"*
+   - **How to Answer:** Acknowledge 2–3 boundary conditions transparently (e.g., sample geography, cross-sectional time horizon) and explain why they do not invalidate your core findings.
+4. *"If you were to start this research again today, what would you do differently?"*
+   - **How to Answer:** Show scholarly growth without undermining your current dissertation (e.g., conducting a longitudinal follow-up or utilizing a larger multi-site pilot).
+5. *"How do your findings translate into practical or policy implications?"*
 
-**Pro Tip:** Avoid abbreviations, literature citations (\`[1]\`), and undefined acronyms in the abstract.`,
+#### Recommended Defense Slide Deck Architecture (20 Slides for a 20-Minute Viva):
+- Slides 1–3: Background, Problem Statement & Research Gap
+- Slides 4–5: Theoretical & Conceptual Framework
+- Slides 6–8: Methodology, Sampling, Instruments & Ethics
+- Slides 9–14: Core Findings, Hypothesis Testing & Empirical Models
+- Slides 15–17: Discussion, Alignment with Literature & Implications
+- Slides 18–20: Limitations, Future Research & Publications Arising from Thesis`,
           suggestedChips: [
-            'Full IMRaD Structure',
-            'Journal Formatting (IEEE/APA)',
+            '5-Chapter Thesis Structure',
+            'Statistical Data Analysis',
             'Get a Project Estimate',
           ],
-          actionLink: { label: 'Get Abstract Proofed', href: '/quote' },
+          actionLink: { label: 'Book Viva Defense Consultation', href: '/quote' },
         };
       }
 
       return {
-        botMessage: `### 🏛️ The Standard IMRaD Manuscript Architecture
+        botMessage: `### 🏛️ The Complete 5-Chapter Doctoral Dissertation Roadmap
 
-High-impact Scopus, IEEE, and SCI/WoS journals require strict adherence to the **IMRaD** framework:
+A doctoral dissertation is an exhaustive monograph that must withstand international external peer evaluation:
 
-#### 1. Title & Abstract
-- **Title:** Concise (<15 words), declarative, incorporating high-indexing keywords.
-- **Abstract:** Structured 200–250 word synthesis (Background, Methods, Results, Conclusion).
+#### Chapter 1: Introduction & Research Problem
+- Background of the study, contextual background, and formal problem statement.
+- Research questions, directional hypotheses ($H_1$ to $H_k$), and specific objectives.
+- Scope, delimitations, and operational definitions of key terms.
 
-#### 2. Introduction (The Funnel Model)
-- **Broad Context:** Current state of the field.
-- **The Research Gap:** What prior studies missed (crucial for peer review survival).
-- **Novelty & Contributions:** 3–4 bulleted, concrete technical or conceptual contributions of this paper.
+#### Chapter 2: Literature Review & Theoretical Framework
+- Thematic synthesis of foundational and modern scholarship (last 5 years).
+- Grand and mid-range theoretical frameworks grounding the investigation.
+- Conceptual framework diagram illustrating hypothesized paths between variables.
+- Explicit synthesis matrix highlighting empirical, methodological, and contextual research gaps.
 
-#### 3. Materials & Methods (Reproducibility Core)
-- Experimental design, sampling strategy, theoretical formulations, and statistical frameworks.
-- Detailed enough that an independent researcher can replicate your study exactly.
+#### Chapter 3: Research Methodology & Design
+- Epistemological paradigm (Positivism, Interpretivism, Pragmatism).
+- Research design (Experimental, Quasi-experimental, Correlational, Mixed-methods).
+- Target population, sampling frame, sample size calculation (Yamane/Cochran/G*Power).
+- Instrumentation, pilot study findings, validity (construct, convergent), and reliability (Cronbach's $\\alpha$).
+- Detailed data analysis plan and institutional ethics / IRB compliance.
 
-#### 4. Results (Objective Reporting)
-- Clear tables and high-resolution figures (300 DPI) presenting empirical data without editorial speculation.
-- Statistical significance levels clearly reported ($p < 0.05$, confidence intervals, effect sizes).
+#### Chapter 4: Data Presentation, Analysis & Empirical Findings
+- Response rate analysis and respondent demographic profiles.
+- Descriptive statistics (mean, SD, skewness, kurtosis).
+- Inferential hypothesis testing (t-tests, ANOVA, multiple regression, or PLS-SEM structural paths).
+- High-resolution data figures and APA/IEEE standardized tables.
 
-#### 5. Discussion & Limitations
-- Interpretation: What do the results mean relative to your initial hypotheses?
-- Contrast with prior literature (agreeing and diverging findings).
-- Frank acknowledgment of methodological constraints and 2–3 avenues for future research.
+#### Chapter 5: Discussion, Conclusions & Recommendations
+- Systematic interpretation of each finding relative to original research questions.
+- Theoretical contributions and practical / managerial implications.
+- Methodological limitations and actionable future research avenues.
 
-InkMonk Research provides end-to-end structural drafting and peer-review preparation for IMRaD papers.`,
+InkMonk Research provides 4-stage milestone delivery with private escrow protection!`,
         suggestedChips: [
-          'How to Write an Abstract',
-          'Peer-Review Rebuttal Support',
+          'Viva Voce Defense Guide',
+          'Sampling & Sample Size Formulas',
+          'Literature Review Matrix',
           'Get a Project Estimate',
         ],
-        actionLink: { label: 'Explore Paper Writing Services', href: '/services#english' },
+        actionLink: { label: 'Explore Thesis Services →', href: '/services' },
       };
     },
   },
 
-  // ─── Research Methodologies & PRISMA Literature Reviews ────────────────────
+  // ─── Journal Selection, Metrics & Predatory Journal Defense ─────────────────
   {
-    id: 'methodology_prisma',
+    id: 'journal_selection_metrics',
     keywords: [
-      'prisma', 'systematic review', 'meta-analysis', 'methodology',
-      'vosviewer', 'bibliometric', 'qualitative', 'quantitative',
-      'sample size', 'cronbach', 'likert', 'survey',
+      'journal', 'journal selection', 'scopus', 'web of science', 'wos',
+      'scie', 'ssci', 'ugc care', 'impact factor', 'citescore', 'sjr',
+      'predatory journal', 'q1', 'q2', 'q3', 'q4', 'desk rejection',
     ],
-    handler: () => ({
-      botMessage: `### 🔬 Research Methodologies & Systematic Reviews
+    handler: (query) => {
+      const q = query.toLowerCase();
 
-#### 1. PRISMA 2020 Guidelines (Systematic Reviews & Meta-Analyses)
-Publishing a Systematic Literature Review requires adherence to the **PRISMA 2020 statement**:
-- **Protocol & Registration:** PROSPERO / Open Science Framework registration.
-- **Search Strategy:** Query strings across at least 3 databases (Scopus, Web of Science, PubMed, IEEE Xplore).
-- **Four-Phase Flow Diagram:**
-  1. *Identification* (records identified through database searching)
-  2. *Screening* (title/abstract review and duplicate removal)
-  3. *Eligibility* (full-text evaluation against explicit inclusion/exclusion criteria)
-  4. *Included* (final qualitative synthesis and quantitative meta-analysis)
+      if (q.includes('predatory') || q.includes('fake')) {
+        return {
+          botMessage: `### 🚨 Avoiding Predatory Journals: The Scholar's Defense Guide
 
-#### 2. Bibliometric Analysis (VOSviewer / R Bibliometrix)
-- Co-authorship networks, co-occurrence of author keywords, and co-citation clustering.
-- Generates high-resolution cluster maps illustrating emerging thematic frontiers.
+Predatory publishers exploit researchers by charging article processing charges (APCs) without conducting authentic peer review, jeopardizing your academic standing:
 
-#### 3. Quantitative Statistical Validation
-- **Sample Size Determination:** Cochran’s formula ($n = \frac{Z^2 p q}{e^2}$) or Yamane’s formula for finite populations.
-- **Instrument Reliability:** Cronbach's Alpha ($\alpha \ge 0.70$ acceptable, $\ge 0.80$ good) for Likert scales.
-- **Construct Validity:** Exploratory Factor Analysis (EFA) and Confirmatory Factor Analysis (CFA).
+#### The 5 Dead Giveaways of a Predatory Journal:
+1. **Unrealistic Turnaround Promises:** Any journal offering *"Peer review and publication within 48 to 72 hours"* is predatory. Legitimate peer review takes 6 to 16 weeks.
+2. **Generic, Flattering Solicitation Emails:** Cold emails praising your unrelated conference paper or inviting you to submit immediately.
+3. **Fake or Bogus Impact Metrics:** Using counterfeit metrics such as *"Universal Impact Factor"*, *"Global Impact Factor"*, or *"SJIF"* instead of authentic Clarivate JCR Impact Factor or Scopus CiteScore.
+4. **Hijacked Journal Websites:** Scammers duplicate the layout and ISSN of legitimate Latin American or European print journals on fraudulent \`.com\` or \`.org\` domains.
+5. **No Verifiable Editorial Board:** Editorial board members listed without institutional \`.edu\` or \`.ac\` emails, or scholars listed who have no knowledge of their inclusion.
 
-Our technical statistics division supports **SPSS, R, Python, and MATLAB** analysis with publication-grade visualizations!`,
-      suggestedChips: [
-        'Statistical Data Analysis',
-        'Thesis & IMRaD Structure',
-        'Get a Project Estimate',
-      ],
-      actionLink: { label: 'Get Statistical Consultation', href: '/quote' },
-    }),
+#### The "Think. Check. Submit." Verification Routine:
+- Check if the journal is indexed directly on **Scopus.com** (verify active indexing status in Scopus Source List).
+- Check **Master Journal List (Clarivate)** for Web of Science Core Collection (SCIE, SSCI, AHCI).
+- Check **DOAJ (Directory of Open Access Journals)** for verified Open Access compliance.`,
+          suggestedChips: [
+            'Scopus Quartiles Explained',
+            'Journal Selection Strategy',
+            'Get a Project Estimate',
+          ],
+          actionLink: { label: 'Get Journal Authenticity Check', href: '/quote' },
+        };
+      }
+
+      return {
+        botMessage: `### 🧭 Journal Selection & Indexing Metrics Explained
+
+Navigating academic indexing hierarchies is essential for academic promotion and doctoral degree awards:
+
+#### 1. Indexing Tier Hierarchies:
+- **Clarivate Web of Science (WoS) Core Collection:**
+  - **SCIE (Science Citation Index Expanded):** Highest tier for STEM.
+  - **SSCI (Social Sciences Citation Index):** Top tier for Economics, Management, Social Sciences.
+  - **AHCI (Arts & Humanities Citation Index):** Prestigious humanities publications.
+  - **ESCI (Emerging Sources Citation Index):** High-quality peer-reviewed journals evaluated for future impact factors.
+- **Scopus (Elsevier):**
+  - Divided into 4 quartiles per subject category:
+    - **Q1 (Top 25%):** Highest prestige and citation influence.
+    - **Q2 (25%–50%):** Strong international visibility.
+    - **Q3 (50%–75%):** Solid regional and specialized scope.
+    - **Q4 (Bottom 25%):** Entry-level peer-reviewed venues.
+- **UGC-CARE List (India):**
+  - **Group I:** Verified Indian and regional journals evaluated by UGC.
+  - **Group II:** Globally indexed journals (Scopus and Web of Science).
+
+#### 2. Key Metrics Demystified:
+- **Journal Impact Factor (JIF):** Citations in year $t$ to articles published in $t-1$ and $t-2$, divided by total citable items. Calculated exclusively by Clarivate.
+- **CiteScore (Scopus):** Calculates average citations across a 4-year rolling window.
+- **SCImago Journal Rank (SJR):** Weights citations by the prestige of the citing journal (PageRank algorithm).`,
+        suggestedChips: [
+          'Avoiding Predatory Journals',
+          'Peer-Review Rebuttal Support',
+          'Thesis & IMRaD Structure',
+          'Get a Project Estimate',
+        ],
+        actionLink: { label: 'Get Journal Target List →', href: '/quote' },
+      };
+    },
   },
 
-  // ─── Peer-Review Rebuttal & Reviewer Comment Templates ─────────────────────
+  // ─── Peer-Review Rebuttals & Handling Reviewer Critiques ───────────────────
   {
-    id: 'rebuttal_reviewers',
+    id: 'peer_review_rebuttal',
     keywords: [
       'rebuttal', 'reviewer', 'reviewer 1', 'reviewer 2', 'major revision',
       'minor revision', 'resubmission', 'response letter', 'editor comments',
+      'reject and resubmit', 'desk reject',
     ],
     handler: () => ({
       botMessage: `### ✍️ Diplomatic Peer-Review Rebuttal Strategy
 
-Receiving a *"Major Revision"* is a victory—it means the editor wants to publish your work once reviewer concerns are satisfactorily resolved!
+Receiving a **"Major Revision"** or **"Revise & Resubmit"** is an achievement—it signifies the editor is prepared to publish your work once reviewer critiques are addressed satisfactorily:
 
-#### The Golden Rule: The 3-Part Response Architecture
-For every single point raised by Reviewer #1 and Reviewer #2, structure your response as:
-1. **Diplomatic Gratitude:** Acknowledge the critique respectfully.
-2. **Exact Action Taken:** State what was added, corrected, or recalculated.
-3. **Manuscript Cross-Reference:** Point directly to Page number, Line number, and quote the newly added text in bold.
+#### The 3-Part Golden Rebuttal Architecture:
+For **every single comment** made by Reviewer #1 and Reviewer #2, structure your response as:
+1. **Diplomatic Acknowledgement:** Respectfully validate the critique.
+2. **Specific Action Taken:** Detail what experiments were re-run, text rewritten, or citations added.
+3. **Cross-Referenced Quote:** State exact Page, Section, and Line numbers, quoting the newly revised text in bold.
 
 #### Template 1: Agreeing and Expanding
-> *"We sincerely thank Reviewer 1 for this constructive observation regarding [Topic]. We agree that our initial explanation was overly condensed. In the revised manuscript, we have expanded Section 3.2 (Page 8, Lines 142–158) to include a comparative baseline: **'[Insert newly added text here]'**."*
+> *"We thank Reviewer 1 for this valuable insight regarding our sampling frame. We concur that our original rationale was overly brief. In the revised manuscript, we have expanded Section 3.2 (Page 7, Lines 142–158) to include a comparative baseline table and additional justification: **'[Insert newly added text]'**."*
 
-#### Template 2: Respectful Disagreement (Defending Your Methodology)
-> *"We appreciate the reviewer’s suggestion to utilize [Method B]. While Method B is indeed valuable in [Context], we chose [Method A] because our study specifically aims to evaluate [Condition]. To make this rationale explicit for future readers, we have added a dedicated justification paragraph in Section 2.4 (Page 5, Lines 95–104)."*
+#### Template 2: Respectfully Defending Methodology
+> *"We appreciate the reviewer’s suggestion to utilize Algorithm B. While Algorithm B is effective in [Alternative Context], we adopted Algorithm A because our study explicitly tests low-power embedded constraints. To clarify this scientific rationale for future readers, we have added a dedicated explanatory paragraph in Section 2.4 (Page 5, Lines 95–104)."*
 
-InkMonk Research specializes in crafting comprehensive Response-to-Reviewers matrices that dramatically accelerate final acceptance!`,
+InkMonk Research crafts comprehensive Response-to-Reviewers matrices that dramatically improve acceptance velocity!`,
       suggestedChips: [
-        'Get a Project Estimate',
+        'Journal Selection & Metrics',
         'Thesis & IMRaD Structure',
-        'Journal Formatting (IEEE/APA)',
+        'Get a Project Estimate',
       ],
-      actionLink: { label: 'Request Revision Assistance', href: '/quote' },
+      actionLink: { label: 'Request Revision Assistance →', href: '/quote' },
     }),
   },
 
-  // ─── Converting Thesis to Book / Monograph ──────────────────────────────────
+  // ─── Turnitin & Originality Verification ────────────────────────────────────
   {
-    id: 'thesis_to_book',
+    id: 'turnitin_originality_ai',
     keywords: [
-      'thesis to book', 'convert thesis', 'monograph', 'book proposal',
-      'publish book', 'isbn', 'scholarly book',
+      'turnitin', 'plagiarism', 'similarity', 'ithenticate', 'ai check',
+      'ai detection', 'safe check', 'repository', 'originality', 'self plagiarism',
+      'false positive',
     ],
     handler: () => ({
-      botMessage: `### 📖 Converting a Doctoral Thesis into a Scholarly Book
+      botMessage: `### 🛡️ Turnitin Originality & AI-Check Standards
 
-A PhD thesis and a published scholarly monograph have fundamentally different audiences:
-- A **thesis** is written to prove to your committee that you read everything and conducted rigorous experiments.
-- A **book** is written for scholars, students, and practitioners who seek a compelling narrative and actionable insights.
+At InkMonk Research, all similarity verification is conducted exclusively through **Licensed Instructor Non-Repository Turnitin Accounts**:
 
-#### Key Transformation Steps:
-1. **Dismantle Chapter 2 (Literature Review):** Readers do not want a catalog of past papers. Weave literature seamlessly into arguments rather than keeping a monolithic review chapter.
-2. **Eliminate Academic Jargon & Dissertationese:** Remove passive constructions like *"It was observed by the researcher that..."* in favor of active, authoritative prose (*"Empirical observations indicate that..."*).
-3. **Enhance Narrative Cohesion:** Group findings into themed standalone chapters with clear introductory bridges.
-4. **ISBN & Publisher Formatting:** Camera-ready interior layouts formatted for print (6×9 or 7×10 inch) and digital distribution.
+#### Why the Non-Repository Protocol is Critical:
+- **Zero Database Indexing Guaranteed:** Your draft is analyzed in private RAM and **never** stored in Turnitin’s global comparative repository. When your university subsequently submits your final thesis, it will **not** trigger a 100% false self-plagiarism match.
+- **Detailed PDF Originality Report:** Color-coded highlighted passage citations matching published journals, internet sources, and student archives.
+- **Turnitin AI Writing Indicator:** Sentence-level statistical perplexity and burstiness detection breakdown.
+- **Ethical Similarity Reduction:** If your similarity exceeds university thresholds (e.g., $>10\\%$ or $>15\\%$), our doctoral fellows assist in rewriting passive quotes into original scholarly discourse.
 
-InkMonk Research offers end-to-end book conversion packages:
-- **100 Pages:** ₹3,999 (English) | ₹2,999 (Hindi)
-- **200 Pages:** ₹7,499 (English) | ₹5,499 (Hindi)
-- **300 Pages:** ₹10,999 (English) | ₹7,999 (Hindi)`,
+#### Typical University Thresholds:
+- Overall Similarity: $<10\\%$ to $<15\\%$.
+- Single Source Match: $<1\\%$.
+- Exclusion filters: Quotes and Bibliography properly configured.`,
       suggestedChips: [
-        'Get a Project Estimate',
         'Thesis & IMRaD Structure',
-        'Contact via WhatsApp',
+        'Journal Formatting (IEEE/APA)',
+        'Get a Project Estimate',
       ],
-      actionLink: { label: 'Explore Book Writing Services', href: '/services' },
+      actionLink: { label: 'Request Turnitin Verification →', href: '/quote?service=TURNITIN' },
+    }),
+  },
+
+  // ─── Scientific Style, Tone & Academic English ─────────────────────────────
+  {
+    id: 'academic_writing_style_tone',
+    keywords: [
+      'academic style', 'tone', 'passive voice', 'active voice', 'hedging',
+      'academic english', 'nominalization', 'scientific writing', 'grammar',
+      'concise writing',
+    ],
+    handler: () => ({
+      botMessage: `### ✍️ Academic Style, Tone & Scientific English
+
+Publishing in prestigious international journals requires an authoritative, objective scholarly voice:
+
+#### 1. Active vs. Passive Voice in Modern Publishing:
+- Historically, journals demanded strict passive voice (*"The experiment was conducted by the authors"*).
+- **Modern Standards (Nature, IEEE, APA 7th):** Encourage active voice when describing author decisions (*"We conducted the experiment..."* or *"We propose a lightweight architecture..."*).
+- Use passive voice when the object or process is the central focus (*"Blood samples were centrifuged at 3,000 RPM for 15 minutes"*).
+
+#### 2. Academic Hedging (Calibrated Caution):
+Scientific manuscripts must avoid unwarranted absolutes:
+- **Avoid:** *"These findings prove that the algorithm is optimal."*
+- **Scholarly Standard:** *"These findings suggest that the algorithm achieves superior performance under evaluated operational constraints."*
+- **Use epistemic verbs:** *indicates, corroborates, reflects, aligns with, implies*.
+
+#### 3. Eliminating Heavy Nominalization:
+Nominalization occurs when dynamic verbs are converted into cumbersome abstract nouns:
+- **Weak:** *"An investigation into the utilization of the technology was undertaken by the team."*
+- **Strong:** *"We investigated how clinicians utilized the technology."*
+
+InkMonk Research provides professional academic copyediting to ensure your prose reads with native scholarly fluency.`,
+      suggestedChips: [
+        'How to Write an Abstract',
+        'Thesis & IMRaD Structure',
+        'Journal Formatting (IEEE/APA)',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Get Academic Copyediting', href: '/quote' },
+    }),
+  },
+
+  // ─── Computational & Machine Learning Research ─────────────────────────────
+  {
+    id: 'computational_ml_research',
+    keywords: [
+      'machine learning', 'deep learning', 'pytorch', 'tensorflow', 'matlab',
+      'cuda', 'reproducible code', 'docker', 'code implementation', 'algorithm',
+      'hyperparameters', 'f1 score', 'auc-roc',
+    ],
+    handler: () => ({
+      botMessage: `### 💻 Documenting Computational & Machine Learning Research
+
+Computer Science and AI manuscripts face severe reproducibility audits by peer reviewers. To achieve acceptance, your paper must document every element of the experimental pipeline:
+
+#### 1. The 5 Pillars of Computational Reproducibility:
+- **Dataset Partitioning:** Document exact splits (e.g., 70% Train, 15% Validation, 15% Test) and state whether stratified cross-validation was employed.
+- **Hardware & Environment Specification:** Disclose GPU architecture (e.g., NVIDIA RTX 4090 / A100), CUDA version, framework versions (PyTorch 2.2, Python 3.11), and random seeds for initialization.
+- **Hyperparameter Tables:** State batch size, initial learning rate, optimizer (e.g., AdamW with weight decay), learning rate scheduler, and training epochs.
+- **Statistical Benchmark Reporting:** Run experiments across multiple random seeds and report **Mean $\\pm$ Standard Deviation** for all metrics:
+  - Classification: Precision, Recall, Macro F1-Score, AUC-ROC.
+  - Regression: RMSE, MAE, $R^2$.
+  - Computer Vision: mAP@0.5, mAP@0.5:0.95, FPS.
+
+#### 2. Docker & Private Git Handoff:
+InkMonk Research provides complete working codebases packaged with \`requirements.txt\`, step-by-step \`README.md\`, and Docker containers ensuring immediate reproducibility.`,
+      suggestedChips: [
+        'Statistical Data Analysis',
+        'Full IMRaD Structure',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Explore Computational Services', href: '/services' },
+    }),
+  },
+
+  // ─── Hindi & Vernacular Academic Research (हिंदी शोध कार्य) ─────────────────
+  {
+    id: 'hindi_academic_research',
+    keywords: [
+      'hindi', 'hindi paper', 'hindi thesis', 'हिंदी', 'शोध प्रबंध',
+      'शोध पत्र', 'यूजीसी', 'शोधगंगा', 'shodhganga', 'ugc care hindi',
+      'cstt', 'देवनागरी', 'mangal',
+    ],
+    handler: () => ({
+      botMessage: `### 🇮🇳 हिंदी शोध एवं अकादमिक प्रभाग (Hindi Academic Division)
+
+इंकमोंक रिसर्च (InkMonk Research) में सह-संस्थापिका **सम्प्रीति मुखर्जी मैम** के प्रत्यक्ष पर्यवेक्षण में हिंदी माध्यम के शोधार्थियों के लिए एक समर्पित विद्वान मंडल कार्यरत है, जो **UGC-CARE** और **शोधगंगा (Shodhganga)** मानकों के पूर्णतः अनुरूप कार्य करता है:
+
+#### प्रमुख हिंदी शोध सेवाएं:
+1. **शोध प्रबंध (Doctoral Thesis & Dissertation):** संपूर्ण 5-अध्यायी शोध संरचना (प्रस्तावना, साहित्य समीक्षा, शोध प्रविधि, तथ्य विश्लेषण, निष्कर्ष एवं संस्तुतियां)।
+2. **शोध पत्र (Research Paper Writing):** यूजीसी-केयर सूचीबद्ध एवं समकक्ष पत्रिकाओं हेतु मानक IMRaD प्रारूप में मौलिक शोध पत्र।
+3. **समीक्षात्मक शोध (Systematic Review Papers):** समकालीन साहित्यिक एवं सामाजिक शोध प्रवृत्तियों का समालोचनात्मक सर्वेक्षण।
+4. **शोध सारांश / प्रस्ताव (Synopsis):** विभागीय शोध समिति (DRC/RAC) पंजीकरण स्वीकृति मानक रूपरेखा।
+5. **अकादमिक ग्रंथ लेखन (Scholarly Books):** 100, 200 एवं 300 पृष्ठों के संदर्भ ग्रंथ एवं मोनोग्राफ (ISBN मानक सहित)।
+
+#### प्रामाणिक भाषा मानक:
+- **वैज्ञानिक तथा तकनीकी शब्दावली आयोग (CSTT), शिक्षा मंत्रालय, भारत सरकार** द्वारा स्वीकृत मानक पारिभाषिक शब्दावली का प्रयोग।
+- मानक यूनिकोड (Mangal / Devanagari) में त्रुटिहीन टाइपिंग एवं प्रूफरीडिंग।
+- 0% AI लेखन एवं शत-प्रतिशत मौलिक बौद्धिक शोध।`,
+      suggestedChips: [
+        'हिंदी कार्य का कोटेशन प्राप्त करें',
+        'शोध पत्र संरचना',
+        'व्हाट्सएप पर संपर्क करें',
+      ],
+      actionLink: { label: 'Explore Hindi Services →', href: '/services' },
     }),
   },
 
   // ─── Client Portal & Authentication Guidance ───────────────────────────────
   {
-    id: 'client_portal',
+    id: 'client_portal_access',
     keywords: [
       'client portal', 'login', 'sign in', 'account', 'otp', 'google login',
-      'dashboard', 'check status', 'track project', 'my project',
+      'dashboard', 'check status', 'track project', 'my project', 'portal',
     ],
     handler: () => ({
       botMessage: `### 🔐 InkMonk Client Portal Access
 
-Our encrypted Client Portal allows scholars to monitor project milestones, review chapter drafts, download similarity certificates, and communicate directly with directors Tuhit Roy and Sampreeti Mukherjee.
+Our encrypted Client Portal enables scholars to monitor project milestones, review chapter drafts, download similarity certificates, and submit technical queries directly to directors Tuhit Roy and Sampreeti Mukherjee:
 
-#### Fast & Secure Sign-In Options:
-1. **Continue with Google (OAuth):** Instant one-click authentication.
-2. **6-Digit Email OTP:** Passwordless numeric code delivered directly to your inbox with zero hassle.
+#### Two Fast & Secure Authentication Methods:
+1. **Continue with Google (OAuth):** Instant one-click sign in.
+2. **6-Digit Email OTP:** Passwordless numeric verification code sent directly to your email inbox.
 
-Click below to open the Portal authentication window:`,
+Click below to access your scholar dashboard:`,
       suggestedChips: [
-        'Client Portal Login',
+        'Open Client Portal',
         'Get a Project Estimate',
         'Contact via WhatsApp',
       ],
@@ -568,27 +1129,28 @@ Click below to open the Portal authentication window:`,
     }),
   },
 
-  // ─── Contact & Office Details ──────────────────────────────────────────────
+  // ─── Contact & Office Leadership ───────────────────────────────────────────
   {
-    id: 'contact_info',
+    id: 'contact_leadership',
     keywords: [
       'contact', 'phone', 'whatsapp', 'email', 'office', 'address',
       'location', 'tuhit roy', 'sampreeti mukherjee', 'kolkata', 'salt lake',
+      'talk to founder', 'speak with director',
     ],
     handler: () => ({
-      botMessage: `### 📍 Connect Directly with InkMonk Research Leadership
+      botMessage: `### 📍 Consult Directly with InkMonk Research Leadership
 
-We welcome scholars to consult directly with our co-founders for custom project scoping, milestone agreements, and confidentiality NDAs:
+We welcome scholars to consult directly with our co-founders for custom project scoping, milestone agreements, and pre-signed mutual NDAs:
 
-- **Founders:** **Tuhit Roy** (Founder) & **Sampreeti Mukherjee** (Co-Founder)
-- **Official WhatsApp / Phone:** [\`+91 7980470880\`](https://wa.me/917980470880) *(Instant response during working hours)*
+- **Leadership:** **Tuhit Roy** (Founder) & **Sampreeti Mukherjee** (Co-Founder)
+- **Official WhatsApp / Phone:** [\`+91 7980470880\`](https://wa.me/917980470880) *(Direct scholar line)*
 - **Official Email:** \`inkmonkresearch@gmail.com\` / \`support@inkmonkresearch.com\`
 - **Registered Office:** Karunamoyee, Sector 2, Salt Lake, Kolkata, West Bengal 700091, India
 - **Consultation Hours:** Monday – Saturday, 9:00 AM – 8:00 PM IST
 
 How would you prefer to get in touch?`,
       suggestedChips: [
-        'Chat on WhatsApp',
+        'Message on WhatsApp',
         'Get a Project Estimate',
         'Journal Formatting (IEEE/APA)',
       ],
@@ -600,39 +1162,95 @@ How would you prefer to get in touch?`,
     }),
   },
 
-  // ─── Hindi Academic Work (हिंदी शोध कार्य) ──────────────────────────────────
+  // ─── Estimator & Pricing Guidance ──────────────────────────────────────────
   {
-    id: 'hindi_services',
+    id: 'pricing_estimator_route',
     keywords: [
-      'hindi', 'hindi paper', 'hindi thesis', 'हिंदी', 'शोध प्रबंध',
-      'शोध पत्र', 'यूजीसी', 'शोधगंगा', 'shodhganga', 'ugc care hindi',
+      'estimate', 'quote', 'cost', 'pricing', 'price', 'rate', 'fees',
+      'how much', 'charge', 'calculator', 'package', 'discount',
     ],
     handler: () => ({
-      botMessage: `### 🇮🇳 हिंदी शोध एवं लेखन सेवाएं (Hindi Research Division)
+      botMessage: `### 💰 Instant Academic Quotation & Timeline Estimator
 
-इंकमोंक रिसर्च (InkMonk Research) में हिंदी भाषा के शोधार्थियों के लिए एक समर्पित विद्वान मंडल (Scholarly Panel) कार्यरत है, जो **UGC-CARE** और **शोधगंगा (Shodhganga)** मानकों के पूर्णतः अनुरूप कार्य करता है:
+At InkMonk Research, all project quotations are tailored deterministically to your **technical complexity**, **word count**, **target journal standard (Scopus/IEEE/UGC-CARE)**, and **language (English or Hindi)**:
 
-#### हमारी प्रमुख हिंदी सेवाएं:
-1. **हिंदी शोध पत्र (Research Paper):** ₹3,999 (विश्वविद्यालय एवं UGC-CARE जर्नल्स हेतु मानक IMRaD प्रारूप)
-2. **समीक्षा पत्र (Review Paper):** ₹2,999 (साहित्यिक एवं विषयगत सर्वेक्षण)
-3. **शोध सारांश / प्रस्ताव (Synopsis):** ₹2,999 (DRC समिति द्वारा स्वीकृत रूपरेखा)
-4. **संपूर्ण शोध प्रबंध (Doctoral Thesis):** ₹14,999 (5 अध्यायों का सुव्यवस्थित शोध प्रबंध)
-5. **ग्रंथ / पुस्तक लेखन (Book Writing):** 100 पृष्ठ: ₹2,999 | 200 पृष्ठ: ₹5,499 | 300 पृष्ठ: ₹7,999
-6. **शोध प्रस्तुति (Academic PPT):** ₹100 प्रति स्लाइड
+#### Core Project Offerings Available in our Quote Engine:
+- **Ph.D. Theses & Master Dissertations:** Complete 5-chapter volumes with 4-stage milestone escrow.
+- **Research Papers:** Full empirical IMRaD drafts formatted to target journal guidelines.
+- **PRISMA Systematic Reviews:** Search strings, screening flowcharts, and meta-analyses.
+- **Academic Synopses & Proposals:** Formulated for university DRC approval.
+- **Computational Models & Code:** PyTorch, TensorFlow, MATLAB simulations, and Docker containers.
+- **Instructor Turnitin Scans:** 100% safe non-repository originality audits with express 15–30 min turnaround.
 
-मंगल (Mangal / Unicode) फॉन्ट में त्रुटिहीन टाइपिंग एवं भाषा-शुद्धि! क्या आप अपने हिंदी शोध कार्य का अनुमान लगाना चाहते हैं?`,
+Use our interactive on-site estimator to calculate your exact milestone timeline and customized breakdown:`,
       suggestedChips: [
-        'हिंदी कार्य का कोटेशन प्राप्त करें',
-        'शोध पत्र संरचना',
-        'व्हाट्सएप पर बात करें',
+        'Open Interactive Estimator',
+        'Thesis & IMRaD Structure',
+        'Plagiarism & AI-Check Standards',
+        'Contact via WhatsApp',
       ],
-      actionLink: { label: 'Explore Hindi Services', href: '/services#hindi' },
+      actionLink: { label: 'Calculate Your Instant Estimate →', href: '/quote' },
     }),
   },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 3. MAIN QUERY PROCESSOR (SEMANTIC MATCHING + CONTEXT)
+// 3. UNIVERSAL SCHOLARLY FALLBACK & REASONING ENGINE
+// ─────────────────────────────────────────────────────────────────────────────
+
+function generateUniversalScholarlyResponse(query: string, context: StellaContext): StellaResponse {
+  // Extract key topic nouns and clean punctuation
+  const cleanTokens = query
+    .replace(/[^\w\s-]/gi, '')
+    .split(/\s+/)
+    .filter(
+      (w) =>
+        w.length > 2 &&
+        ![
+          'what', 'how', 'when', 'where', 'which', 'who', 'why',
+          'does', 'explain', 'tell', 'help', 'about', 'with', 'from',
+          'this', 'that', 'have', 'been', 'give', 'want', 'need', 'please',
+        ].includes(w.toLowerCase())
+    );
+
+  const topicPhrase = cleanTokens.length > 0 ? cleanTokens.join(' ') : 'your specific research inquiry';
+
+  return {
+    botMessage: `### 🎓 Comprehensive Academic Consultation: "${topicPhrase}"
+
+As your **Academic Concierge**, here is an authoritative, step-by-step scholarly framework for addressing **${topicPhrase}** in peer-reviewed journals and doctoral dissertations:
+
+#### 1. Conceptual Framing & Problem Positioning
+- **Establish Scholarly Context:** Connect ${topicPhrase} to primary theoretical frameworks in your discipline.
+- **Isolate the Unresolved Gap:** Demonstrate why existing publications have not fully resolved this issue. Why does this inquiry matter to independent peer reviewers?
+
+#### 2. Methodological & Empirical Rigor
+- **Operationalization:** Clearly define and operationalize all dependent and independent variables or qualitative constructs.
+- **Sampling & Validity:** Ensure your sample size is mathematically justified (Yamane/Cochran/G*Power) or that your qualitative purposive criteria demonstrate adequate data saturation.
+- **Standardized Instrumentation:** Use validated measurement scales (testing Cronbach’s $\\alpha \\ge 0.70$) or calibrated experimental hardware.
+
+#### 3. Manuscript & Dissertation Integration
+- **IMRaD Alignment:** Embed the methodology transparently in Section 3 and discuss contradictory evidence frankly in the Discussion section.
+- **Citation Integrity:** Format all references strictly to your target guidelines (IEEE, APA 7th, Harvard, or Chicago) with zero non-peer-reviewed blog citations.
+- **Turnitin Originality:** Verify zero repository retention to guarantee intellectual property safety.
+
+#### 4. How InkMonk Research Can Support You:
+Our doctoral directors, **Tuhit Roy** and **Sampreeti Mukherjee**, provide dedicated 1-on-1 mentorship, structural drafting, statistical validation, and pre-submission peer review proofing.
+
+Would you like an exact milestone timeline or customized project quotation for this study?`,
+    suggestedChips: [
+      'Get a Project Estimate',
+      'Thesis & IMRaD Structure',
+      'Journal Formatting (IEEE/APA)',
+      'Plagiarism & AI-Check Standards',
+      'Consult on WhatsApp',
+    ],
+    actionLink: { label: 'Calculate Instant Estimate →', href: '/quote' },
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 4. MAIN PROCESSOR (SEMANTIC INTENT MATCHING + CONTEXT TRACKING)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export function processStellaQuery(
@@ -642,60 +1260,66 @@ export function processStellaQuery(
   const query = rawQuery.trim();
   const lowerQuery = query.toLowerCase();
 
-  // Empty input check
+  // Empty query guard
   if (!query) {
     return {
-      botMessage: `Hello! I am **Stella**, your Academic Concierge at InkMonk Research. How can I assist with your research paper, thesis, or citation formatting today?`,
+      botMessage: `Hello! I am **Stella**, your encyclopedic Academic Concierge at **InkMonk Research**. 
+
+I can answer any question regarding:
+- **Manuscript Architecture & IMRaD Structure**
+- **Doctoral Theses & Viva Voce Defense**
+- **Statistical Tests & Research Methodologies**
+- **PRISMA 2020 Systematic Reviews & Meta-Analyses**
+- **Citation Guidelines (IEEE, APA 7th, Harvard, Chicago, MLA)**
+- **Turnitin Originality & AI Writing Standards**
+- **Scopus / Web of Science Journal Selection**
+
+How can I assist your scholarly journey today?`,
       suggestedChips: [
         'Journal Formatting (IEEE/APA)',
         'Thesis & IMRaD Structure',
+        'Statistical Data Analysis',
         'Get a Project Estimate',
-        'Plagiarism & AI-Check Standards',
       ],
     };
   }
 
-  // 1. Check intent rules
-  for (const rule of INTENT_RULES) {
-    for (const keyword of rule.keywords) {
-      const isMatch =
-        typeof keyword === 'string'
-          ? lowerQuery.includes(keyword.toLowerCase())
-          : keyword.test(lowerQuery);
+  // Multi-pass semantic matcher: calculate best scoring rule
+  let bestRule: IntentRule | null = null;
+  let bestScore = 0;
 
-      if (isMatch) {
-        context.lastTopic = rule.id;
-        context.turnCount += 1;
-        return rule.handler(query, context);
+  for (const rule of INTENT_RULES) {
+    let score = 0;
+
+    for (const kw of rule.keywords) {
+      if (typeof kw === 'string') {
+        const lowerKw = kw.toLowerCase();
+        if (lowerQuery === lowerKw) {
+          score += 15; // exact match
+        } else if (lowerQuery.includes(lowerKw)) {
+          score += lowerKw.split(' ').length * 3; // phrase match weighted by word count
+        }
+      } else if (kw instanceof RegExp) {
+        if (kw.test(lowerQuery)) {
+          score += 20; // high priority regex match (e.g. guardrails)
+        }
       }
+    }
+
+    if (score > bestScore) {
+      bestScore = score;
+      bestRule = rule;
     }
   }
 
-  // 2. Intelligent Academic Fallback with Keyword Extraction
+  // If a high-confidence intent is found (score >= 3), execute its handler
+  if (bestRule && bestScore >= 3) {
+    context.lastTopic = bestRule.id;
+    context.turnCount += 1;
+    return bestRule.handler(query, context);
+  }
+
+  // Fallback to Universal Scholarly Reasoning Engine
   context.turnCount += 1;
-  const words = query
-    .replace(/[^\w\s]/gi, '')
-    .split(/\s+/)
-    .filter((w) => w.length > 3 && !['this', 'that', 'with', 'what', 'have', 'from', 'help'].includes(w.toLowerCase()));
-
-  const topicKeyword = words.length > 0 ? words.slice(0, 3).join(' ') : 'your academic project';
-
-  return {
-    botMessage: `### 🎓 Academic Consultation on "${topicKeyword}"
-
-Thank you for your question. As your **Academic Concierge**, here is how **InkMonk Research** approaches this domain:
-
-1. **Scholarly Scoping & Rigor:** Every study requires a defensible theoretical foundation, validated methodology (qualitative, quantitative, or computational), and explicit research gap positioning.
-2. **Formatting & Originality Standards:** We ensure all writing meets target publication rules (IEEE, Springer, Elsevier, APA 7th, or UGC-CARE) alongside safe, non-repository Turnitin verification.
-3. **Direct Editorial Support:** Our directors, **Tuhit Roy** and **Sampreeti Mukherjee**, personally oversee research quality and milestone delivery.
-
-Would you like an exact milestone timeline and cost breakdown for this project?`,
-    suggestedChips: [
-      'Get a Project Estimate',
-      'Journal Formatting (IEEE/APA)',
-      'Thesis & IMRaD Structure',
-      'Plagiarism & AI-Check Standards',
-    ],
-    actionLink: { label: 'Calculate Instant Estimate →', href: '/quote' },
-  };
+  return generateUniversalScholarlyResponse(query, context);
 }

@@ -109,11 +109,17 @@ How can I assist your scholarly journey today?
   const [isLoading, setIsLoading] = useState(false);
   const [context, setContext] = useState<StellaContext>({ turnCount: 0 });
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  // Auto-scroll ONLY inside the chat container so window/page never jumps down
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTo({
+        top: messagesContainerRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
   }, [messages, isLoading]);
 
   const handleSend = (messageText: string) => {
@@ -147,7 +153,7 @@ How can I assist your scholarly journey today?
 
       setMessages((prev) => [...prev, stellaMsg]);
       setIsLoading(false);
-      inputRef.current?.focus();
+      inputRef.current?.focus({ preventScroll: true });
     }, 380);
   };
 
@@ -194,8 +200,11 @@ How can I assist your scholarly journey today?
         {/* Chat Conversation Container */}
         <div className="bg-white dark:bg-[#0A0F1D] rounded-3xl shadow-xl border-2 border-slate-200 dark:border-slate-800 flex flex-col h-[650px] overflow-hidden">
           
-          {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-slate-50/60 dark:bg-[#070b14] scrollbar-thin">
+          {/* Messages Area (Pure Internal Scroll, Never Scrolls Webpage Window) */}
+          <div
+            ref={messagesContainerRef}
+            className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-slate-50/60 dark:bg-[#070b14] scrollbar-thin overscroll-contain"
+          >
             {messages.map((m) => (
               <div
                 key={m.id}
@@ -270,8 +279,6 @@ How can I assist your scholarly journey today?
                 <div className="w-2 h-2 bg-[#f97316] rounded-full animate-bounce" />
               </div>
             )}
-
-            <div ref={messagesEndRef} />
           </div>
 
           {/* Input Footer */}

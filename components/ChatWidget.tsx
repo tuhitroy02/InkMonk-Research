@@ -121,19 +121,24 @@ How can I assist your scholarship today?
 
   const chatDrawerRef = useRef<HTMLDivElement>(null);
   const chatLauncherRef = useRef<HTMLButtonElement>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-scroll to latest message
+  // Auto-scroll ONLY inside the chat messages container to prevent window/viewport jumping
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTo({
+        top: messagesContainerRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
   };
 
   useEffect(() => {
     if (isOpen) {
       scrollToBottom();
-      // Focus input when opened
-      setTimeout(() => inputRef.current?.focus(), 150);
+      // Focus input without jumping or scrolling the window viewport
+      setTimeout(() => inputRef.current?.focus({ preventScroll: true }), 150);
     }
   }, [messages, isOpen, isTyping]);
 
@@ -260,10 +265,11 @@ How can I assist your scholarship today?
               </div>
             </div>
 
-            {/* ─── Messages Scroll Container ─────────────────────────── */}
+            {/* ─── Messages Scroll Container (Pure Internal Scroll, No Page Jump) ─── */}
             <div
+              ref={messagesContainerRef}
               onClick={(e) => e.stopPropagation()}
-              className="flex-1 overflow-y-auto p-4 space-y-3.5 bg-slate-50/70 dark:bg-[#070b14] scrollbar-thin"
+              className="flex-1 overflow-y-auto p-4 space-y-3.5 bg-slate-50/70 dark:bg-[#070b14] scrollbar-thin overscroll-contain"
             >
               {messages.map((m) => (
                 <div
@@ -344,8 +350,6 @@ How can I assist your scholarship today?
                   <div className="w-1.5 h-1.5 bg-[#f97316] rounded-full animate-bounce" />
                 </div>
               )}
-
-              <div ref={messagesEndRef} />
             </div>
 
             {/* ─── Bottom Input Box ──────────────────────────────────── */}
