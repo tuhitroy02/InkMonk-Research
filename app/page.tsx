@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import HeroClaymorphic from '@/components/HeroClaymorphic';
 import FloatingLiveHelp from '@/components/FloatingLiveHelp';
 import InkMonkCinematicCore from '@/components/InkMonkCinematicCore';
@@ -14,14 +15,6 @@ import {
   Scroll3DParallaxSection,
   FloatingScrollBadge,
 } from '@/components/FuturisticScrollExperience';
-import {
-  ResearchPaper3DVisual,
-  Thesis3DVisual,
-  ModelCode3DVisual,
-  Turnitin3DVisual,
-  Book3DVisual,
-  Presentation3DVisual,
-} from '@/components/Service3DVisuals';
 
 import HorizontalHowItWorks from '@/components/HorizontalHowItWorks';
 import ResearchAreasSection from '@/components/ResearchAreasSection';
@@ -47,19 +40,6 @@ import {
 } from '@/components/RealIcons';
 
 import {
-  ResearchPaperRealWork,
-  ThesisRealWork,
-  BookRealWork,
-  ReviewPaperRealWork,
-  ArticleRealWork,
-  PresentationRealWork,
-  ModelCodeRealWork,
-  SynopsisRealWork,
-  TurnitinReportRealWork,
-  HindiPaperRealWork,
-} from '@/components/RealWorkImages';
-
-import {
   InstantTurnitinModal,
   TurnitinSampleModal,
   FormalNdaModal,
@@ -71,78 +51,69 @@ import {
 
 const SERVICES = [
   {
-    visual: <ResearchPaper3DVisual className="w-full h-44 mb-4" />,
+    image: '/services/research-paper.jpg',
     title: 'Research Paper Writing',
     desc: 'IEEE, Springer, Elsevier standard manuscripts with structured methodology, empirical experiments, and citations in English & Hindi.',
     href: '/quote?service=RESEARCH_PAPER',
     badge: 'IEEE / Springer / Elsevier',
-    glowColor: 'purple' as const,
   },
   {
-    visual: <Thesis3DVisual className="w-full h-44 mb-4" />,
+    image: '/services/thesis-dissertation.jpg',
     title: 'Thesis & Dissertation',
     desc: 'Master and Doctoral thesis drafting from literature review to conclusion, with optional computational model implementation.',
     href: '/quote?service=THESIS',
     badge: 'Milestone Escrow',
-    glowColor: 'purple' as const,
   },
   {
-    visual: <Book3DVisual className="w-full h-44 mb-4" />,
+    image: '/services/book-monograph.jpg',
     title: 'Book Writing (100–300 Pages)',
     desc: 'Full-length scholarly book manuscripts, edited volumes, monographs, and book chapters formatted for ISBN publication.',
     href: '/quote?service=BOOK',
     badge: 'ISBN Standard',
-    glowColor: 'purple' as const,
   },
   {
-    visual: <ReviewPaperRealWork className="w-full h-44 mb-4" />,
+    image: '/services/review-paper.jpg',
     title: 'Review Papers',
     desc: 'Systematic literature reviews and bibliometric surveys mapping state-of-the-art developments across your discipline.',
     href: '/quote?service=REVIEW_PAPER',
     badge: 'PRISMA Guidelines',
-    glowColor: 'purple' as const,
   },
   {
-    visual: <ArticleRealWork className="w-full h-44 mb-4" />,
+    image: '/services/article-writing.jpg',
     title: 'Article Writing',
     desc: 'Expertly researched academic, journal, and thought leadership articles with verified word counts and full citation rigor.',
     href: '/quote?service=ARTICLE',
     badge: 'Standardized Rates in Quote',
-    glowColor: 'purple' as const,
   },
   {
-    visual: <Presentation3DVisual className="w-full h-44 mb-4" />,
+    image: '/services/academic-presentation.jpg',
     title: 'Academic PPT & Defense',
     desc: 'Engaging, professional thesis defense and conference presentation slide decks formatted for university evaluation panels.',
     href: '/quote?service=PPT',
     badge: 'Defense Ready',
-    glowColor: 'purple' as const,
   },
   {
-    visual: <ModelCode3DVisual className="w-full h-44 mb-4" />,
+    image: '/services/computational-model.jpg',
     title: 'Model & Code Implementation',
     desc: 'Machine learning, deep learning (PyTorch, TensorFlow), Python, and MATLAB code implementation with reproducible benchmarks.',
     href: '/quote?service=MODEL',
     badge: 'Docker & Git Handoff',
-    glowColor: 'purple' as const,
     isCode: true,
   },
   {
-    visual: <SynopsisRealWork className="w-full h-44 mb-4" />,
+    image: '/services/synopsis-proposal.jpg',
     title: 'Synopsis & Research Proposals',
     desc: 'Crisp, defensible research synopses for PhD registrations, grant applications, and institutional doctoral committees.',
     href: '/quote?service=SYNOPSIS',
     badge: 'DRC Committee Ready',
-    glowColor: 'purple' as const,
   },
   {
-    visual: <Turnitin3DVisual className="w-full h-44 mb-4" />,
+    image: '/services/turnitin-report.jpg',
     title: 'Turnitin AI & Plagiarism Reports',
     price: '₹200 per file flat',
     desc: 'Instructor-tier Turnitin verification audits checking similarity index and AI writing percentages without saving to repository.',
     href: '/quote?type=TURNITIN',
     badge: 'Safe Non-Repository',
-    glowColor: 'purple' as const,
     isTurnitin: true,
   },
 ];
@@ -187,23 +158,29 @@ export default function HomePage() {
                   English Specialists
                 </span>
                 <div>
-                  <ResearchPaper3DVisual className="w-full h-44 mb-4" />
+                  <Image
+                    src="/services/research-paper.jpg"
+                    alt="English Services"
+                    width={400}
+                    height={200}
+                    className="w-full h-44 object-cover rounded-2xl mb-4 border-2 border-slate-200/80 shadow-sm"
+                  />
                   <h3 className="font-serif text-2xl font-black text-slate-900 mb-1 text-center">English Services</h3>
                   <p className="text-slate-600 text-xs mb-4 text-center font-medium">
                     Technical and non-technical manuscripts formatted to IEEE, Springer, Elsevier, APA, Harvard, and UGC standards.
                   </p>
                   <div className="max-w-xs mx-auto mb-6">
-                    <ul className="space-y-2 text-xs text-slate-700 font-bold text-left">
-                      <li className="flex items-center gap-2">
+                    <ul className="space-y-2 text-xs text-slate-700 font-bold text-center">
+                      <li className="flex items-center justify-center gap-2">
                         <span className="text-[#F95721] font-black">✦</span> Research &amp; Review Papers
                       </li>
-                      <li className="flex items-center gap-2">
+                      <li className="flex items-center justify-center gap-2">
                         <span className="text-[#F95721] font-black">✦</span> Master &amp; Doctoral Theses (with/without model)
                       </li>
-                      <li className="flex items-center gap-2">
+                      <li className="flex items-center justify-center gap-2">
                         <span className="text-[#F95721] font-black">✦</span> Scholarly Books (100–300 pages)
                       </li>
-                      <li className="flex items-center gap-2">
+                      <li className="flex items-center justify-center gap-2">
                         <span className="text-[#F95721] font-black">✦</span> Journal Articles &amp; Conference Slides
                       </li>
                     </ul>
@@ -220,23 +197,29 @@ export default function HomePage() {
                   Hindi Specialists
                 </span>
                 <div>
-                  <HindiPaperRealWork className="w-full h-44 mb-4" />
+                  <Image
+                    src="/research-areas/hindi-sahitya.jpg"
+                    alt="Hindi Services"
+                    width={400}
+                    height={200}
+                    className="w-full h-44 object-cover rounded-2xl mb-4 border-2 border-slate-200/80 shadow-sm"
+                  />
                   <h3 className="font-serif text-2xl font-black text-slate-900 mb-1 text-center">Hindi Services</h3>
                   <p className="text-slate-600 text-xs mb-4 text-center font-medium">
                     Supervised by Sampreeti Mukherjee with standardized academic vocabulary, Shodhganga compliance, and zero automated translation shortcuts.
                   </p>
                   <div className="max-w-xs mx-auto mb-4">
-                    <ul className="space-y-2 text-xs text-slate-700 font-bold text-left">
-                      <li className="flex items-center gap-2">
+                    <ul className="space-y-2 text-xs text-slate-700 font-bold text-center">
+                      <li className="flex items-center justify-center gap-2">
                         <span className="text-[#F95721] font-black">✦</span> शोध पत्र / Research Papers
                       </li>
-                      <li className="flex items-center gap-2">
+                      <li className="flex items-center justify-center gap-2">
                         <span className="text-[#F95721] font-black">✦</span> शोध प्रबंध / Complete Thesis
                       </li>
-                      <li className="flex items-center gap-2">
+                      <li className="flex items-center justify-center gap-2">
                         <span className="text-[#F95721] font-black">✦</span> पुस्तक लेखन (100–300 पृष्ठ)
                       </li>
-                      <li className="flex items-center gap-2">
+                      <li className="flex items-center justify-center gap-2">
                         <span className="text-[#F95721] font-black">✦</span> देवनागरी व्याख्यान एवं प्रस्तुतियाँ
                       </li>
                     </ul>
@@ -261,7 +244,13 @@ export default function HomePage() {
                   Verified Originality
                 </span>
                 <div>
-                  <Turnitin3DVisual className="w-full h-44 mb-4" />
+                  <Image
+                    src="/services/turnitin-report.jpg"
+                    alt="Turnitin Reports"
+                    width={400}
+                    height={200}
+                    className="w-full h-44 object-cover rounded-2xl mb-4 border-2 border-slate-200/80 shadow-sm"
+                  />
                   <h3 className="font-serif text-2xl font-black text-slate-900 mb-1 text-center">Turnitin Reports</h3>
                   <p className="text-slate-600 text-xs mb-3 text-center font-medium">
                     Instructor-grade originality and AI writing detection report without saving your file to public repositories.
@@ -329,9 +318,15 @@ export default function HomePage() {
                     {s.badge}
                   </span>
 
-                  {/* Real Image of the Work or 3D Visual */}
+                  {/* Real Image of the Deliverable */}
                   <div className="w-full transform group-hover:scale-[1.02] transition-transform duration-300">
-                    {s.visual}
+                    <Image
+                      src={s.image}
+                      alt={s.title}
+                      width={400}
+                      height={200}
+                      className="w-full h-44 object-cover rounded-2xl mb-4 border-2 border-slate-200/80 shadow-sm"
+                    />
                   </div>
 
                   <div className="flex flex-col items-center text-center w-full">
@@ -478,12 +473,12 @@ export default function HomePage() {
                 {/* Editorial Badges */}
                 <div className="w-full pt-4 border-t border-slate-100 flex items-center justify-center gap-4 text-xs text-slate-700 font-bold">
                   <span className="flex items-center gap-1">
-                    <span className="text-[#2563EB] font-bold">✓</span>
+                    <span className="text-[#2563EB] font-bold">◆</span>
                     <span>UGC-CARE Standards</span>
                   </span>
                   <span>•</span>
                   <span className="flex items-center gap-1">
-                    <span className="text-[#F95721] font-bold">✓</span>
+                    <span className="text-[#F95721] font-bold">◆</span>
                     <span>Comparative Literature</span>
                   </span>
                 </div>

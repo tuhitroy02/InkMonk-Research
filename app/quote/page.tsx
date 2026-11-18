@@ -246,7 +246,7 @@ function QuoteWizard() {
                     : 'bg-white text-slate-600 border-2 border-slate-200'
                 }`}
               >
-                {step > item.s ? '✓' : item.s}
+                {step > item.s ? '◆' : item.s}
               </div>
               <span className="text-[11px] text-slate-600 font-bold mt-1">{item.label}</span>
             </div>
@@ -576,8 +576,8 @@ function QuoteWizard() {
         {/* Step 4: Submission Confirmation */}
         {step === 4 && (
           <div className="card-clay-white p-8 md:p-12 text-center">
-            <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm border border-emerald-300 font-black">
-              ✓
+            <div className="w-16 h-16 bg-blue-100 text-[#2563EB] rounded-full flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm border border-blue-200 font-black">
+              ◆
             </div>
             <h2 className="font-serif text-3xl font-black text-slate-900 mb-3">
               Quotation Request Received!

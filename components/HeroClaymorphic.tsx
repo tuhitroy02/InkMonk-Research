@@ -56,49 +56,60 @@ export default function HeroClaymorphic() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
           {/* ─── LEFT COLUMN: HEADLINE & VALUE PROP ─────────────────────────── */}
-          <div className="lg:col-span-7 text-left">
+          <div className="lg:col-span-7 flex flex-col items-center text-center">
             
+            {/* Authentic Brand Badge */}
+            <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 px-4 py-1.5 rounded-full mb-3 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#2563EB] animate-pulse"></span>
+              <span className="text-[11px] font-black uppercase tracking-widest text-[#1E3A8A] font-mono">
+                RESEARCH WITH CARE • WRITING WITH CLARITY
+              </span>
+            </div>
+
             {/* Main Headline with 3D Arrow */}
-            <div className="relative inline-block mb-4 sm:mb-6">
-              <h1 className="font-serif font-black text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.08] text-slate-900 tracking-tight">
-                Your Research.<br />
+            <div className="relative inline-block mb-3">
+              <h1 className="font-serif font-black text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] leading-[1.08] text-slate-900 tracking-tight">
+                InkMonk Research<br />
                 <span className="text-[#F95721] inline-block relative">
-                  Published.
+                  Your Research. Published.
                 </span>
               </h1>
 
               {/* 3D Curved Pointer Arrow looping back onto "Published." */}
-              <div className="absolute -top-3 sm:-top-5 -right-28 sm:-right-36 lg:-right-44 hidden xs:block">
-                <CurvedPointerArrow className="w-28 sm:w-36 lg:w-44 h-auto" />
+              <div className="absolute -top-3 sm:-top-5 -right-24 sm:-right-32 lg:-right-36 hidden xs:block">
+                <CurvedPointerArrow className="w-24 sm:w-32 lg:w-36 h-auto" />
               </div>
             </div>
 
-            {/* Description */}
-            <p className="text-slate-700 text-base sm:text-lg lg:text-xl font-medium leading-relaxed max-w-xl mb-6">
-              We help PhDs, researchers, and students perfect their manuscripts, analyze data, and pass peer review with zero stress.
+            {/* Authentic Tagline & Subhead */}
+            <p className="font-serif italic text-lg sm:text-xl text-[#1E3A8A] font-bold mb-2">
+              &ldquo;Research with care. Writing with clarity.&rdquo;
+            </p>
+            <p className="text-slate-700 text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-xl mb-6">
+              Premier academic research writing, PhD thesis development, peer-reviewed journal publishing, and Turnitin audits in English and Hindi.
             </p>
 
-            {/* Bullet Checklist with Sparkle Icons */}
-            <div className="space-y-3 mb-8">
-              <div className="flex items-center gap-3 text-slate-800 font-bold text-sm sm:text-base">
-                <span className="text-[#F95721] text-lg font-black shrink-0">✦</span>
+            {/* Bullet Checklist with Unique Academic Diamond Icons (No Ticks) */}
+            <div className="space-y-3 mb-8 w-full max-w-md mx-auto">
+              <div className="flex items-center justify-center gap-3 text-slate-800 font-bold text-sm sm:text-base">
+                <span className="text-[#F95721] text-base font-black shrink-0">✦</span>
                 <span>Done-for-you Formatting (LaTeX, APA, etc.)</span>
               </div>
-              <div className="flex items-center gap-3 text-slate-800 font-bold text-sm sm:text-base">
-                <span className="text-[#2563EB] text-lg font-black shrink-0">✦</span>
+              <div className="flex items-center justify-center gap-3 text-slate-800 font-bold text-sm sm:text-base">
+                <span className="text-[#2563EB] text-base font-black shrink-0">✦</span>
                 <span>Peer-Review Ready Checklist</span>
               </div>
-              <div className="flex items-center gap-3 text-slate-800 font-bold text-sm sm:text-base">
-                <span className="text-[#1E293B] text-lg font-black shrink-0">✦</span>
+              <div className="flex items-center justify-center gap-3 text-slate-800 font-bold text-sm sm:text-base">
+                <span className="text-[#1E293B] text-base font-black shrink-0">✦</span>
                 <span>100% Confidentiality Guaranteed</span>
               </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 w-full max-w-md mx-auto">
               <Link
                 href="/quote"
-                className="btn-clay-orange text-center text-sm sm:text-base"
+                className="btn-clay-orange text-center text-sm sm:text-base w-full sm:w-auto"
               >
                 <span>Start Your Journey</span>
                 <span className="text-lg">→</span>
@@ -106,7 +117,7 @@ export default function HeroClaymorphic() {
 
               <Link
                 href="/how-it-works"
-                className="btn-clay-white text-center text-sm sm:text-base"
+                className="btn-clay-white text-center text-sm sm:text-base w-full sm:w-auto"
               >
                 <span>See Our Process</span>
                 <span className="text-lg">↓</span>
@@ -114,7 +125,7 @@ export default function HeroClaymorphic() {
             </div>
 
             {/* Social Proof: Avatars + Loved by Scholars */}
-            <div className="flex items-center gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
               <div className="flex -space-x-3 overflow-hidden">
                 {SCHOLAR_AVATARS.map((src, i) => (
                   <img
@@ -125,11 +136,11 @@ export default function HeroClaymorphic() {
                   />
                 ))}
               </div>
-              <div>
+              <div className="text-center sm:text-left">
                 <div className="text-sm sm:text-base font-extrabold text-slate-900">
                   Loved by 1,200+ Scholars
                 </div>
-                <div className="flex items-center text-amber-500 text-xs">
+                <div className="flex items-center justify-center sm:justify-start text-amber-500 text-xs">
                   {'★'.repeat(5)} <span className="text-slate-500 text-[11px] font-semibold ml-1.5">(4.9/5 from Scopus authors)</span>
                 </div>
               </div>
@@ -299,7 +310,7 @@ export default function HeroClaymorphic() {
 
             {/* 6. UGC-CARE */}
             <div className="badge-clay-embossed">
-              <span className="text-purple-600 font-black">✓</span>
+              <span className="text-blue-600 font-black">◆</span>
               <span>UGC-CARE</span>
             </div>
 

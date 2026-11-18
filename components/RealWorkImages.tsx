@@ -68,7 +68,7 @@ export function ResearchPaperRealWork({ className = "w-full h-44" }: { className
 
       {/* Watermark Ribbon */}
       <div className="absolute bottom-1 right-2 bg-purple-950 border border-purple-400/50 text-purple-200 text-[7px] font-sans font-bold px-1.5 py-0.5 rounded shadow-sm font-mono">
-        ✓ IEEE Standard Format
+        ◆ IEEE Standard Format
       </div>
     </div>
   );
@@ -182,7 +182,7 @@ export function ReviewPaperRealWork({ className = "w-full h-44" }: { className?:
       </div>
 
       <div className="flex items-center justify-between text-[7.5px] text-purple-200 border-t border-purple-900/60 pt-1">
-        <span className="font-bold text-purple-300">✓ Comprehensive Gap Analysis</span>
+        <span className="font-bold text-purple-300">◆ Comprehensive Gap Analysis</span>
         <span>Harvard / APA 7th Citations</span>
       </div>
     </div>
@@ -283,7 +283,7 @@ export function ModelCodeRealWork({ className = "w-full h-44" }: { className?: s
       </div>
 
       <div className="flex items-center justify-between text-[7px] text-purple-300 border-t border-purple-900/60 pt-1">
-        <span className="text-white font-bold">✓ Private Git Repo Handoff</span>
+        <span className="text-white font-bold">◆ Private Git Repo Handoff</span>
         <span>Requirements.txt + Dockerfile</span>
       </div>
     </div>
@@ -310,7 +310,7 @@ export function SynopsisRealWork({ className = "w-full h-44" }: { className?: st
       </div>
 
       <div className="flex items-center justify-between font-sans text-[7.5px] text-purple-300 border-t border-purple-900/60 pt-1">
-        <span className="text-white font-bold">✓ Committee Ready</span>
+        <span className="text-white font-bold">◆ Committee Ready</span>
         <span>University Registration Approved</span>
       </div>
     </div>
@@ -385,7 +385,7 @@ export function HindiPaperRealWork({ className = "w-full h-44" }: { className?: 
       </div>
 
       <div className="flex items-center justify-between font-sans text-[7.5px] text-purple-300 border-t border-purple-900/60 pt-1">
-        <span className="text-white font-bold">✓ शुद्ध देवनागरी शब्दावली</span>
+        <span className="text-white font-bold">◆ शुद्ध देवनागरी शब्दावली</span>
         <span>शोधगंगा मानक प्रारूप</span>
       </div>
     </div>

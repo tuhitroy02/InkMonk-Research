@@ -146,7 +146,7 @@ export default function HorizontalHowItWorks({ className = "" }: { className?: s
                         : 'bg-white text-slate-700 border-slate-300 hover:border-[#F95721] shadow-sm'
                     }`}
                   >
-                    {isPast ? '✓' : s.step}
+                    {isPast ? '◆' : s.step}
                   </div>
                   <span
                     className={`text-[11px] font-bold mt-2 uppercase tracking-wider transition-colors ${
@@ -162,7 +162,7 @@ export default function HorizontalHowItWorks({ className = "" }: { className?: s
         </div>
 
         {/* Horizontal 5-Step Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-left">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-center">
           {HORIZONTAL_STEPS.map((s, idx) => {
             const isCurrent = activeStep === idx;
             return (
@@ -172,15 +172,15 @@ export default function HorizontalHowItWorks({ className = "" }: { className?: s
                 className="cursor-pointer transition-all duration-200"
               >
                 <div
-                  className={`card-clay-white p-5 flex flex-col justify-between h-full border-2 transition-all ${
+                  className={`card-clay-white p-5 flex flex-col justify-between items-center text-center h-full border-2 transition-all ${
                     isCurrent
                       ? 'border-[#F95721] shadow-lg ring-2 ring-[#F95721]/30 -translate-y-1'
                       : 'border-slate-200 hover:border-slate-300'
                   }`}
                 >
-                  <div>
+                  <div className="w-full flex flex-col items-center text-center">
                     {/* Step Header */}
-                    <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center justify-between w-full mb-3">
                       <span className="w-8 h-8 rounded-xl bg-orange-100 text-[#F95721] font-black text-xs flex items-center justify-center border border-orange-200">
                         {s.step}
                       </span>
@@ -189,26 +189,26 @@ export default function HorizontalHowItWorks({ className = "" }: { className?: s
                       </span>
                     </div>
 
-                    <h3 className="font-serif text-base font-black text-slate-900 mb-2 leading-snug">
+                    <h3 className="font-serif text-base font-black text-slate-900 mb-2 leading-snug text-center">
                       {s.title}
                     </h3>
-                    <p className="text-slate-600 text-xs font-medium leading-relaxed mb-4">
+                    <p className="text-slate-600 text-xs font-medium leading-relaxed mb-4 text-center">
                       {s.desc}
                     </p>
 
                     {/* Deliverable Box */}
-                    <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 mb-3">
-                      <div className="text-[10px] font-black text-[#F95721] uppercase mb-0.5">
+                    <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 mb-3 w-full text-center">
+                      <div className="text-[10px] font-black text-[#F95721] uppercase mb-0.5 text-center">
                         DELIVERABLE:
                       </div>
-                      <div className="text-xs text-slate-800 font-bold leading-tight">
+                      <div className="text-xs text-slate-800 font-bold leading-tight text-center">
                         {s.deliverables}
                       </div>
                     </div>
                   </div>
 
                   {/* Timeline Bottom */}
-                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between w-full text-[11px] text-slate-500 font-medium">
                     <span>Timeline:</span>
                     <span className="text-[#2563EB] font-bold">{s.timeline}</span>
                   </div>

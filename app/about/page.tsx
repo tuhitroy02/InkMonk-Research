@@ -144,12 +144,12 @@ export default function AboutPage() {
               {/* Badges */}
               <div className="w-full pt-4 border-t border-slate-100 flex items-center justify-center gap-4 text-xs text-slate-700 font-bold">
                 <span className="flex items-center gap-1">
-                  <span className="text-[#2563EB] font-bold">✓</span>
+                  <span className="text-[#2563EB] font-bold">◆</span>
                   <span>UGC-CARE Standards</span>
                 </span>
                 <span>•</span>
                 <span className="flex items-center gap-1">
-                  <span className="text-[#F95721] font-bold">✓</span>
+                  <span className="text-[#F95721] font-bold">◆</span>
                   <span>Comparative Literature</span>
                 </span>
               </div>

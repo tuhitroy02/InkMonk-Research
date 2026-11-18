@@ -2,20 +2,33 @@
 
 @layer base {
   :root {
-    --font-heading: "Playfair Display", Georgia, Cambria, "Times New Roman", serif;
-    --font-body: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-heading: "Cavolini Condensed", "Cavolini", "Segoe UI", system-ui, sans-serif;
+    --font-body: "Cavolini Condensed", "Cavolini", "Segoe UI", system-ui, sans-serif;
+    --font-hindi: "Mangal", "Noto Sans Devanagari", sans-serif;
   }
 }
 
-/* ─── Universal Typography (Elite Academic Editorial Standard) ───────────── */
+/* ─── Universal Typography (MS Cavolini Condensed & Mangal) ─────────────── */
 html,
-body {
-  font-family: var(--font-body);
-  background-color: #F8FAFC;
-  color: #0F172A;
+body,
+* {
+  font-family: "Cavolini Condensed", "Cavolini", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif !important;
+  text-align: center !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+}
+
+[lang="hi"],
+.font-hindi,
+.hindi-text,
+.devanagari {
+  font-family: "Mangal", "Noto Sans Devanagari", "Cavolini Condensed", sans-serif !important;
+}
+
+html,
+body {
+  background-color: #F8FAFC;
+  color: #0F172A;
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -29,17 +42,24 @@ body {
   background-size: 32px 32px;
 }
 
+[data-theme="dark"] .bg-notebook-grid,
+.dark-mode .bg-notebook-grid {
+  background-color: #0B1120;
+  background-image: 
+    linear-gradient(to right, rgba(30, 41, 59, 0.6) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30, 41, 59, 0.6) 1px, transparent 1px);
+}
+
 h1,
 h2,
 h3,
 h4,
 .font-serif {
-  font-family: var(--font-heading);
-  letter-spacing: -0.02em;
+  font-family: var(--font-heading) !important;
+  letter-spacing: -0.01em;
+  text-align: center !important;
 }
 
-/* ─── Global Text Alignment Rule ────────────────────────────────────────── */
-/* Headings & Descriptions Centered, Bullet Points Left-Aligned */
 p,
 h1,
 h2,
@@ -47,19 +67,23 @@ h3,
 h4,
 h5,
 h6,
-.center-text-content {
-  text-align: center;
-}
-
 ul,
 ol,
 li,
-.bullet-point,
-.bullet-list {
-  text-align: left !important;
+span,
+a,
+div,
+form,
+input,
+textarea,
+button,
+table,
+th,
+td {
+  text-align: center !important;
 }
 
-/* ─── InkMonk Claymorphic 3D Design Tokens ──────────────────────────────── */
+/* ─── InkMonk Clean Color Tokens (Orange, Blue, White, Slate - NO PURPLE) ─── */
 :root,
 [data-theme="light"],
 .light-mode {
@@ -116,37 +140,38 @@ li,
   cursor: pointer;
   text-decoration: none;
   user-select: none;
+  white-space: nowrap;
 }
 
 .btn-clay-orange:hover {
+  background: linear-gradient(180deg, #FF843D 0%, #FA5E11 100%);
   transform: translateY(-2px);
   box-shadow: 
     0 7px 0 #C43B00,
     0 16px 28px rgba(245, 82, 4, 0.42),
     inset 0 1px 2px rgba(255, 255, 255, 0.8);
-  filter: brightness(1.03);
 }
 
 .btn-clay-orange:active {
   transform: translateY(4px);
   box-shadow: 
     0 1px 0 #C43B00,
-    0 4px 8px rgba(245, 82, 4, 0.3),
-    inset 0 2px 2px rgba(0, 0, 0, 0.2);
+    0 4px 10px rgba(245, 82, 4, 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .btn-clay-white {
   position: relative;
-  background: #FFFFFF;
-  color: #1E3A8A !important;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%);
+  color: #1E293B !important;
   font-weight: 700;
   border-radius: 9999px;
   padding: 0.85rem 1.85rem;
-  border: 2.5px solid #2563EB;
+  border: 2px solid #CBD5E1;
   box-shadow: 
-    0 4px 0 #CBD5E1,
-    0 8px 18px rgba(0, 0, 0, 0.06),
-    inset 0 2px 4px rgba(255, 255, 255, 0.95);
+    0 4px 0 #94A3B8,
+    0 10px 20px rgba(15, 23, 42, 0.08),
+    inset 0 2px 2px #FFFFFF;
   transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
@@ -155,127 +180,251 @@ li,
   cursor: pointer;
   text-decoration: none;
   user-select: none;
+  white-space: nowrap;
 }
 
 .btn-clay-white:hover {
+  background: #FFFFFF;
+  border-color: #94A3B8;
   transform: translateY(-2px);
   box-shadow: 
     0 6px 0 #94A3B8,
-    0 12px 24px rgba(37, 99, 235, 0.15),
-    inset 0 2px 4px rgba(255, 255, 255, 1);
-  background-color: #F8FAFC;
+    0 14px 24px rgba(15, 23, 42, 0.12),
+    inset 0 2px 2px #FFFFFF;
 }
 
 .btn-clay-white:active {
   transform: translateY(3px);
   box-shadow: 
     0 1px 0 #94A3B8,
-    0 3px 6px rgba(0, 0, 0, 0.05);
+    0 3px 8px rgba(15, 23, 42, 0.08),
+    inset 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .btn-clay-portal {
-  background: #E2E8F0;
-  color: #1E293B !important;
-  font-weight: 700;
+  position: relative;
+  background: linear-gradient(180deg, #F8FAFC 0%, #E2E8F0 100%);
+  color: #0F172A !important;
+  font-weight: 800;
   border-radius: 9999px;
-  padding: 0.65rem 1.4rem;
-  border: 1px solid #CBD5E1;
+  padding: 0.65rem 1.35rem;
+  border: 1.5px solid #CBD5E1;
   box-shadow: 
     0 3px 0 #94A3B8,
-    0 6px 12px rgba(0, 0, 0, 0.06),
-    inset 0 1px 2px rgba(255, 255, 255, 0.85);
-  transition: all 0.15s ease-in-out;
+    0 6px 14px rgba(0, 0, 0, 0.06),
+    inset 0 1px 1px #FFFFFF;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.4rem;
   cursor: pointer;
   text-decoration: none;
+  user-select: none;
+  white-space: nowrap;
 }
 
 .btn-clay-portal:hover {
-  background: #CBD5E1;
+  background: linear-gradient(180deg, #FFFFFF 0%, #EDF2F7 100%);
+  border-color: #38BDF8;
+  color: #0284C7 !important;
   transform: translateY(-1px);
+  box-shadow: 
+    0 4px 0 #0284C7,
+    0 8px 18px rgba(2, 132, 199, 0.2),
+    inset 0 1px 1px #FFFFFF;
 }
 
 .btn-clay-portal:active {
   transform: translateY(2px);
-  box-shadow: 0 1px 0 #94A3B8;
+  box-shadow: 0 1px 0 #0284C7;
 }
 
-/* ─── 3D Claymorphic Cards & Badges ──────────────────────────────────────── */
+/* ─── 3D Clay Cards & Frames ────────────────────────────────────────────── */
 .card-clay-white {
-  background: #FFFFFF;
-  border: 2.5px solid #E2E8F0;
+  position: relative;
+  background-color: #FFFFFF;
   border-radius: 1.75rem;
+  border: 2px solid #E2E8F0;
   box-shadow: 
-    0 14px 34px -4px rgba(15, 23, 42, 0.07),
-    0 4px 8px -2px rgba(15, 23, 42, 0.03),
-    inset 0 2px 5px rgba(255, 255, 255, 0.95);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    0 16px 36px -6px rgba(15, 23, 42, 0.08),
+    0 4px 10px -2px rgba(15, 23, 42, 0.04),
+    inset 0 2px 4px #FFFFFF;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+}
+
+[data-theme="dark"] .card-clay-white,
+.dark-mode .card-clay-white {
+  background-color: #0F172A;
+  border-color: #1E293B;
+  box-shadow: 
+    0 20px 40px -8px rgba(0, 0, 0, 0.6),
+    inset 0 1px 2px rgba(255, 255, 255, 0.08);
 }
 
 .card-clay-white:hover {
   transform: translateY(-4px);
-  box-shadow: 
-    0 22px 45px -6px rgba(15, 23, 42, 0.12),
-    0 6px 12px -2px rgba(15, 23, 42, 0.05),
-    inset 0 2px 5px rgba(255, 255, 255, 0.95);
   border-color: #CBD5E1;
+  box-shadow: 
+    0 24px 48px -8px rgba(15, 23, 42, 0.12),
+    0 8px 16px -4px rgba(15, 23, 42, 0.06),
+    inset 0 2px 4px #FFFFFF;
 }
 
 .card-clay-blue-frame {
-  background: linear-gradient(180deg, #F0F6FF 0%, #FFFFFF 100%);
-  border: 4px solid #2563EB;
+  position: relative;
+  background-color: #FFFFFF;
   border-radius: 2rem;
+  border: 4px solid #2563EB;
   box-shadow: 
-    0 20px 48px -8px rgba(37, 99, 235, 0.22),
-    0 6px 16px -4px rgba(37, 99, 235, 0.12),
-    inset 0 3px 6px rgba(255, 255, 255, 0.95);
+    0 8px 0 #1D4ED8,
+    0 22px 45px rgba(37, 99, 235, 0.22),
+    inset 0 2px 4px #FFFFFF;
+  text-align: center;
 }
 
-.badge-clay-embossed {
-  background: #F1F5F9;
-  border: 2px solid #E2E8F0;
-  border-radius: 1rem;
-  padding: 0.65rem 1.25rem;
+[data-theme="dark"] .card-clay-blue-frame,
+.dark-mode .card-clay-blue-frame {
+  background-color: #0F172A;
+  border-color: #38BDF8;
   box-shadow: 
-    inset 0 2px 3px rgba(255, 255, 255, 0.95),
-    0 4px 6px -1px rgba(0, 0, 0, 0.07),
-    0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    0 8px 0 #0284C7,
+    0 24px 50px rgba(0, 0, 0, 0.8),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+/* ─── Embossed Clay Badges ──────────────────────────────────────────────── */
+.badge-clay-embossed {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%);
+  border: 1.5px solid #CBD5E1;
+  border-radius: 1rem;
+  padding: 0.65rem 1.4rem;
+  box-shadow: 
+    0 4px 0 #94A3B8,
+    0 8px 16px rgba(15, 23, 42, 0.06),
+    inset 0 1px 2px #FFFFFF;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
   font-weight: 800;
+  text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #334155;
   transition: all 0.2s ease;
 }
 
 .badge-clay-embossed:hover {
   transform: translateY(-2px);
   box-shadow: 
-    inset 0 2px 4px rgba(255, 255, 255, 1),
-    0 8px 14px -2px rgba(0, 0, 0, 0.1);
+    0 6px 0 #94A3B8,
+    0 12px 22px rgba(15, 23, 42, 0.1),
+    inset 0 1px 2px #FFFFFF;
 }
 
-/* ─── Floating Live Help Chat Widget ────────────────────────────────────── */
-.pill-live-help {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 50;
-  background: #FFFFFF;
+/* ─── Backwards Compatibility Classes (Mapped to Clay/Clean Tokens) ───────── */
+.card-futuristic-3d {
+  background-color: #FFFFFF;
   border: 2px solid #E2E8F0;
   border-radius: 1.5rem;
-  padding: 0.75rem 1.25rem;
-  box-shadow: 
-    0 14px 30px -4px rgba(0, 0, 0, 0.12),
-    0 4px 10px rgba(0, 0, 0, 0.06),
-    inset 0 2px 4px rgba(255, 255, 255, 0.95);
-  display: flex;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
+  text-align: center;
+}
+
+[data-theme="dark"] .card-futuristic-3d,
+.dark-mode .card-futuristic-3d {
+  background-color: #0F172A;
+  border-color: #1E293B;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+}
+
+.btn-primary-glow,
+.btn-whatsapp-pill {
+  position: relative;
+  background: linear-gradient(180deg, #FF7629 0%, #F55204 100%) !important;
+  color: #FFFFFF !important;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 0.85rem 1.85rem;
+  box-shadow: 0 5px 0 #C43B00, 0 12px 22px rgba(245, 82, 4, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-secondary-dark {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 0.85rem 1.85rem;
+  border: 2px solid #CBD5E1;
+  box-shadow: 0 4px 0 #94A3B8, 0 10px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.badge-pill-purple,
+.badge-pill-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #FFF7ED !important;
+  border: 1px solid #FFEDD5 !important;
+  color: #C2410C !important;
+  font-weight: 800;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 1.25rem;
+  border-radius: 9999px;
+  box-shadow: 0 2px 6px rgba(249, 87, 33, 0.1);
+}
+
+.gradient-purple-text,
+.gradient-saffron-text {
+  background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 50%, #F95721 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.input-field {
+  width: 100%;
+  background-color: #FFFFFF;
+  border: 2px solid #CBD5E1;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #0F172A;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  outline: none;
+  text-align: center !important;
+}
+
+.input-field:focus {
+  border-color: #F95721;
+  box-shadow: 0 0 0 3px rgba(249, 87, 33, 0.2);
+}
+
+.pill-live-help {
+  display: inline-flex;
   align-items: center;
   gap: 0.75rem;
+  background: #FFFFFF;
+  border: 2px solid #E2E8F0;
+  border-radius: 9999px;
+  padding: 0.65rem 1.25rem;
+  box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.12), 0 4px 10px -2px rgba(15, 23, 42, 0.06);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
@@ -286,276 +435,13 @@ li,
   box-shadow: 0 18px 38px -4px rgba(0, 0, 0, 0.18);
   border-color: #CBD5E1;
 }
-.dark-mode {
-  --bg-primary: #000000;
-  --bg-card: #0A0414;
-  --bg-secondary: #05020A;
-  --text-primary: #FFFFFF;
-  --text-secondary: #E9D5FF;
-  --text-muted: #C084FC;
-  --border-card: rgba(168, 85, 247, 0.25);
-  --border-focus: #C084FC;
-  --card-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.9), 0 0 30px rgba(168, 85, 247, 0.18);
-  --accent-purple: #A855F7;
-  --accent-purple-light: #C084FC;
-  --accent-purple-dark: #7E22CE;
-  --accent-purple-glow: rgba(168, 85, 247, 0.45);
-}
 
-/* ─── Luxury 3D Cards (Strict Purple / White / Black) ────────────────────── */
-.card-futuristic-3d {
-  position: relative;
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-card);
-  border-radius: 1.5rem;
-  box-shadow: var(--card-shadow);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  transform-style: preserve-3d;
-  color: var(--text-primary);
-}
-
-.card-futuristic-3d:hover {
-  transform: perspective(1000px) translateY(-6px) scale(1.015);
-  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.5), 0 0 35px var(--accent-purple-glow);
-  border-color: var(--border-focus);
-}
-
-/* ─── Numbered Step Badges (01, 02, 03, 04, 05) in Glowing Purple & White ── */
-.step-number-futuristic {
-  position: relative;
-  width: 3.25rem;
-  height: 3.25rem;
-  border-radius: 1.1rem;
-  background: linear-gradient(135deg, #A855F7 0%, #7E22CE 50%, #4C1D95 100%);
-  color: #FFFFFF;
-  font-weight: 800;
-  font-size: 1.2rem;
-  font-family: var(--font-body);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
-}
-
-.step-number-futuristic:hover {
-  transform: translateY(-3px) scale(1.08);
-  box-shadow: 0 0 30px rgba(192, 132, 252, 0.7), inset 0 1px 2px rgba(255, 255, 255, 0.8);
-}
-
-/* ─── Clean Academic Gradients & Surfaces ────────────────────────────────── */
-.bg-midnight {
-  background: radial-gradient(circle at 50% 20%, #17072E 0%, #0A0314 55%, #000000 100%);
-}
-
-[data-theme="light"] .bg-midnight {
-  background: radial-gradient(circle at 50% 20%, #FAF5FF 0%, #F3E8FF 55%, #FFFFFF 100%);
-}
-
-.gradient-saffron-text,
-.gradient-purple-text {
-  background: linear-gradient(135deg, #FFFFFF 0%, #E9D5FF 35%, #C084FC 70%, #A855F7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-[data-theme="light"] .gradient-saffron-text,
-[data-theme="light"] .gradient-purple-text {
-  background: linear-gradient(135deg, #3B0764 0%, #7E22CE 50%, #A855F7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* ─── Luxury Buttons (Strict Purple / White / Black) ─────────────────────── */
-.btn-primary-glow {
-  background: linear-gradient(135deg, #A855F7 0%, #7E22CE 50%, #581C87 100%);
-  color: #FFFFFF;
-  font-weight: 700;
-  padding: 0.75rem 1.75rem;
-  border-radius: 9999px;
-  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  text-decoration: none;
-}
-
-.btn-primary-glow:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(192, 132, 252, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.5);
-  filter: brightness(1.1);
-}
-
-.btn-secondary-dark {
-  background-color: #0A0414;
-  color: #FFFFFF;
-  font-weight: 700;
-  border: 1px solid rgba(168, 85, 247, 0.35);
-  padding: 0.75rem 1.75rem;
-  border-radius: 9999px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  transition: all 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  text-decoration: none;
-}
-
-.btn-secondary-dark:hover {
-  background-color: #17072E;
-  border-color: #C084FC;
-  color: #FFFFFF;
-  transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
-}
-
-[data-theme="light"] .btn-secondary-dark {
-  background-color: #FFFFFF;
-  color: #3B0764;
-  border-color: #D8B4FE;
-}
-
-[data-theme="light"] .btn-secondary-dark:hover {
-  background-color: #FAF5FF;
-  border-color: #9333EA;
-  color: #7E22CE;
-}
-
-.btn-whatsapp-pill {
-  background: linear-gradient(135deg, #7E22CE 0%, #4C1D95 100%);
-  color: #FFFFFF;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.75rem;
-  border-radius: 9999px;
-  box-shadow: 0 4px 15px rgba(126, 34, 206, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.25s ease;
-  text-decoration: none;
-}
-
-.btn-whatsapp-pill:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(168, 85, 247, 0.6);
-  filter: brightness(1.1);
-}
-
-/* ─── Pill Badges (Purple, White & Black) ─────────────────────────────────── */
-.badge-pill-gold,
-.badge-pill-purple {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: rgba(168, 85, 247, 0.12);
-  border: 1px solid rgba(192, 132, 252, 0.35);
-  color: #E9D5FF;
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  padding: 0.35rem 1.25rem;
-  border-radius: 9999px;
-  box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);
-}
-
-[data-theme="light"] .badge-pill-gold,
-[data-theme="light"] .badge-pill-purple {
-  background: #FAF5FF;
-  border-color: #D8B4FE;
-  color: #6B21A8;
-}
-
-/* ─── Form Inputs ────────────────────────────────────────────────────────── */
-.input-field {
-  width: 100%;
-  background-color: #0A0414;
-  border: 1px solid rgba(168, 85, 247, 0.3);
-  border-radius: 0.75rem;
-  padding: 0.75rem 1rem;
-  color: #FFFFFF;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  outline: none;
-}
-
-.input-field:focus {
-  border-color: #C084FC;
-  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.25);
-}
-
-[data-theme="light"] .input-field {
-  background-color: #FFFFFF;
-  border-color: #E9D5FF;
-  color: #000000;
-}
-
-[data-theme="light"] .input-field:focus {
-  border-color: #9333EA;
-  box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.2);
-}
-
-/* ─── Purple Cyber Grid & Volumetric Lighting ────────────────────────────── */
-.cyber-grid-bg {
-  background-image:
-    linear-gradient(to right, rgba(168, 85, 247, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(168, 85, 247, 0.08) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-
-[data-theme="light"] .cyber-grid-bg {
-  background-image:
-    linear-gradient(to right, rgba(147, 51, 234, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(147, 51, 234, 0.06) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-
-/* ─── Scanline & Spin Keyframes ─────────────────────────────────────────── */
-@keyframes scanline {
-  0% {
-    transform: translateY(-100%);
-  }
-
-  100% {
-    transform: translateY(1000%);
-  }
-}
-
-.animate-scanline {
-  animation: scanline 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
+/* ─── Animations ────────────────────────────────────────────────────────── */
 @keyframes spinSlow {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .animate-spin-slow {
   animation: spinSlow 20s linear infinite;
-}
-
-@keyframes reverseSpin {
-  from {
-    transform: rotate(360deg);
-  }
-
-  to {
-    transform: rotate(0deg);
-  }
-}
-
-.animate-reverse-spin {
-  animation: reverseSpin 25s linear infinite;
 }

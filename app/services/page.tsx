@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   UkFlagLogo,
   IndiaFlagLogo,
@@ -15,20 +16,6 @@ import {
 } from '@/components/RealIcons';
 
 import {
-  ResearchPaperRealWork,
-  ThesisRealWork,
-  BookRealWork,
-  ReviewPaperRealWork,
-  ArticleRealWork,
-  PresentationRealWork,
-  ModelCodeRealWork,
-  SynopsisRealWork,
-  TurnitinReportRealWork,
-  HindiPaperRealWork,
-  HindiThesisRealWork,
-} from '@/components/RealWorkImages';
-
-import {
   InstantTurnitinModal,
   TurnitinSampleModal,
   FormalNdaModal,
@@ -37,7 +24,6 @@ import {
   TranslationAuditModal,
 } from '@/components/FuturisticInteractions';
 
-import { Interactive3DCard } from '@/components/FuturisticScrollExperience';
 import ResearchAreasSection from '@/components/ResearchAreasSection';
 import FloatingLiveHelp from '@/components/FloatingLiveHelp';
 
@@ -46,11 +32,10 @@ export interface ServiceItem {
   category: string;
   title: string;
   badge: string;
-  visual: React.ReactNode;
+  image: string;
   desc: string;
   features: string[];
   href: string;
-  glowColor: 'purple';
   isCode?: boolean;
   isTurnitin?: boolean;
   isHindi?: boolean;
@@ -64,7 +49,7 @@ const SERVICE_CATALOG: ServiceItem[] = [
     category: 'Manuscripts & Publications',
     title: 'Research Paper Writing',
     badge: 'IEEE / Springer / Elsevier',
-    visual: <ResearchPaperRealWork className="w-full h-44 mb-4" />,
+    image: '/services/research-paper.jpg',
     desc: 'High-impact empirical and theoretical research manuscripts structured to international publication standards. Formatted to IEEE, Springer, Elsevier, or target UGC-CARE guidelines.',
     features: [
       'Original hypothesis formulation & literature synthesis',
@@ -73,14 +58,13 @@ const SERVICE_CATALOG: ServiceItem[] = [
       'Target journal formatting (LaTeX template or Word)',
     ],
     href: '/quote?service=RESEARCH_PAPER',
-    glowColor: 'purple',
   },
   {
     id: 'review-paper',
     category: 'Manuscripts & Publications',
     title: 'Systematic Review Papers',
     badge: 'PRISMA / Bibliometric',
-    visual: <ReviewPaperRealWork className="w-full h-44 mb-4" />,
+    image: '/services/review-paper.jpg',
     desc: 'Comprehensive systematic literature reviews, state-of-the-art meta-analyses, and VOSviewer/Biblioshiny bibliometric mapping across your discipline.',
     features: [
       'PRISMA-compliant search strategy & inclusion flowchart',
@@ -89,14 +73,13 @@ const SERVICE_CATALOG: ServiceItem[] = [
       'Identification of research gaps and future directions',
     ],
     href: '/quote?service=REVIEW_PAPER',
-    glowColor: 'purple',
   },
   {
     id: 'academic-article',
     category: 'Manuscripts & Publications',
     title: 'Academic Articles & Chapters',
     badge: 'Scopus / UGC-CARE',
-    visual: <ArticleRealWork className="w-full h-44 mb-4" />,
+    image: '/services/article-writing.jpg',
     desc: 'Scholarly articles, edited book chapters, policy whitepapers, and conference proceedings with verified word count tiers and rigorous citation apparatus.',
     features: [
       'Available across 1,000 to 5,000+ word tiers',
@@ -105,7 +88,6 @@ const SERVICE_CATALOG: ServiceItem[] = [
       'Zero AI hallucinations and verified fact-checking',
     ],
     href: '/quote?service=ARTICLE',
-    glowColor: 'purple',
   },
 
   // Category 2: Dissertations & Proposals
@@ -114,7 +96,7 @@ const SERVICE_CATALOG: ServiceItem[] = [
     category: 'Dissertations & Proposals',
     title: 'Ph.D. Thesis & Master Dissertation',
     badge: 'Chapter Milestone Escrow',
-    visual: <ThesisRealWork className="w-full h-44 mb-4" />,
+    image: '/services/thesis-dissertation.jpg',
     desc: 'End-to-end doctoral thesis drafting from Chapter 1 (Introduction) through literature review, methodology, results, and conclusion. Available with or without computational models.',
     features: [
       'Comprehensive 5-chapter or 6-chapter university structure',
@@ -123,14 +105,13 @@ const SERVICE_CATALOG: ServiceItem[] = [
       'Direct communication channel with your assigned Ph.D. director',
     ],
     href: '/quote?service=THESIS',
-    glowColor: 'purple',
   },
   {
     id: 'research-synopsis',
     category: 'Dissertations & Proposals',
     title: 'Synopsis & Ph.D. Proposals',
     badge: 'DRC / Grant Ready',
-    visual: <SynopsisRealWork className="w-full h-44 mb-4" />,
+    image: '/services/synopsis-proposal.jpg',
     desc: 'Crisp, defensible research synopses, doctoral registration proposals, and academic grant applications formulated to pass university screening committees.',
     features: [
       'Problem statement, research questions, and tentative hypotheses',
@@ -139,7 +120,6 @@ const SERVICE_CATALOG: ServiceItem[] = [
       'Preliminary bibliography conforming to institutional norms',
     ],
     href: '/quote?service=SYNOPSIS',
-    glowColor: 'purple',
   },
 
   // Category 3: Code & Computational Models
@@ -148,7 +128,7 @@ const SERVICE_CATALOG: ServiceItem[] = [
     category: 'Computational & Code Implementation',
     title: 'Model & Code Implementation',
     badge: 'PyTorch / MATLAB / Docker',
-    visual: <ModelCodeRealWork className="w-full h-44 mb-4" />,
+    image: '/services/computational-model.jpg',
     desc: 'Machine learning, deep neural network (PyTorch, TensorFlow, CUDA), Python, and MATLAB simulation development with reproducible benchmarks and Git handoff.',
     features: [
       'Custom algorithm implementation & hyperparameter tuning',
@@ -157,7 +137,6 @@ const SERVICE_CATALOG: ServiceItem[] = [
       'Private Git repository handoff directly to your client portal',
     ],
     href: '/quote?service=MODEL',
-    glowColor: 'purple',
     isCode: true,
   },
 
@@ -167,7 +146,7 @@ const SERVICE_CATALOG: ServiceItem[] = [
     category: 'Books & Monographs',
     title: 'Scholarly Book Writing (100–300 pp)',
     badge: 'ISBN Standard',
-    visual: <BookRealWork className="w-full h-44 mb-4" />,
+    image: '/services/book-monograph.jpg',
     desc: 'Full-length scholarly monographs, edited volumes, and reference textbooks prepared for academic publishers with ISBN registration support.',
     features: [
       'Structured 100-page, 200-page, and 300-page packages',
@@ -176,7 +155,6 @@ const SERVICE_CATALOG: ServiceItem[] = [
       'Available in both English and Hindi',
     ],
     href: '/quote?service=BOOK',
-    glowColor: 'purple',
   },
 
   // Category 5: Presentations & Defense
@@ -185,7 +163,7 @@ const SERVICE_CATALOG: ServiceItem[] = [
     category: 'Presentations & Defense',
     title: 'Academic PPT & Thesis Defense',
     badge: 'Defense Ready',
-    visual: <PresentationRealWork className="w-full h-44 mb-4" />,
+    image: '/services/academic-presentation.jpg',
     desc: 'Professional thesis defense slide decks, conference presentations, and seminar slides formatted to withstand tough academic committee inquiries.',
     features: [
       'Clean, widescreen 16:9 visual hierarchy with high-contrast figures',
@@ -194,7 +172,6 @@ const SERVICE_CATALOG: ServiceItem[] = [
       'Per-slide standardized rate in quote engine',
     ],
     href: '/quote?service=PPT',
-    glowColor: 'purple',
   },
 
   // Category 6: Turnitin Reports
@@ -203,7 +180,7 @@ const SERVICE_CATALOG: ServiceItem[] = [
     category: 'Originality & Audits',
     title: 'Turnitin AI & Plagiarism Reports',
     badge: 'Safe Non-Repository',
-    visual: <TurnitinReportRealWork className="w-full h-44 mb-4" />,
+    image: '/services/turnitin-report.jpg',
     desc: 'Instructor-tier Turnitin verification audits checking similarity index and AI writing percentages without saving your manuscript to public databases.',
     features: [
       'Flat fee of ₹200 per file scanned (15–30 min delivery)',
@@ -212,7 +189,6 @@ const SERVICE_CATALOG: ServiceItem[] = [
       'Instant UPI payment and instant upload modal',
     ],
     href: '/quote?type=TURNITIN',
-    glowColor: 'purple',
     isTurnitin: true,
     priceTag: '₹200 per file flat',
   },
@@ -223,7 +199,7 @@ const SERVICE_CATALOG: ServiceItem[] = [
     category: 'Hindi Academic Division (हिंदी शोध)',
     title: 'Hindi Research & Thesis (हिंदी शोध पत्र एवं प्रबंध)',
     badge: 'Devanagari Specialists',
-    visual: <HindiPaperRealWork className="w-full h-44 mb-4" />,
+    image: '/research-areas/hindi-sahitya.jpg',
     desc: 'Specialized academic research in Hindi supervised by Sampreeti Mukherjee with standard Devanagari terminology, Shodhganga compliance, and zero automated translation shortcuts.',
     features: [
       'शोध पत्र (Research Papers) & शोध प्रबंध (Complete Theses)',
@@ -232,7 +208,6 @@ const SERVICE_CATALOG: ServiceItem[] = [
       'तुलनात्मक साहित्य, मानविकी, भाषाविज्ञान एवं समाजशास्त्र',
     ],
     href: '/quote?lang=HI',
-    glowColor: 'purple',
     isHindi: true,
   },
 ];
@@ -289,7 +264,7 @@ export default function ServicesPage() {
               <span>100% IP &amp; Mutual NDA</span>
             </span>
             <span className="flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full shadow-sm">
-              <span className="text-emerald-600 font-bold">✓</span>
+              <span className="text-blue-600 font-bold">◆</span>
               <span>Chapter-by-Chapter Escrow</span>
             </span>
           </div>
@@ -315,11 +290,11 @@ export default function ServicesPage() {
         {/* ─── Redesigned Services Grid ────────────────────────────────────── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
           {filteredServices.map((service) => (
-            <div key={service.id} className="card-clay-white p-6 flex flex-col justify-between text-left h-full group relative">
+            <div key={service.id} className="card-clay-white p-6 flex flex-col justify-between text-center items-center h-full group relative">
               
               {/* Badge & Category */}
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-3">
+              <div className="w-full flex flex-col items-center">
+                <div className="flex items-center justify-between w-full gap-2 mb-3">
                   <span className="text-[10px] font-black uppercase text-[#2563EB] bg-blue-50 border border-blue-200 px-3 py-1 rounded-full">
                     {service.badge}
                   </span>
@@ -330,28 +305,34 @@ export default function ServicesPage() {
                   )}
                 </div>
 
-                {/* Real Deliverable Image */}
-                <div className="my-2 transform group-hover:scale-[1.02] transition-transform duration-300">
-                  {service.visual}
+                {/* Real High-Resolution Deliverable Photograph */}
+                <div className="w-full my-2 transform group-hover:scale-[1.02] transition-transform duration-300">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    width={400}
+                    height={200}
+                    className="w-full h-44 object-cover rounded-2xl mb-4 border-2 border-slate-200/80 shadow-sm"
+                  />
                 </div>
 
                 {/* Title & Desc */}
-                <h3 className="font-serif text-xl font-black text-slate-900 mb-2 group-hover:text-[#F95721] transition-colors">
+                <h3 className="font-serif text-xl font-black text-slate-900 mb-2 group-hover:text-[#F95721] transition-colors text-center">
                   {service.title}
                 </h3>
-                <p className="text-slate-600 text-xs font-medium leading-relaxed mb-4">
+                <p className="text-slate-600 text-xs font-medium leading-relaxed mb-4 text-center">
                   {service.desc}
                 </p>
 
-                {/* Features Bullet List (Left-Aligned) */}
-                <div className="pt-3 border-t border-slate-100 mb-6">
-                  <div className="text-[10px] text-slate-800 font-bold uppercase mb-2 tracking-wider">
+                {/* Features Bullet List (Centered) */}
+                <div className="w-full pt-3 border-t border-slate-100 mb-6 text-center">
+                  <div className="text-[10px] text-slate-800 font-bold uppercase mb-2 tracking-wider text-center">
                     Key Deliverables &amp; Standards:
                   </div>
-                  <ul className="space-y-1.5 text-xs text-slate-700 font-medium">
+                  <ul className="space-y-1.5 text-xs text-slate-700 font-medium flex flex-col items-center">
                     {service.features.map((feat, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="text-[#F95721] font-black text-[11px] mt-0.5">✦</span>
+                      <li key={i} className="flex items-center justify-center gap-2 text-center">
+                        <span className="text-[#F95721] font-black text-[11px]">✦</span>
                         <span>{feat}</span>
                       </li>
                     ))}

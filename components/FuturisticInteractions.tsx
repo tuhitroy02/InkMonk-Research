@@ -178,7 +178,7 @@ export function InstantTurnitinModal({
                 onClick={handleCopyUpi}
                 className="text-xs bg-purple-600 hover:bg-purple-500 text-white font-bold px-3 py-1 rounded-lg transition-colors cursor-pointer"
               >
-                {copiedUpi ? '✓ Copied!' : 'Copy UPI'}
+                {copiedUpi ? '◆ Copied!' : 'Copy UPI'}
               </button>
             </div>
 
@@ -210,8 +210,8 @@ export function InstantTurnitinModal({
 
         {step === 'success' && (
           <div className="flex flex-col items-center text-center py-4">
-            <div className="w-16 h-16 rounded-full bg-purple-600 text-white flex items-center justify-center text-3xl mb-4 shadow-[0_0_20px_rgba(168,85,247,0.6)]">
-              ✓
+            <div className="w-16 h-16 rounded-full bg-blue-600 text-white flex items-center justify-center text-3xl mb-4 shadow-[0_0_20px_rgba(37,99,235,0.6)]">
+              ◆
             </div>
             <h3 className="font-serif text-2xl font-bold text-white mb-2">
               Manuscript Queued for Audit!
@@ -352,7 +352,7 @@ export function TurnitinSampleModal({
           {/* Official Verification Stamp */}
           <div className="flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-200 font-mono">
             <span>Audit Authority: InkMonk Research Salt Lake Office</span>
-            <span className="text-purple-700 font-bold">✓ Institutional Exemption Verified</span>
+            <span className="text-blue-700 font-bold">◆ Institutional Exemption Verified</span>
           </div>
         </div>
 
@@ -422,7 +422,7 @@ export function FormalNdaModal({
 
         <div className="flex flex-wrap items-center justify-between mt-6 pt-4 border-t border-purple-900/60 gap-3">
           <div className="text-left text-[11px] text-purple-300 font-mono">
-            <span className="text-white font-bold block">✓ Pre-Signed by InkMonk Directorate</span>
+            <span className="text-white font-bold block">◆ Pre-Signed by InkMonk Directorate</span>
             Tuhit Roy (Research Dir.) • Sampreeti Mukherjee (Editorial Dir.)
           </div>
           <button
@@ -556,8 +556,8 @@ export function ConsultationSchedulerModal({
           </div>
         ) : (
           <div className="text-center py-4">
-            <div className="w-16 h-16 rounded-full bg-purple-600 text-white flex items-center justify-center text-3xl mx-auto mb-4 shadow-[0_0_20px_rgba(168,85,247,0.6)]">
-              ✓
+            <div className="w-16 h-16 rounded-full bg-blue-600 text-white flex items-center justify-center text-3xl mx-auto mb-4 shadow-[0_0_20px_rgba(37,99,235,0.6)]">
+              ◆
             </div>
             <h3 className="font-serif text-2xl font-bold text-white mb-2">
               Consultation Confirmed!
@@ -689,8 +689,8 @@ export function ModelCodeScopeBuilderModal({
           <div className="bg-black rounded-xl border border-purple-500/30 p-3 font-mono text-[11px] text-purple-200 space-y-1">
             <div className="text-purple-400 font-bold"># Live Reproducibility Telemetry</div>
             <div className="text-white/60">$ python train_benchmark.py --framework {framework} --seed 42</div>
-            <div className="text-purple-300">✓ Random seeds locked. Deterministic validation: PASSED</div>
-            <div className="text-white">✓ IEEE/Scopus formatting scan: 0 errors detected</div>
+            <div className="text-blue-300">◆ Random seeds locked. Deterministic validation: PASSED</div>
+            <div className="text-white">◆ IEEE/Scopus formatting scan: 0 errors detected</div>
           </div>
         </div>
 

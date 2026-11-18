@@ -161,7 +161,7 @@ export default function ClientDashboard() {
             {user?.phone && (
               <div className="text-center">
                 <div className="text-[10px] text-slate-500 font-bold uppercase">Registered Mobile</div>
-                <div className="text-sm font-black text-[#2563EB]">✓ {user.phone}</div>
+                <div className="text-sm font-black text-[#2563EB]">◆ {user.phone}</div>
               </div>
             )}
             <div className="text-center">
@@ -177,7 +177,7 @@ export default function ClientDashboard() {
             <ResearchPaperRealIcon className="w-10 h-10 mb-2" />
             <div className="text-xs font-bold text-slate-500 uppercase">Active Research Projects</div>
             <div className="font-serif text-3xl font-black text-slate-900 mt-1">1</div>
-            <div className="text-xs text-[#2563EB] font-bold mt-1">✓ In Progress on Schedule</div>
+            <div className="text-xs text-[#2563EB] font-bold mt-1">◆ In Progress on Schedule</div>
           </div>
 
           <div className="card-clay-white p-6 flex flex-col items-center text-center">
