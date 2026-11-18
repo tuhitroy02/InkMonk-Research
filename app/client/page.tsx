@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { supabase } from '@/lib/supabaseClient';
+import ResearchToolkitContainer from '@/components/toolkit/ResearchToolkitContainer';
 
 interface User {
   id: string;
@@ -54,8 +55,11 @@ export default function ClientPortalPage() {
   const [profile, setProfile] = useState<ScholarProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Active Tab: 'OVERVIEW' | 'WORKS' | 'QUERIES'
-  const [activeTab, setActiveTab] = useState<'OVERVIEW' | 'WORKS' | 'QUERIES'>('WORKS');
+  // Exactly Three Top-Level Client Portal Sections: Dashboard, Works, Queries
+  const [activeTab, setActiveTab] = useState<'DASHBOARD' | 'WORKS' | 'QUERIES'>('DASHBOARD');
+
+  // Sub-section inside Works: 'DELIVERABLES' | 'TOOLKIT'
+  const [worksSubSection, setWorksSubSection] = useState<'DELIVERABLES' | 'TOOLKIT'>('DELIVERABLES');
 
   // Filter for Works: 'ALL' | 'IN_PROGRESS' | 'COMPLETED'
   const [statusFilter, setStatusFilter] = useState<'ALL' | 'IN_PROGRESS' | 'COMPLETED'>('ALL');
@@ -143,6 +147,26 @@ export default function ClientPortalPage() {
       ],
     },
   ]);
+
+  // URL Query Parameters support (e.g. ?tab=works&section=toolkit)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get('tab')?.toUpperCase();
+      const sectionParam = params.get('section')?.toUpperCase();
+
+      if (tabParam === 'WORKS') {
+        setActiveTab('WORKS');
+        if (sectionParam === 'TOOLKIT') {
+          setWorksSubSection('TOOLKIT');
+        }
+      } else if (tabParam === 'QUERIES') {
+        setActiveTab('QUERIES');
+      } else if (tabParam === 'DASHBOARD') {
+        setActiveTab('DASHBOARD');
+      }
+    }
+  }, []);
 
   // Auth Checking
   useEffect(() => {
@@ -271,7 +295,7 @@ export default function ClientPortalPage() {
       } else {
         throw new Error(data.error || 'Failed to submit query');
       }
-    } catch (err: unknown) {
+    } catch {
       // Local fallback in case of network issue
       const ticketId = `QRY-${Math.floor(1000 + Math.random() * 9000)}`;
       const fallbackQuery: QueryRecord = {
@@ -321,7 +345,7 @@ export default function ClientPortalPage() {
     );
   }
 
-  // If NOT Logged In: Show Instant In-Portal Login / Signup Experience
+  // If NOT Logged In: Show In-Portal Login / Signup Experience
   if (!user) {
     return (
       <div className="min-h-screen bg-notebook-grid py-12 px-4 flex items-center justify-center">
@@ -340,7 +364,7 @@ export default function ClientPortalPage() {
             Scholar Client Portal
           </h2>
           <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm font-medium mb-6">
-            Sign in to track ongoing research papers, download drafts, inspect Turnitin originality reports, or submit queries.
+            Sign in to track ongoing research papers, access the Research Toolkit, download drafts, inspect Turnitin originality reports, or submit queries.
           </p>
 
           <div className="space-y-3">
@@ -392,7 +416,7 @@ export default function ClientPortalPage() {
     );
   }
 
-  // Logged-in Client Portal Dashboard
+  // Logged-in Client Portal
   return (
     <div className="min-h-screen bg-notebook-grid py-8 sm:py-12 px-4 text-slate-900 dark:text-white">
       <div className="max-w-7xl mx-auto space-y-8">
@@ -422,6 +446,16 @@ export default function ClientPortalPage() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
+            <button
+              type="button"
+              onClick={() => {
+                setActiveTab('WORKS');
+                setWorksSubSection('TOOLKIT');
+              }}
+              className="bg-white/15 hover:bg-white/25 text-white text-xs font-black py-2.5 px-4 rounded-xl border border-white/30 transition-all hover:scale-102 flex items-center gap-1.5 cursor-pointer shadow-sm"
+            >
+              <span>⚡ Research Toolkit</span>
+            </button>
             <Link
               href="/quote"
               className="btn-clay-orange text-xs py-2.5 px-4 shadow-md font-extrabold flex items-center gap-1.5"
@@ -437,9 +471,23 @@ export default function ClientPortalPage() {
           </div>
         </div>
 
-        {/* ─── Portal Navigation Tabs ───────────────────────────────────── */}
+        {/* ─── Exactly Three Top-Level Client Portal Navigation Tabs ────── */}
         <div className="flex flex-wrap items-center justify-between gap-4 border-b-2 border-slate-200 dark:border-slate-800 pb-2">
           <div className="flex items-center gap-2">
+            {/* 1. Dashboard Tab */}
+            <button
+              type="button"
+              onClick={() => setActiveTab('DASHBOARD')}
+              className={`px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center gap-2 ${
+                activeTab === 'DASHBOARD'
+                  ? 'bg-[#1d4ed8] text-white shadow-md scale-102'
+                  : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:border-[#1d4ed8]'
+              }`}
+            >
+              <span>📊 Dashboard</span>
+            </button>
+
+            {/* 2. Works Tab */}
             <button
               type="button"
               onClick={() => setActiveTab('WORKS')}
@@ -449,12 +497,13 @@ export default function ClientPortalPage() {
                   : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:border-[#1d4ed8]'
               }`}
             >
-              <span>📁 My Works &amp; Drafts</span>
+              <span>📁 Works</span>
               <span className="bg-white/20 text-[10px] px-2 py-0.5 rounded-full">
                 {projects.length}
               </span>
             </button>
 
+            {/* 3. Queries Tab */}
             <button
               type="button"
               onClick={() => setActiveTab('QUERIES')}
@@ -464,22 +513,10 @@ export default function ClientPortalPage() {
                   : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:border-[#1d4ed8]'
               }`}
             >
-              <span>💬 Ask Director / Query</span>
+              <span>💬 Queries</span>
               <span className="bg-[#f97316] text-white text-[10px] px-2 py-0.5 rounded-full font-black">
                 {queries.length}
               </span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('OVERVIEW')}
-              className={`px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer ${
-                activeTab === 'OVERVIEW'
-                  ? 'bg-[#1d4ed8] text-white shadow-md scale-102'
-                  : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:border-[#1d4ed8]'
-              }`}
-            >
-              📊 Overview &amp; Account
             </button>
           </div>
 
@@ -497,164 +534,334 @@ export default function ClientPortalPage() {
           </div>
         </div>
 
-        {/* ─── TAB 1: MY WORKS & ONGOING PROJECTS ───────────────────────── */}
-        {activeTab === 'WORKS' && (
-          <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div>
-                <h2 className="font-serif text-2xl font-black text-slate-900 dark:text-white">
-                  Active &amp; Completed Research Works
-                </h2>
-                <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm font-medium">
-                  Review milestone progress, download camera-ready chapters, inspect verified Turnitin similarity scans, and access code repos.
-                </p>
+        {/* ═════════════════════════════════════════════════════════════════ */}
+        {/* SECTION 1: DASHBOARD (Overview, Metrics, Profile & Toolkit Link)   */}
+        {/* ═════════════════════════════════════════════════════════════════ */}
+        {activeTab === 'DASHBOARD' && (
+          <div className="space-y-8">
+            {/* Primary Research Toolkit Shortcut Banner */}
+            <div className="card-clay-blue-frame p-6 sm:p-7 text-white flex flex-col sm:flex-row items-center justify-between gap-5 shadow-xl">
+              <div className="flex items-center gap-4 text-center sm:text-left">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#f97316] to-[#fb923c] flex items-center justify-center text-3xl shadow-inner shrink-0 ring-2 ring-white/30">
+                  ⚡
+                </div>
+                <div>
+                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                    <h3 className="font-serif text-lg sm:text-xl font-black text-white">
+                      Research Toolkit
+                    </h3>
+                    <span className="bg-emerald-500 text-white text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                      5 Interactive Utilities
+                    </span>
+                  </div>
+                  <p className="text-blue-100 text-xs sm:text-sm mt-1 font-medium max-w-2xl">
+                    Convert references between APA &amp; IEEE, find DOIs from publisher links, generate BibTeX records, build reviewer response letters, and calculate English/Hindi word counts.
+                  </p>
+                </div>
               </div>
 
-              {/* Status Filter Buttons */}
-              <div className="flex items-center gap-1.5 bg-white dark:bg-slate-900 p-1.5 rounded-2xl border border-slate-300 dark:border-slate-700 text-xs font-bold">
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveTab('WORKS');
+                  setWorksSubSection('TOOLKIT');
+                }}
+                className="btn-clay-orange text-xs py-3 px-6 font-extrabold shrink-0 cursor-pointer shadow-lg hover:scale-103 transition-transform"
+              >
+                <span>Open Research Toolkit →</span>
+              </button>
+            </div>
+
+            {/* Quick Metrics Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="card-clay-white p-6 border-2 border-slate-200 dark:border-slate-800 text-center">
+                <div className="text-3xl mb-2">📚</div>
+                <div className="text-2xl font-black text-slate-900 dark:text-white">
+                  {projects.length} Works
+                </div>
+                <p className="text-xs text-slate-500 font-bold mt-1">2 Active • 1 Delivered</p>
                 <button
                   type="button"
-                  onClick={() => setStatusFilter('ALL')}
-                  className={`px-3 py-1.5 rounded-xl cursor-pointer ${statusFilter === 'ALL' ? 'bg-[#f97316] text-white' : 'text-slate-600 dark:text-slate-300'}`}
+                  onClick={() => {
+                    setActiveTab('WORKS');
+                    setWorksSubSection('DELIVERABLES');
+                  }}
+                  className="mt-3 text-xs font-bold text-[#1d4ed8] dark:text-blue-400 hover:underline cursor-pointer"
                 >
-                  All ({projects.length})
+                  View All Works →
                 </button>
+              </div>
+
+              <div className="card-clay-white p-6 border-2 border-slate-200 dark:border-slate-800 text-center">
+                <div className="text-3xl mb-2">🛡️</div>
+                <div className="text-2xl font-black text-emerald-600">100% Non-Repository</div>
+                <p className="text-xs text-slate-500 font-bold mt-1">Turnitin Verified Zero Indexing</p>
+                <div className="mt-3 text-xs font-medium text-slate-400">
+                  Safe Instructor-Tier Protocol
+                </div>
+              </div>
+
+              <div className="card-clay-white p-6 border-2 border-slate-200 dark:border-slate-800 text-center">
+                <div className="text-3xl mb-2">🤝</div>
+                <div className="text-2xl font-black text-[#1d4ed8]">Direct Director Access</div>
+                <p className="text-xs text-slate-500 font-bold mt-1">Tuhit Roy &amp; Sampreeti Mukherjee</p>
                 <button
                   type="button"
-                  onClick={() => setStatusFilter('IN_PROGRESS')}
-                  className={`px-3 py-1.5 rounded-xl cursor-pointer ${statusFilter === 'IN_PROGRESS' ? 'bg-[#f97316] text-white' : 'text-slate-600 dark:text-slate-300'}`}
+                  onClick={() => setActiveTab('QUERIES')}
+                  className="mt-3 text-xs font-bold text-[#f97316] hover:underline cursor-pointer"
                 >
-                  In Progress (2)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setStatusFilter('COMPLETED')}
-                  className={`px-3 py-1.5 rounded-xl cursor-pointer ${statusFilter === 'COMPLETED' ? 'bg-[#f97316] text-white' : 'text-slate-600 dark:text-slate-300'}`}
-                >
-                  Completed (1)
+                  Ask Director a Question →
                 </button>
               </div>
             </div>
 
-            {/* Project Cards Grid */}
-            <div className="grid grid-cols-1 gap-6">
-              {filteredProjects.map((proj) => (
-                <div
-                  key={proj.id}
-                  className="card-clay-white p-6 sm:p-7 flex flex-col justify-between border-2 border-slate-200 dark:border-slate-800 shadow-lg relative overflow-hidden"
-                >
-                  {/* Status Banner */}
-                  <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-                    <div className="flex items-center gap-2">
-                      <span className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-mono text-xs font-black px-2.5 py-1 rounded-lg">
-                        {proj.id}
-                      </span>
-                      <span className="text-xs font-black text-[#1d4ed8] dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800">
-                        {proj.service}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider ${
-                          proj.status === 'COMPLETED'
-                            ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
-                            : proj.status === 'UNDER_REVIEW'
-                            ? 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
-                            : 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300'
-                        }`}
-                      >
-                        ● {proj.status.replace('_', ' ')}
-                      </span>
-                      <span className="text-xs font-bold text-slate-500">
-                        Deadline: {proj.deadline}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Project Title */}
-                  <h3 className="font-serif text-xl sm:text-2xl font-black text-slate-900 dark:text-white mb-3">
-                    {proj.title}
-                  </h3>
-
-                  {/* Milestone Progress Bar */}
-                  <div className="mb-5">
-                    <div className="flex justify-between items-center text-xs font-black text-slate-700 dark:text-slate-300 mb-1.5">
-                      <span>Milestone Progress</span>
-                      <span className="text-[#f97316] font-black">{proj.progress}%</span>
-                    </div>
-                    <div className="w-full bg-slate-200 dark:bg-slate-800 h-3 rounded-full overflow-hidden p-0.5">
-                      <div
-                        className="bg-gradient-to-r from-[#1d4ed8] to-[#f97316] h-full rounded-full transition-all duration-500"
-                        style={{ width: `${proj.progress}%` }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Badges / Metrics Row */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 bg-slate-50 dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 mb-5 text-center">
-                    <div>
-                      <div className="text-[10px] uppercase font-bold text-slate-500">Language</div>
-                      <div className="text-xs sm:text-sm font-black text-slate-900 dark:text-white">{proj.language}</div>
-                    </div>
-                    <div>
-                      <div className="text-[10px] uppercase font-bold text-slate-500">Turnitin Index</div>
-                      <div className="text-xs sm:text-sm font-black text-emerald-600">{proj.turnitinScore || 'Pending'}</div>
-                    </div>
-                    <div>
-                      <div className="text-[10px] uppercase font-bold text-slate-500">AI Writing Score</div>
-                      <div className="text-xs sm:text-sm font-black text-blue-600">{proj.aiScore || '0% AI'}</div>
-                    </div>
-                    <div>
-                      <div className="text-[10px] uppercase font-bold text-slate-500">Total Fixed Quote</div>
-                      <div className="text-xs sm:text-sm font-black text-[#f97316]">{proj.amount}</div>
-                    </div>
-                  </div>
-
-                  {/* Deliverables Download Links */}
-                  <div>
-                    <h4 className="text-xs font-extrabold uppercase text-slate-500 mb-2.5">
-                      Available Files &amp; Downloads:
-                    </h4>
-                    <div className="flex flex-wrap gap-2.5">
-                      {proj.deliverables.map((del, dIdx) => (
-                        <button
-                          key={dIdx}
-                          type="button"
-                          onClick={() => alert(`Downloading verified academic deliverable: ${del.name}`)}
-                          className="inline-flex items-center gap-2 bg-white dark:bg-slate-800 hover:bg-orange-50 dark:hover:bg-orange-950/40 text-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-700 hover:border-[#f97316] px-3.5 py-2 rounded-xl text-xs font-bold shadow-xs transition-all hover:scale-102 cursor-pointer"
-                        >
-                          <span>{del.type === 'doc' ? '📄' : del.type === 'pdf' ? '📑' : '💻'}</span>
-                          <span>{del.name}</span>
-                          <span className="text-[#f97316] font-black">↓</span>
-                        </button>
-                      ))}
-
-                      {/* Fast Action: Ask Question regarding this project */}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setQueryProject(proj.id);
-                          setQuerySubject(`Inquiry regarding ${proj.id}: ${proj.title}`);
-                          setActiveTab('QUERIES');
-                        }}
-                        className="inline-flex items-center gap-1.5 bg-blue-50 dark:bg-blue-950/60 text-[#1d4ed8] dark:text-blue-300 border border-blue-200 dark:border-blue-800 px-3 py-2 rounded-xl text-xs font-extrabold hover:bg-blue-100 transition-colors cursor-pointer"
-                      >
-                        <span>💬 Query Director on this Project</span>
-                      </button>
-                    </div>
-                  </div>
-
+            {/* Scholar Profile Card */}
+            <div className="card-clay-white p-6 sm:p-8 border-2 border-slate-200 dark:border-slate-800">
+              <h3 className="font-serif text-xl font-black text-slate-900 dark:text-white mb-4">
+                Verified Scholar Profile
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-xs">
+                <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+                  <span className="text-slate-400 block font-bold">Full Name</span>
+                  <span className="font-black text-slate-800 dark:text-white text-sm">{profile?.name || user.name}</span>
                 </div>
-              ))}
+                <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+                  <span className="text-slate-400 block font-bold">Email Address</span>
+                  <span className="font-black text-slate-800 dark:text-white text-sm">{user.email}</span>
+                </div>
+                <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+                  <span className="text-slate-400 block font-bold">Gender</span>
+                  <span className="font-black text-slate-800 dark:text-white text-sm">{profile?.gender || 'Not Specified'}</span>
+                </div>
+                <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+                  <span className="text-slate-400 block font-bold">Educational Qualification</span>
+                  <span className="font-black text-slate-800 dark:text-white text-sm">{profile?.qualification || 'PhD Candidate'}</span>
+                </div>
+                <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+                  <span className="text-slate-400 block font-bold">University / Institution</span>
+                  <span className="font-black text-slate-800 dark:text-white text-sm">{profile?.institution || 'Academic Institution'}</span>
+                </div>
+                <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+                  <span className="text-slate-400 block font-bold">Discipline / Research Area</span>
+                  <span className="font-black text-slate-800 dark:text-white text-sm">{profile?.discipline || 'Multidisciplinary'}</span>
+                </div>
+              </div>
             </div>
           </div>
         )}
 
-        {/* ─── TAB 2: ASK DIRECTOR / SUBMIT A QUERY ─────────────────────── */}
+        {/* ═════════════════════════════════════════════════════════════════ */}
+        {/* SECTION 2: WORKS (Deliverables & Research Toolkit Sub-Section)     */}
+        {/* ═════════════════════════════════════════════════════════════════ */}
+        {activeTab === 'WORKS' && (
+          <div className="space-y-6">
+            {/* Works Sub-Navigation (Deliverables vs Research Toolkit) */}
+            <div className="flex flex-wrap items-center justify-between gap-4 p-2 bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-200 dark:border-slate-800 shadow-sm">
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setWorksSubSection('DELIVERABLES')}
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center gap-2 ${
+                    worksSubSection === 'DELIVERABLES'
+                      ? 'bg-[#1d4ed8] text-white shadow-sm'
+                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  }`}
+                >
+                  <span>📁 Active Deliverables &amp; Drafts</span>
+                  <span className="bg-white/20 text-[10px] px-2 py-0.5 rounded-full">
+                    {projects.length}
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setWorksSubSection('TOOLKIT')}
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center gap-2 ${
+                    worksSubSection === 'TOOLKIT'
+                      ? 'bg-[#f97316] text-white shadow-sm'
+                      : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                  }`}
+                >
+                  <span>⚡ Research Toolkit</span>
+                  <span className="bg-white/20 text-[10px] px-2 py-0.5 rounded-full font-black">
+                    5 Tools
+                  </span>
+                </button>
+              </div>
+
+              <span className="text-xs font-bold text-slate-400 px-2 hidden sm:inline">
+                Works Directorate Workspace
+              </span>
+            </div>
+
+            {/* Sub-view A: Research Toolkit */}
+            {worksSubSection === 'TOOLKIT' && (
+              <ResearchToolkitContainer
+                onBackToWorks={() => setWorksSubSection('DELIVERABLES')}
+              />
+            )}
+
+            {/* Sub-view B: Active Works & Deliverables */}
+            {worksSubSection === 'DELIVERABLES' && (
+              <div className="space-y-6">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div>
+                    <h2 className="font-serif text-2xl font-black text-slate-900 dark:text-white">
+                      Active &amp; Completed Research Works
+                    </h2>
+                    <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm font-medium">
+                      Review milestone progress, download camera-ready chapters, inspect verified Turnitin similarity scans, and access code repos.
+                    </p>
+                  </div>
+
+                  {/* Status Filter Buttons */}
+                  <div className="flex items-center gap-1.5 bg-white dark:bg-slate-900 p-1.5 rounded-2xl border border-slate-300 dark:border-slate-700 text-xs font-bold">
+                    <button
+                      type="button"
+                      onClick={() => setStatusFilter('ALL')}
+                      className={`px-3 py-1.5 rounded-xl cursor-pointer ${statusFilter === 'ALL' ? 'bg-[#f97316] text-white' : 'text-slate-600 dark:text-slate-300'}`}
+                    >
+                      All ({projects.length})
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setStatusFilter('IN_PROGRESS')}
+                      className={`px-3 py-1.5 rounded-xl cursor-pointer ${statusFilter === 'IN_PROGRESS' ? 'bg-[#f97316] text-white' : 'text-slate-600 dark:text-slate-300'}`}
+                    >
+                      In Progress (2)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setStatusFilter('COMPLETED')}
+                      className={`px-3 py-1.5 rounded-xl cursor-pointer ${statusFilter === 'COMPLETED' ? 'bg-[#f97316] text-white' : 'text-slate-600 dark:text-slate-300'}`}
+                    >
+                      Completed (1)
+                    </button>
+                  </div>
+                </div>
+
+                {/* Project Cards Grid */}
+                <div className="grid grid-cols-1 gap-6">
+                  {filteredProjects.map((proj) => (
+                    <div
+                      key={proj.id}
+                      className="card-clay-white p-6 sm:p-7 flex flex-col justify-between border-2 border-slate-200 dark:border-slate-800 shadow-lg relative overflow-hidden"
+                    >
+                      {/* Status Banner */}
+                      <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <div className="flex items-center gap-2">
+                          <span className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-mono text-xs font-black px-2.5 py-1 rounded-lg">
+                            {proj.id}
+                          </span>
+                          <span className="text-xs font-black text-[#1d4ed8] dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800">
+                            {proj.service}
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider ${
+                              proj.status === 'COMPLETED'
+                                ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
+                                : proj.status === 'UNDER_REVIEW'
+                                ? 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
+                                : 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300'
+                            }`}
+                          >
+                            ● {proj.status.replace('_', ' ')}
+                          </span>
+                          <span className="text-xs font-bold text-slate-500">
+                            Deadline: {proj.deadline}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Project Title */}
+                      <h3 className="font-serif text-xl sm:text-2xl font-black text-slate-900 dark:text-white mb-3">
+                        {proj.title}
+                      </h3>
+
+                      {/* Milestone Progress Bar */}
+                      <div className="mb-5">
+                        <div className="flex justify-between items-center text-xs font-black text-slate-700 dark:text-slate-300 mb-1.5">
+                          <span>Milestone Progress</span>
+                          <span className="text-[#f97316] font-black">{proj.progress}%</span>
+                        </div>
+                        <div className="w-full bg-slate-200 dark:bg-slate-800 h-3 rounded-full overflow-hidden p-0.5">
+                          <div
+                            className="bg-gradient-to-r from-[#1d4ed8] to-[#f97316] h-full rounded-full transition-all duration-500"
+                            style={{ width: `${proj.progress}%` }}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Badges / Metrics Row */}
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 bg-slate-50 dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 mb-5 text-center">
+                        <div>
+                          <div className="text-[10px] uppercase font-bold text-slate-500">Language</div>
+                          <div className="text-xs sm:text-sm font-black text-slate-900 dark:text-white">{proj.language}</div>
+                        </div>
+                        <div>
+                          <div className="text-[10px] uppercase font-bold text-slate-500">Turnitin Index</div>
+                          <div className="text-xs sm:text-sm font-black text-emerald-600">{proj.turnitinScore || 'Pending'}</div>
+                        </div>
+                        <div>
+                          <div className="text-[10px] uppercase font-bold text-slate-500">AI Writing Score</div>
+                          <div className="text-xs sm:text-sm font-black text-blue-600">{proj.aiScore || '0% AI'}</div>
+                        </div>
+                        <div>
+                          <div className="text-[10px] uppercase font-bold text-slate-500">Total Fixed Quote</div>
+                          <div className="text-xs sm:text-sm font-black text-[#f97316]">{proj.amount}</div>
+                        </div>
+                      </div>
+
+                      {/* Deliverables Download Links */}
+                      <div>
+                        <h4 className="text-xs font-extrabold uppercase text-slate-500 mb-2.5">
+                          Available Files &amp; Downloads:
+                        </h4>
+                        <div className="flex flex-wrap gap-2.5">
+                          {proj.deliverables.map((del, dIdx) => (
+                            <button
+                              key={dIdx}
+                              type="button"
+                              onClick={() => alert(`Downloading verified academic deliverable: ${del.name}`)}
+                              className="inline-flex items-center gap-2 bg-white dark:bg-slate-800 hover:bg-orange-50 dark:hover:bg-orange-950/40 text-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-700 hover:border-[#f97316] px-3.5 py-2 rounded-xl text-xs font-bold shadow-xs transition-all hover:scale-102 cursor-pointer"
+                            >
+                              <span>{del.type === 'doc' ? '📄' : del.type === 'pdf' ? '📑' : '💻'}</span>
+                              <span>{del.name}</span>
+                              <span className="text-[#f97316] font-black">↓</span>
+                            </button>
+                          ))}
+
+                          {/* Fast Action: Ask Question regarding this project */}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setQueryProject(proj.id);
+                              setQuerySubject(`Inquiry regarding ${proj.id}: ${proj.title}`);
+                              setActiveTab('QUERIES');
+                            }}
+                            className="inline-flex items-center gap-1.5 bg-blue-50 dark:bg-blue-950/60 text-[#1d4ed8] dark:text-blue-300 border border-blue-200 dark:border-blue-800 px-3 py-2 rounded-xl text-xs font-extrabold hover:bg-blue-100 transition-colors cursor-pointer"
+                          >
+                            <span>💬 Query Director on this Project</span>
+                          </button>
+                        </div>
+                      </div>
+
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ═════════════════════════════════════════════════════════════════ */}
+        {/* SECTION 3: QUERIES (Direct Escalation & Director History)          */}
+        {/* ═════════════════════════════════════════════════════════════════ */}
         {activeTab === 'QUERIES' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
             {/* Left Column: Submit New Query Form */}
             <div className="lg:col-span-5">
               <div className="card-clay-white p-6 sm:p-7 border-2 border-slate-200 dark:border-slate-800 shadow-xl">
@@ -852,68 +1059,6 @@ export default function ClientPortalPage() {
                 ))
               )}
             </div>
-
-          </div>
-        )}
-
-        {/* ─── TAB 3: OVERVIEW & SCHOLAR ACCOUNT ────────────────────────── */}
-        {activeTab === 'OVERVIEW' && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            {/* Metric Card 1 */}
-            <div className="card-clay-white p-6 border-2 border-slate-200 dark:border-slate-800 text-center">
-              <div className="text-3xl mb-2">📚</div>
-              <div className="text-2xl font-black text-slate-900 dark:text-white">3 Works</div>
-              <p className="text-xs text-slate-500 font-bold mt-1">2 Active • 1 Delivered</p>
-            </div>
-
-            {/* Metric Card 2 */}
-            <div className="card-clay-white p-6 border-2 border-slate-200 dark:border-slate-800 text-center">
-              <div className="text-3xl mb-2">🛡️</div>
-              <div className="text-2xl font-black text-emerald-600">100% Non-Repository</div>
-              <p className="text-xs text-slate-500 font-bold mt-1">Turnitin Verified Zero Indexing</p>
-            </div>
-
-            {/* Metric Card 3 */}
-            <div className="card-clay-white p-6 border-2 border-slate-200 dark:border-slate-800 text-center">
-              <div className="text-3xl mb-2">🤝</div>
-              <div className="text-2xl font-black text-[#1d4ed8]">Direct Director Access</div>
-              <p className="text-xs text-slate-500 font-bold mt-1">Tuhit Roy &amp; Sampreeti Mukherjee</p>
-            </div>
-
-            {/* Scholar Profile Card */}
-            <div className="md:col-span-3 card-clay-white p-6 sm:p-8 border-2 border-slate-200 dark:border-slate-800">
-              <h3 className="font-serif text-xl font-black text-slate-900 dark:text-white mb-4">
-                Verified Scholar Profile
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-xs">
-                <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
-                  <span className="text-slate-400 block font-bold">Full Name</span>
-                  <span className="font-black text-slate-800 dark:text-white text-sm">{profile?.name || user.name}</span>
-                </div>
-                <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
-                  <span className="text-slate-400 block font-bold">Email Address</span>
-                  <span className="font-black text-slate-800 dark:text-white text-sm">{user.email}</span>
-                </div>
-                <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
-                  <span className="text-slate-400 block font-bold">Gender</span>
-                  <span className="font-black text-slate-800 dark:text-white text-sm">{profile?.gender || 'Not Specified'}</span>
-                </div>
-                <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
-                  <span className="text-slate-400 block font-bold">Educational Qualification</span>
-                  <span className="font-black text-slate-800 dark:text-white text-sm">{profile?.qualification || 'PhD Candidate'}</span>
-                </div>
-                <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
-                  <span className="text-slate-400 block font-bold">University / Institution</span>
-                  <span className="font-black text-slate-800 dark:text-white text-sm">{profile?.institution || 'Academic Institution'}</span>
-                </div>
-                <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
-                  <span className="text-slate-400 block font-bold">Discipline / Research Area</span>
-                  <span className="font-black text-slate-800 dark:text-white text-sm">{profile?.discipline || 'Multidisciplinary'}</span>
-                </div>
-              </div>
-            </div>
-
           </div>
         )}
 
