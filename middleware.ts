@@ -9,9 +9,19 @@ function sessionKey() {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Check 8: Force HTTPS in production
+  // Agent Readiness: Intercept Accept: text/markdown on homepage
+  const acceptHeader = request.headers.get('accept') || '';
+  if ((pathname === '/' || pathname === '') && acceptHeader.includes('text/markdown')) {
+    const markdownUrl = new URL('/api/markdown-homepage', request.url);
+    return NextResponse.rewrite(markdownUrl);
+  }
+
+  // Force HTTPS in production (exclude localhost / internal health checks)
+  const host = request.headers.get('host') || '';
+  const isLocalhost = host.includes('localhost') || host.includes('127.0.0.1');
   if (
     process.env.NODE_ENV === 'production' &&
+    !isLocalhost &&
     request.headers.get('x-forwarded-proto') === 'http'
   ) {
     const httpsUrl = request.nextUrl.clone();
@@ -58,7 +68,16 @@ export async function middleware(request: NextRequest) {
 
   const response = NextResponse.next();
 
-  // Check 18: Security Headers on all HTTP responses
+  // Agent Readiness: RFC 8288 Link headers and Content-Signal
+  response.headers.set('Content-Signal', 'search=yes, ai-train=no');
+  if (pathname === '/' || pathname === '') {
+    response.headers.set(
+      'Link',
+      '</llms.txt>; rel="describedby"; type="text/plain", </>; rel="alternate"; type="text/markdown"'
+    );
+  }
+
+  // Security Headers on all HTTP responses
   response.headers.set('X-Frame-Options', 'DENY');
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');

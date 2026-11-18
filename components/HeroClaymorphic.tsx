@@ -174,9 +174,20 @@ export default function HeroClaymorphic() {
 
           </div>
 
-          {/* ─── RIGHT COLUMN: INTERACTIVE CLAY CARD ──────────────────────── */}
+          {/* ─── RIGHT COLUMN: INTERACTIVE CLAY CARD (WebMCP Enabled) ─────── */}
           <div className="lg:col-span-5">
-            <div className="card-clay-blue-frame p-6 sm:p-8 text-center max-w-md mx-auto">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleShowPricing(e as any);
+              }}
+              // @ts-expect-error WebMCP browser standard attributes
+              toolname="calculate_research_estimate"
+              tooldescription="Calculate quotation and delivery timeline for research papers, doctoral dissertations, and Turnitin originality reports"
+              data-toolname="calculate_research_estimate"
+              data-tooldescription="Calculate quotation and delivery timeline for research papers, doctoral dissertations, and Turnitin originality reports"
+              className="card-clay-blue-frame p-6 sm:p-8 text-center max-w-md mx-auto block"
+            >
               
               <h3 className="font-extrabold text-xl sm:text-2xl text-[#1E3A8A] mb-5 tracking-tight">
                 Help Me Perfect My…
@@ -289,7 +300,7 @@ export default function HeroClaymorphic() {
                 <span className="text-base font-black">→</span>
               </Link>
 
-            </div>
+            </form>
           </div>
 
         </div>

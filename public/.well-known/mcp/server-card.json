@@ -1,0 +1,75 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schemas/server-card.json",
+  "name": "InkMonk Research MCP Server",
+  "description": "Model Context Protocol (MCP) server for InkMonk Research. Exposes catalog discovery, pricing calculation, Turnitin verification consultation, and direct contact tools for AI agents.",
+  "version": "1.0.0",
+  "homepage": "https://inkmonkresearch.com",
+  "endpoints": [
+    {
+      "type": "http",
+      "url": "https://inkmonkresearch.com/api/mcp",
+      "transport": "streamable-http"
+    }
+  ],
+  "capabilities": {
+    "tools": {
+      "list": true,
+      "call": true
+    },
+    "resources": {
+      "list": true,
+      "read": true
+    },
+    "prompts": {
+      "list": true,
+      "get": true
+    }
+  },
+  "tools": [
+    {
+      "name": "get_service_catalog",
+      "description": "Retrieve comprehensive catalogue of academic research services in English and Hindi with turnaround times.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": ["all", "english", "hindi", "turnitin"],
+            "description": "Service category to filter"
+          }
+        }
+      }
+    },
+    {
+      "name": "calculate_quote",
+      "description": "Calculate exact quotation for research paper, thesis, book writing, and Turnitin plagiarism check using central server pricing rules.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string",
+            "description": "Specific academic service requested"
+          },
+          "language": {
+            "type": "string",
+            "enum": ["english", "hindi"]
+          },
+          "isTechnical": {
+            "type": "boolean"
+          },
+          "wordCount": {
+            "type": "number"
+          }
+        },
+        "required": ["service", "language"]
+      }
+    },
+    {
+      "name": "get_contact_info",
+      "description": "Get verified contact details, founders profile, and Kolkata office address of InkMonk Research.",
+      "inputSchema": {
+        "type": "object"
+      }
+    }
+  ]
+}

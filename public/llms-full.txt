@@ -1,0 +1,50 @@
+# InkMonk Research — Complete Entity Documentation (llms-full.txt)
+
+## Business Information
+- Name: InkMonk Research
+- URL: https://inkmonkresearch.com
+- Founders: Tuhit Roy, Sampreeti Mukherjee
+- Official Email: inkmonkresearch@gmail.com
+- Phone / WhatsApp: +91 7980470880
+- Office Address: Karunamoyee, Sector 2, Salt Lake, Kolkata, West Bengal 700091, India
+- Working Hours: Monday – Saturday, 9:00 AM – 8:00 PM IST
+- Client Guarantee: 100% Confidentiality NDA, Zero-Repository Plagiarism Check, Scopus/IEEE/Springer format compliance.
+
+## Detailed Price Matrix (INR)
+### 1. English Non-Technical Academic Work
+- Research Paper Writing: ₹4,999
+- Review Paper Writing: ₹3,999
+- Synopsis Writing: ₹3,999
+- Complete Thesis / Dissertation: ₹19,999
+- Book Writing (100 Pages): ₹3,999
+- Book Writing (200 Pages): ₹7,499
+- Book Writing (300 Pages): ₹10,999
+- Academic PPT / Defense: ₹120 per slide
+- Article Writing: ₹0.60 per word
+
+### 2. English Technical Academic Work (with Computation/Model)
+- Research Paper with Computational Model: ₹8,998 (₹4,999 writing + ₹3,999 code)
+- Technical Review Paper: ₹4,499
+- Technical Synopsis: ₹4,499
+- Technical Thesis with Model: ₹28,998 (₹20,999 writing + ₹7,999 code)
+- Standalone Small Model (Python/MATLAB): ₹5,999
+- Standalone Large Model: ₹8,999
+- Standalone Complex Model + Web Interface: ₹12,999
+- Technical Book Writing (100 Pages): ₹4,999
+- Technical Book Writing (200 Pages): ₹8,499
+- Technical Book Writing (300 Pages): ₹11,999
+
+### 3. Hindi Academic Work (हिंदी शोध कार्य)
+- Hindi Research Paper: ₹3,999
+- Hindi Review Paper: ₹2,999
+- Hindi Synopsis: ₹2,999
+- Hindi Thesis: ₹14,999
+- Hindi Book (100 Pages): ₹2,999
+- Hindi Book (200 Pages): ₹5,499
+- Hindi Book (300 Pages): ₹7,999
+- Hindi Article Writing: ₹0.50 per word
+- Hindi PPT: ₹100 per slide
+
+### 4. Turnitin Plagiarism & AI Detection Reports
+- Originality reports processed via licensed Instructor Turnitin non-repository accounts.
+- Guarantees manuscript is NEVER stored into the global Turnitin repository, avoiding self-plagiarism flags upon university submission.

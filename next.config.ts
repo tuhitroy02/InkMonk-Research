@@ -10,12 +10,29 @@ const nextConfig: NextConfig = {
       allowedOrigins: ['localhost:3000', 'inkmonkresearch.com', 'www.inkmonkresearch.com'],
     },
   },
-  // Check 18: Comprehensive HTTP Security Headers
+  // Check 18: Comprehensive HTTP Security & Agent Headers
   async headers() {
     return [
       {
+        source: '/',
+        headers: [
+          {
+            key: 'Link',
+            value: '</llms.txt>; rel="describedby"; type="text/plain", </>; rel="alternate"; type="text/markdown"',
+          },
+          {
+            key: 'Content-Signal',
+            value: 'search=yes, ai-train=no',
+          },
+        ],
+      },
+      {
         source: '/:path*',
         headers: [
+          {
+            key: 'Content-Signal',
+            value: 'search=yes, ai-train=no',
+          },
           {
             key: 'X-DNS-Prefetch-Control',
             value: 'on',

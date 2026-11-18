@@ -1,0 +1,24 @@
+# InkMonk Research
+
+> InkMonk Research is an elite academic research, manuscript writing, computational modeling, and plagiarism audit consultancy based in Kolkata, India. Founded by Tuhit Roy and Sampreeti Mukherjee.
+
+## Core Academic Services
+- [Services Catalogue](https://inkmonkresearch.com/services): End-to-end manuscript writing for English and Hindi disciplines. Scopus, IEEE, Springer, Elsevier, APA, Harvard, and UGC-CARE compliance.
+- [Instant Quotation Estimator](https://inkmonkresearch.com/quote): Interactive real-time cost and timeline estimation for research papers, theses, synopses, monographs, and Turnitin checks.
+- [Academic Proof of Work](https://inkmonkresearch.com/samples): Redacted, approved manuscript excerpts, PRISMA flowcharts, bibliometric reviews, and Turnitin similarity reports.
+- [Process & Methodology](https://inkmonkresearch.com/how-it-works): Five-stage scholarly delivery lifecycle: Consultation -> Estimation -> Drafting & Proofing -> Similarity Audit -> Final Handoff with NDA.
+- [Founders & Business Profile](https://inkmonkresearch.com/about): Co-founded by Tuhit Roy and Sampreeti Mukherjee in Salt Lake, Sector 2, Kolkata 700091.
+- [Direct Contact](https://inkmonkresearch.com/contact): Direct WhatsApp (+91 7980470880) and email (inkmonkresearch@gmail.com).
+- [Frequently Asked Questions](https://inkmonkresearch.com/faq): Strict zero-repository Turnitin checking, 100% intellectual property non-disclosure, and formatting standards.
+- [Interactive AI Assistant](https://inkmonkresearch.com/chat): Academic consultation bot answering topic scoping, methodology design, and citation style queries.
+
+## Service Categories & Specifications
+- **English Non-Technical Work**: Research Papers (₹4,999), Review Papers (₹3,999), Synopses (₹3,999), Complete Doctoral Theses (₹19,999), Monograph Books (100pp: ₹3,999; 200pp: ₹7,499; 300pp: ₹10,999), PPT Decks (₹120/slide), Articles (₹0.60/word).
+- **English Technical Work with Computation/Code**: Research Papers with Model (₹8,998), Technical Review Papers (₹4,499), Technical Theses with Implementation (₹28,998), Standalone Small Models (₹5,999), Standalone Big Models (₹8,999), Full Model + Web App (₹12,999).
+- **Hindi Research (हिंदी शोध कार्य)**: Hindi Research Papers (₹3,999), Hindi Review Papers (₹2,999), Hindi Synopses (₹2,999), Hindi Theses (₹14,999), Hindi Books (100pp: ₹2,999; 200pp: ₹5,499; 300pp: ₹7,999), Articles & PPTs.
+- **Turnitin Plagiarism Verification**: Safe non-repository similarity audits generating full PDF similarity reports with AI writing analysis.
+
+## Machine-Readable Endpoints
+- [Sitemap](https://inkmonkresearch.com/sitemap.xml): Comprehensive URL index.
+- [MCP Server Card](https://inkmonkresearch.com/.well-known/mcp/server-card.json): Model Context Protocol metadata for autonomous AI agents.
+- [Markdown Representation](https://inkmonkresearch.com/api/markdown-homepage): Pure markdown alternative for AI models requesting `Accept: text/markdown`.
