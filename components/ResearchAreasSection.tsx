@@ -23,12 +23,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     image: '/research-areas/engineering.jpg',
     desc: 'Experimental design, finite element modeling (FEM), computational simulations, and technical manuscript drafting across all engineering branches.',
     subfields: [
-      'Electrical & Electronics Engineering',
-      'Mechanical & Aerospace Systems',
-      'Civil & Structural Engineering',
-      'Chemical & Materials Engineering',
-      'Robotics & Industrial Automation',
-      'Biomedical Engineering & Devices',
+      'Robotics, Autonomous Systems & Control Theory',
+      'Finite Element Modeling (FEM) & Structural Dynamics',
+      'Renewable Microgrids & Advanced Materials',
     ],
     standards: 'IEEE, ASME, ASCE, Elsevier, Springer',
   },
@@ -39,12 +36,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     image: '/research-areas/computer-science.jpg',
     desc: 'State-of-the-art computational algorithms, deep neural network architectures (PyTorch/CUDA), and empirical benchmarking with reproducible codebases.',
     subfields: [
-      'Machine Learning & Deep Learning (CNN, LSTM, Transformers)',
-      'Natural Language Processing (LLM Finetuning & Tokenization)',
+      'Deep Learning, Transformers & LLM Architectures',
       'Computer Vision & Medical Image Segmentation',
-      'Cybersecurity, Cryptography & Network Intrusion',
-      'Cloud Computing, Distributed Systems & DevOps',
-      'Blockchain, Smart Contracts & Distributed Ledgers',
+      'Cybersecurity, Cryptography & Distributed Systems',
     ],
     standards: 'IEEE Transactions, ACM, Springer LNCS, Scopus Q1',
   },
@@ -55,12 +49,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     image: '/research-areas/medicine.jpg',
     desc: 'Biomedical investigations, clinical trials analysis, epidemiological surveys, and pharmacological literature reviews adhering to strict medical publication ethics.',
     subfields: [
-      'Clinical Medicine & Surgical Studies',
-      'Public Health, Epidemiology & Global Health',
-      'Pharmacology & Drug Delivery Formulations',
-      'Biostatistics & Survival Analysis (R/SPSS/STATA)',
-      'Nursing Informatics & Patient Care Systems',
-      'Healthcare Management & Health Economics',
+      'Clinical Trials Protocols & Systematic Meta-Analyses',
+      'Public Health, Epidemiology & Global Disease Modeling',
+      'Pharmacokinetics & Targeted Drug Delivery',
     ],
     standards: 'ICMJE, PubMed, The Lancet / BMJ guidelines, APA 7th',
   },
@@ -71,12 +62,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     image: '/research-areas/natural-sciences.jpg',
     desc: 'Rigorous theoretical formulations, laboratory experimental synthesis, and quantitative data modeling across fundamental sciences.',
     subfields: [
-      'Theoretical & Quantum Physics',
-      'Organic, Inorganic & Analytical Chemistry',
-      'Cellular & Molecular Biology',
-      'Pure & Applied Mathematics (Stochastic, PDEs)',
-      'Biotechnology & Genetic Engineering',
-      'Materials Science & Nanotechnology',
+      'Theoretical Physics & Quantum Information',
+      'Synthetic Organic, Analytical Chemistry & Nanotech',
+      'Molecular Genetics & Stochastic Biomathematics',
     ],
     standards: 'Nature, Science, ACS, APS, Royal Society of Chemistry',
   },
@@ -87,12 +75,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     image: '/research-areas/environmental.jpg',
     desc: 'Climate impact assessments, ecological biodiversity modeling, renewable energy lifecycle analysis, and sustainable urban environmental policies.',
     subfields: [
-      'Climate Dynamics & Meteorological Modeling',
-      'Ecology, Biodiversity & Conservation Biology',
-      'Renewable Energy Systems (Solar, Wind, Biomass)',
-      'Waste Management & Circular Bio-Economy',
-      'Hydrology, Water Resources & Soil Conservation',
-      'Environmental Impact Assessment (EIA) & Policy',
+      'Climate Dynamics, Carbon Audits & IPCC Metrics',
+      'Ecology, Biodiversity & Marine Conservation',
+      'Circular Bio-Economy & Clean Energy Systems',
     ],
     standards: 'IPCC Guidelines, Elsevier Environmental, UGC-CARE',
   },
@@ -103,12 +88,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     image: '/research-areas/business.jpg',
     desc: 'Quantitative econometrics, corporate financial modeling, behavioral consumer dynamics, and strategic organizational management research.',
     subfields: [
-      'Econometric Modeling (Time-Series, GARCH, Panel Data)',
-      'Corporate Finance, Valuation & Capital Markets',
-      'FinTech, Digital Currencies & Algorithmic Trading',
-      'Strategic Management & Organizational Behavior',
-      'Supply Chain Logistics & Operations Research',
-      'Marketing Analytics & Consumer Behavior',
+      'Empirical Econometrics & Time-Series Modeling (GARCH/Panel)',
+      'Corporate Finance, Capital Asset Pricing & FinTech',
+      'Strategic Leadership & Global Supply Operations',
     ],
     standards: 'JFE, AER, Harvard Business Review, APA / Chicago',
   },
@@ -119,12 +101,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     image: '/research-areas/social-sciences.jpg',
     desc: 'Qualitative field studies, sociological theory, historical archival analysis, governance frameworks, and interdisciplinary human inquiry.',
     subfields: [
-      'Sociology, Social Stratification & Gender Studies',
-      'Political Science, Governance & Public Administration',
-      'International Relations & Geopolitics',
-      'Cognitive & Developmental Psychology',
-      'Pedagogy, Education Policy & NEP 2020 Reforms',
-      'Jurisprudence, Human Rights & Constitutional Law',
+      'Global Governance, Geopolitics & Public Policy',
+      'Sociological Field Studies & Gender Frameworks',
+      'Cognitive Psychology & Higher Education Pedagogy',
     ],
     standards: 'APA 7th, Chicago Manual of Style, MLA 9th, UGC-CARE',
   },
@@ -136,12 +115,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     image: '/research-areas/hindi-sahitya.jpg',
     desc: 'Specialized academic research in Hindi supervised by Sampreeti Mukherjee with standard Devanagari vocabulary and Shodhganga compliance.',
     subfields: [
-      'हिंदी साहित्य एवं समकालीन विमर्श (कविता, उपन्यास, नाटक)',
-      'तुलनात्मक साहित्य एवं अनुवाद सिद्धांत',
-      'भारतीय दर्शन, संस्कृति एवं समाजशास्त्र',
-      'राष्ट्रीय शिक्षा नीति (NEP 2020) एवं मातृभाषा शिक्षा',
-      'देवनागरी पारिभाषिक शब्दावली मानकीकरण',
-      'शोध प्रबंध एवं यूजीसी-केयर स्वीकृत प्रारूप',
+      'समकालीन हिंदी साहित्य, विमर्श एवं आलोचनात्मक सिद्धांत',
+      'तुलनात्मक भाषाविज्ञान एवं देवनागरी पारिभाषिक मानक',
+      'शोधगंगा एवं यूजीसी-केयर अनुरूप शोध प्रबंध निर्देशन',
     ],
     standards: 'Shodhganga (शोधगंगा), UGC-CARE List, Devanagari Standards',
   },
@@ -152,12 +128,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     image: '/research-areas/humanities.jpg',
     desc: 'Critical textual hermeneutics, post-colonial literary discourse, comparative rhetoric, and descriptive/applied linguistics.',
     subfields: [
-      'British, American & Post-Colonial English Literature',
-      'Literary Theory, Hermeneutics & Psychoanalysis',
-      'Applied Linguistics, Phonetics & Syntax',
-      'Translation Studies & Cross-Cultural Semiotics',
-      'Cultural Studies & Digital Humanities',
-      'Discourse Analysis & Media Hermeneutics',
+      'Comparative Literary Theory & Post-Colonial Studies',
+      'Applied Linguistics, Syntax & Computational Semiotics',
+      'Cross-Cultural Translation & Digital Humanities',
     ],
     standards: 'MLA 9th Edition, MHRA, Chicago Style',
   },
@@ -168,12 +141,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     image: '/research-areas/environmental.jpg',
     desc: 'Agronomic field experiment design, crop physiology modeling, soil microbiome analytics, and agribusiness supply economics.',
     subfields: [
-      'Agronomy & Precision Agriculture Technologies',
-      'Plant Breeding, Genetics & Crop Protection',
-      'Soil Science & Agricultural Chemistry',
-      'Horticulture, Post-Harvest Tech & Food Science',
-      'Agribusiness Management & Rural Development',
-      'Sustainable Irrigation & Climate-Resilient Farming',
+      'Precision Agriculture, IoT Sensing & Drone Analytics',
+      'Soil Microbiology & Sustainable Crop Protection',
+      'Agribusiness Value Chains & Climate-Resilient Farming',
     ],
     standards: 'ICAR Guidelines, FAO Standards, Springer AgSciences',
   },
@@ -184,12 +154,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     image: '/research-areas/engineering.jpg',
     desc: 'Spatial urban analysis, sustainable architectural design paradigms, GIS geographic modeling, and resilient city infrastructure.',
     subfields: [
-      'Urban Design, Zoning & Smart Cities',
-      'Sustainable Architecture & Green Building (LEED/GRIHA)',
-      'GIS Spatial Modeling & Remote Sensing Mapping',
-      'Transportation Planning & Urban Mobility Networks',
-      'Architectural Heritage Conservation & Restoration',
-      'Landscape Architecture & Environmental Planning',
+      'Sustainable Architecture & Net-Zero Green Building',
+      'GIS Spatial Analytics & Resilient City Planning',
+      'Urban Transportation & Infrastructure Mobility Networks',
     ],
     standards: 'RIBA, Council of Architecture (CoA), Harvard Style',
   },
@@ -200,12 +167,9 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     image: '/research-areas/business.jpg',
     desc: 'Practice-led academic research, visual culture analysis, industrial product ergonomics, and digital media design theory.',
     subfields: [
-      'Visual Arts & Art History Hermeneutics',
-      'Industrial Product Design & Ergonomics',
-      'Digital Media Arts, UI/UX & Interaction Design',
-      'Design Pedagogy & Practice-Led Research (PaR)',
-      'Fashion, Textiles & Sustainable Materiality',
-      'Museum Studies & Curatorial Research',
+      'Practice-Led Research (PaR) & Curatorial Studies',
+      'Human-Computer Interaction (HCI) & Digital Media Theory',
+      'Sustainable Materiality & Industrial Ergonomics',
     ],
     standards: 'Harvard, Chicago Author-Date, Design Research Society',
   },
@@ -296,16 +260,16 @@ export default function ResearchAreasSection({ className = "" }: { className?: s
                   {area.desc}
                 </p>
 
-                {/* Subfield Tags (Centered Bullet List) */}
-                <div className="w-full mb-4 pt-3 border-t border-slate-100 text-center">
-                  <div className="text-[11px] font-black text-slate-800 mb-2 uppercase tracking-wider text-center">
-                    Core Specialized Subfields:
+                {/* Core Research Focus (Centered, 3 Concise & High-Impact Points) */}
+                <div className="w-full mb-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-center">
+                  <div className="text-[10px] font-black text-slate-800 dark:text-slate-200 mb-2 uppercase tracking-wider text-center">
+                    Key Research Focus:
                   </div>
-                  <ul className="space-y-1.5 text-xs text-slate-700 font-medium flex flex-col items-center justify-center">
-                    {area.subfields.slice(0, 4).map((sub, i) => (
-                      <li key={i} className="flex items-center justify-center gap-2 text-center">
-                        <span className="text-[#F95721] font-black text-[10px]">◆</span>
-                        <span>{sub}</span>
+                  <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 font-medium flex flex-col items-center justify-center">
+                    {area.subfields.map((sub, i) => (
+                      <li key={i} className="flex items-start justify-center gap-2 text-center max-w-xs">
+                        <span className="text-[#F95721] font-bold text-xs shrink-0 mt-0.5">•</span>
+                        <span className="leading-snug">{sub}</span>
                       </li>
                     ))}
                   </ul>

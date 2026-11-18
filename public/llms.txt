@@ -14,10 +14,10 @@
 - [Interactive AI Assistant](https://inkmonkresearch.com/chat): Academic consultation bot answering topic scoping, methodology design, and citation style queries.
 
 ## Service Categories & Specifications
-- **English Non-Technical Work**: Research Papers (₹4,999), Review Papers (₹3,999), Synopses (₹3,999), Complete Doctoral Theses (₹19,999), Monograph Books (100pp: ₹3,999; 200pp: ₹7,499; 300pp: ₹10,999), PPT Decks (₹120/slide), Articles (₹0.60/word).
-- **English Technical Work with Computation/Code**: Research Papers with Model (₹8,998), Technical Review Papers (₹4,499), Technical Theses with Implementation (₹28,998), Standalone Small Models (₹5,999), Standalone Big Models (₹8,999), Full Model + Web App (₹12,999).
-- **Hindi Research (हिंदी शोध कार्य)**: Hindi Research Papers (₹3,999), Hindi Review Papers (₹2,999), Hindi Synopses (₹2,999), Hindi Theses (₹14,999), Hindi Books (100pp: ₹2,999; 200pp: ₹5,499; 300pp: ₹7,999), Articles & PPTs.
-- **Turnitin Plagiarism Verification**: Safe non-repository similarity audits generating full PDF similarity reports with AI writing analysis.
+- **English Scholarly Services**: Complete Doctoral Theses, High-Impact Research Papers (IEEE/Springer/Elsevier), PRISMA Systematic Reviews, Academic Synopses & DRC Proposals, Monograph Volumes (100–300pp), Peer-Reviewed Articles, and Defense PPT Presentations. Exact customized estimates are generated directly via the Quote Engine or AI Assistant.
+- **English Computational & Modeling Services**: Deep Learning (PyTorch/CUDA/TensorFlow), Computer Vision, Statistical Simulation, MATLAB Pipelines, Reproducible Benchmarks, Docker Containers, and Private Git Repository Handoffs.
+- **Hindi Academic Research (हिंदी शोध कार्य)**: Ph.D. Theses (शोध प्रबंध), Research Papers (शोध पत्र), Systematic Reviews (समीक्षात्मक शोध), Synopses (शोध प्रस्ताव), and Scholarly Books adhering to Shodhganga and UGC-CARE standards under Sampreeti Mukherjee.
+- **Turnitin Originality Audits**: 100% Non-Repository instructor-grade verification audits checking global repository similarity plus proprietary Turnitin AI writing detection.
 
 ## Machine-Readable Endpoints
 - [Sitemap](https://inkmonkresearch.com/sitemap.xml): Comprehensive URL index.

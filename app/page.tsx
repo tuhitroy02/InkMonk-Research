@@ -170,9 +170,9 @@ export default function HomePage() {
                     Instructor-tier originality and AI writing detection audits without saving your document to public repositories.
                   </p>
                   <div className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border-2 border-slate-200 dark:border-slate-700 mb-4 text-center">
-                    <div className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Fixed Flat Fee</div>
-                    <div className="font-serif text-3xl font-black text-slate-900 dark:text-white">₹200</div>
-                    <div className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">per file • 15–30 min delivery • Instant UPI</div>
+                    <div className="text-[10px] text-emerald-600 dark:text-emerald-400 font-black uppercase tracking-wider">Zero Repository Deposit</div>
+                    <div className="font-serif text-xl sm:text-2xl font-black text-slate-900 dark:text-white">Safe Express Scan</div>
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">100% Non-Repository • 15–30 min delivery</div>
                   </div>
 
                   <button
@@ -188,7 +188,7 @@ export default function HomePage() {
                     onClick={() => setTurnitinModalOpen(true)}
                     className="btn-clay-orange text-xs w-full text-center py-2.5 cursor-pointer"
                   >
-                    Upload &amp; Scan for ₹200 →
+                    Upload &amp; Verify Originality →
                   </button>
                 </div>
               </div>
@@ -419,7 +419,7 @@ export default function HomePage() {
                     <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                   </div>
                   <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium leading-relaxed italic mb-6 text-center">
-                    &ldquo;The flat ₹200 Turnitin scan was a lifesaver. Within 20 minutes, I had an instructor-grade non-repo originality report that proved 0% AI writing and 6% similarity. Excellent service and zero stress.&rdquo;
+                    &ldquo;The express Turnitin audit was a lifesaver. Within 20 minutes, I had an instructor-grade non-repo originality report that proved 0% AI writing and 6% similarity. Excellent service and zero stress.&rdquo;
                   </p>
                 </div>
                 <div className="pt-4 border-t border-slate-100 dark:border-slate-800 text-center">

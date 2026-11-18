@@ -29,8 +29,8 @@ const FAQS: FAQItem[] = [
   },
   {
     category: 'Pricing & Estimates',
-    q: 'How much does a Turnitin report cost and what does it include?',
-    a: 'Turnitin reports are fixed at ₹200 per scanned file. The audit checks for web similarity, repository matching, and includes Turnitin’s proprietary AI writing detection indicator without submitting your file to the public repository.',
+    q: 'How can I get an estimate for a Turnitin report and what does it include?',
+    a: 'Turnitin reports are available with transparent institutional pricing directly through our interactive quote estimator or by asking our AI Assistant. The audit checks for web similarity, global scholarly repository matching, and includes Turnitin’s proprietary AI writing detection index—guaranteeing 100% non-repository safety with zero public database deposit.',
   },
   {
     category: 'Services & Scope',

@@ -17,43 +17,34 @@ InkMonk Research was founded by Tuhit Roy and Sampreeti Mukherjee to support PhD
 
 ## Academic Divisions & Service Catalogue
 
-### 1. English Non-Technical Services
-- **Research Paper Writing**: ₹4,999 (Full IMRaD manuscript with peer-reviewed references)
-- **Review Paper Writing**: ₹3,999 (PRISMA systematic literature reviews and bibliometric surveys)
-- **Synopsis / Proposal Writing**: ₹3,999 (DRC committee ready proposal)
-- **Complete Doctoral Thesis / Dissertation**: ₹19,999 (Full 5-chapter volume with literature review)
-- **Scholarly Book Writing**:
-  - 100 Pages: ₹3,999
-  - 200 Pages: ₹7,499
-  - 300 Pages: ₹10,999
-- **Academic PPT & Defense**: ₹120 per slide
-- **Academic Article Writing**: ₹0.60 per word
+### 1. English Scholarly Services
+- **Research Paper Writing**: Full IMRaD manuscript with peer-reviewed references adhering to IEEE, Springer, or Elsevier standards.
+- **Review Paper Writing**: PRISMA systematic literature reviews and bibliometric citation network mapping.
+- **Synopsis / Proposal Writing**: Defensible DRC committee ready doctoral registration proposals.
+- **Complete Doctoral Thesis / Dissertation**: Full 5-chapter volume aligned to institutional thesis handbooks with milestone escrow.
+- **Scholarly Book Writing**: Monograph volumes and edited collections (100, 200, 300 pages) formatted for ISBN publishing.
+- **Academic PPT & Defense**: Widescreen 16:9 slide decks with speaker notes for doctoral defense boards.
+- **Academic Article Writing**: Standardized per-word scholarly essays and book chapters with full citation apparatus.
 
 ### 2. English Technical Services (with Computational Models & Code)
-- **Research Paper with Model**: ₹8,998 (₹4,999 writing + ₹3,999 computational architecture)
-- **Technical Review Paper**: ₹4,499
-- **Technical Synopsis**: ₹4,499
-- **Technical Thesis with Model**: ₹28,998 (₹20,999 writing + ₹7,999 code)
+- **Research Paper with Model**: Theoretical manuscript paired with reproducible machine learning / simulation code.
+- **Technical Review Paper**: Comprehensive state-of-the-art computational and algorithmic survey.
+- **Technical Synopsis**: Methodological proposal detailing computational architecture, sampling, and validation metrics.
+- **Technical Thesis with Model**: Doctoral dissertation with complete working codebase, datasets, and benchmarks.
 - **Standalone Computational Models**:
-  - Small Model (PyTorch / TensorFlow / Scikit-learn): ₹5,999
-  - Big Model Implementation: ₹8,999
-  - Full Model cum Web Application (Dockerized): ₹12,999
-- **Technical Book Writing**:
-  - 100 Pages: ₹4,999
-  - 200 Pages: ₹8,499
-  - 300 Pages: ₹11,999
+  - Small Models (PyTorch / TensorFlow / Scikit-learn architectures)
+  - Complex Deep Learning & Computer Vision Implementations
+  - Full Model cum Web Application (Dockerized with Git repository handoff)
 
 ### 3. Hindi Academic Services (हिंदी शोध एवं लेखन सेवाएं)
-- **Hindi Research Paper (हिंदी शोध पत्र)**: ₹3,999
-- **Hindi Review Paper (समीक्षा पत्र)**: ₹2,999
-- **Hindi Synopsis (शोध प्रस्ताव / सारांश)**: ₹2,999
-- **Hindi Doctoral Thesis (हिंदी शोध प्रबंध)**: ₹14,999
-- **Hindi Book Writing**:
-  - 100 पृष्ठ: ₹2,999
-  - 200 पृष्ठ: ₹5,499
-  - 300 पृष्ठ: ₹7,999
-- **Hindi PPT**: ₹100 प्रति स्लाइड
-- **Hindi Article**: ₹0.50 प्रति शब्द
+- **Hindi Research Paper (हिंदी शोध पत्र)**: यूजीसी-केयर एवं समकक्ष पत्रिकाओं हेतु मौलिक शोध पत्र।
+- **Hindi Review Paper (समीक्षा पत्र)**: समकालीन शोध प्रवृत्तियों का समालोचनात्मक एवं ग्रंथपरक सर्वेक्षण।
+- **Hindi Synopsis (शोध प्रस्ताव / सारांश)**: विभागीय शोध समिति (DRC/RAC) पंजीकरण स्वीकृति मानक प्रस्ताव।
+- **Hindi Doctoral Thesis (हिंदी शोध प्रबंध)**: शोधगंगा एवं यूजीसी नियमावली अनुरूप संपूर्ण 5-अध्यायी शोध प्रबंध।
+- **Hindi Book Writing (पुस्तक लेखन)**: 100, 200 एवं 300 पृष्ठों के अकादमिक ग्रंथ आईएसबीएन प्रारूप सहित।
+- **Hindi PPT & Articles**: 16:9 देवनागरी स्लाइड एवं उच्च स्तरीय बौद्धिक आलेख।
+
+*Note: All exact customized pricing and project scopes are calculated dynamically via our Instant Quote Estimator (https://inkmonkresearch.com/quote) or through consultation with our AI Academic Concierge (https://inkmonkresearch.com/chat).*
 
 ### 4. Turnitin Originality & AI Verification
 - Instructor-level safe non-repository Turnitin checking.

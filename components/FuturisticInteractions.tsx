@@ -65,7 +65,7 @@ export function InstantTurnitinModal({
               Instant Turnitin Plagiarism &amp; AI Scan
             </h3>
             <p className="text-xs sm:text-sm text-purple-200 mb-5">
-              Flat <span className="text-purple-400 font-bold font-mono">₹200</span> • Safe Non-Repository Protocol • Delivered in 15–30 Mins
+              Safe Non-Repository Protocol • Delivered in 15–30 Mins • Zero Repository Deposit
             </p>
 
             {/* Non-Repository Guarantee Badge */}
@@ -116,7 +116,7 @@ export function InstantTurnitinModal({
               onClick={() => setStep('pay')}
               className="btn-primary-glow w-full !py-3 text-sm font-bold disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              Continue to Instant UPI Pay (₹200) →
+              Continue to Instant Verification →
             </button>
           </div>
         )}
@@ -128,7 +128,7 @@ export function InstantTurnitinModal({
             </div>
 
             <h3 className="font-serif text-xl font-bold text-white mb-1">
-              Pay ₹200 via UPI
+              Verify Manuscript via Instant UPI / Escrow
             </h3>
             <p className="text-xs text-purple-200 mb-4">
               Scan QR or copy UPI ID. Instant verification with zero transaction fee.
@@ -361,7 +361,7 @@ export function TurnitinSampleModal({
             onClick={onClose}
             className="btn-primary-glow !py-2.5 text-xs font-bold"
           >
-            Order Your Scan for ₹200 →
+            Configure Your Turnitin Scan →
           </button>
         </div>
       </div>
