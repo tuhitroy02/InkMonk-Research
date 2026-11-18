@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import HeroClaymorphic from '@/components/HeroClaymorphic';
-import FloatingLiveHelp from '@/components/FloatingLiveHelp';
 import {
   ScrollProgressLaser,
   ScrollReveal3D,
@@ -472,9 +471,6 @@ export default function HomePage() {
           </div>
         </ScrollReveal3D>
       </section>
-
-      {/* ─── Floating Live Help Pill Widget ─────────────────────────────── */}
-      <FloatingLiveHelp />
 
       {/* ─── Interactive Modals ─────────────────────────────────────────── */}
       <InstantTurnitinModal

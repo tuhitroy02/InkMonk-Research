@@ -21,8 +21,6 @@ import {
   TranslationAuditModal,
 } from '@/components/FuturisticInteractions';
 
-import FloatingLiveHelp from '@/components/FloatingLiveHelp';
-
 export interface ServiceItem {
   id: string;
   division: 'ENGLISH' | 'HINDI' | 'TURNITIN';
@@ -573,8 +571,6 @@ export default function ServicesPage() {
         </div>
 
       </div>
-
-      <FloatingLiveHelp />
 
       {/* ─── Interactive Modals ───────────────────────────────────────────── */}
       <InstantTurnitinModal

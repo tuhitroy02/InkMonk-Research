@@ -8,7 +8,6 @@ import {
   OfficialTurnitinLogo,
 } from '@/components/RealIcons';
 import FaqSection from '@/components/FaqSection';
-import FloatingLiveHelp from '@/components/FloatingLiveHelp';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -253,8 +252,6 @@ export default function ContactPage() {
         </div>
 
       </div>
-
-      <FloatingLiveHelp />
     </div>
   );
 }

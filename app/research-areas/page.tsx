@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import ResearchAreasSection from '@/components/ResearchAreasSection';
-import FloatingLiveHelp from '@/components/FloatingLiveHelp';
 
 export const metadata: Metadata = {
   title: 'Academic Research Areas & Disciplinary Taxonomy | InkMonk Research',
@@ -45,8 +44,6 @@ export default function ResearchAreasPage() {
         {/* Dedicated Research Areas Taxonomy & Filter Matrix */}
         <ResearchAreasSection />
       </div>
-
-      <FloatingLiveHelp />
     </main>
   );
 }

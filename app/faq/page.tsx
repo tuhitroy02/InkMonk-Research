@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { WhatsAppRealIcon } from '@/components/RealIcons';
-import FloatingLiveHelp from '@/components/FloatingLiveHelp';
 
 interface FAQItem {
   q: string;
@@ -152,7 +151,6 @@ export default function FAQPage() {
         </div>
 
       </div>
-      <FloatingLiveHelp />
     </div>
   );
 }

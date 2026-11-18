@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import FloatingLiveHelp from '@/components/FloatingLiveHelp';
 import {
   ResearchPaperRealWork,
   HindiPaperRealWork,
@@ -184,8 +183,6 @@ export default function SamplesPage() {
         </div>
 
       </div>
-
-      <FloatingLiveHelp />
     </div>
   );
 }

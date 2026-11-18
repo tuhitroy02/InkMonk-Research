@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import HorizontalHowItWorks from '@/components/HorizontalHowItWorks';
-import FloatingLiveHelp from '@/components/FloatingLiveHelp';
 import {
   ThesisRealIcon,
   NdaShieldIcon,
@@ -64,8 +63,6 @@ export default function HowItWorksPage() {
           </Link>
         </div>
       </div>
-
-      <FloatingLiveHelp />
     </div>
   );
 }

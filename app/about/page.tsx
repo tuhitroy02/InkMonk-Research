@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import FloatingLiveHelp from '@/components/FloatingLiveHelp';
 import {
   LocationRealIcon,
   TurnitinShieldLogo,
@@ -193,8 +192,6 @@ export default function AboutPage() {
         </div>
 
       </div>
-
-      <FloatingLiveHelp />
     </div>
   );
 }
