@@ -29,7 +29,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(httpsUrl, 301);
   }
 
-  // Check 14: Server-side route protection for Admin Dashboard
+  // Server-side route protection for Admin Dashboard
   if (pathname.startsWith('/admin')) {
     const token = request.cookies.get('inkmonk_session')?.value;
     if (!token) {
@@ -46,22 +46,6 @@ export async function middleware(request: NextRequest) {
       }
     } catch {
       const loginUrl = new URL('/login?portal=admin&error=expired', request.url);
-      return NextResponse.redirect(loginUrl);
-    }
-  }
-
-  // Check 14: Server-side route protection for Client Portal
-  if (pathname.startsWith('/client')) {
-    const token = request.cookies.get('inkmonk_session')?.value;
-    if (!token) {
-      const loginUrl = new URL('/login', request.url);
-      return NextResponse.redirect(loginUrl);
-    }
-
-    try {
-      await jwtVerify(token, sessionKey());
-    } catch {
-      const loginUrl = new URL('/login?error=expired', request.url);
       return NextResponse.redirect(loginUrl);
     }
   }
