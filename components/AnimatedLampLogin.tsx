@@ -280,7 +280,7 @@ export default function AnimatedLampLogin() {
           {/* Lamp Status Caption */}
           <div className="mt-4 text-center">
             <span className="text-[11px] font-bold text-amber-200/80 uppercase tracking-widest">
-              {lampOn ? '✦ Incandescent Light Active' : '○ Lamp Off — Pull Cord to Illuminate'}
+              {lampOn ? '● Incandescent Light Active' : '○ Lamp Off — Pull Cord to Illuminate'}
             </span>
           </div>
         </div>

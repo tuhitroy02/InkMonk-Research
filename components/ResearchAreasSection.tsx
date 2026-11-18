@@ -304,7 +304,7 @@ export default function ResearchAreasSection({ className = "" }: { className?: s
                   <ul className="space-y-1.5 text-xs text-slate-700 font-medium flex flex-col items-center justify-center">
                     {area.subfields.slice(0, 4).map((sub, i) => (
                       <li key={i} className="flex items-center justify-center gap-2 text-center">
-                        <span className="text-[#F95721] font-black text-[10px]">✦</span>
+                        <span className="text-[#F95721] font-black text-[10px]">◆</span>
                         <span>{sub}</span>
                       </li>
                     ))}

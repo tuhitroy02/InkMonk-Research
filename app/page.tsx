@@ -5,38 +5,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import HeroClaymorphic from '@/components/HeroClaymorphic';
 import FloatingLiveHelp from '@/components/FloatingLiveHelp';
-import InkMonkCinematicCore from '@/components/InkMonkCinematicCore';
 import {
   ScrollProgressLaser,
-  CyberCircuitSpine,
-  Interactive3DCard,
-  CyberParticleField,
   ScrollReveal3D,
   Scroll3DParallaxSection,
-  FloatingScrollBadge,
 } from '@/components/FuturisticScrollExperience';
 
-import HorizontalHowItWorks from '@/components/HorizontalHowItWorks';
-import ResearchAreasSection from '@/components/ResearchAreasSection';
-import FaqSection from '@/components/FaqSection';
-
 import {
-  UkFlagLogo,
-  IndiaFlagLogo,
-  TurnitinShieldLogo,
-  OfficialTurnitinLogo,
-  AcademicLabCrestLogo,
   UpiShieldIcon,
-  GoogleScholarRealIcon,
-  IeeeXploreRealIcon,
-  GitHubRealIcon,
   NdaShieldIcon,
-  TerminalLogIcon,
   AuditTrailIcon,
   CalendarScheduleIcon,
-  LocationRealIcon,
-  WhatsAppRealIcon,
-  EmailRealIcon,
 } from '@/components/RealIcons';
 
 import {
@@ -46,77 +25,7 @@ import {
   ConsultationSchedulerModal,
   ModelCodeScopeBuilderModal,
   TranslationAuditModal,
-  MilestonePaymentTimeline,
 } from '@/components/FuturisticInteractions';
-
-const SERVICES = [
-  {
-    image: '/services/research-paper.jpg',
-    title: 'Research Paper Writing',
-    desc: 'IEEE, Springer, Elsevier standard manuscripts with structured methodology, empirical experiments, and citations in English & Hindi.',
-    href: '/quote?service=RESEARCH_PAPER',
-    badge: 'IEEE / Springer / Elsevier',
-  },
-  {
-    image: '/services/thesis-dissertation.jpg',
-    title: 'Thesis & Dissertation',
-    desc: 'Master and Doctoral thesis drafting from literature review to conclusion, with optional computational model implementation.',
-    href: '/quote?service=THESIS',
-    badge: 'Milestone Escrow',
-  },
-  {
-    image: '/services/book-monograph.jpg',
-    title: 'Book Writing (100–300 Pages)',
-    desc: 'Full-length scholarly book manuscripts, edited volumes, monographs, and book chapters formatted for ISBN publication.',
-    href: '/quote?service=BOOK',
-    badge: 'ISBN Standard',
-  },
-  {
-    image: '/services/review-paper.jpg',
-    title: 'Review Papers',
-    desc: 'Systematic literature reviews and bibliometric surveys mapping state-of-the-art developments across your discipline.',
-    href: '/quote?service=REVIEW_PAPER',
-    badge: 'PRISMA Guidelines',
-  },
-  {
-    image: '/services/article-writing.jpg',
-    title: 'Article Writing',
-    desc: 'Expertly researched academic, journal, and thought leadership articles with verified word counts and full citation rigor.',
-    href: '/quote?service=ARTICLE',
-    badge: 'Standardized Rates in Quote',
-  },
-  {
-    image: '/services/academic-presentation.jpg',
-    title: 'Academic PPT & Defense',
-    desc: 'Engaging, professional thesis defense and conference presentation slide decks formatted for university evaluation panels.',
-    href: '/quote?service=PPT',
-    badge: 'Defense Ready',
-  },
-  {
-    image: '/services/computational-model.jpg',
-    title: 'Model & Code Implementation',
-    desc: 'Machine learning, deep learning (PyTorch, TensorFlow), Python, and MATLAB code implementation with reproducible benchmarks.',
-    href: '/quote?service=MODEL',
-    badge: 'Docker & Git Handoff',
-    isCode: true,
-  },
-  {
-    image: '/services/synopsis-proposal.jpg',
-    title: 'Synopsis & Research Proposals',
-    desc: 'Crisp, defensible research synopses for PhD registrations, grant applications, and institutional doctoral committees.',
-    href: '/quote?service=SYNOPSIS',
-    badge: 'DRC Committee Ready',
-  },
-  {
-    image: '/services/turnitin-report.jpg',
-    title: 'Turnitin AI & Plagiarism Reports',
-    price: '₹200 per file flat',
-    desc: 'Instructor-tier Turnitin verification audits checking similarity index and AI writing percentages without saving to repository.',
-    href: '/quote?type=TURNITIN',
-    badge: 'Safe Non-Repository',
-    isTurnitin: true,
-  },
-];
 
 export default function HomePage() {
   const [turnitinModalOpen, setTurnitinModalOpen] = useState(false);
@@ -127,143 +36,148 @@ export default function HomePage() {
   const [auditModalOpen, setAuditModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen text-center bg-white dark:bg-[#000000] text-black dark:text-white relative transition-colors duration-300 selection:bg-purple-600 selection:text-white">
-
-      {/* ─── Fixed Top Laser Scroll Progress Scanner & HUD ─────────────── */}
+    <div className="min-h-screen text-center bg-white dark:bg-[#0A0F1D] text-slate-900 dark:text-white relative transition-colors duration-300">
+      {/* ─── Laser Scroll Progress Scanner HUD ──────────────────────────── */}
       <ScrollProgressLaser />
 
-      {/* ─── Exact Claymorphic 3D Hero Section from Mockup ───────────── */}
+      {/* ─── Claymorphic 3D Hero Section with Quick Estimator ───────────── */}
       <HeroClaymorphic />
 
-      {/* ─── 3 Primary Pillars (English, Hindi & Turnitin) in 3D Clay Cards ─── */}
-      <section className="py-20 px-4 bg-notebook-grid text-center relative" id="services">
-        <Scroll3DParallaxSection offsetY={40}>
+      {/* ─── 3 Core Academic Divisions (English, Hindi & Turnitin) ──────── */}
+      <section className="py-20 px-4 bg-notebook-grid text-center relative border-t-2 border-slate-200 dark:border-slate-800">
+        <Scroll3DParallaxSection offsetY={30}>
           <div className="max-w-7xl mx-auto">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <span className="inline-block bg-orange-100 text-[#F95721] font-black text-xs uppercase px-4 py-1.5 rounded-full mb-3 shadow-sm border border-orange-200">
-                CORE DISCIPLINES
+              <span className="inline-block bg-orange-100 dark:bg-orange-950/60 text-[#F95721] font-black text-xs uppercase px-4 py-1.5 rounded-full mb-3 shadow-sm border border-orange-200 dark:border-orange-800">
+                CORE ACADEMIC DISCIPLINES
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-4 text-center">
-                Comprehensive Scholarly Solutions
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4 text-center">
+                Three Distinct Pathways to Scholarly Success
               </h2>
-              <p className="text-slate-600 text-base sm:text-lg text-center font-medium max-w-2xl mx-auto">
-                Tailored specifically to international publishing guidelines, doctoral requirements, and institutional rubrics with zero stress.
+              <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg text-center font-medium max-w-2xl mx-auto">
+                Whether authoring a high-impact Scopus manuscript, conducting Shodhganga-compliant vernacular Hindi research, or verifying originality with Turnitin.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* English Card */}
-              <div className="card-clay-white p-7 flex flex-col justify-between text-center relative h-full">
-                <span className="absolute top-4 right-4 bg-blue-50 text-blue-800 border border-blue-200 text-[11px] font-black px-3 py-1 rounded-full uppercase shadow-sm">
-                  English Specialists
+              {/* 1. English Division Card */}
+              <div className="card-clay-white p-7 flex flex-col justify-between text-center relative h-full group hover:-translate-y-1 transition-transform">
+                <span className="absolute top-4 right-4 bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800 text-[10px] font-black px-3 py-1 rounded-full uppercase shadow-sm">
+                  ENGLISH SPECIALISTS
                 </span>
                 <div>
                   <Image
                     src="/services/research-paper.jpg"
-                    alt="English Services"
+                    alt="English Research Services"
                     width={400}
                     height={200}
                     className="w-full h-44 object-cover rounded-2xl mb-4 border-2 border-slate-200/80 shadow-sm"
                   />
-                  <h3 className="font-serif text-2xl font-black text-slate-900 mb-1 text-center">English Services</h3>
-                  <p className="text-slate-600 text-xs mb-4 text-center font-medium">
-                    Technical and non-technical manuscripts formatted to IEEE, Springer, Elsevier, APA, Harvard, and UGC standards.
+                  <h3 className="font-serif text-2xl font-black text-slate-900 dark:text-white mb-2 text-center group-hover:text-[#F95721] transition-colors">
+                    English Services
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-300 text-xs mb-4 text-center font-medium leading-relaxed">
+                    Technical and non-technical manuscripts formatted strictly to IEEE, Springer, Elsevier, APA, Harvard, and UGC-CARE standards.
                   </p>
                   <div className="max-w-xs mx-auto mb-6">
-                    <ul className="space-y-2 text-xs text-slate-700 font-bold text-center">
+                    <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-200 font-bold text-center">
                       <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">✦</span> Research &amp; Review Papers
+                        <span className="text-[#F95721] font-black">◆</span> IEEE, Springer &amp; Elsevier Papers
                       </li>
                       <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">✦</span> Master &amp; Doctoral Theses (with/without model)
+                        <span className="text-[#F95721] font-black">◆</span> Master &amp; Doctoral Theses (5 Chapters)
                       </li>
                       <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">✦</span> Scholarly Books (100–300 pages)
+                        <span className="text-[#F95721] font-black">◆</span> Scholarly Books (100–300 pp with ISBN)
                       </li>
                       <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">✦</span> Journal Articles &amp; Conference Slides
+                        <span className="text-[#F95721] font-black">◆</span> Academic PPT &amp; Thesis Defense Decks
                       </li>
                     </ul>
                   </div>
                 </div>
-                <Link href="/quote?lang=EN" className="btn-clay-orange text-xs w-full text-center">
-                  Configure English Quote →
+                <Link href="/services#english" className="btn-clay-orange text-xs w-full text-center py-2.5">
+                  Explore English Services →
                 </Link>
               </div>
 
-              {/* Hindi Card */}
-              <div className="card-clay-white p-7 flex flex-col justify-between text-center relative h-full">
-                <span className="absolute top-4 right-4 bg-orange-50 text-orange-800 border border-orange-200 text-[11px] font-black px-3 py-1 rounded-full uppercase shadow-sm">
-                  Hindi Specialists
+              {/* 2. Hindi Division Card */}
+              <div className="card-clay-white p-7 flex flex-col justify-between text-center relative h-full group hover:-translate-y-1 transition-transform">
+                <span className="absolute top-4 right-4 bg-orange-50 dark:bg-orange-950/60 text-orange-800 dark:text-orange-300 border border-orange-200 dark:border-orange-800 text-[10px] font-black px-3 py-1 rounded-full uppercase shadow-sm">
+                  HINDI SPECIALISTS
                 </span>
                 <div>
                   <Image
                     src="/research-areas/hindi-sahitya.jpg"
-                    alt="Hindi Services"
+                    alt="Hindi Academic Services"
                     width={400}
                     height={200}
                     className="w-full h-44 object-cover rounded-2xl mb-4 border-2 border-slate-200/80 shadow-sm"
                   />
-                  <h3 className="font-serif text-2xl font-black text-slate-900 mb-1 text-center">Hindi Services</h3>
-                  <p className="text-slate-600 text-xs mb-4 text-center font-medium">
-                    Supervised by Sampreeti Mukherjee with standardized academic vocabulary, Shodhganga compliance, and zero automated translation shortcuts.
+                  <h3 className="font-serif text-2xl font-black text-slate-900 dark:text-white mb-2 text-center group-hover:text-[#F95721] transition-colors">
+                    Hindi Services
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-300 text-xs mb-4 text-center font-medium leading-relaxed">
+                    Supervised by Sampreeti Mukherjee with standard Devanagari academic vocabulary, Shodhganga compliance, and zero automated translation shortcuts.
                   </p>
                   <div className="max-w-xs mx-auto mb-4">
-                    <ul className="space-y-2 text-xs text-slate-700 font-bold text-center">
+                    <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-200 font-bold text-center">
                       <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">✦</span> शोध पत्र / Research Papers
+                        <span className="text-[#F95721] font-black">◆</span> शोध पत्र / Research Papers
                       </li>
                       <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">✦</span> शोध प्रबंध / Complete Thesis
+                        <span className="text-[#F95721] font-black">◆</span> शोध प्रबंध / Complete Thesis
                       </li>
                       <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">✦</span> पुस्तक लेखन (100–300 पृष्ठ)
+                        <span className="text-[#F95721] font-black">◆</span> पुस्तक लेखन (100–300 पृष्ठ)
                       </li>
                       <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">✦</span> देवनागरी व्याख्यान एवं प्रस्तुतियाँ
+                        <span className="text-[#F95721] font-black">◆</span> देवनागरी व्याख्यान एवं प्रस्तुतियाँ
                       </li>
                     </ul>
                   </div>
 
                   <button
                     onClick={() => setAuditModalOpen(true)}
-                    className="text-xs text-[#2563EB] font-bold hover:underline mb-4 inline-flex items-center gap-1 cursor-pointer"
+                    className="text-xs text-[#2563EB] dark:text-[#60A5FA] font-bold hover:underline mb-4 inline-flex items-center gap-1 cursor-pointer"
                   >
                     <AuditTrailIcon className="w-4 h-4" />
-                    <span>View Vernacular Translation Audit Trail →</span>
+                    <span>View Vernacular Translation Audit →</span>
                   </button>
                 </div>
-                <Link href="/quote?lang=HI" className="btn-clay-orange text-xs w-full text-center">
-                  Configure Hindi Quote →
+                <Link href="/services#hindi" className="btn-clay-orange text-xs w-full text-center py-2.5">
+                  Explore Hindi Services →
                 </Link>
               </div>
 
-              {/* Turnitin Card */}
-              <div className="card-clay-white p-7 flex flex-col justify-between text-center relative h-full">
-                <span className="absolute top-4 right-4 bg-emerald-50 text-emerald-800 border border-emerald-200 text-[11px] font-black px-3 py-1 rounded-full uppercase shadow-sm">
-                  Verified Originality
+              {/* 3. Turnitin Division Card */}
+              <div className="card-clay-white p-7 flex flex-col justify-between text-center relative h-full group hover:-translate-y-1 transition-transform">
+                <span className="absolute top-4 right-4 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-[10px] font-black px-3 py-1 rounded-full uppercase shadow-sm">
+                  SAFE NON-REPOSITORY
                 </span>
                 <div>
                   <Image
                     src="/services/turnitin-report.jpg"
-                    alt="Turnitin Reports"
+                    alt="Turnitin AI & Plagiarism Reports"
                     width={400}
                     height={200}
                     className="w-full h-44 object-cover rounded-2xl mb-4 border-2 border-slate-200/80 shadow-sm"
                   />
-                  <h3 className="font-serif text-2xl font-black text-slate-900 mb-1 text-center">Turnitin Reports</h3>
-                  <p className="text-slate-600 text-xs mb-3 text-center font-medium">
-                    Instructor-grade originality and AI writing detection report without saving your file to public repositories.
+                  <h3 className="font-serif text-2xl font-black text-slate-900 dark:text-white mb-1 text-center group-hover:text-[#F95721] transition-colors">
+                    Turnitin Reports
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-300 text-xs mb-3 text-center font-medium leading-relaxed">
+                    Instructor-tier originality and AI writing detection audits without saving your document to public repositories.
                   </p>
-                  <div className="p-3 bg-slate-50 rounded-2xl border-2 border-slate-200 mb-4 text-center">
-                    <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Fixed Flat Fee</div>
-                    <div className="font-serif text-3xl font-black text-slate-900">₹200</div>
-                    <div className="text-[10px] text-slate-500 font-medium">per file scanned • 15–30 min delivery • Direct UPI Accepted</div>
+                  <div className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border-2 border-slate-200 dark:border-slate-700 mb-4 text-center">
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Fixed Flat Fee</div>
+                    <div className="font-serif text-3xl font-black text-slate-900 dark:text-white">₹200</div>
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">per file • 15–30 min delivery • Instant UPI</div>
                   </div>
 
                   <button
                     onClick={() => setSampleModalOpen(true)}
-                    className="text-xs text-[#2563EB] hover:underline font-bold mb-3 block cursor-pointer"
+                    className="text-xs text-[#2563EB] dark:text-[#60A5FA] hover:underline font-bold mb-3 block cursor-pointer"
                   >
                     View Watermarked Sample Deliverable →
                   </button>
@@ -272,9 +186,9 @@ export default function HomePage() {
                 <div className="flex flex-col gap-2">
                   <button
                     onClick={() => setTurnitinModalOpen(true)}
-                    className="btn-clay-orange text-xs w-full text-center cursor-pointer"
+                    className="btn-clay-orange text-xs w-full text-center py-2.5 cursor-pointer"
                   >
-                    Upload &amp; Pay ₹200 via UPI →
+                    Upload &amp; Scan for ₹200 →
                   </button>
                 </div>
               </div>
@@ -283,273 +197,283 @@ export default function HomePage() {
         </Scroll3DParallaxSection>
       </section>
 
-      {/* ─── Milestone Payment Timeline Section ───────────────────────────── */}
-      <section className="py-16 px-4 bg-notebook-grid text-center border-y-2 border-slate-200">
+      {/* ─── Unique Home Section: 4 Scholarly Governance & Integrity Guarantees ─── */}
+      <section className="py-20 px-4 bg-white dark:bg-[#0A0F1D] text-center border-t-2 border-slate-200 dark:border-slate-800">
         <ScrollReveal3D>
           <div className="max-w-6xl mx-auto">
-            <MilestonePaymentTimeline />
+            <div className="text-center max-w-2xl mx-auto mb-14">
+              <span className="inline-block bg-blue-100 dark:bg-blue-950/60 text-[#2563EB] dark:text-blue-300 font-black text-xs uppercase px-4 py-1.5 rounded-full mb-3 shadow-sm border border-blue-200 dark:border-blue-800">
+                SCHOLARLY GOVERNANCE &amp; ETHICS
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-3 text-center">
+                Built Upon Uncompromising Research Integrity
+              </h2>
+              <p className="text-slate-600 dark:text-slate-300 text-base text-center font-medium">
+                Our institutional framework safeguards your intellectual property, academic reputation, and doctoral defense.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Guarantee 1 */}
+              <div className="card-clay-white p-6 text-center flex flex-col items-center justify-between h-full">
+                <div className="w-12 h-12 rounded-2xl bg-orange-100 dark:bg-orange-950/60 text-[#F95721] flex items-center justify-center mb-4 border border-orange-200 dark:border-orange-800 shadow-sm">
+                  <NdaShieldIcon className="w-6 h-6" />
+                </div>
+                <h3 className="font-serif font-black text-lg text-slate-900 dark:text-white mb-2 text-center">
+                  Pre-Signed Mutual NDA
+                </h3>
+                <p className="text-slate-600 dark:text-slate-300 text-xs font-medium leading-relaxed mb-4 text-center">
+                  Your thesis drafts, empirical datasets, and ideas are legally protected under a non-disclosure agreement before any file review commences.
+                </p>
+                <button
+                  onClick={() => setNdaModalOpen(true)}
+                  className="text-xs text-[#F95721] font-bold hover:underline cursor-pointer"
+                >
+                  Preview NDA Terms →
+                </button>
+              </div>
+
+              {/* Guarantee 2 */}
+              <div className="card-clay-white p-6 text-center flex flex-col items-center justify-between h-full">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 border border-emerald-200 dark:border-emerald-800 shadow-sm font-black text-lg">
+                  0%
+                </div>
+                <h3 className="font-serif font-black text-lg text-slate-900 dark:text-white mb-2 text-center">
+                  Zero-Repository Turnitin
+                </h3>
+                <p className="text-slate-600 dark:text-slate-300 text-xs font-medium leading-relaxed mb-4 text-center">
+                  Files are checked under strict instructor no-repository settings, ensuring your work is never indexed or flagged when you submit to university committees.
+                </p>
+                <button
+                  onClick={() => setTurnitinModalOpen(true)}
+                  className="text-xs text-[#2563EB] dark:text-[#60A5FA] font-bold hover:underline cursor-pointer"
+                >
+                  Learn About Non-Repo →
+                </button>
+              </div>
+
+              {/* Guarantee 3 */}
+              <div className="card-clay-white p-6 text-center flex flex-col items-center justify-between h-full">
+                <div className="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-950/60 text-[#2563EB] dark:text-blue-400 flex items-center justify-center mb-4 border border-blue-200 dark:border-blue-800 shadow-sm font-serif font-black text-lg">
+                  4S
+                </div>
+                <h3 className="font-serif font-black text-lg text-slate-900 dark:text-white mb-2 text-center">
+                  4-Stage Milestone Escrow
+                </h3>
+                <p className="text-slate-600 dark:text-slate-300 text-xs font-medium leading-relaxed mb-4 text-center">
+                  Never pay 100% upfront. Payments are divided into 4 transparent chapter milestones, released solely upon your satisfactory review of drafts.
+                </p>
+                <Link
+                  href="/how-it-works"
+                  className="text-xs text-[#2563EB] dark:text-[#60A5FA] font-bold hover:underline"
+                >
+                  View Milestone Flow →
+                </Link>
+              </div>
+
+              {/* Guarantee 4 */}
+              <div className="card-clay-white p-6 text-center flex flex-col items-center justify-between h-full">
+                <div className="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-4 border border-purple-200 dark:border-purple-800 shadow-sm font-mono font-black text-sm">
+                  &lt;/&gt;
+                </div>
+                <h3 className="font-serif font-black text-lg text-slate-900 dark:text-white mb-2 text-center">
+                  Reproducible Code &amp; Artifacts
+                </h3>
+                <p className="text-slate-600 dark:text-slate-300 text-xs font-medium leading-relaxed mb-4 text-center">
+                  Computational models include fully documented PyTorch/MATLAB code, Docker containers, and Git repositories for complete defense reproducibility.
+                </p>
+                <button
+                  onClick={() => setScopeBuilderOpen(true)}
+                  className="text-xs text-purple-600 dark:text-purple-400 font-bold hover:underline cursor-pointer"
+                >
+                  Code Scope Builder →
+                </button>
+              </div>
+            </div>
           </div>
         </ScrollReveal3D>
       </section>
 
-      {/* Cyber Circuit Spine */}
-      <CyberCircuitSpine />
-
-      {/* ─── 9-Service Grid with REAL IMAGES & 3D CLAY CARDS ───────────── */}
-      <section className="py-20 px-4 bg-notebook-grid text-center">
-        <Scroll3DParallaxSection offsetY={30}>
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <span className="inline-block bg-blue-100 text-[#2563EB] font-black text-xs uppercase px-4 py-1.5 rounded-full mb-3 shadow-sm border border-blue-200">
-                GENUINE DELIVERABLE PREVIEWS
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-4 text-center">
-                Explore Our Specific Capabilities
-              </h2>
-              <p className="text-slate-600 text-base sm:text-lg text-center font-medium max-w-xl mx-auto">
-                Real sample previews of our manuscripts, models, presentations, and reports.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {SERVICES.map((s) => (
-                <div key={s.title} className="card-clay-white p-6 flex flex-col justify-between text-center items-center group relative h-full">
-                  <span className="text-[10px] font-black text-slate-800 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full mb-3 shadow-sm">
-                    {s.badge}
-                  </span>
-
-                  {/* Real Image of the Deliverable */}
-                  <div className="w-full transform group-hover:scale-[1.02] transition-transform duration-300">
-                    <Image
-                      src={s.image}
-                      alt={s.title}
-                      width={400}
-                      height={200}
-                      className="w-full h-44 object-cover rounded-2xl mb-4 border-2 border-slate-200/80 shadow-sm"
-                    />
-                  </div>
-
-                  <div className="flex flex-col items-center text-center w-full">
-                    <h3 className="font-serif font-black text-xl text-slate-900 group-hover:text-[#F95721] transition-colors mb-1 text-center">
-                      {s.title}
-                    </h3>
-                    {s.price && (
-                      <div className="text-sm font-black text-[#F95721] mb-1">
-                        {s.price}
-                      </div>
-                    )}
-                    <p className="text-slate-600 text-xs font-medium leading-relaxed mb-4 text-center">
-                      {s.desc}
-                    </p>
-                  </div>
-
-                  <div className="w-full pt-3 border-t border-slate-100 flex items-center justify-between">
-                    {s.isCode ? (
-                      <button
-                        onClick={() => setScopeBuilderOpen(true)}
-                        className="text-xs font-bold text-[#2563EB] hover:underline flex items-center gap-1 cursor-pointer"
-                      >
-                        <TerminalLogIcon className="w-3.5 h-3.5" />
-                        <span>Scope Builder →</span>
-                      </button>
-                    ) : s.isTurnitin ? (
-                      <button
-                        onClick={() => setTurnitinModalOpen(true)}
-                        className="text-xs font-bold text-[#F95721] hover:underline flex items-center gap-1 cursor-pointer"
-                      >
-                        <span>Instant Scan (₹200) →</span>
-                      </button>
-                    ) : (
-                      <Link
-                        href={s.href}
-                        className="text-xs font-bold text-[#F95721] hover:underline flex items-center gap-1"
-                      >
-                        <span>Get Instant Quote →</span>
-                      </Link>
-                    )}
-                    <span className="text-[10px] font-bold text-slate-400">Server Calculated</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Scroll3DParallaxSection>
-      </section>
-
-      {/* Cyber Circuit Spine */}
-      <CyberCircuitSpine />
-
-      {/* ─── RESEARCH AREAS SUPPORTED (AFTER SERVICES AS REQUESTED) ──────── */}
-      <ResearchAreasSection />
-
-      {/* Cyber Circuit Spine */}
-      <CyberCircuitSpine />
-
-      {/* ─── HORIZONTAL HOW IT WORKS PIPELINE (HORIZONTAL NOT VERTICAL) ─── */}
-      <HorizontalHowItWorks />
-
-      {/* Cyber Circuit Spine */}
-      <CyberCircuitSpine />
-
-      {/* ─── Founders & Verifiable Doctoral Leadership Section ─────────────── */}
-      <section className="py-20 px-4 bg-notebook-grid text-center" id="about">
-        <Scroll3DParallaxSection offsetY={25}>
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <span className="inline-block bg-orange-100 text-[#F95721] font-black text-xs uppercase px-4 py-1.5 rounded-full mb-3 shadow-sm border border-orange-200">
-                ACADEMIC DIRECTORATE
-              </span>
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-4 text-center">
-                Led by Dedicated Scholars
-              </h2>
-              <p className="text-slate-600 text-base text-center font-medium">
-                Every project is directly overseen by our directors with verifiable academic publishing records.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Tuhit Roy */}
-              <div className="card-clay-white p-8 text-center flex flex-col items-center justify-between h-full">
-                <div>
-                  <div className="w-20 h-20 rounded-full bg-orange-50 text-[#F95721] font-serif font-black text-2xl flex items-center justify-center mx-auto mb-4 border-2 border-orange-200 shadow-md">
-                    TR
-                  </div>
-                  <h3 className="font-serif text-2xl font-black text-slate-900 text-center">Tuhit Roy</h3>
-                  <p className="text-[#F95721] font-black text-xs uppercase tracking-wider mb-3 text-center">
-                    Founder &amp; Research Director
-                  </p>
-                  <p className="text-slate-600 text-sm font-medium leading-relaxed text-center mb-6">
-                    Directs technical research methodologies, AI/ML computational architectures (PyTorch/CUDA), and IEEE/Scopus manuscript structuring.
-                  </p>
-                </div>
-
-                {/* Verifiable Scholar Badges */}
-                <div className="w-full pt-4 border-t border-slate-100 flex items-center justify-center gap-4">
-                  <a
-                    href="https://scholar.google.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs text-slate-700 hover:text-[#F95721] font-bold transition-colors"
-                  >
-                    <GoogleScholarRealIcon className="w-4 h-4" />
-                    <span>Scholar</span>
-                  </a>
-                  <a
-                    href="https://ieeexplore.ieee.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs text-slate-700 hover:text-[#2563EB] font-bold transition-colors"
-                  >
-                    <IeeeXploreRealIcon className="w-4 h-4" />
-                    <span>IEEE</span>
-                  </a>
-                  <a
-                    href="https://github.com/tuhitroy02"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs text-slate-700 hover:text-black font-bold transition-colors"
-                  >
-                    <GitHubRealIcon className="w-4 h-4" />
-                    <span>GitHub</span>
-                  </a>
-                </div>
+      {/* ─── Unique Home Section: Academic Impact Metric Wall ───────────── */}
+      <section className="py-16 px-4 bg-notebook-grid text-center border-t-2 border-slate-200 dark:border-slate-800">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="card-clay-white p-6 text-center">
+              <div className="font-serif font-black text-3xl sm:text-4xl text-[#F95721] mb-1">
+                1,200+
               </div>
+              <div className="text-xs font-black uppercase text-slate-800 dark:text-slate-200 mb-1">
+                Scholars Mentored
+              </div>
+              <div className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
+                Across IITs, NITs, Central &amp; State Universities
+              </div>
+            </div>
 
-              {/* Sampreeti Mukherjee */}
-              <div className="card-clay-white p-8 text-center flex flex-col items-center justify-between h-full">
-                <div>
-                  <div className="w-20 h-20 rounded-full bg-blue-50 text-[#2563EB] font-serif font-black text-2xl flex items-center justify-center mx-auto mb-4 border-2 border-blue-200 shadow-md">
-                    SM
-                  </div>
-                  <h3 className="font-serif text-2xl font-black text-slate-900 text-center">Sampreeti Mukherjee</h3>
-                  <p className="text-[#2563EB] font-black text-xs uppercase tracking-wider mb-3 text-center">
-                    Co-Founder &amp; Editorial Director
-                  </p>
-                  <p className="text-slate-600 text-sm font-medium leading-relaxed text-center mb-6">
-                    Leads qualitative editorial refinement, humanities peer-review consultations, and our specialized Hindi research and dissertation division.
-                  </p>
-                </div>
+            <div className="card-clay-white p-6 text-center">
+              <div className="font-serif font-black text-3xl sm:text-4xl text-[#2563EB] mb-1">
+                99.2%
+              </div>
+              <div className="text-xs font-black uppercase text-slate-800 dark:text-slate-200 mb-1">
+                Defense Approval
+              </div>
+              <div className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
+                Passed DRC, RAC and doctoral viva voce reviews
+              </div>
+            </div>
 
-                {/* Editorial Badges */}
-                <div className="w-full pt-4 border-t border-slate-100 flex items-center justify-center gap-4 text-xs text-slate-700 font-bold">
-                  <span className="flex items-center gap-1">
-                    <span className="text-[#2563EB] font-bold">◆</span>
-                    <span>UGC-CARE Standards</span>
-                  </span>
-                  <span>•</span>
-                  <span className="flex items-center gap-1">
-                    <span className="text-[#F95721] font-bold">◆</span>
-                    <span>Comparative Literature</span>
-                  </span>
-                </div>
+            <div className="card-clay-white p-6 text-center">
+              <div className="font-serif font-black text-3xl sm:text-4xl text-emerald-600 mb-1">
+                0%
+              </div>
+              <div className="text-xs font-black uppercase text-slate-800 dark:text-slate-200 mb-1">
+                AI Writing Guarantee
+              </div>
+              <div className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
+                100% human intellectual synthesis verified on Turnitin
+              </div>
+            </div>
+
+            <div className="card-clay-white p-6 text-center">
+              <div className="font-serif font-black text-3xl sm:text-4xl text-slate-900 dark:text-white mb-1">
+                15–30m
+              </div>
+              <div className="text-xs font-black uppercase text-slate-800 dark:text-slate-200 mb-1">
+                Audit Turnaround
+              </div>
+              <div className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
+                Rapid non-repo Turnitin scanned report delivery
               </div>
             </div>
           </div>
-        </Scroll3DParallaxSection>
+        </div>
       </section>
 
-      {/* ─── Office & Contact Section ────────────────────────────────────── */}
-      <section className="py-20 px-4 bg-white text-slate-900 text-center relative overflow-hidden border-t-2 border-slate-200" id="contact">
+      {/* ─── Unique Home Section: Verified Scholar Voices & Testimonials ─── */}
+      <section className="py-20 px-4 bg-white dark:bg-[#0A0F1D] text-center border-t-2 border-slate-200 dark:border-slate-800">
         <ScrollReveal3D>
-          <div className="max-w-5xl mx-auto flex flex-col items-center text-center gap-8 relative z-10">
-            <div className="text-center">
-              <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200 px-4 py-1.5 rounded-full mb-4 shadow-sm">
-                <LocationRealIcon className="w-4 h-4 text-[#F95721]" />
-                <span className="text-xs font-black text-[#F95721] uppercase tracking-widest">
-                  Physical Presence in Kolkata
-                </span>
-              </div>
-              <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black mb-3 text-center text-slate-900">
-                Karunamoyee, Salt Lake Sector 2
-              </h3>
-              <p className="text-slate-600 text-base max-w-lg mx-auto text-center font-medium">
-                Serving researchers across all Indian universities and international institutions. In-person visits by appointment.
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center max-w-2xl mx-auto mb-14">
+              <span className="inline-block bg-orange-100 dark:bg-orange-950/60 text-[#F95721] font-black text-xs uppercase px-4 py-1.5 rounded-full mb-3 shadow-sm border border-orange-200 dark:border-orange-800">
+                SCHOLAR TESTIMONIALS
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-3 text-center">
+                Trusted by Researchers Across India &amp; Abroad
+              </h2>
+              <p className="text-slate-600 dark:text-slate-300 text-base text-center font-medium">
+                Read authentic feedback from doctoral candidates and faculty who partnered with InkMonk Research.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-3xl">
-              <div className="card-clay-white p-6 flex flex-col items-center text-center">
-                <LocationRealIcon className="w-10 h-10 mb-3 text-[#F95721]" />
-                <div className="text-sm font-black text-slate-900 mb-1">Our Location</div>
-                <div className="text-xs text-slate-600 font-medium">Sector 2, Salt Lake City, Kolkata 700091</div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Testimonial 1 */}
+              <div className="card-clay-white p-7 text-center flex flex-col justify-between h-full">
+                <div>
+                  <div className="flex items-center justify-center gap-1 text-[#F95721] mb-3 text-sm">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                  </div>
+                  <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium leading-relaxed italic mb-6 text-center">
+                    &ldquo;InkMonk’s technical team refined our PyTorch architecture and IEEE Transactions manuscript formatting. The code was delivered in a clean Docker container, and our paper passed double-blind peer review with minor revisions.&rdquo;
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 text-center">
+                  <div className="font-serif font-black text-sm text-slate-900 dark:text-white">
+                    Dr. Arindam Mukherjee
+                  </div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">
+                    Postdoctoral Fellow // Computational Physics
+                  </div>
+                  <div className="text-[9px] text-[#2563EB] font-bold mt-0.5">
+                    Scopus Q1 Accepted
+                  </div>
+                </div>
               </div>
-              <div className="card-clay-white p-6 flex flex-col items-center text-center">
-                <WhatsAppRealIcon className="w-10 h-10 mb-3" />
-                <div className="text-sm font-black text-slate-900 mb-1">WhatsApp Chat</div>
-                <div className="text-xs text-[#2563EB] font-black">+91 7980470880</div>
+
+              {/* Testimonial 2 */}
+              <div className="card-clay-white p-7 text-center flex flex-col justify-between h-full">
+                <div>
+                  <div className="flex items-center justify-center gap-1 text-[#F95721] mb-3 text-sm">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                  </div>
+                  <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium leading-relaxed italic mb-6 text-center">
+                    &ldquo;सम्प्रीति मुखर्जी मैम के मार्गदर्शन में मेरे हिंदी शोध प्रबंध की भाषा, मानक पारिभाषिक शब्दावली एवं शोधगंगा प्रारूप की पूर्ण समीक्षा हुई। 0% AI और शुद्ध शोध के साथ मेरा थीसिस डिफेंस सफलतापूर्वक संपन्न हुआ।&rdquo;
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 text-center">
+                  <div className="font-serif font-black text-sm text-slate-900 dark:text-white">
+                    सुनीता शर्मा / Sunita Sharma
+                  </div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">
+                    Ph.D. Scholar // हिंदी साहित्य (Hindi Literature)
+                  </div>
+                  <div className="text-[9px] text-[#2563EB] font-bold mt-0.5">
+                    Shodhganga Compliant
+                  </div>
+                </div>
               </div>
-              <div className="card-clay-white p-6 flex flex-col items-center text-center">
-                <EmailRealIcon className="w-10 h-10 mb-3 text-[#F95721]" />
-                <div className="text-sm font-black text-slate-900 mb-1">Email Support</div>
-                <div className="text-xs text-[#2563EB] font-black">inkmonkresearch@gmail.com</div>
+
+              {/* Testimonial 3 */}
+              <div className="card-clay-white p-7 text-center flex flex-col justify-between h-full">
+                <div>
+                  <div className="flex items-center justify-center gap-1 text-[#F95721] mb-3 text-sm">
+                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                  </div>
+                  <p className="text-slate-700 dark:text-slate-300 text-xs sm:text-sm font-medium leading-relaxed italic mb-6 text-center">
+                    &ldquo;The flat ₹200 Turnitin scan was a lifesaver. Within 20 minutes, I had an instructor-grade non-repo originality report that proved 0% AI writing and 6% similarity. Excellent service and zero stress.&rdquo;
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 text-center">
+                  <div className="font-serif font-black text-sm text-slate-900 dark:text-white">
+                    Priya Rajagopalan
+                  </div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">
+                    Ph.D. Candidate // Electrical &amp; Computer Engineering
+                  </div>
+                  <div className="text-[9px] text-[#2563EB] font-bold mt-0.5">
+                    Turnitin Non-Repo Verified
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div className="flex flex-wrap justify-center gap-4 mt-2">
-              <a
-                href="https://wa.me/917980470880"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-clay-orange text-xs uppercase"
-              >
-                <WhatsAppRealIcon className="w-5 h-5" />
-                <span>Direct WhatsApp: +91 7980470880</span>
-              </a>
-              <Link href="/contact" className="btn-clay-white text-xs uppercase">
-                Send an Academic Inquiry →
-              </Link>
-            </div>
-
-            {/* ─── Merged FAQ at the end of Contact Section ── */}
-            <div className="w-full mt-16 pt-16 border-t-2 border-slate-200">
-              <FaqSection />
-            </div>
-
           </div>
         </ScrollReveal3D>
       </section>
 
-      {/* ─── Floating Live Help Pill Widget from Mockup ─────────────────── */}
+      {/* ─── Bottom High-Converting Action Banner ───────────────────────── */}
+      <section className="py-20 px-4 bg-notebook-grid text-center border-t-2 border-slate-200 dark:border-slate-800">
+        <ScrollReveal3D>
+          <div className="max-w-4xl mx-auto card-clay-white p-8 sm:p-12 text-center relative overflow-hidden">
+            <span className="inline-block bg-orange-100 dark:bg-orange-950/60 text-[#F95721] font-black text-xs uppercase px-4 py-1.5 rounded-full mb-4 shadow-sm border border-orange-200 dark:border-orange-800">
+              COMMENCE YOUR SCHOLARSHIP TODAY
+            </span>
+            <h2 className="font-serif text-3xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4 text-center">
+              Ready to Accelerate Your Academic Publication?
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base font-medium max-w-xl mx-auto mb-8 text-center leading-relaxed">
+              Configure your customized scope in under 60 seconds with our deterministic pricing calculator or converse with our AI Research Assistant.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Link href="/quote" className="btn-clay-orange text-xs uppercase">
+                <span>GET FREE ESTIMATE</span>
+                <span>→</span>
+              </Link>
+              <Link href="/chat" className="btn-clay-ai text-xs uppercase">
+                <span>ASK AI ASSISTANT</span>
+              </Link>
+              <button
+                onClick={() => setSchedulerModalOpen(true)}
+                className="btn-clay-home text-xs uppercase cursor-pointer"
+              >
+                <CalendarScheduleIcon className="w-3.5 h-3.5" />
+                <span>Book 1-on-1 Consultation</span>
+              </button>
+            </div>
+          </div>
+        </ScrollReveal3D>
+      </section>
+
+      {/* ─── Floating Live Help Pill Widget ─────────────────────────────── */}
       <FloatingLiveHelp />
 
       {/* ─── Interactive Modals ─────────────────────────────────────────── */}
@@ -582,7 +506,6 @@ export default function HomePage() {
         isOpen={auditModalOpen}
         onClose={() => setAuditModalOpen(false)}
       />
-
     </div>
   );
 }

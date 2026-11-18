@@ -141,7 +141,7 @@ export default function SamplesPage() {
                 <ul className="space-y-2 text-xs sm:text-sm text-slate-700 font-medium text-left">
                   {sample.highlights.map((h, i) => (
                     <li key={i} className="flex items-center gap-2">
-                      <span className="text-[#F95721] font-black">✦</span>
+                      <span className="text-[#F95721] font-black">◆</span>
                       <span>{h}</span>
                     </li>
                   ))}

@@ -243,7 +243,7 @@ export default function HorizontalHowItWorks({ className = "" }: { className?: s
               <ul className="space-y-2.5 text-xs text-slate-700 font-medium">
                 {current.subpoints.map((pt, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="text-[#F95721] font-black mt-0.5">✦</span>
+                    <span className="text-[#F95721] font-black mt-0.5">◆</span>
                     <span>{pt}</span>
                   </li>
                 ))}

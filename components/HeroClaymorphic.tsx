@@ -89,18 +89,18 @@ export default function HeroClaymorphic() {
               Premier academic research writing, PhD thesis development, peer-reviewed journal publishing, and Turnitin audits in English and Hindi.
             </p>
 
-            {/* Bullet Checklist with Unique Academic Diamond Icons (No Ticks) */}
+            {/* Bullet Checklist with Professional Academic Diamonds (No Gemini Stars, No Ticks) */}
             <div className="space-y-3 mb-8 w-full max-w-md mx-auto">
               <div className="flex items-center justify-center gap-3 text-slate-800 font-bold text-sm sm:text-base">
-                <span className="text-[#F95721] text-base font-black shrink-0">✦</span>
+                <span className="text-[#F95721] text-base font-black shrink-0">◆</span>
                 <span>Done-for-you Formatting (LaTeX, APA, etc.)</span>
               </div>
               <div className="flex items-center justify-center gap-3 text-slate-800 font-bold text-sm sm:text-base">
-                <span className="text-[#2563EB] text-base font-black shrink-0">✦</span>
+                <span className="text-[#2563EB] text-base font-black shrink-0">◆</span>
                 <span>Peer-Review Ready Checklist</span>
               </div>
               <div className="flex items-center justify-center gap-3 text-slate-800 font-bold text-sm sm:text-base">
-                <span className="text-[#1E293B] text-base font-black shrink-0">✦</span>
+                <span className="text-[#1E293B] text-base font-black shrink-0">◆</span>
                 <span>100% Confidentiality Guaranteed</span>
               </div>
             </div>

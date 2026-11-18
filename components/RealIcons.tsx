@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 /**
  * InkMonk Research — Real Icon & Logo Suite
@@ -453,90 +454,20 @@ export function Step4Icon({ className = "w-8 h-8" }: { className?: string }) {
   );
 }
 
-// 14. Academic Research Lab Crest / Seal (Replaces Cartoon Mascot)
+// 14. Academic Research Lab Crest / Seal (Uses Official High-Resolution InkMonk Logo)
 export function AcademicLabCrestLogo({ className = "w-36 h-36" }: { className?: string }) {
   return (
     <div className={`relative inline-flex items-center justify-center shrink-0 ${className}`}>
-      <svg viewBox="0 0 120 120" fill="none" className="w-full h-full drop-shadow-2xl">
-        <defs>
-          <linearGradient id="crestGold" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#FFFBEB" />
-            <stop offset="30%" stopColor="#F59E0B" />
-            <stop offset="70%" stopColor="#D97706" />
-            <stop offset="100%" stopColor="#78350F" />
-          </linearGradient>
-          <linearGradient id="crestBlue" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#1E3A8A" />
-            <stop offset="50%" stopColor="#0F172A" />
-            <stop offset="100%" stopColor="#020617" />
-          </linearGradient>
-          <linearGradient id="orbitGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#38BDF8" />
-            <stop offset="100%" stopColor="#F59E0B" />
-          </linearGradient>
-        </defs>
-
-        {/* Outer Hexagonal Shield */}
-        <polygon
-          points="60,6 108,30 108,90 60,114 12,90 12,30"
-          fill="url(#crestGold)"
-          stroke="#FDE68A"
-          strokeWidth="1.5"
-        />
-        {/* Inner Shield */}
-        <polygon
-          points="60,12 102,33 102,87 60,108 18,87 18,33"
-          fill="url(#crestBlue)"
-        />
-
-        {/* Laurels Wreath (Scholarly Excellence) */}
-        <g stroke="#F59E0B" strokeWidth="1.2" opacity="0.85" fill="none">
-          <path d="M30 40 C22 55, 24 75, 36 86 M30 44 L25 40 M28 54 L22 52 M28 65 L22 66 M32 76 L27 80" />
-          <path d="M90 40 C98 55, 96 75, 84 86 M90 44 L95 40 M92 54 L98 52 M92 65 L98 66 M88 76 L93 80" />
-        </g>
-
-        {/* Atom / Neural Computational Orbit (Model & Science) */}
-        <ellipse cx="60" cy="58" rx="26" ry="11" stroke="url(#orbitGlow)" strokeWidth="1.2" transform="rotate(-25 60 58)" opacity="0.75" />
-        <ellipse cx="60" cy="58" rx="26" ry="11" stroke="url(#orbitGlow)" strokeWidth="1.2" transform="rotate(25 60 58)" opacity="0.75" />
-
-        {/* Open Folio / Scholarly Manuscript */}
-        <path
-          d="M44 64 C50 61, 56 61, 60 63 C64 61, 70 61, 76 64 V78 C70 75, 64 75, 60 77 C56 75, 50 75, 44 78 Z"
-          fill="#FFFBEB"
-          stroke="#D97706"
-          strokeWidth="1"
-        />
-        <line x1="60" y1="63" x2="60" y2="77" stroke="#92400E" strokeWidth="1" />
-
-        {/* Quill Pen with Ink Drop */}
-        <path
-          d="M60 30 C64 36, 68 46, 60 56 C57 52, 56 42, 60 30 Z"
-          fill="url(#crestGold)"
-          stroke="#FFFBEB"
-          strokeWidth="0.8"
-        />
-        <circle cx="60" cy="57" r="1.5" fill="#38BDF8" />
-
-        {/* Academic Stars */}
-        <circle cx="60" cy="20" r="2" fill="#FDE68A" />
-        <circle cx="50" cy="23" r="1.5" fill="#FDE68A" />
-        <circle cx="70" cy="23" r="1.5" fill="#FDE68A" />
-
-        {/* Latin Scroll Inscription Banner */}
-        <rect x="28" y="93" width="64" height="13" rx="3" fill="#D97706" stroke="#FEF3C7" strokeWidth="1" />
-        <text
-          x="60"
-          y="102"
-          textAnchor="middle"
-          fill="#FFFBEB"
-          fontSize="6.5"
-          fontWeight="bold"
-          fontFamily="serif"
-          letterSpacing="1"
-        >
-          INKMONK LAB
-        </text>
-      </svg>
+      <Image
+        src="/logo.png"
+        alt="InkMonk Research Logo"
+        width={140}
+        height={140}
+        className="w-full h-full object-contain"
+        unoptimized
+        priority
+        style={{ imageRendering: '-webkit-optimize-contrast' }}
+      />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -24,7 +24,6 @@ import {
   TranslationAuditModal,
 } from '@/components/FuturisticInteractions';
 
-import ResearchAreasSection from '@/components/ResearchAreasSection';
 import FloatingLiveHelp from '@/components/FloatingLiveHelp';
 
 export interface ServiceItem {
@@ -213,7 +212,7 @@ const SERVICE_CATALOG: ServiceItem[] = [
 ];
 
 export default function ServicesPage() {
-  const [activeCategory, setActiveCategory] = useState<string>('ALL');
+  const [activeCategory, setActiveCategory] = useState<string>('ENGLISH SERVICES');
 
   // Modals
   const [turnitinModalOpen, setTurnitinModalOpen] = useState(false);
@@ -223,20 +222,39 @@ export default function ServicesPage() {
   const [scopeBuilderOpen, setScopeBuilderOpen] = useState(false);
   const [auditModalOpen, setAuditModalOpen] = useState(false);
 
+  // Read URL Hash on load
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.toLowerCase();
+      if (hash === '#english') setActiveCategory('ENGLISH SERVICES');
+      else if (hash === '#hindi') setActiveCategory('HINDI SERVICES');
+      else if (hash === '#turnitin') setActiveCategory('TURNITIN REPORTS');
+    }
+  }, []);
+
+  // 1stly the 3 primary options in the top, followed by specific catalog categories
   const categories = [
-    'ALL',
-    'Manuscripts & Publications',
-    'Dissertations & Proposals',
-    'Computational & Code Implementation',
-    'Books & Monographs',
-    'Presentations & Defense',
-    'Originality & Audits',
-    'Hindi Academic Division (हिंदी शोध)',
+    'ENGLISH SERVICES',
+    'HINDI SERVICES',
+    'TURNITIN REPORTS',
+    'ALL SERVICES',
+    'DISSERTATIONS & PROPOSALS',
+    'COMPUTATIONAL & CODE IMPLEMENTATION',
+    'BOOKS & MONOGRAPHS',
+    'PRESENTATIONS & DEFENSE',
   ];
 
-  const filteredServices = activeCategory === 'ALL'
-    ? SERVICE_CATALOG
-    : SERVICE_CATALOG.filter((s) => s.category === activeCategory);
+  const filteredServices = SERVICE_CATALOG.filter((s) => {
+    if (activeCategory === 'ALL SERVICES') return true;
+    if (activeCategory === 'ENGLISH SERVICES') return !s.isHindi && !s.isTurnitin;
+    if (activeCategory === 'HINDI SERVICES') return s.isHindi === true;
+    if (activeCategory === 'TURNITIN REPORTS') return s.isTurnitin === true;
+    if (activeCategory === 'DISSERTATIONS & PROPOSALS') return s.category === 'Dissertations & Proposals';
+    if (activeCategory === 'COMPUTATIONAL & CODE IMPLEMENTATION') return s.category === 'Computational & Code Implementation';
+    if (activeCategory === 'BOOKS & MONOGRAPHS') return s.category === 'Books & Monographs';
+    if (activeCategory === 'PRESENTATIONS & DEFENSE') return s.category === 'Presentations & Defense';
+    return true;
+  });
 
   return (
     <div className="min-h-screen bg-notebook-grid text-slate-900 py-16 px-4 text-center">
@@ -332,7 +350,7 @@ export default function ServicesPage() {
                   <ul className="space-y-1.5 text-xs text-slate-700 font-medium flex flex-col items-center">
                     {service.features.map((feat, i) => (
                       <li key={i} className="flex items-center justify-center gap-2 text-center">
-                        <span className="text-[#F95721] font-black text-[11px]">✦</span>
+                        <span className="text-[#F95721] font-black text-[11px]">◆</span>
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -401,11 +419,6 @@ export default function ServicesPage() {
 
             </div>
           ))}
-        </div>
-
-        {/* ─── RESEARCH AREAS SUPPORTED (Immediately After Services as requested) ── */}
-        <div className="border-t-2 border-slate-200 pt-16">
-          <ResearchAreasSection />
         </div>
 
         {/* ─── Bottom CTA & Video Consultation Banner ──────────────────────── */}

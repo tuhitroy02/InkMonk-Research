@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   TurnitinShieldLogo,
   ResearchPaperRealIcon,
@@ -73,19 +74,31 @@ export default function ClientDashboard() {
     async function checkAuth() {
       try {
         const res = await fetch('/api/auth/me');
-        if (!res.ok) {
-          router.push('/login');
-          return;
+        if (res.ok) {
+          const data = await res.json();
+          setUser(data.user);
+        } else {
+          // Fallback to local storage if available
+          const storedUser = localStorage.getItem('inkmonk_user');
+          if (storedUser) {
+            setUser(JSON.parse(storedUser));
+          } else {
+            router.push('/login');
+            return;
+          }
         }
-        const data = await res.json();
-        setUser(data.user);
 
         try {
           const stored = localStorage.getItem('inkmonk_scholar_profile');
           if (stored) setProfile(JSON.parse(stored));
         } catch {}
       } catch {
-        router.push('/login');
+        const storedUser = localStorage.getItem('inkmonk_user');
+        if (storedUser) {
+          setUser(JSON.parse(storedUser));
+        } else {
+          router.push('/login');
+        }
       } finally {
         setLoading(false);
       }
@@ -115,19 +128,29 @@ export default function ClientDashboard() {
 
         {/* 3D Holographic Portal Header */}
         <div className="card-clay-white p-6 md:p-8 mb-8 flex flex-col sm:flex-row justify-between items-center gap-6 text-center sm:text-left">
-          <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
-            <div className="inline-flex items-center gap-2 bg-orange-100 text-[#F95721] text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-2 border border-orange-200">
-              <TurnitinShieldLogo className="w-4 h-4" />
-              <span>Verified Scholar Portal</span>
+          <div className="flex items-center gap-4 text-center sm:text-left">
+            <Image
+              src="/logo.png"
+              alt="InkMonk Logo"
+              width={64}
+              height={64}
+              className="w-14 h-14 object-contain rounded-2xl shadow-sm border border-slate-200"
+              unoptimized
+            />
+            <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
+              <div className="inline-flex items-center gap-2 bg-orange-100 text-[#F95721] text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider mb-2 border border-orange-200">
+                <TurnitinShieldLogo className="w-4 h-4" />
+                <span>Verified Scholar Portal</span>
+              </div>
+              <h1 className="font-serif text-3xl font-black text-slate-900">
+                Welcome, {profile?.name || user?.name || 'Academic Scholar'}
+              </h1>
+              <p className="text-slate-600 text-xs sm:text-sm mt-1 font-medium">
+                Account: <strong className="text-slate-900">{user?.email}</strong>
+                {user?.phone ? ` • Verified Phone: ${user.phone}` : ''}
+                {profile?.institution ? ` • ${profile.institution}` : ''}
+              </p>
             </div>
-            <h1 className="font-serif text-3xl font-black text-slate-900">
-              Welcome, {profile?.name || user?.name || 'Academic Scholar'}
-            </h1>
-            <p className="text-slate-600 text-xs sm:text-sm mt-1 font-medium">
-              Account: <strong className="text-slate-900">{user?.email}</strong>
-              {user?.phone ? ` • Verified Phone: ${user.phone}` : ''}
-              {profile?.institution ? ` • ${profile.institution}` : ''}
-            </p>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3">

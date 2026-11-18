@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { AcademicLabCrestLogo, TurnitinShieldLogo, WhatsAppRealIcon } from '@/components/RealIcons';
 
 interface Lead {
@@ -118,8 +119,15 @@ export default function AdminDashboard() {
     return (
       <div className="min-h-screen bg-white text-black flex items-center justify-center p-4">
         <div className="max-w-md w-full card-futuristic-3d p-8 bg-black text-white border-t-4 border-t-purple-600 text-center shadow-2xl rounded-2xl">
-          <div className="w-16 h-16 rounded-2xl bg-purple-950/60 border border-purple-500/50 flex items-center justify-center mx-auto mb-4">
-            <AcademicLabCrestLogo className="w-12 h-12" />
+          <div className="w-16 h-16 rounded-2xl bg-white border-2 border-slate-200 flex items-center justify-center mx-auto mb-4 p-1.5 shadow-sm">
+            <Image
+              src="/logo.png"
+              alt="InkMonk Research"
+              width={64}
+              height={64}
+              className="w-12 h-12 object-contain rounded-xl"
+              unoptimized
+            />
           </div>
           <h1 className="font-serif text-2xl font-bold text-white mb-1">
             InkMonk Director Console
@@ -198,8 +206,15 @@ export default function AdminDashboard() {
         {/* Console Top Header */}
         <div className="bg-white rounded-3xl p-6 md:p-8 border border-purple-200 shadow-md mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-2xl bg-black border border-purple-500/50 flex items-center justify-center p-1">
-              <AcademicLabCrestLogo className="w-10 h-10" />
+            <div className="w-14 h-14 rounded-2xl bg-white border-2 border-slate-200 flex items-center justify-center p-1.5 shadow-sm">
+              <Image
+                src="/logo.png"
+                alt="InkMonk Research Logo"
+                width={64}
+                height={64}
+                className="w-12 h-12 object-contain rounded-xl"
+                unoptimized
+              />
             </div>
             <div>
               <div className="text-xs text-purple-600 font-bold uppercase tracking-wider">

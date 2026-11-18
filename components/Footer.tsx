@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import InkMonkNibLogo from '@/components/InkMonkNibLogo';
+import Image from 'next/image';
 import {
   LocationRealIcon,
   EmailRealIcon,
@@ -82,8 +82,24 @@ export default function Footer() {
 
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4 flex flex-col items-center md:items-start text-center md:text-left">
-            <Link href="/" className="inline-block">
-              <InkMonkNibLogo className="h-10" />
+            <Link href="/" className="inline-flex items-center gap-2.5 group">
+              <Image
+                src="/logo.png"
+                alt="InkMonk Research Logo"
+                width={80}
+                height={80}
+                className="h-12 w-auto object-contain rounded-xl drop-shadow-sm group-hover:scale-105 transition-transform"
+                unoptimized
+                style={{ imageRendering: '-webkit-optimize-contrast' }}
+              />
+              <div className="flex flex-col text-left leading-tight">
+                <span className="font-serif font-black text-xl tracking-tight text-slate-900">
+                  <span className="text-[#1E3A8A]">Ink</span><span className="text-[#F95721]">Monk</span>
+                </span>
+                <span className="text-[10px] font-black tracking-widest uppercase text-slate-500">
+                  RESEARCH
+                </span>
+              </div>
             </Link>
 
             <p className="text-slate-600 text-sm leading-relaxed max-w-sm text-center md:text-left font-medium">

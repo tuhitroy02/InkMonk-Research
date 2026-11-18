@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import FloatingLiveHelp from '@/components/FloatingLiveHelp';
 import {
   LocationRealIcon,
@@ -58,7 +59,15 @@ export default function AboutPage() {
             </div>
             <div className="flex justify-center">
               <div className="relative w-72 h-72 rounded-3xl bg-white p-6 flex flex-col items-center justify-center border-2 border-slate-200 shadow-md">
-                <AcademicLabCrestLogo className="w-48 h-48 drop-shadow-xl" />
+                <Image
+                  src="/logo.png"
+                  alt="Official InkMonk Research Logo"
+                  width={240}
+                  height={240}
+                  className="w-48 h-48 object-contain rounded-2xl drop-shadow-md"
+                  unoptimized
+                  style={{ imageRendering: '-webkit-optimize-contrast' }}
+                />
                 <span className="text-xs font-black text-[#2563EB] uppercase mt-2 tracking-wider">
                   OFFICIAL RESEARCH SEAL
                 </span>

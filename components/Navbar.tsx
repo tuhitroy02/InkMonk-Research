@@ -34,37 +34,38 @@ export default function Navbar() {
   }, []);
 
   // Navigation Links strictly ordered as requested:
-  // Services -> Research Areas -> How It Works -> Samples -> About -> Contact & FAQ -> Get a Quote -> Ask AI -> Home
+  // ENGLISH SERVICES -> HINDI SERVICES -> TURNITIN REPORTS -> SAMPLES -> HOW IT WORKS -> ABOUT -> CONTACT & FAQ
+  // All in CAPITAL LETTERS
   const NAV_LINKS = [
-    { href: '/services', label: 'Services' },
-    { href: '/services#research-areas', label: 'Research Areas' },
-    { href: '/how-it-works', label: 'How It Works' },
-    { href: '/samples', label: 'Samples' },
-    { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact & FAQ' },
-    { href: '/quote', label: 'Get a Quote', highlight: true },
-    { href: '/chat', label: 'Ask AI' },
-    { href: '/', label: 'Home' },
+    { href: '/services#english', label: 'ENGLISH SERVICES' },
+    { href: '/services#hindi', label: 'HINDI SERVICES' },
+    { href: '/services#turnitin', label: 'TURNITIN REPORTS' },
+    { href: '/samples', label: 'SAMPLES' },
+    { href: '/how-it-works', label: 'HOW IT WORKS' },
+    { href: '/about', label: 'ABOUT' },
+    { href: '/contact', label: 'CONTACT & FAQ' },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-2 sm:px-4 md:px-6 pt-3 transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-50 px-2 sm:px-4 md:px-5 pt-3 transition-all duration-300">
       <div
-        className={`w-full max-w-[1400px] mx-auto rounded-full px-3 sm:px-5 md:px-6 py-2 sm:py-2.5 transition-all duration-300 border-2 ${
+        className={`w-full max-w-[1540px] mx-auto rounded-full px-3 sm:px-5 py-2 sm:py-2.5 transition-all duration-300 border-2 ${
           scrolled
             ? 'bg-white/95 dark:bg-[#0F172A]/95 backdrop-blur-xl border-slate-300 dark:border-slate-700 shadow-[0_14px_35px_rgba(0,0,0,0.1)]'
             : 'bg-white/90 dark:bg-[#0F172A]/90 backdrop-blur-md border-slate-200/90 dark:border-slate-800 shadow-[0_8px_25px_rgba(0,0,0,0.06)]'
-        } flex items-center justify-between gap-2 lg:gap-4`}
+        } flex items-center justify-between gap-2 lg:gap-3`}
       >
-        {/* Left: Authentic Original High-Resolution InkMonk Logo */}
-        <Link href="/" className="group shrink-0 flex items-center gap-2 sm:gap-3 pl-1">
+        {/* Left: Authentic Original High-Resolution InkMonk Logo (Crystal Clear on Zoom) */}
+        <Link href="/" className="group shrink-0 flex items-center gap-2 sm:gap-2.5 pl-1" title="InkMonk Research">
           <Image
             src="/logo.png"
             alt="InkMonk Research Logo"
-            width={48}
-            height={48}
+            width={80}
+            height={80}
             className="h-10 sm:h-11 w-auto object-contain rounded-xl drop-shadow-sm group-hover:scale-105 transition-transform"
             priority
+            unoptimized
+            style={{ imageRendering: '-webkit-optimize-contrast' }}
           />
           <div className="flex flex-col text-center leading-tight">
             <span className="font-serif font-black text-base sm:text-lg tracking-tight text-slate-900 dark:text-white">
@@ -76,20 +77,20 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Center: Equal-Distance Nav Links (Strictly Equal Spacing, Zero Overlapping) */}
+        {/* Center: Equal-Distance Main Navigation Links in CAPITAL LETTERS */}
         <nav
-          className="hidden xl:flex items-center justify-evenly flex-1 px-3 min-w-0"
+          className="hidden xl:flex items-center justify-center gap-1 2xl:gap-2 flex-1 px-1 min-w-0"
           aria-label="Main Navigation"
         >
           {NAV_LINKS.map((link) => {
-            const active = pathname === link.href;
+            const active = pathname === link.href || (link.href.startsWith('/services#') && pathname === '/services');
             return (
               <Link
                 key={link.label}
                 href={link.href}
-                className={`text-[12.5px] 2xl:text-sm font-bold tracking-tight whitespace-nowrap transition-colors py-1.5 px-2 text-center rounded-lg hover:bg-slate-100/60 dark:hover:bg-slate-800/60 ${
+                className={`text-[10px] 2xl:text-[11px] font-black tracking-wider uppercase whitespace-nowrap transition-colors py-1.5 px-1.5 2xl:px-2.5 text-center rounded-lg hover:bg-slate-100/60 dark:hover:bg-slate-800/60 ${
                   active
-                    ? 'text-[#F95721] font-black'
+                    ? 'text-[#F95721]'
                     : 'text-slate-700 dark:text-slate-200 hover:text-[#F95721]'
                 }`}
               >
@@ -99,29 +100,43 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Right Actions:
-            1. 3D "Get Free Estimate →" Push Button (With Safe Separation)
-            2. "Client Portal" Button (with Admin Portal Dropdown Option Inside)
-            3. Light/Dark Theme Switcher Icon Beside It
+        {/* Right: The 4 Distinctly Styled Action Options Sequence:
+            1. GET FREE ESTIMATE (Orange 3D Push Button)
+            2. ASK AI (Electric Blue AI Pill)
+            3. CLIENT PORTAL (Slate/Navy Portal Pill with Dropdown)
+            4. HOME (Clean White/Slate Claymorphic Button)
+            Followed by Theme Toggle
         */}
-        <div className="hidden sm:flex items-center gap-2.5 2xl:gap-3.5 shrink-0 ml-2">
+        <div className="hidden xl:flex items-center gap-2 shrink-0 ml-1">
+          {/* 1. GET FREE ESTIMATE */}
           <Link
             href="/quote"
-            className="btn-clay-orange !py-2 !px-4 !text-xs font-bold shrink-0 whitespace-nowrap shadow-md"
+            className="btn-clay-orange"
+            title="Get Free Estimate"
           >
-            <span>Get Free Estimate</span>
+            <span>GET FREE ESTIMATE</span>
             <span className="font-black">→</span>
           </Link>
 
-          {/* Client Portal with Integrated Admin Portal Dropdown */}
+          {/* 2. ASK AI */}
+          <Link
+            href="/chat"
+            className="btn-clay-ai"
+            title="Ask AI Assistant"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse" />
+            <span>ASK AI</span>
+          </Link>
+
+          {/* 3. CLIENT PORTAL with Integrated Admin Portal Dropdown */}
           <div className="relative shrink-0" ref={portalDropdownRef}>
             <button
               onClick={() => setPortalMenuOpen(!portalMenuOpen)}
-              className="btn-clay-portal !py-2 !px-3.5 !text-xs font-bold shrink-0 whitespace-nowrap flex items-center gap-1.5 cursor-pointer"
+              className="btn-clay-portal flex items-center gap-1.5 cursor-pointer"
               title="Scholar & Admin Portals"
             >
-              <span>Client Portal</span>
-              <span className="text-[10px] text-slate-500">▼</span>
+              <span>CLIENT PORTAL</span>
+              <span className="text-[9px] text-slate-400">▼</span>
             </button>
 
             {/* Dropdown containing Client Portal and Admin Portal option */}
@@ -132,7 +147,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 8, scale: 0.95 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute right-0 mt-2 w-56 rounded-2xl bg-white dark:bg-[#0F172A] border-2 border-slate-200 dark:border-slate-700 shadow-2xl p-2 z-50 text-center"
+                  className="absolute right-0 mt-2 w-60 rounded-2xl bg-white dark:bg-[#0F172A] border-2 border-slate-200 dark:border-slate-700 shadow-2xl p-2 z-50 text-center"
                 >
                   <div className="text-[10px] font-black uppercase text-slate-400 dark:text-slate-500 py-1 border-b border-slate-100 dark:border-slate-800 mb-1">
                     Select Portal Destination
@@ -140,11 +155,11 @@ export default function Navbar() {
                   <Link
                     href="/login?portal=client"
                     onClick={() => setPortalMenuOpen(false)}
-                    className="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-orange-50 dark:hover:bg-slate-800 transition-colors group mb-1"
+                    className="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-orange-50 dark:hover:bg-slate-800 transition-colors group mb-1 text-center"
                   >
                     <div className="flex items-center gap-1.5 font-bold text-xs text-slate-900 dark:text-white group-hover:text-[#F95721]">
                       <span>🎓</span>
-                      <span>Client Scholar Portal</span>
+                      <span className="uppercase">Client Scholar Portal</span>
                     </div>
                     <span className="text-[10px] text-slate-500 dark:text-slate-400">
                       View deliverables, drafts &amp; status
@@ -154,11 +169,11 @@ export default function Navbar() {
                   <Link
                     href="/login?portal=admin"
                     onClick={() => setPortalMenuOpen(false)}
-                    className="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-blue-50 dark:hover:bg-slate-800 transition-colors group border-t border-slate-100 dark:border-slate-800"
+                    className="flex flex-col items-center justify-center p-2.5 rounded-xl hover:bg-blue-50 dark:hover:bg-slate-800 transition-colors group border-t border-slate-100 dark:border-slate-800 text-center"
                   >
                     <div className="flex items-center gap-1.5 font-bold text-xs text-slate-900 dark:text-white group-hover:text-[#2563EB]">
                       <span>🛡️</span>
-                      <span>Admin Directorate Portal</span>
+                      <span className="uppercase">Admin Directorate Portal</span>
                     </div>
                     <span className="text-[10px] text-slate-500 dark:text-slate-400">
                       Tuhit Roy &amp; Sampreeti Mukherjee
@@ -169,8 +184,17 @@ export default function Navbar() {
             </AnimatePresence>
           </div>
 
-          {/* Theme Switcher Icon right beside */}
-          <div className="shrink-0 pl-0.5">
+          {/* 4. HOME */}
+          <Link
+            href="/"
+            className="btn-clay-home"
+            title="Return to Home"
+          >
+            <span>HOME</span>
+          </Link>
+
+          {/* Theme Switcher Icon */}
+          <div className="shrink-0 pl-1">
             <ThemeToggle />
           </div>
         </div>
@@ -203,39 +227,53 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -10, scale: 0.98 }}
             className="xl:hidden mt-2 max-w-md mx-auto bg-white dark:bg-[#0F172A] border-2 border-slate-200 dark:border-slate-700 rounded-3xl p-5 shadow-2xl text-center"
           >
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1.5">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-sm font-bold text-slate-800 dark:text-slate-200 p-2.5 rounded-xl hover:bg-orange-50 dark:hover:bg-slate-800 hover:text-[#F95721] text-center"
+                  className="text-xs font-black uppercase tracking-wider text-slate-800 dark:text-slate-200 p-2.5 rounded-xl hover:bg-orange-50 dark:hover:bg-slate-800 hover:text-[#F95721] text-center"
                 >
                   {link.label}
                 </Link>
               ))}
 
-              <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2.5">
+              <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2">
                 <Link
                   href="/quote"
                   onClick={() => setMobileOpen(false)}
                   className="btn-clay-orange w-full !py-2.5 text-center text-xs"
                 >
-                  Get Free Estimate →
+                  GET FREE ESTIMATE →
+                </Link>
+                <Link
+                  href="/chat"
+                  onClick={() => setMobileOpen(false)}
+                  className="btn-clay-ai w-full !py-2.5 text-center text-xs"
+                >
+                  ASK AI ASSISTANT
                 </Link>
                 <Link
                   href="/login?portal=client"
                   onClick={() => setMobileOpen(false)}
                   className="btn-clay-portal w-full !py-2 text-center text-xs"
                 >
-                  🎓 Client Scholar Portal
+                  🎓 CLIENT SCHOLAR PORTAL
                 </Link>
                 <Link
                   href="/login?portal=admin"
                   onClick={() => setMobileOpen(false)}
-                  className="btn-clay-white w-full !py-2 text-center text-xs"
+                  className="btn-clay-white w-full !py-2 text-center text-xs uppercase"
                 >
-                  🛡️ Admin Directorate Portal
+                  🛡️ ADMIN DIRECTORATE PORTAL
+                </Link>
+                <Link
+                  href="/"
+                  onClick={() => setMobileOpen(false)}
+                  className="btn-clay-home w-full !py-2 text-center text-xs"
+                >
+                  HOME
                 </Link>
               </div>
             </div>

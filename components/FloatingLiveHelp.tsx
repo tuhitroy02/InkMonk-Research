@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { InkMonkNibIcon } from '@/components/InkMonkNibLogo';
 
 export default function FloatingLiveHelp() {
   const [minimized, setMinimized] = useState(false);
@@ -24,9 +24,17 @@ export default function FloatingLiveHelp() {
               className="flex items-center gap-3.5 bg-white border-2 border-slate-200 rounded-2xl p-3 sm:p-3.5 shadow-[0_14px_34px_-4px_rgba(15,23,42,0.18)] hover:shadow-[0_18px_40px_-4px_rgba(15,23,42,0.25)] hover:-translate-y-1 transition-all duration-200 group text-left max-w-xs"
               title="Click to chat with AI Scholar Assistant"
             >
-              {/* Nib Logo Icon in rounded container */}
-              <div className="w-12 h-12 rounded-xl bg-orange-50 border border-orange-200 flex items-center justify-center shrink-0 p-1 group-hover:scale-105 transition-transform">
-                <InkMonkNibIcon className="w-9 h-9" />
+              {/* Official InkMonk Logo Icon in rounded container */}
+              <div className="w-12 h-12 rounded-xl bg-orange-50 border border-orange-200 flex items-center justify-center shrink-0 p-1 group-hover:scale-105 transition-transform overflow-hidden shadow-inner">
+                <Image
+                  src="/logo.png"
+                  alt="InkMonk Logo"
+                  width={60}
+                  height={60}
+                  className="w-10 h-10 object-contain rounded-lg"
+                  unoptimized
+                  style={{ imageRendering: '-webkit-optimize-contrast' }}
+                />
               </div>
 
               {/* Text & Status */}
@@ -71,7 +79,15 @@ export default function FloatingLiveHelp() {
             className="w-14 h-14 rounded-full bg-white border-2 border-orange-500 shadow-[0_12px_28px_rgba(249,87,33,0.3)] flex items-center justify-center p-2.5 hover:scale-110 active:scale-95 transition-transform"
             title="Open Live Help"
           >
-            <InkMonkNibIcon className="w-full h-full" />
+            <Image
+              src="/logo.png"
+              alt="InkMonk Live Help"
+              width={48}
+              height={48}
+              className="w-full h-full object-contain"
+              unoptimized
+              style={{ imageRendering: '-webkit-optimize-contrast' }}
+            />
             <span className="absolute top-1 right-1 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white"></span>
           </motion.button>
         )}
