@@ -243,32 +243,32 @@ export default function ResearchAreasSection({ className = "" }: { className?: s
     : RESEARCH_AREAS.filter((a) => a.category === selectedCategory || (selectedCategory === 'Vernacular & Humanities' && a.id === 'hindi-vernacular'));
 
   return (
-    <section id="research-areas" className={`py-20 px-4 text-center relative ${className}`}>
+    <section id="research-areas" className={`py-20 px-4 text-center relative bg-notebook-grid ${className}`}>
       <div className="max-w-7xl mx-auto">
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="badge-pill-purple mb-3 font-mono">
+          <div className="inline-block bg-blue-100 text-[#2563EB] font-black text-xs uppercase px-4 py-1.5 rounded-full mb-3 shadow-sm border border-blue-200">
             DISCIPLINARY TAXONOMY // ALL SUBJECTS
           </div>
-          <h2 className="font-serif text-3xl sm:text-5xl font-bold text-black dark:text-white mb-4 text-center">
+          <h2 className="font-serif text-3xl sm:text-5xl font-black text-slate-900 mb-4 text-center">
             Comprehensive Research Areas
           </h2>
-          <p className="text-purple-900/70 dark:text-purple-200/80 text-base sm:text-lg text-center leading-relaxed font-normal">
+          <p className="text-slate-600 text-base sm:text-lg text-center leading-relaxed font-medium">
             Subject-matter doctoral directors and researchers across every major scholarly discipline. Adhering strictly to your field’s publication ethics and citation norms.
           </p>
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12 font-mono">
+        <div className="flex flex-wrap justify-center gap-2 mb-12 font-sans">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 selectedCategory === cat
-                  ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white border border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.5)] scale-105'
-                  : 'bg-white dark:bg-[#0A0414] text-purple-900/70 dark:text-purple-300 hover:text-purple-600 dark:hover:text-white border border-purple-200 dark:border-purple-900/40'
+                  ? 'bg-[#F95721] text-white shadow-[0_4px_0_#C43B00,0_8px_16px_rgba(249,87,33,0.3)] scale-105'
+                  : 'bg-white text-slate-700 hover:text-[#F95721] border-2 border-slate-200 shadow-sm'
               }`}
             >
               {cat}
@@ -279,81 +279,79 @@ export default function ResearchAreasSection({ className = "" }: { className?: s
         {/* 12 Research Areas Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((area) => (
-            <Interactive3DCard key={area.id} glowColor="purple">
-              <div className="p-6 flex flex-col justify-between text-left h-full group relative bg-white dark:bg-[#0A0414] rounded-3xl">
-                
-                {/* Top Badge & Icon */}
-                <div className="flex items-start justify-between gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-500/40 flex items-center justify-center text-2xl shadow-inner shrink-0">
-                    {area.icon}
-                  </div>
-                  <span className="text-[10px] font-mono font-bold uppercase text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/80 border border-purple-200 dark:border-purple-500/40 px-2.5 py-1 rounded-full">
-                    {area.category}
-                  </span>
+            <div key={area.id} className="card-clay-white p-6 flex flex-col justify-between text-left h-full group relative">
+              
+              {/* Top Badge & Icon */}
+              <div className="flex items-start justify-between gap-3 mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-orange-50 border border-orange-200 flex items-center justify-center text-2xl shadow-inner shrink-0">
+                  {area.icon}
                 </div>
-
-                {/* Title */}
-                <div>
-                  <h3 className="font-serif text-xl font-bold text-black dark:text-white mb-1 group-hover:text-purple-500 dark:group-hover:text-purple-300 transition-colors">
-                    {area.name}
-                  </h3>
-                  {area.hindiName && (
-                    <div className="text-xs text-purple-400 font-bold mb-2">
-                      {area.hindiName}
-                    </div>
-                  )}
-                  <p className="text-slate-600 dark:text-purple-200/70 text-xs leading-relaxed mb-4">
-                    {area.desc}
-                  </p>
-
-                  {/* Subfield Tags (Left-Aligned Bullet List) */}
-                  <div className="mb-4 pt-3 border-t border-purple-100 dark:border-purple-900/40">
-                    <div className="text-[11px] font-mono font-bold text-purple-700 dark:text-purple-300 mb-2 uppercase">
-                      Core Specialized Subfields:
-                    </div>
-                    <ul className="space-y-1.5 text-xs text-slate-700 dark:text-purple-200">
-                      {area.subfields.slice(0, 4).map((sub, i) => (
-                        <li key={i} className="flex items-center gap-2">
-                          <span className="text-purple-500 font-bold text-[10px]">●</span>
-                          <span className="truncate">{sub}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Footer with Standards & Action */}
-                <div className="pt-3 border-t border-purple-100 dark:border-purple-900/40 flex items-center justify-between text-xs mt-auto">
-                  <div className="text-[10px] font-mono text-slate-500 dark:text-purple-300/70">
-                    <span className="text-slate-400 dark:text-purple-400/60 block">STANDARD:</span>
-                    <span className="font-bold text-slate-700 dark:text-purple-200 truncate max-w-[140px] block">{area.standards}</span>
-                  </div>
-                  <Link
-                    href={`/quote?domain=${encodeURIComponent(area.name)}`}
-                    className="text-xs font-mono font-bold text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-white flex items-center gap-1 group-hover:underline"
-                  >
-                    <span>Request Quote →</span>
-                  </Link>
-                </div>
-
+                <span className="text-[10px] font-bold uppercase text-[#2563EB] bg-blue-50 border border-blue-200 px-3 py-1 rounded-full">
+                  {area.category}
+                </span>
               </div>
-            </Interactive3DCard>
+
+              {/* Title */}
+              <div>
+                <h3 className="font-serif text-xl font-black text-slate-900 mb-1 group-hover:text-[#F95721] transition-colors">
+                  {area.name}
+                </h3>
+                {area.hindiName && (
+                  <div className="text-xs text-[#F95721] font-bold mb-2">
+                    {area.hindiName}
+                  </div>
+                )}
+                <p className="text-slate-600 text-xs font-medium leading-relaxed mb-4">
+                  {area.desc}
+                </p>
+
+                {/* Subfield Tags (Left-Aligned Bullet List) */}
+                <div className="mb-4 pt-3 border-t border-slate-100">
+                  <div className="text-[11px] font-bold text-slate-800 mb-2 uppercase tracking-wider">
+                    Core Specialized Subfields:
+                  </div>
+                  <ul className="space-y-1.5 text-xs text-slate-700 font-medium">
+                    {area.subfields.slice(0, 4).map((sub, i) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <span className="text-[#F95721] font-black text-[10px]">✦</span>
+                        <span className="truncate">{sub}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Footer with Standards & Action */}
+              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs mt-auto">
+                <div className="text-[10px] text-slate-500">
+                  <span className="text-slate-400 block font-bold">STANDARD:</span>
+                  <span className="font-bold text-slate-800 truncate max-w-[140px] block">{area.standards}</span>
+                </div>
+                <Link
+                  href={`/quote?domain=${encodeURIComponent(area.name)}`}
+                  className="text-xs font-bold text-[#F95721] hover:underline flex items-center gap-1"
+                >
+                  <span>Request Quote →</span>
+                </Link>
+              </div>
+
+            </div>
           ))}
         </div>
 
         {/* Bottom Banner */}
-        <div className="mt-14 p-6 rounded-3xl bg-purple-50/60 dark:bg-[#0A0414] border border-purple-200 dark:border-purple-500/30 max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-sm dark:shadow-[0_0_30px_rgba(168,85,247,0.15)]">
+        <div className="mt-14 p-6 sm:p-8 rounded-3xl card-clay-white max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-md">
           <div>
-            <div className="text-black dark:text-white font-serif font-bold text-lg">
+            <div className="text-slate-900 font-serif font-black text-xl">
               Have an Interdisciplinary or Custom Topic?
             </div>
-            <div className="text-xs text-purple-900/70 dark:text-purple-300/70 mt-1">
+            <div className="text-xs text-slate-600 font-medium mt-1">
               Our directors evaluate cross-domain studies (e.g. AI in Healthcare, Econometrics of Climate Policy, Digital Humanities).
             </div>
           </div>
           <Link
             href="/quote"
-            className="btn-primary-glow text-xs font-mono whitespace-nowrap !py-2.5 !px-5"
+            className="btn-clay-orange text-xs whitespace-nowrap !py-3 !px-6"
           >
             Configure Custom Topic →
           </Link>

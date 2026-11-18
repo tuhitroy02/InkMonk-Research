@@ -39,6 +39,7 @@ import {
 
 import { Interactive3DCard } from '@/components/FuturisticScrollExperience';
 import ResearchAreasSection from '@/components/ResearchAreasSection';
+import FloatingLiveHelp from '@/components/FloatingLiveHelp';
 
 export interface ServiceItem {
   id: string;
@@ -263,46 +264,47 @@ export default function ServicesPage() {
     : SERVICE_CATALOG.filter((s) => s.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#000000] text-black dark:text-white py-16 px-4 text-center transition-colors duration-300 selection:bg-purple-600 selection:text-white">
+    <div className="min-h-screen bg-notebook-grid text-slate-900 py-16 px-4 text-center">
       <div className="max-w-7xl mx-auto">
 
         {/* ─── Hero Header ─────────────────────────────────────────────────── */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="badge-pill-purple mb-3 font-mono">
+          <div className="inline-block bg-orange-100 text-[#F95721] font-black text-xs uppercase px-4 py-1.5 rounded-full mb-3 shadow-sm border border-orange-200">
             ACADEMIC CATALOGUE // RIGOROUS &amp; CONFIDENTIAL
           </div>
-          <h1 className="font-serif text-4xl sm:text-6xl font-bold text-black dark:text-white mb-4 text-center">
+          <h1 className="font-serif text-4xl sm:text-6xl font-black text-slate-900 mb-4 text-center">
             Scholarly Services Catalogue
           </h1>
-          <p className="text-slate-600 dark:text-purple-200/80 text-base sm:text-lg text-center font-normal leading-relaxed">
-            Rigorously formatted, 0% AI, and plagiarism-free academic scholarship in both <strong className="text-black dark:text-white font-bold">English</strong> and <strong className="text-black dark:text-white font-bold">Hindi</strong>. Evaluated transparently through our central server-side pricing engine.
+          <p className="text-slate-600 text-base sm:text-lg text-center font-medium leading-relaxed">
+            Rigorously formatted, 0% AI, and plagiarism-free academic scholarship in both <strong className="text-slate-900 font-bold">English</strong> and <strong className="text-slate-900 font-bold">Hindi</strong>. Evaluated transparently through our central server-side pricing engine.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-3 mt-5 text-xs font-semibold text-slate-700 dark:text-purple-200 font-mono">
-            <span className="flex items-center gap-1.5 bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-500/40 px-3 py-1 rounded-full text-purple-800 dark:text-purple-300">
-              <UpiShieldIcon className="w-4 h-4" />
+          <div className="flex flex-wrap justify-center gap-3 mt-5 text-xs font-bold text-slate-700">
+            <span className="flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full shadow-sm">
+              <UpiShieldIcon className="w-4 h-4 text-[#F95721]" />
               <span>Instant UPI Accepted</span>
             </span>
-            <span className="flex items-center gap-1.5 bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-500/40 px-3 py-1 rounded-full text-purple-800 dark:text-purple-300">
-              <NdaShieldIcon className="w-4 h-4" />
+            <span className="flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full shadow-sm">
+              <NdaShieldIcon className="w-4 h-4 text-[#2563EB]" />
               <span>100% IP &amp; Mutual NDA</span>
             </span>
-            <span className="flex items-center gap-1.5 bg-purple-100 dark:bg-purple-900/40 border border-purple-300 dark:border-purple-700 px-3 py-1 rounded-full text-purple-900 dark:text-purple-200">
+            <span className="flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full shadow-sm">
+              <span className="text-emerald-600 font-bold">✓</span>
               <span>Chapter-by-Chapter Escrow</span>
             </span>
           </div>
         </div>
 
         {/* ─── Category Filter Tabs ────────────────────────────────────────── */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12 font-mono">
+        <div className="flex flex-wrap justify-center gap-2 mb-12 font-sans">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeCategory === cat
-                  ? 'bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-200 border border-purple-300 dark:border-purple-400/60 shadow-sm dark:shadow-[0_0_15px_rgba(168,85,247,0.35)] scale-105'
-                  : 'bg-white dark:bg-[#0A0414] text-slate-600 dark:text-purple-300/70 hover:text-black dark:hover:text-white border border-purple-200 dark:border-purple-900/50'
+                  ? 'bg-[#F95721] text-white shadow-[0_4px_0_#C43B00,0_8px_16px_rgba(249,87,33,0.3)] scale-105'
+                  : 'bg-white text-slate-700 hover:text-[#F95721] border-2 border-slate-200 shadow-sm'
               }`}
             >
               {cat}
@@ -313,142 +315,140 @@ export default function ServicesPage() {
         {/* ─── Redesigned Services Grid ────────────────────────────────────── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
           {filteredServices.map((service) => (
-            <Interactive3DCard key={service.id} glowColor={service.glowColor}>
-              <div className="card-futuristic-3d p-6 flex flex-col justify-between text-left h-full group relative border-t-4 border-t-purple-600 dark:border-t-purple-400 bg-purple-50/20 dark:bg-[#0A0414]">
-                
-                {/* Badge & Category */}
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="text-[10px] font-mono font-bold uppercase text-purple-800 dark:text-purple-200 bg-purple-50 dark:bg-purple-950/80 border border-purple-200 dark:border-purple-500/40 px-2.5 py-1 rounded-full">
-                      {service.badge}
+            <div key={service.id} className="card-clay-white p-6 flex flex-col justify-between text-left h-full group relative">
+              
+              {/* Badge & Category */}
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="text-[10px] font-black uppercase text-[#2563EB] bg-blue-50 border border-blue-200 px-3 py-1 rounded-full">
+                    {service.badge}
+                  </span>
+                  {service.priceTag && (
+                    <span className="text-xs font-black text-[#F95721] bg-orange-50 border border-orange-200 px-3 py-1 rounded-full">
+                      {service.priceTag}
                     </span>
-                    {service.priceTag && (
-                      <span className="text-xs font-mono font-bold text-purple-700 dark:text-purple-300 bg-purple-100 dark:bg-purple-950/80 border border-purple-300 dark:border-purple-500/40 px-2.5 py-1 rounded-full">
-                        {service.priceTag}
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Real Deliverable Image */}
-                  <div className="my-2 transform group-hover:scale-[1.02] transition-transform duration-300">
-                    {service.visual}
-                  </div>
-
-                  {/* Title & Desc */}
-                  <h3 className="font-serif text-xl font-bold text-black dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-slate-600 dark:text-purple-200/70 text-xs leading-relaxed mb-4">
-                    {service.desc}
-                  </p>
-
-                  {/* Features Bullet List (Left-Aligned) */}
-                  <div className="pt-3 border-t border-purple-100 dark:border-purple-900/40 mb-6">
-                    <div className="text-[10px] font-mono text-purple-700 dark:text-purple-400 font-bold uppercase mb-2">
-                      Key Deliverables &amp; Standards:
-                    </div>
-                    <ul className="space-y-1.5 text-xs text-slate-700 dark:text-purple-200">
-                      {service.features.map((feat, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="text-purple-600 dark:text-purple-400 font-bold text-[11px] mt-0.5">✓</span>
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Card Action Buttons */}
-                <div className="pt-4 border-t border-purple-100 dark:border-purple-900/40 flex flex-col gap-2.5 mt-auto">
-                  {service.isCode ? (
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => setScopeBuilderOpen(true)}
-                        className="btn-primary-glow text-xs w-full font-mono py-2.5 flex items-center justify-center gap-1.5 cursor-pointer"
-                      >
-                        <TerminalLogIcon className="w-3.5 h-3.5" />
-                        <span>Interactive Code Scope Builder →</span>
-                      </button>
-                    </div>
-                  ) : service.isTurnitin ? (
-                    <div className="flex flex-col gap-2">
-                      <button
-                        onClick={() => setTurnitinModalOpen(true)}
-                        className="btn-primary-glow text-xs w-full font-mono py-2.5 cursor-pointer"
-                      >
-                        Upload &amp; Pay ₹200 via UPI →
-                      </button>
-                      <button
-                        onClick={() => setSampleModalOpen(true)}
-                        className="text-xs text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-white font-mono text-center underline cursor-pointer"
-                      >
-                        View Watermarked Sample Report
-                      </button>
-                    </div>
-                  ) : service.isHindi ? (
-                    <div className="flex flex-col gap-2">
-                      <Link
-                        href={service.href}
-                        className="btn-primary-glow text-xs w-full text-center font-mono py-2.5"
-                      >
-                        Configure Hindi Quote →
-                      </Link>
-                      <button
-                        onClick={() => setAuditModalOpen(true)}
-                        className="text-xs text-purple-700 dark:text-purple-300 hover:underline inline-flex items-center justify-center gap-1 cursor-pointer font-mono"
-                      >
-                        <AuditTrailIcon className="w-3.5 h-3.5" />
-                        <span>View Vernacular Translation Audit</span>
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-between gap-2">
-                      <Link
-                        href={service.href}
-                        className="btn-primary-glow text-xs w-full text-center font-mono py-2.5"
-                      >
-                        Configure Instant Quote →
-                      </Link>
-                    </div>
                   )}
-
-                  <div className="text-[10px] font-mono text-purple-400 dark:text-purple-500 text-center">
-                    Protected under Pre-Signed Mutual NDA
-                  </div>
                 </div>
 
+                {/* Real Deliverable Image */}
+                <div className="my-2 transform group-hover:scale-[1.02] transition-transform duration-300">
+                  {service.visual}
+                </div>
+
+                {/* Title & Desc */}
+                <h3 className="font-serif text-xl font-black text-slate-900 mb-2 group-hover:text-[#F95721] transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-slate-600 text-xs font-medium leading-relaxed mb-4">
+                  {service.desc}
+                </p>
+
+                {/* Features Bullet List (Left-Aligned) */}
+                <div className="pt-3 border-t border-slate-100 mb-6">
+                  <div className="text-[10px] text-slate-800 font-bold uppercase mb-2 tracking-wider">
+                    Key Deliverables &amp; Standards:
+                  </div>
+                  <ul className="space-y-1.5 text-xs text-slate-700 font-medium">
+                    {service.features.map((feat, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-[#F95721] font-black text-[11px] mt-0.5">✦</span>
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </Interactive3DCard>
+
+              {/* Card Action Buttons */}
+              <div className="pt-4 border-t border-slate-100 flex flex-col gap-2.5 mt-auto">
+                {service.isCode ? (
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setScopeBuilderOpen(true)}
+                      className="btn-clay-orange text-xs w-full py-2.5 flex items-center justify-center gap-1.5 cursor-pointer"
+                    >
+                      <TerminalLogIcon className="w-3.5 h-3.5" />
+                      <span>Interactive Code Scope Builder →</span>
+                    </button>
+                  </div>
+                ) : service.isTurnitin ? (
+                  <div className="flex flex-col gap-2">
+                    <button
+                      onClick={() => setTurnitinModalOpen(true)}
+                      className="btn-clay-orange text-xs w-full py-2.5 cursor-pointer"
+                    >
+                      Upload &amp; Pay ₹200 via UPI →
+                    </button>
+                    <button
+                      onClick={() => setSampleModalOpen(true)}
+                      className="text-xs text-[#2563EB] hover:underline font-bold text-center cursor-pointer"
+                    >
+                      View Watermarked Sample Report
+                    </button>
+                  </div>
+                ) : service.isHindi ? (
+                  <div className="flex flex-col gap-2">
+                    <Link
+                      href={service.href}
+                      className="btn-clay-orange text-xs w-full text-center py-2.5"
+                    >
+                      Configure Hindi Quote →
+                    </Link>
+                    <button
+                      onClick={() => setAuditModalOpen(true)}
+                      className="text-xs text-[#2563EB] hover:underline inline-flex items-center justify-center gap-1 cursor-pointer font-bold"
+                    >
+                      <AuditTrailIcon className="w-3.5 h-3.5" />
+                      <span>View Vernacular Translation Audit</span>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between gap-2">
+                    <Link
+                      href={service.href}
+                      className="btn-clay-orange text-xs w-full text-center py-2.5"
+                    >
+                      Configure Instant Quote →
+                    </Link>
+                  </div>
+                )}
+
+                <div className="text-[10px] text-slate-400 font-medium text-center">
+                  Protected under Pre-Signed Mutual NDA
+                </div>
+              </div>
+
+            </div>
           ))}
         </div>
 
         {/* ─── RESEARCH AREAS SUPPORTED (Immediately After Services as requested) ── */}
-        <div className="border-t border-purple-200 dark:border-purple-900/40 pt-16">
+        <div className="border-t-2 border-slate-200 pt-16">
           <ResearchAreasSection />
         </div>
 
         {/* ─── Bottom CTA & Video Consultation Banner ──────────────────────── */}
-        <div className="mt-20 p-8 md:p-12 rounded-3xl bg-purple-50/40 dark:bg-[#0A0414] border border-purple-200 dark:border-purple-500/30 text-black dark:text-white text-center shadow-xl relative overflow-hidden">
+        <div className="mt-20 p-8 md:p-12 rounded-3xl card-clay-white text-slate-900 text-center shadow-lg relative overflow-hidden">
           <div className="max-w-3xl mx-auto">
-            <h2 className="font-serif text-2xl sm:text-4xl font-bold mb-3 text-center text-black dark:text-white">
+            <h2 className="font-serif text-2xl sm:text-4xl font-black mb-3 text-center text-slate-900">
               Uncertain About Your Specific Requirements?
             </h2>
-            <p className="text-slate-600 dark:text-purple-200/80 text-sm sm:text-base max-w-xl mx-auto mb-8 text-center font-normal">
+            <p className="text-slate-600 text-sm sm:text-base max-w-xl mx-auto mb-8 text-center font-medium">
               Schedule a 1-on-1 preliminary consultation with assigned doctoral directors Tuhit Roy and Sampreeti Mukherjee to evaluate rubrics and data reproducibility.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <button
                 onClick={() => setSchedulerModalOpen(true)}
-                className="btn-primary-glow font-mono text-xs uppercase cursor-pointer"
+                className="btn-clay-orange text-xs uppercase cursor-pointer"
               >
                 <CalendarScheduleIcon className="w-4 h-4" />
                 <span>Book 1-on-1 Consultation</span>
               </button>
               <button
                 onClick={() => setNdaModalOpen(true)}
-                className="btn-secondary-dark font-mono text-xs uppercase cursor-pointer"
+                className="btn-clay-white text-xs uppercase cursor-pointer"
               >
-                <NdaShieldIcon className="w-4 h-4 text-purple-400" />
+                <NdaShieldIcon className="w-4 h-4" />
                 <span>Preview Mutual NDA</span>
               </button>
             </div>
@@ -456,6 +456,8 @@ export default function ServicesPage() {
         </div>
 
       </div>
+
+      <FloatingLiveHelp />
 
       {/* ─── Interactive Modals ───────────────────────────────────────────── */}
       <InstantTurnitinModal

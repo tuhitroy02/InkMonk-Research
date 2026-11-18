@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { WhatsAppRealIcon } from '@/components/RealIcons';
-import { Interactive3DCard } from '@/components/FuturisticScrollExperience';
+import FloatingLiveHelp from '@/components/FloatingLiveHelp';
 
 interface FAQItem {
   q: string;
@@ -62,30 +62,32 @@ export default function FAQPage() {
   const filteredFaqs = filter === 'All' ? FAQS : FAQS.filter(f => f.category === filter);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[#000000] text-black dark:text-white py-20 px-4 text-center transition-colors duration-300 selection:bg-purple-600 selection:text-white">
+    <div className="min-h-screen bg-notebook-grid text-slate-900 py-16 px-4">
       <div className="max-w-4xl mx-auto">
 
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="badge-pill-purple mb-3 font-mono">FREQUENTLY ASKED QUESTIONS</div>
-          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-black dark:text-white mb-4 text-center">
+          <div className="inline-block bg-orange-100 text-[#F95721] font-black text-xs uppercase px-4 py-1.5 rounded-full mb-3 shadow-sm border border-orange-200">
+            Frequently Asked Questions
+          </div>
+          <h1 className="font-serif text-3xl sm:text-5xl font-black text-slate-900 mb-4 text-center">
             Got Questions? We Have Answers
           </h1>
-          <p className="text-slate-600 dark:text-purple-200/80 text-base sm:text-lg text-center leading-relaxed font-normal">
+          <p className="text-slate-600 text-base sm:text-lg text-center leading-relaxed font-medium max-w-2xl mx-auto">
             Clear, transparent answers about our academic workflows, pricing estimates, confidentiality protocols, and research standards.
           </p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10 font-mono">
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 filter === cat
-                  ? 'bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-200 border border-purple-300 dark:border-purple-400/50 shadow-sm dark:shadow-[0_0_15px_rgba(168,85,247,0.3)]'
-                  : 'bg-white dark:bg-[#0A0414] text-slate-600 dark:text-purple-300/70 hover:text-black dark:hover:text-white border border-purple-200 dark:border-purple-900/50'
+                  ? 'bg-[#F95721] text-white shadow-[0_4px_0_#C43B00]'
+                  : 'bg-white text-slate-700 hover:text-black border-2 border-slate-200 shadow-sm'
               }`}
             >
               {cat}
@@ -94,55 +96,55 @@ export default function FAQPage() {
         </div>
 
         {/* Accordion */}
-        <div className="space-y-4 mb-16 text-center">
+        <div className="space-y-4 mb-16">
           {filteredFaqs.map((faq, idx) => {
             const isOpen = openIdx === idx;
             return (
-              <Interactive3DCard key={idx} glowColor="purple">
-                <div className="card-futuristic-3d overflow-hidden text-center bg-purple-50/20 dark:bg-[#0A0414]">
-                  <button
-                    type="button"
-                    onClick={() => setOpenIdx(isOpen ? null : idx)}
-                    className="w-full text-center p-6 flex justify-between items-center gap-4 hover:bg-purple-50/50 dark:hover:bg-purple-950/30 transition-colors cursor-pointer"
-                  >
-                    <span className="font-serif font-bold text-base sm:text-lg text-black dark:text-white text-left">
-                      {faq.q}
-                    </span>
-                    <span className="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-950 text-purple-800 dark:text-purple-300 border border-purple-300 dark:border-purple-500/40 flex items-center justify-center shrink-0 text-sm font-bold font-mono">
-                      {isOpen ? '−' : '+'}
-                    </span>
-                  </button>
-                  {isOpen && (
-                    <div className="px-6 pb-6 text-sm text-slate-700 dark:text-purple-200/80 leading-relaxed border-t border-purple-100 dark:border-purple-900/40 pt-4 text-left">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              </Interactive3DCard>
+              <div key={idx} className="card-clay-white overflow-hidden transition-all">
+                <button
+                  type="button"
+                  onClick={() => setOpenIdx(isOpen ? null : idx)}
+                  className="w-full text-left p-6 flex justify-between items-center gap-4 hover:bg-orange-50/40 transition-colors cursor-pointer"
+                >
+                  <span className="font-serif font-black text-base sm:text-lg text-slate-900">
+                    {faq.q}
+                  </span>
+                  <span className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-sm font-black transition-all ${
+                    isOpen ? 'bg-[#F95721] text-white shadow-sm' : 'bg-slate-100 text-slate-700 border border-slate-200'
+                  }`}>
+                    {isOpen ? '−' : '+'}
+                  </span>
+                </button>
+                {isOpen && (
+                  <div className="px-6 pb-6 text-sm text-slate-700 leading-relaxed border-t border-slate-100 pt-4 font-medium">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
             );
           })}
         </div>
 
         {/* Still have questions */}
-        <div className="bg-purple-50/40 dark:bg-[#0A0414] border border-purple-200 dark:border-purple-500/30 rounded-3xl p-8 md:p-10 text-black dark:text-white text-center shadow-xl relative overflow-hidden">
-          <div className="relative z-10 flex flex-col items-center text-center">
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold mb-2 text-center">
+        <div className="card-clay-blue-frame p-8 md:p-10 text-white text-center">
+          <div className="flex flex-col items-center text-center">
+            <h3 className="font-serif text-2xl sm:text-3xl font-black mb-2 text-center text-white">
               Have a Question Not Listed Here?
             </h3>
-            <p className="text-slate-600 dark:text-purple-200/80 text-sm max-w-md mx-auto mb-6 text-center font-medium">
+            <p className="text-blue-100 text-sm max-w-md mx-auto mb-6 text-center font-medium">
               Ask our instant local AI assistant or talk directly with our founders on WhatsApp.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/chat" className="btn-primary-glow font-mono">
+              <Link href="/chat" className="btn-clay-orange font-bold text-xs">
                 Ask AI Assistant →
               </Link>
               <a
                 href="https://wa.me/917980470880"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-whatsapp-pill font-mono"
+                className="btn-clay-white font-bold text-xs flex items-center justify-center gap-2"
               >
-                <WhatsAppRealIcon className="w-5 h-5" />
+                <WhatsAppRealIcon className="w-4 h-4" />
                 <span>WhatsApp (+91 7980470880)</span>
               </a>
             </div>
@@ -150,6 +152,7 @@ export default function FAQPage() {
         </div>
 
       </div>
+      <FloatingLiveHelp />
     </div>
   );
 }

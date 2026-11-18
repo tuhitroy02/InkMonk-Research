@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import FloatingLiveHelp from '@/components/FloatingLiveHelp';
 import {
   UkFlagLogo,
   IndiaFlagLogo,
@@ -211,16 +212,18 @@ function QuoteWizard() {
   };
 
   return (
-    <div className="min-h-screen py-16 px-4 bg-white dark:bg-[#000000] text-black dark:text-white transition-colors duration-300">
+    <div className="min-h-screen py-16 px-4 bg-notebook-grid text-slate-900">
       <div className="max-w-4xl mx-auto">
 
         {/* Header */}
         <div className="text-center mb-10">
-          <div className="badge-pill-purple mb-3">Guided Estimation</div>
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-black dark:text-white mb-3 text-center">
+          <div className="inline-block bg-orange-100 text-[#F95721] font-black text-xs uppercase px-4 py-1.5 rounded-full mb-3 shadow-sm border border-orange-200">
+            Guided Estimation
+          </div>
+          <h1 className="font-serif text-3xl sm:text-5xl font-black text-slate-900 mb-3 text-center">
             Custom Project Quotation
           </h1>
-          <p className="text-slate-600 dark:text-purple-200/80 text-base max-w-xl mx-auto text-center leading-relaxed">
+          <p className="text-slate-600 text-base max-w-xl mx-auto text-center leading-relaxed font-medium">
             Select your academic specifications below. Our server-side pricing engine calculates a precise, transparent estimate according to our exact business schedule.
           </p>
         </div>
@@ -235,25 +238,25 @@ function QuoteWizard() {
           ].map((item) => (
             <div key={item.s} className="flex flex-col items-center">
               <div
-                className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm transition-all ${
+                className={`w-9 h-9 rounded-full flex items-center justify-center font-black text-sm transition-all ${
                   step === item.s
-                    ? 'bg-purple-600 text-white shadow-[0_0_15px_rgba(168,85,247,0.5)] scale-110'
+                    ? 'bg-[#F95721] text-white shadow-[0_4px_0_#C43B00,0_8px_16px_rgba(249,87,33,0.35)] scale-110'
                     : step > item.s
-                    ? 'bg-purple-800 text-white'
-                    : 'bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800'
+                    ? 'bg-[#2563EB] text-white'
+                    : 'bg-white text-slate-600 border-2 border-slate-200'
                 }`}
               >
                 {step > item.s ? '✓' : item.s}
               </div>
-              <span className="text-[11px] text-slate-500 dark:text-purple-300/70 font-medium mt-1">{item.label}</span>
+              <span className="text-[11px] text-slate-600 font-bold mt-1">{item.label}</span>
             </div>
           ))}
         </div>
 
         {/* Step 1: Select Language & Service Category */}
         {step === 1 && (
-          <div className="card-futuristic-3d p-6 md:p-8 bg-purple-50/20 dark:bg-[#0A0414] border border-purple-200 dark:border-purple-500/30">
-            <h2 className="font-serif text-2xl font-bold text-black dark:text-white mb-6">Step 1: Select Category &amp; Language</h2>
+          <div className="card-clay-white p-6 md:p-8 shadow-md">
+            <h2 className="font-serif text-2xl font-black text-slate-900 mb-6">Step 1: Select Category &amp; Language</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
               {[
@@ -274,20 +277,20 @@ function QuoteWizard() {
                   }}
                   className={`p-5 rounded-2xl border-2 text-center flex flex-col items-center justify-center transition-all cursor-pointer ${
                     language === cat.id
-                      ? 'border-purple-500 bg-purple-50 dark:bg-purple-950/70 shadow-md ring-2 ring-purple-500/20'
-                      : 'border-purple-100 dark:border-purple-900/40 hover:border-purple-300 bg-white dark:bg-[#05020A]'
+                      ? 'border-[#F95721] bg-orange-50/50 shadow-md ring-2 ring-[#F95721]/20'
+                      : 'border-slate-200 hover:border-slate-300 bg-white'
                   }`}
                 >
                   {cat.logo}
-                  <div className="font-serif font-bold text-lg text-black dark:text-white mb-1">{cat.title}</div>
-                  <div className="text-slate-500 dark:text-purple-300/70 text-xs">{cat.desc}</div>
+                  <div className="font-serif font-black text-lg text-slate-900 mb-1">{cat.title}</div>
+                  <div className="text-slate-500 text-xs font-medium">{cat.desc}</div>
                 </button>
               ))}
             </div>
 
             {/* Service selector */}
             <div className="mb-8">
-              <label className="block text-sm font-semibold text-black dark:text-white mb-2">Service Type</label>
+              <label className="block text-sm font-bold text-slate-900 mb-2">Service Type</label>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {getAvailableServices().map((s) => (
                   <button
@@ -305,10 +308,10 @@ function QuoteWizard() {
                         setPackageType('SMALL');
                       }
                     }}
-                    className={`p-3.5 rounded-xl border text-left text-sm font-medium transition-all cursor-pointer ${
+                    className={`p-3.5 rounded-xl border-2 text-left text-sm font-bold transition-all cursor-pointer ${
                       service === s.id
-                        ? 'border-purple-500 bg-purple-50 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 shadow-sm'
-                        : 'border-purple-100 dark:border-purple-900/40 hover:border-purple-300 text-slate-700 dark:text-purple-200 bg-white dark:bg-[#05020A]'
+                        ? 'border-[#F95721] bg-orange-50 text-[#F95721] shadow-sm'
+                        : 'border-slate-200 hover:border-slate-300 text-slate-700 bg-white'
                     }`}
                   >
                     {s.name}
@@ -321,7 +324,7 @@ function QuoteWizard() {
               <button
                 type="button"
                 onClick={() => setStep(2)}
-                className="btn-primary-glow font-mono text-xs cursor-pointer"
+                className="btn-clay-orange text-xs font-black"
               >
                 Continue to Specifications →
               </button>
@@ -331,12 +334,12 @@ function QuoteWizard() {
 
         {/* Step 2: Service Specifications */}
         {step === 2 && (
-          <div className="card-futuristic-3d p-6 md:p-8 bg-purple-50/20 dark:bg-[#0A0414] border border-purple-200 dark:border-purple-500/30">
-            <h2 className="font-serif text-2xl font-bold text-black dark:text-white mb-6">Step 2: Technical Specifications</h2>
+          <div className="card-clay-white p-6 md:p-8 shadow-md">
+            <h2 className="font-serif text-2xl font-black text-slate-900 mb-6">Step 2: Technical Specifications</h2>
 
             {language !== 'TURNITIN' && (
               <div className="mb-6">
-                <label className="block text-sm font-semibold text-black dark:text-white mb-2">Technical vs. Non-Technical</label>
+                <label className="block text-sm font-bold text-slate-900 mb-2">Technical vs. Non-Technical</label>
                 <div className="grid grid-cols-2 gap-4">
                   {[
                     { id: 'TECH', title: 'Technical', desc: 'Engineering, CS, AI/ML, Data Science, Medical, Sciences' },
@@ -346,14 +349,14 @@ function QuoteWizard() {
                       key={t.id}
                       type="button"
                       onClick={() => setWorkType(t.id as any)}
-                      className={`p-4 rounded-xl border text-left transition-all cursor-pointer ${
+                      className={`p-4 rounded-xl border-2 text-left transition-all cursor-pointer ${
                         workType === t.id
-                          ? 'border-purple-500 bg-purple-50 dark:bg-purple-950/70 text-black dark:text-white ring-2 ring-purple-500/20'
-                          : 'border-purple-100 dark:border-purple-900/40 hover:border-purple-300 text-slate-700 dark:text-purple-200 bg-white dark:bg-[#05020A]'
+                          ? 'border-[#2563EB] bg-blue-50 text-slate-900 ring-2 ring-blue-500/20'
+                          : 'border-slate-200 hover:border-slate-300 text-slate-700 bg-white'
                       }`}
                     >
-                      <div className="font-bold text-sm mb-1">{t.title}</div>
-                      <div className="text-xs text-slate-500 dark:text-purple-300/70">{t.desc}</div>
+                      <div className="font-black text-sm mb-1">{t.title}</div>
+                      <div className="text-xs text-slate-500 font-medium">{t.desc}</div>
                     </button>
                   ))}
                 </div>
@@ -363,17 +366,17 @@ function QuoteWizard() {
             {/* Package selector if applicable */}
             {getAvailablePackages().length > 0 && (
               <div className="mb-6">
-                <label className="block text-sm font-semibold text-black dark:text-white mb-2">Scope / Package Tier</label>
+                <label className="block text-sm font-bold text-slate-900 mb-2">Scope / Package Tier</label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {getAvailablePackages().map((p) => (
                     <button
                       key={p.id}
                       type="button"
                       onClick={() => setPackageType(p.id)}
-                      className={`p-3.5 rounded-xl border text-left text-sm font-medium transition-all cursor-pointer ${
+                      className={`p-3.5 rounded-xl border-2 text-left text-sm font-bold transition-all cursor-pointer ${
                         packageType === p.id
-                          ? 'border-purple-500 bg-purple-50 dark:bg-purple-950/70 text-purple-700 dark:text-purple-300 shadow-sm'
-                          : 'border-purple-100 dark:border-purple-900/40 hover:border-purple-300 text-slate-700 dark:text-purple-200 bg-white dark:bg-[#05020A]'
+                          ? 'border-[#F95721] bg-orange-50 text-[#F95721] shadow-sm'
+                          : 'border-slate-200 hover:border-slate-300 text-slate-700 bg-white'
                       }`}
                     >
                       {p.name}
@@ -386,7 +389,7 @@ function QuoteWizard() {
             {/* Quantity inputs if per-unit service */}
             {['ARTICLE', 'PPT', 'TURNITIN', 'ASSIGNMENT'].includes(service) && (
               <div className="mb-6">
-                <label className="block text-sm font-semibold text-black dark:text-white mb-2">
+                <label className="block text-sm font-bold text-slate-900 mb-2">
                   {service === 'ARTICLE' || service === 'ASSIGNMENT'
                     ? 'Total Estimated Word Count'
                     : service === 'PPT'
@@ -400,9 +403,9 @@ function QuoteWizard() {
                     step={service === 'ARTICLE' || service === 'ASSIGNMENT' ? '100' : '1'}
                     value={quantity}
                     onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="input-field font-semibold text-lg"
+                    className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-lg font-bold text-slate-900 shadow-inner"
                   />
-                  <span className="text-xs text-slate-500 dark:text-purple-300/70 mt-1 block">
+                  <span className="text-xs text-slate-500 font-medium mt-1 block">
                     {service === 'ARTICLE' || service === 'ASSIGNMENT'
                       ? 'Example: 1500 or 3000 words'
                       : service === 'PPT'
@@ -415,25 +418,25 @@ function QuoteWizard() {
 
             {/* Domain & Topic */}
             <div className="mb-6">
-              <label className="block text-sm font-semibold text-black dark:text-white mb-2">Domain / Subject Topic</label>
+              <label className="block text-sm font-bold text-slate-900 mb-2">Domain / Subject Topic</label>
               <input
                 type="text"
                 value={domain}
                 onChange={(e) => setDomain(e.target.value)}
                 placeholder="e.g. Deep Learning in Healthcare, Constitutional Law, Hindi Literature..."
-                className="input-field"
+                className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner"
               />
             </div>
 
             {/* Deadline */}
             <div className="mb-8">
-              <label className="block text-sm font-semibold text-black dark:text-white mb-2">Target Completion Date / Urgency</label>
+              <label className="block text-sm font-bold text-slate-900 mb-2">Target Completion Date / Urgency</label>
               <input
                 type="text"
                 value={deadline}
                 onChange={(e) => setDeadline(e.target.value)}
                 placeholder="e.g. 15 days, End of next month, Urgent (5 days)"
-                className="input-field"
+                className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner"
               />
             </div>
 
@@ -441,7 +444,7 @@ function QuoteWizard() {
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="text-sm font-semibold text-slate-600 dark:text-purple-300 hover:text-black dark:hover:text-white cursor-pointer"
+                className="text-sm font-bold text-slate-600 hover:text-black cursor-pointer"
               >
                 ← Back
               </button>
@@ -449,7 +452,7 @@ function QuoteWizard() {
                 type="button"
                 onClick={handleCalculate}
                 disabled={isCalculating}
-                className="btn-primary-glow font-mono text-xs cursor-pointer"
+                className="btn-clay-orange text-xs font-black cursor-pointer"
               >
                 {isCalculating ? 'Calculating Quote...' : 'Calculate Quote →'}
               </button>
@@ -459,93 +462,93 @@ function QuoteWizard() {
 
         {/* Step 3: Server Quote Calculation & Client Contact Info */}
         {step === 3 && calculatedQuote && (
-          <div className="card-futuristic-3d p-6 md:p-8 bg-purple-50/20 dark:bg-[#0A0414] border border-purple-200 dark:border-purple-500/30">
-            <h2 className="font-serif text-2xl font-bold text-black dark:text-white mb-2">Step 3: Your Calculated Estimate</h2>
-            <p className="text-slate-600 dark:text-purple-200/80 text-sm mb-6">
+          <div className="card-clay-white p-6 md:p-8">
+            <h2 className="font-serif text-2xl font-black text-slate-900 mb-2">Step 3: Your Calculated Estimate</h2>
+            <p className="text-slate-600 text-sm mb-6 font-medium">
               Calculated automatically using InkMonk Research’s internal verified rate schedule.
             </p>
 
             {/* Quote Summary Box */}
-            <div className="bg-purple-950/70 border border-purple-400/50 rounded-2xl p-6 text-white mb-8 shadow-xl">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-purple-400/20 pb-5 mb-5">
+            <div className="card-clay-blue-frame p-6 text-white mb-8">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/20 pb-5 mb-5">
                 <div>
-                  <div className="text-xs text-purple-300 font-bold uppercase tracking-wider font-mono">
+                  <div className="text-xs text-orange-200 font-black uppercase tracking-wider font-mono">
                     {calculatedQuote.languageName} • {calculatedQuote.workTypeName || 'Standard'}
                   </div>
-                  <div className="font-serif text-2xl font-bold mt-1 text-white">{calculatedQuote.serviceName}</div>
+                  <div className="font-serif text-2xl sm:text-3xl font-black mt-1 text-white">{calculatedQuote.serviceName}</div>
                   {calculatedQuote.packageName && (
-                    <div className="text-purple-200 text-sm">{calculatedQuote.packageName}</div>
+                    <div className="text-blue-100 text-sm font-semibold">{calculatedQuote.packageName}</div>
                   )}
                 </div>
                 <div className="text-right">
-                  <div className="text-xs text-purple-300/80">Estimated Total</div>
-                  <div className="text-3xl sm:text-4xl font-serif font-bold text-purple-300">
+                  <div className="text-xs text-blue-200 font-semibold uppercase">Estimated Total</div>
+                  <div className="text-3xl sm:text-4xl font-serif font-black text-white">
                     {calculatedQuote.formattedTotal}
                   </div>
                 </div>
               </div>
 
-              <div className="text-sm text-purple-200 space-y-1">
-                <div className="font-medium text-white">Price Calculation Breakdown:</div>
-                <div className="text-purple-300/90 font-mono text-xs">{calculatedQuote.breakdown}</div>
+              <div className="text-sm text-blue-100 space-y-1">
+                <div className="font-black text-white">Price Calculation Breakdown:</div>
+                <div className="text-blue-200 font-mono text-xs">{calculatedQuote.breakdown}</div>
               </div>
             </div>
 
             {/* Contact details to finalize and reserve quote */}
             <form onSubmit={handleSubmitLead}>
-              <h3 className="font-serif text-lg font-bold text-black dark:text-white mb-4">
+              <h3 className="font-serif text-lg font-black text-slate-900 mb-4">
                 Confirm Your Details to Lock-in this Estimate
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-purple-200 mb-1">Full Name *</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Full Name *</label>
                   <input
                     type="text"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Your Name"
-                    className="input-field text-sm"
+                    className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-purple-200 mb-1">Email Address *</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Email Address *</label>
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@domain.com"
-                    className="input-field text-sm"
+                    className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner"
                   />
                 </div>
               </div>
 
               <div className="mb-4">
-                <label className="block text-xs font-semibold text-slate-700 dark:text-purple-200 mb-1">Phone / WhatsApp Number</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Phone / WhatsApp Number</label>
                 <input
                   type="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+91 9876543210"
-                  className="input-field text-sm"
+                  className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner"
                 />
               </div>
 
               <div className="mb-6">
-                <label className="block text-xs font-semibold text-slate-700 dark:text-purple-200 mb-1">Detailed Brief or Questions (Optional)</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Detailed Brief or Questions (Optional)</label>
                 <textarea
                   rows={3}
                   value={requirements}
                   onChange={(e) => setRequirements(e.target.value)}
                   placeholder="Include any specific journal requirements, software/tools needed, or guidelines..."
-                  className="input-field text-sm"
+                  className="w-full bg-white border-2 border-slate-300 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 shadow-inner"
                 />
               </div>
 
               {submitError && (
-                <div className="p-3 bg-red-50 text-red-700 text-sm rounded-xl mb-4 border border-red-200">
+                <div className="p-3 bg-red-50 text-red-700 text-sm rounded-xl mb-4 border border-red-200 font-medium">
                   {submitError}
                 </div>
               )}
@@ -554,14 +557,14 @@ function QuoteWizard() {
                 <button
                   type="button"
                   onClick={() => setStep(2)}
-                  className="text-sm font-semibold text-slate-600 dark:text-purple-300 hover:text-black dark:hover:text-white cursor-pointer"
+                  className="text-sm font-bold text-slate-600 hover:text-black cursor-pointer"
                 >
                   ← Modify Parameters
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="btn-primary-glow font-mono text-xs w-full sm:w-auto cursor-pointer"
+                  className="btn-clay-orange font-bold text-xs w-full sm:w-auto cursor-pointer"
                 >
                   {isSubmitting ? 'Submitting...' : 'Confirm & Save Quotation →'}
                 </button>
@@ -572,17 +575,17 @@ function QuoteWizard() {
 
         {/* Step 4: Submission Confirmation */}
         {step === 4 && (
-          <div className="card-futuristic-3d p-8 md:p-12 text-center bg-purple-50/20 dark:bg-[#0A0414] border border-purple-200 dark:border-purple-500/30">
-            <div className="w-16 h-16 bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-300 rounded-full flex items-center justify-center text-3xl mx-auto mb-6 shadow-inner border border-purple-300 dark:border-purple-600">
+          <div className="card-clay-white p-8 md:p-12 text-center">
+            <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-6 shadow-sm border border-emerald-300 font-black">
               ✓
             </div>
-            <h2 className="font-serif text-3xl font-bold text-black dark:text-white mb-3">
+            <h2 className="font-serif text-3xl font-black text-slate-900 mb-3">
               Quotation Request Received!
             </h2>
-            <p className="text-slate-600 dark:text-purple-200/80 max-w-lg mx-auto text-base mb-6 leading-relaxed">
-              Thank you, <strong className="text-black dark:text-white">{name}</strong>. Your project quote of{' '}
-              <strong className="text-purple-600 dark:text-purple-300 font-bold">{calculatedQuote?.formattedTotal}</strong> has been saved.
-              Our academic directors, <strong className="text-black dark:text-white">Tuhit Roy</strong> and <strong className="text-black dark:text-white">Sampreeti Mukherjee</strong>, will review your scope and get in touch shortly.
+            <p className="text-slate-600 max-w-lg mx-auto text-base mb-6 leading-relaxed font-medium">
+              Thank you, <strong className="text-slate-900">{name}</strong>. Your project quote of{' '}
+              <strong className="text-[#F95721] font-black">{calculatedQuote?.formattedTotal}</strong> has been saved.
+              Our academic directors, <strong className="text-slate-900">Tuhit Roy</strong> and <strong className="text-slate-900">Sampreeti Mukherjee</strong>, will review your scope and get in touch shortly.
             </p>
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
@@ -590,22 +593,24 @@ function QuoteWizard() {
                 href={getWhatsAppLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-whatsapp-pill font-mono text-xs"
+                className="btn-clay-orange font-bold text-xs flex items-center justify-center gap-2"
               >
+                <WhatsAppRealIcon className="w-4 h-4" />
                 <span>Direct WhatsApp Confirmation</span>
               </a>
-              <Link href="/services" className="btn-secondary-dark font-mono text-xs">
+              <Link href="/services" className="btn-clay-white font-bold text-xs">
                 Explore More Services
               </Link>
             </div>
 
-            <div className="text-xs text-slate-500 dark:text-purple-400 font-mono">
+            <div className="text-xs text-slate-500 font-mono font-semibold">
               Reference ID: {submittedLeadId || 'INKMONK-QUOTE'} • Karunamoyee, Salt Lake, Kolkata
             </div>
           </div>
         )}
 
       </div>
+      <FloatingLiveHelp />
     </div>
   );
 }

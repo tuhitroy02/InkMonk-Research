@@ -100,18 +100,18 @@ export default function HorizontalHowItWorks({ className = "" }: { className?: s
   const current = HORIZONTAL_STEPS[activeStep];
 
   return (
-    <section id="how-it-works" className={`py-20 px-4 text-center relative ${className}`}>
+    <section id="how-it-works" className={`py-20 px-4 text-center relative bg-notebook-grid ${className}`}>
       <div className="max-w-7xl mx-auto">
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="badge-pill-purple mb-3">
+          <div className="inline-block bg-orange-100 text-[#F95721] font-black text-xs uppercase px-4 py-1.5 rounded-full mb-3 shadow-sm border border-orange-200">
             5-STAGE RESEARCH PIPELINE
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-black dark:text-white mb-3 text-center">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-3 text-center">
             How InkMonk Delivers Excellence
           </h2>
-          <p className="text-purple-900/70 dark:text-purple-200/80 text-base text-center leading-relaxed font-medium">
+          <p className="text-slate-600 text-base text-center leading-relaxed font-medium">
             A transparent, milestone-protected workflow from confidential consultation to doctoral drafting and Turnitin originality verification.
           </p>
         </div>
@@ -119,9 +119,9 @@ export default function HorizontalHowItWorks({ className = "" }: { className?: s
         {/* Horizontal Navigation Stepper Track (Desktop) */}
         <div className="relative mb-10 max-w-5xl mx-auto hidden md:block">
           {/* Horizontal Connecting Line */}
-          <div className="absolute top-6 left-12 right-12 h-[2px] bg-purple-200 dark:bg-purple-950 pointer-events-none z-0">
+          <div className="absolute top-6 left-12 right-12 h-[3px] bg-slate-200 pointer-events-none z-0">
             <div
-              className="h-full bg-gradient-to-r from-purple-600 to-indigo-500 shadow-[0_0_15px_rgba(168,85,247,0.8)] transition-all duration-300"
+              className="h-full bg-gradient-to-r from-[#F95721] to-[#2563EB] shadow-md transition-all duration-300"
               style={{ width: `${(activeStep / (HORIZONTAL_STEPS.length - 1)) * 100}%` }}
             />
           </div>
@@ -138,19 +138,19 @@ export default function HorizontalHowItWorks({ className = "" }: { className?: s
                   className="flex flex-col items-center group cursor-pointer focus:outline-none"
                 >
                   <div
-                    className={`w-12 h-12 rounded-2xl flex items-center justify-center font-sans font-bold text-sm transition-all duration-200 border-2 ${
+                    className={`w-12 h-12 rounded-2xl flex items-center justify-center font-sans font-black text-sm transition-all duration-200 border-2 ${
                       isCurrent
-                        ? 'bg-gradient-to-br from-purple-500 to-indigo-600 text-white border-white shadow-[0_0_20px_rgba(168,85,247,0.7)] scale-110'
+                        ? 'bg-[#F95721] text-white border-white shadow-[0_6px_0_#C43B00,0_10px_20px_rgba(249,87,33,0.35)] scale-110'
                         : isPast
-                        ? 'bg-purple-800 text-white border-purple-400'
-                        : 'bg-white dark:bg-black text-purple-400 dark:text-purple-300 border-purple-200 dark:border-purple-900/60 hover:border-purple-400'
+                        ? 'bg-[#2563EB] text-white border-blue-400'
+                        : 'bg-white text-slate-700 border-slate-300 hover:border-[#F95721] shadow-sm'
                     }`}
                   >
                     {isPast ? '✓' : s.step}
                   </div>
                   <span
-                    className={`text-[11px] font-semibold mt-2 uppercase tracking-wider transition-colors ${
-                      isCurrent ? 'text-purple-600 dark:text-purple-300 font-bold' : 'text-slate-500 dark:text-purple-200/60 group-hover:text-purple-400'
+                    className={`text-[11px] font-bold mt-2 uppercase tracking-wider transition-colors ${
+                      isCurrent ? 'text-[#F95721]' : 'text-slate-500 group-hover:text-slate-800'
                     }`}
                   >
                     {s.shortTitle}
@@ -171,81 +171,79 @@ export default function HorizontalHowItWorks({ className = "" }: { className?: s
                 onClick={() => setActiveStep(idx)}
                 className="cursor-pointer transition-all duration-200"
               >
-                <Interactive3DCard glowColor="purple">
-                  <div
-                    className={`card-futuristic-3d p-5 flex flex-col justify-between h-full border-t-4 transition-all ${
-                      isCurrent
-                        ? 'border-t-purple-500 shadow-md ring-2 ring-purple-500/30'
-                        : 'border-t-purple-200 dark:border-t-purple-900/40'
-                    }`}
-                  >
-                    <div>
-                      {/* Step Header */}
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="step-number-futuristic !w-9 !h-9 !text-sm">
-                          {s.step}
-                        </span>
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/40">
-                          {s.badge}
-                        </span>
-                      </div>
-
-                      <h3 className="font-serif text-base font-bold text-black dark:text-white mb-2 leading-snug">
-                        {s.title}
-                      </h3>
-                      <p className="text-slate-600 dark:text-purple-200/70 text-xs leading-relaxed mb-4">
-                        {s.desc}
-                      </p>
-
-                      {/* Deliverable Box */}
-                      <div className="p-2.5 rounded-xl bg-purple-50/60 dark:bg-black/80 border border-purple-200 dark:border-purple-500/30 mb-3">
-                        <div className="text-[10px] font-bold text-purple-700 dark:text-purple-400 uppercase mb-0.5 font-mono">
-                          DELIVERABLE:
-                        </div>
-                        <div className="text-xs text-slate-800 dark:text-purple-100 font-medium leading-tight">
-                          {s.deliverables}
-                        </div>
-                      </div>
+                <div
+                  className={`card-clay-white p-5 flex flex-col justify-between h-full border-2 transition-all ${
+                    isCurrent
+                      ? 'border-[#F95721] shadow-lg ring-2 ring-[#F95721]/30 -translate-y-1'
+                      : 'border-slate-200 hover:border-slate-300'
+                  }`}
+                >
+                  <div>
+                    {/* Step Header */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="w-8 h-8 rounded-xl bg-orange-100 text-[#F95721] font-black text-xs flex items-center justify-center border border-orange-200">
+                        {s.step}
+                      </span>
+                      <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-200">
+                        {s.badge}
+                      </span>
                     </div>
 
-                    {/* Timeline Bottom */}
-                    <div className="pt-2 border-t border-purple-100 dark:border-purple-900/40 flex items-center justify-between text-[11px] text-slate-500 dark:text-purple-300/70">
-                      <span>Timeline:</span>
-                      <span className="text-purple-700 dark:text-purple-300 font-bold">{s.timeline}</span>
+                    <h3 className="font-serif text-base font-black text-slate-900 mb-2 leading-snug">
+                      {s.title}
+                    </h3>
+                    <p className="text-slate-600 text-xs font-medium leading-relaxed mb-4">
+                      {s.desc}
+                    </p>
+
+                    {/* Deliverable Box */}
+                    <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 mb-3">
+                      <div className="text-[10px] font-black text-[#F95721] uppercase mb-0.5">
+                        DELIVERABLE:
+                      </div>
+                      <div className="text-xs text-slate-800 font-bold leading-tight">
+                        {s.deliverables}
+                      </div>
                     </div>
                   </div>
-                </Interactive3DCard>
+
+                  {/* Timeline Bottom */}
+                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+                    <span>Timeline:</span>
+                    <span className="text-[#2563EB] font-bold">{s.timeline}</span>
+                  </div>
+                </div>
               </div>
             );
           })}
         </div>
 
         {/* Active Stage Detailed Spotlight Box */}
-        <div className="mt-8 p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0A0414] border border-purple-200 dark:border-purple-500/30 text-left max-w-5xl mx-auto shadow-sm dark:shadow-[0_0_40px_rgba(168,85,247,0.15)]">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-purple-100 dark:border-purple-900/40">
+        <div className="mt-8 p-6 sm:p-8 rounded-3xl card-clay-white text-left max-w-5xl mx-auto shadow-md">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 dark:bg-purple-950/80 border border-purple-200 dark:border-purple-400/50 text-[11px] font-bold text-purple-800 dark:text-purple-300 uppercase tracking-wider mb-2 font-mono">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 border border-orange-200 text-[11px] font-black text-[#F95721] uppercase tracking-wider mb-2">
                 <span>STAGE {current.step} IN-DEPTH PROTOCOL</span>
               </div>
-              <h3 className="font-serif text-2xl font-bold text-black dark:text-white">
+              <h3 className="font-serif text-2xl font-black text-slate-900">
                 {current.title}
               </h3>
             </div>
             <div className="text-right shrink-0">
-              <span className="text-xs text-slate-500 dark:text-purple-300/60 block">Standard Timeline</span>
-              <span className="text-sm font-bold text-purple-700 dark:text-purple-300">{current.timeline}</span>
+              <span className="text-xs text-slate-500 block">Standard Timeline</span>
+              <span className="text-sm font-black text-[#2563EB]">{current.timeline}</span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6">
             <div>
-              <h4 className="font-sans text-xs font-bold text-black dark:text-white uppercase tracking-wider mb-3">
+              <h4 className="font-sans text-xs font-black text-slate-900 uppercase tracking-wider mb-3">
                 Key Milestone Activities:
               </h4>
-              <ul className="space-y-2.5 text-xs text-slate-600 dark:text-purple-200/80">
+              <ul className="space-y-2.5 text-xs text-slate-700 font-medium">
                 {current.subpoints.map((pt, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="text-purple-600 dark:text-purple-400 font-bold mt-0.5">✓</span>
+                    <span className="text-[#F95721] font-black mt-0.5">✦</span>
                     <span>{pt}</span>
                   </li>
                 ))}
@@ -253,11 +251,11 @@ export default function HorizontalHowItWorks({ className = "" }: { className?: s
             </div>
 
             <div className="space-y-4">
-              <div className="p-4 rounded-2xl bg-purple-50/50 dark:bg-black/60 border border-purple-200 dark:border-purple-500/30">
-                <div className="text-xs font-bold text-purple-700 dark:text-purple-400 uppercase mb-1 font-mono">
+              <div className="p-4 rounded-2xl bg-blue-50/60 border border-blue-200">
+                <div className="text-xs font-black text-[#2563EB] uppercase mb-1">
                   Guaranteed Deliverable:
                 </div>
-                <div className="text-sm font-bold text-black dark:text-white">
+                <div className="text-sm font-bold text-slate-900">
                   {current.deliverables}
                 </div>
               </div>
@@ -265,7 +263,7 @@ export default function HorizontalHowItWorks({ className = "" }: { className?: s
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/quote"
-                  className="btn-primary-glow text-xs !py-2.5 !px-5"
+                  className="btn-clay-orange text-xs !py-2.5 !px-5"
                 >
                   Configure Project Scope →
                 </Link>
@@ -273,7 +271,7 @@ export default function HorizontalHowItWorks({ className = "" }: { className?: s
                   href="https://wa.me/917980470880"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-secondary-dark text-xs !py-2.5 !px-5"
+                  className="btn-clay-white text-xs !py-2.5 !px-5"
                 >
                   Discuss with Assigned Director
                 </a>
