@@ -94,17 +94,17 @@ export default function ReferenceConverterTool() {
         </div>
 
         {/* Direction Switcher Toggle */}
-        <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800/80 p-1.5 rounded-2xl border border-slate-300 dark:border-slate-700 shrink-0">
+        <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800/90 p-1.5 rounded-2xl border border-slate-200/90 dark:border-slate-700 shadow-inner shrink-0">
           <button
             type="button"
             onClick={() => {
               setDirection('APA_TO_IEEE');
               setHasParsed(false);
             }}
-            className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all duration-200 cursor-pointer ${
               direction === 'APA_TO_IEEE'
-                ? 'bg-[#1d4ed8] text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900'
+                ? 'bg-gradient-to-r from-[#1d4ed8] to-[#2563eb] text-white shadow-xs'
+                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             APA 7th → IEEE
@@ -115,10 +115,10 @@ export default function ReferenceConverterTool() {
               setDirection('IEEE_TO_APA');
               setHasParsed(false);
             }}
-            className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all duration-200 cursor-pointer ${
               direction === 'IEEE_TO_APA'
-                ? 'bg-[#1d4ed8] text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900'
+                ? 'bg-gradient-to-r from-[#1d4ed8] to-[#2563eb] text-white shadow-xs'
+                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             IEEE → APA 7th
@@ -127,7 +127,7 @@ export default function ReferenceConverterTool() {
       </div>
 
       {/* Scope Advisory Badge */}
-      <div className="flex items-center gap-2 px-3.5 py-2 bg-blue-50 dark:bg-blue-950/40 rounded-xl border border-blue-200 dark:border-blue-800 text-xs text-[#1d4ed8] dark:text-blue-300 font-medium">
+      <div className="flex items-center gap-2 px-4 py-2.5 bg-blue-50/80 dark:bg-blue-950/40 rounded-2xl border border-blue-200/90 dark:border-blue-800/80 text-xs text-[#1d4ed8] dark:text-blue-300 font-medium shadow-2xs">
         <span className="font-black text-sm">ℹ️</span>
         <span>
           <strong>Scope Notice:</strong> This release supports <strong>academic journal articles</strong> and periodical papers. Book and conference proceeding modules will be added in upcoming builds.
@@ -171,7 +171,7 @@ export default function ReferenceConverterTool() {
               ? 'e.g. Vaswani, A., Shazeer, N., & Parmar, N. (2017). Attention is all you need. Advances in Neural Information Processing Systems, 30(2), 5998–6008. https://doi.org/10.48550/arXiv.1706.03762'
               : 'e.g. [1] A. Vaswani, N. Shazeer, and N. Parmar, "Attention is all you need," Adv. Neural Inf. Process. Syst., vol. 30, no. 2, pp. 5998-6008, 2017, doi: 10.48550/arXiv.1706.03762.'
           }
-          className="w-full bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 rounded-2xl p-4 text-xs sm:text-sm font-mono text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all leading-relaxed"
+          className="w-full bg-white dark:bg-slate-900 border-2 border-slate-200/90 dark:border-slate-700 rounded-2xl p-4 text-xs sm:text-sm font-mono text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-3 focus:ring-[#1d4ed8]/20 transition-all duration-200 leading-relaxed shadow-2xs"
         />
 
         <div className="flex justify-end">
@@ -179,7 +179,7 @@ export default function ReferenceConverterTool() {
             type="button"
             onClick={handleParse}
             disabled={!inputText.trim()}
-            className="btn-clay-orange text-xs sm:text-sm py-2.5 px-6 font-extrabold flex items-center gap-2 cursor-pointer disabled:opacity-50"
+            className="btn-clay-orange text-xs sm:text-sm py-2.5 px-6 font-extrabold flex items-center gap-2 cursor-pointer shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#f97316]/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
           >
             <span>Parse &amp; Verify Metadata</span>
             <span>→</span>
@@ -206,15 +206,15 @@ export default function ReferenceConverterTool() {
             {parsedEntries.map((entry, index) => (
               <div
                 key={entry.id}
-                className={`p-5 rounded-2xl border-2 transition-all ${
+                className={`p-5 rounded-2xl border-2 transition-all duration-200 shadow-xs ${
                   entry.confidence === 'low'
-                    ? 'bg-amber-50/50 dark:bg-amber-950/20 border-amber-300 dark:border-amber-800'
-                    : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800'
+                    ? 'bg-amber-50/50 dark:bg-amber-950/20 border-amber-300 dark:border-amber-700/80'
+                    : 'bg-white dark:bg-slate-900 border-slate-200/90 dark:border-slate-800'
                 }`}
               >
                 {/* Header row: Index & Confidence Flag */}
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                  <span className="bg-[#1d4ed8] text-white text-xs font-black px-2.5 py-0.5 rounded-lg font-mono">
+                  <span className="bg-[#1d4ed8] text-white text-xs font-black px-2.5 py-0.5 rounded-lg font-mono shadow-2xs">
                     Entry #{index + 1}
                   </span>
 
@@ -223,22 +223,22 @@ export default function ReferenceConverterTool() {
                       {entry.flaggedReasons.map((reason, rIdx) => (
                         <span
                           key={rIdx}
-                          className="bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-200 text-[10px] font-black px-2 py-0.5 rounded-full"
+                          className="bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-200 border border-amber-300 dark:border-amber-700 text-[10px] font-black px-2 py-0.5 rounded-full"
                         >
                           ⚠️ {reason}
                         </span>
                       ))}
                     </div>
                   ) : (
-                    <span className="bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 text-[10px] font-black px-2 py-0.5 rounded-full">
+                    <span className="bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 text-[10px] font-black px-2 py-0.5 rounded-full">
                       ✓ High Confidence Match
                     </span>
                   )}
                 </div>
 
                 {/* Original Raw Text Display (Preserved for review) */}
-                <div className="mb-4 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-300">
-                  <span className="text-[10px] font-black uppercase text-slate-400 block mb-1">
+                <div className="mb-4 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-300">
+                  <span className="text-[10px] font-black uppercase text-slate-400 dark:text-slate-400 block mb-1">
                     Original Pasted Reference:
                   </span>
                   <p className="font-mono text-[11px] break-words">{entry.raw}</p>
@@ -254,7 +254,7 @@ export default function ReferenceConverterTool() {
                       type="text"
                       value={entry.authors}
                       onChange={(e) => handleFieldChange(entry.id, 'authors', e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium"
+                      className="w-full bg-slate-50/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200"
                     />
                   </div>
 
@@ -267,7 +267,7 @@ export default function ReferenceConverterTool() {
                       value={entry.year}
                       onChange={(e) => handleFieldChange(entry.id, 'year', e.target.value)}
                       placeholder="e.g. 2023"
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium"
+                      className="w-full bg-slate-50/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200"
                     />
                   </div>
 
@@ -280,7 +280,7 @@ export default function ReferenceConverterTool() {
                       value={entry.doi}
                       onChange={(e) => handleFieldChange(entry.id, 'doi', e.target.value)}
                       placeholder="10.xxxx/yyyy"
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium font-mono"
+                      className="w-full bg-slate-50/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium font-mono text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200"
                     />
                   </div>
 
@@ -292,7 +292,7 @@ export default function ReferenceConverterTool() {
                       type="text"
                       value={entry.title}
                       onChange={(e) => handleFieldChange(entry.id, 'title', e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium"
+                      className="w-full bg-slate-50/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200"
                     />
                   </div>
 
@@ -304,7 +304,7 @@ export default function ReferenceConverterTool() {
                       type="text"
                       value={entry.journal}
                       onChange={(e) => handleFieldChange(entry.id, 'journal', e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium"
+                      className="w-full bg-slate-50/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200"
                     />
                   </div>
 
@@ -317,7 +317,7 @@ export default function ReferenceConverterTool() {
                       value={entry.volume}
                       onChange={(e) => handleFieldChange(entry.id, 'volume', e.target.value)}
                       placeholder="e.g. 42"
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium"
+                      className="w-full bg-slate-50/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200"
                     />
                   </div>
 
@@ -330,7 +330,7 @@ export default function ReferenceConverterTool() {
                       value={entry.issue}
                       onChange={(e) => handleFieldChange(entry.id, 'issue', e.target.value)}
                       placeholder="e.g. 3"
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium"
+                      className="w-full bg-slate-50/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200"
                     />
                   </div>
 
@@ -343,7 +343,7 @@ export default function ReferenceConverterTool() {
                       value={entry.pages}
                       onChange={(e) => handleFieldChange(entry.id, 'pages', e.target.value)}
                       placeholder="e.g. 112–125"
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium"
+                      className="w-full bg-slate-50/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200"
                     />
                   </div>
                 </div>
@@ -368,13 +368,13 @@ export default function ReferenceConverterTool() {
               <button
                 type="button"
                 onClick={handleCopyAll}
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs px-4 py-2 rounded-xl flex items-center gap-1.5 transition-all shadow-sm cursor-pointer"
+                className="bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-extrabold text-xs px-4 py-2 rounded-xl flex items-center gap-1.5 transition-all duration-200 shadow-xs hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/40 cursor-pointer"
               >
                 <span>{copied ? '✓ Copied to Clipboard!' : '📋 Copy All References'}</span>
               </button>
             </div>
 
-            <div className="bg-slate-900 text-slate-100 rounded-2xl p-5 font-mono text-xs leading-relaxed overflow-x-auto border-2 border-slate-800">
+            <div className="bg-slate-950 text-slate-100 rounded-2xl p-5 font-mono text-xs leading-relaxed overflow-x-auto border-2 border-slate-800 shadow-inner">
               <pre className="whitespace-pre-wrap">{generateOutput()}</pre>
             </div>
           </div>

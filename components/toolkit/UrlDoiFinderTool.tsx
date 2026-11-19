@@ -206,13 +206,13 @@ export default function UrlDoiFinderTool() {
             value={urlInput}
             onChange={(e) => setUrlInput(e.target.value)}
             placeholder="e.g. https://link.springer.com/article/10.1007/s11263-020-01387-4"
-            className="flex-1 bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8]"
+            className="flex-1 bg-white dark:bg-slate-900 border-2 border-slate-200/90 dark:border-slate-700 rounded-2xl px-4 py-3 text-xs sm:text-sm font-mono text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-3 focus:ring-[#1d4ed8]/20 transition-all duration-200 shadow-2xs"
           />
           <button
             type="button"
             onClick={handleInspectUrl}
             disabled={!urlInput.trim() || loading}
-            className="btn-clay-orange text-xs sm:text-sm py-3 px-6 font-extrabold flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shrink-0"
+            className="btn-clay-orange text-xs sm:text-sm py-3 px-6 font-extrabold flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#f97316]/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shrink-0"
           >
             {loading ? <span>Analyzing URL…</span> : <span>Extract DOI →</span>}
           </button>
@@ -222,14 +222,14 @@ export default function UrlDoiFinderTool() {
       {/* Status Bar */}
       {statusState !== 'IDLE' && (
         <div
-          className={`p-4 rounded-2xl border-2 flex items-center justify-between gap-3 ${
+          className={`p-4 rounded-2xl border-2 flex items-center justify-between gap-3 shadow-2xs ${
             statusState === 'DOI extracted from URL'
-              ? 'bg-blue-50 dark:bg-blue-950/40 border-blue-300 dark:border-blue-800 text-[#1d4ed8] dark:text-blue-300'
+              ? 'bg-blue-50/80 dark:bg-blue-950/40 border-blue-300 dark:border-blue-800/80 text-[#1d4ed8] dark:text-blue-300'
               : statusState === 'Matching DOI found'
-              ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200'
+              ? 'bg-emerald-50/80 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-800/80 text-emerald-800 dark:text-emerald-200'
               : statusState === 'No DOI found'
-              ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200'
-              : 'bg-rose-50 dark:bg-rose-950/40 border-rose-300 dark:border-rose-800 text-rose-800 dark:text-rose-200'
+              ? 'bg-amber-50/80 dark:bg-amber-950/40 border-amber-300 dark:border-amber-800/80 text-amber-900 dark:text-amber-200'
+              : 'bg-rose-50/80 dark:bg-rose-950/40 border-rose-300 dark:border-rose-800/80 text-rose-800 dark:text-rose-200'
           }`}
         >
           <div className="flex items-center gap-2 font-black text-xs sm:text-sm">
@@ -248,18 +248,18 @@ export default function UrlDoiFinderTool() {
 
       {/* Article Result Card */}
       {article && (
-        <div className="card-clay-white p-6 border-2 border-slate-200 dark:border-slate-800 shadow-md space-y-4">
+        <div className="card-clay-white p-6 border-2 border-slate-200/90 dark:border-slate-800 rounded-2xl shadow-sm space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-xs font-black bg-[#1d4ed8] text-white px-3 py-1 rounded-lg">
+              <span className="font-mono text-xs font-black bg-[#1d4ed8] text-white px-3 py-1 rounded-lg shadow-2xs">
                 DOI: {article.doi}
               </span>
               {article.isConfirmed ? (
-                <span className="bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 text-[10px] font-black px-2.5 py-0.5 rounded-full">
+                <span className="bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 text-[10px] font-black px-2.5 py-0.5 rounded-full">
                   Confirmed Record
                 </span>
               ) : (
-                <span className="bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 text-[10px] font-black px-2.5 py-0.5 rounded-full">
+                <span className="bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border border-amber-300 dark:border-amber-700 text-[10px] font-black px-2.5 py-0.5 rounded-full">
                   Suggested Search Match (Medium Confidence)
                 </span>
               )}
@@ -269,7 +269,7 @@ export default function UrlDoiFinderTool() {
               <button
                 type="button"
                 onClick={handleCopyDoi}
-                className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-100 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 transition-colors cursor-pointer"
+                className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 active:bg-slate-300 text-slate-800 dark:text-slate-100 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-xs focus:ring-2 focus:ring-slate-400/30"
               >
                 {copiedDoi ? '✓ Copied DOI' : '📋 Copy DOI'}
               </button>
@@ -277,7 +277,7 @@ export default function UrlDoiFinderTool() {
                 href={`https://doi.org/${article.doi}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#1d4ed8] hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1 transition-colors"
+                className="bg-[#1d4ed8] hover:bg-blue-700 active:bg-blue-800 text-white text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1 transition-all duration-200 shadow-2xs hover:shadow-xs focus:ring-2 focus:ring-blue-500/40"
               >
                 <span>Open DOI</span>
                 <span>↗</span>
@@ -286,7 +286,7 @@ export default function UrlDoiFinderTool() {
                 <button
                   type="button"
                   onClick={handleConfirmDoi}
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition-colors cursor-pointer"
+                  className="bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-xs focus:ring-2 focus:ring-emerald-500/40"
                 >
                   Confirm this DOI ✓
                 </button>
@@ -303,7 +303,7 @@ export default function UrlDoiFinderTool() {
               {article.authors.length > 1 && ` et al. (${article.authors.length} authors)`}
               {article.year && ` • (${article.year})`}
             </p>
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
               <strong>Journal / Source:</strong> {article.journal}
               {article.volume && `, vol. ${article.volume}`}
               {article.issue && `(${article.issue})`}
@@ -314,12 +314,12 @@ export default function UrlDoiFinderTool() {
       )}
 
       {/* Fallback Search Option: If no DOI found in URL or user wants to search manually */}
-      <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 space-y-4">
+      <div className="p-5 sm:p-6 rounded-2xl bg-slate-50/90 dark:bg-slate-900/60 border-2 border-slate-200/90 dark:border-slate-800 space-y-4 shadow-2xs">
         <div>
           <h4 className="font-serif text-sm sm:text-base font-black text-slate-900 dark:text-white flex items-center gap-2">
             <span>🔎 Fallback Search: Search Scholarly Registry by Title &amp; Author</span>
           </h4>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             If the publisher URL is masked or behind a proxy, query Crossref directly with the article title.
           </p>
         </div>
@@ -335,7 +335,7 @@ export default function UrlDoiFinderTool() {
               onChange={(e) => setSearchTitle(e.target.value)}
               placeholder="e.g. Deep learning or Attention is all you need"
               required
-              className="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-2.5 text-xs font-medium text-slate-900 dark:text-white"
+              className="w-full bg-white dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl p-2.5 text-xs font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200"
             />
           </div>
 
@@ -349,7 +349,7 @@ export default function UrlDoiFinderTool() {
                 value={searchAuthor}
                 onChange={(e) => setSearchAuthor(e.target.value)}
                 placeholder="e.g. LeCun or Vaswani"
-                className="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-2.5 text-xs font-medium text-slate-900 dark:text-white"
+                className="w-full bg-white dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl p-2.5 text-xs font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200"
               />
             </div>
 
@@ -362,7 +362,7 @@ export default function UrlDoiFinderTool() {
                 value={searchYear}
                 onChange={(e) => setSearchYear(e.target.value)}
                 placeholder="e.g. 2017"
-                className="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-2.5 text-xs font-medium text-slate-900 dark:text-white"
+                className="w-full bg-white dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl p-2.5 text-xs font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200"
               />
             </div>
           </div>
@@ -371,7 +371,7 @@ export default function UrlDoiFinderTool() {
             <button
               type="submit"
               disabled={!searchTitle.trim() || searching}
-              className="btn-clay-white text-xs py-2 px-5 font-bold cursor-pointer disabled:opacity-40"
+              className="btn-clay-white text-xs py-2 px-5 font-bold cursor-pointer disabled:opacity-40 rounded-xl shadow-2xs hover:shadow-xs focus:ring-2 focus:ring-slate-400/30 transition-all duration-200"
             >
               {searching ? 'Querying Crossref…' : 'Search Scholarly Registry 🔍'}
             </button>

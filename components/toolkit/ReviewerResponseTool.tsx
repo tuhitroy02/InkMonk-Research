@@ -207,8 +207,8 @@ export default function ReviewerResponseTool() {
       </div>
 
       {/* Manuscript Meta Controls */}
-      <div className="card-clay-white p-5 border-2 border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-        <span className="text-[11px] font-black uppercase text-slate-400 tracking-wider block">
+      <div className="card-clay-white p-5 border-2 border-slate-200/90 dark:border-slate-800 rounded-2xl shadow-sm space-y-3">
+        <span className="text-[11px] font-black uppercase text-slate-400 dark:text-slate-500 tracking-wider block">
           Manuscript &amp; Submission Details:
         </span>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
@@ -220,7 +220,7 @@ export default function ReviewerResponseTool() {
               type="text"
               value={meta.manuscriptTitle}
               onChange={(e) => setMeta({ ...meta, manuscriptTitle: e.target.value })}
-              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium"
+              className="w-full bg-slate-50/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200"
             />
           </div>
 
@@ -233,7 +233,7 @@ export default function ReviewerResponseTool() {
               value={meta.manuscriptId || ''}
               onChange={(e) => setMeta({ ...meta, manuscriptId: e.target.value })}
               placeholder="e.g. IEEE-TSE-2026-0891"
-              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium font-mono"
+              className="w-full bg-slate-50/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium font-mono text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200"
             />
           </div>
 
@@ -246,7 +246,7 @@ export default function ReviewerResponseTool() {
               value={meta.targetJournal || ''}
               onChange={(e) => setMeta({ ...meta, targetJournal: e.target.value })}
               placeholder="e.g. IEEE, Springer, Nature"
-              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium"
+              className="w-full bg-slate-50/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200"
             />
           </div>
 
@@ -258,7 +258,7 @@ export default function ReviewerResponseTool() {
               type="text"
               value={meta.authorName || ''}
               onChange={(e) => setMeta({ ...meta, authorName: e.target.value })}
-              className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium"
+              className="w-full bg-slate-50/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 rounded-xl p-2 font-medium text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200"
             />
           </div>
         </div>
@@ -272,10 +272,10 @@ export default function ReviewerResponseTool() {
               key={group.id}
               type="button"
               onClick={() => setActiveGroupIndex(idx)}
-              className={`px-4 py-2 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center gap-2 ${
+              className={`px-4 py-2 rounded-xl text-xs font-black transition-all duration-200 cursor-pointer flex items-center gap-2 ${
                 activeGroupIndex === idx
-                  ? 'bg-[#1d4ed8] text-white shadow-sm'
-                  : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:border-[#1d4ed8]'
+                  ? 'bg-[#1d4ed8] text-white shadow-xs'
+                  : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:border-[#1d4ed8] hover:text-[#1d4ed8]'
               }`}
             >
               <span>{group.reviewerName}</span>
@@ -288,7 +288,7 @@ export default function ReviewerResponseTool() {
           <button
             type="button"
             onClick={handleAddGroup}
-            className="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 text-xs font-extrabold border border-dashed border-slate-300 dark:border-slate-700 cursor-pointer"
+            className="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-extrabold border border-dashed border-slate-300 dark:border-slate-700 cursor-pointer transition-all duration-200"
           >
             + Add Reviewer Group
           </button>
@@ -298,7 +298,7 @@ export default function ReviewerResponseTool() {
           <button
             type="button"
             onClick={handleResetExample}
-            className="text-xs font-bold text-[#f97316] hover:underline cursor-pointer"
+            className="text-xs font-bold text-[#f97316] hover:text-[#ea580c] dark:hover:text-orange-400 hover:underline cursor-pointer transition-colors"
           >
             Reset to Sample Rebuttal
           </button>
@@ -339,11 +339,11 @@ export default function ReviewerResponseTool() {
           {currentGroup.comments.map((comment, cIdx) => (
             <div
               key={comment.id}
-              className="card-clay-white p-5 border-2 border-slate-200 dark:border-slate-800 shadow-sm space-y-3 relative group"
+              className="card-clay-white p-5 border-2 border-slate-200/90 dark:border-slate-800 rounded-2xl shadow-xs space-y-3 relative group"
             >
               {/* Comment Numbering & Reorder Buttons */}
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
-                <span className="bg-[#1d4ed8] text-white text-xs font-black px-2.5 py-1 rounded-lg font-mono">
+                <span className="bg-[#1d4ed8] text-white text-xs font-black px-2.5 py-1 rounded-lg font-mono shadow-2xs">
                   Comment {currentGroup.reviewerNumber}.{cIdx + 1}
                 </span>
 
@@ -352,7 +352,7 @@ export default function ReviewerResponseTool() {
                     type="button"
                     onClick={() => handleMoveUp(activeGroupIndex, cIdx)}
                     disabled={cIdx === 0}
-                    className="p-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 disabled:opacity-30 hover:bg-slate-200 cursor-pointer"
+                    className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 disabled:opacity-30 hover:bg-slate-200 dark:hover:bg-slate-700 cursor-pointer transition-all duration-200"
                     title="Move Up"
                   >
                     ▲
@@ -361,7 +361,7 @@ export default function ReviewerResponseTool() {
                     type="button"
                     onClick={() => handleMoveDown(activeGroupIndex, cIdx)}
                     disabled={cIdx === currentGroup.comments.length - 1}
-                    className="p-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 disabled:opacity-30 hover:bg-slate-200 cursor-pointer"
+                    className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 disabled:opacity-30 hover:bg-slate-200 dark:hover:bg-slate-700 cursor-pointer transition-all duration-200"
                     title="Move Down"
                   >
                     ▼
@@ -369,7 +369,7 @@ export default function ReviewerResponseTool() {
                   <button
                     type="button"
                     onClick={() => handleDeleteComment(activeGroupIndex, cIdx)}
-                    className="p-1 rounded bg-rose-50 dark:bg-rose-950/60 text-rose-600 text-xs font-bold hover:bg-rose-100 cursor-pointer ml-1"
+                    className="p-1.5 rounded-lg bg-rose-50 dark:bg-rose-950/60 text-rose-600 text-xs font-bold hover:bg-rose-100 dark:hover:bg-rose-900/40 cursor-pointer ml-1 transition-all duration-200"
                     title="Delete Comment"
                   >
                     ✕
@@ -389,7 +389,7 @@ export default function ReviewerResponseTool() {
                     handleCommentChange(activeGroupIndex, cIdx, 'reviewerComment', e.target.value)
                   }
                   placeholder="Paste the exact wording from the reviewer report…"
-                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-3 text-xs font-mono text-slate-800 dark:text-slate-100"
+                  className="w-full bg-slate-50/90 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 rounded-xl p-3 text-xs font-mono text-slate-800 dark:text-slate-100 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200 shadow-2xs"
                 />
               </div>
 
@@ -405,7 +405,7 @@ export default function ReviewerResponseTool() {
                     handleCommentChange(activeGroupIndex, cIdx, 'authorResponse', e.target.value)
                   }
                   placeholder="Detail your scientific justification, counter-argument, or how the comment was addressed…"
-                  className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl p-3 text-xs font-medium text-slate-800 dark:text-slate-100 focus:outline-none focus:border-[#1d4ed8]"
+                  className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl p-3 text-xs font-medium text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200 shadow-2xs"
                 />
               </div>
 
@@ -421,7 +421,7 @@ export default function ReviewerResponseTool() {
                     handleCommentChange(activeGroupIndex, cIdx, 'locationChanged', e.target.value)
                   }
                   placeholder="e.g. Page 7, Section 3.2, Lines 142–150"
-                  className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl p-2.5 text-xs font-medium text-slate-800 dark:text-slate-100 focus:outline-none focus:border-[#1d4ed8]"
+                  className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl p-2.5 text-xs font-medium text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-2 focus:ring-[#1d4ed8]/20 transition-all duration-200 shadow-2xs"
                 />
               </div>
             </div>
@@ -431,7 +431,7 @@ export default function ReviewerResponseTool() {
             <button
               type="button"
               onClick={() => handleAddComment(activeGroupIndex)}
-              className="btn-clay-white text-xs py-2 px-4 font-bold cursor-pointer"
+              className="btn-clay-white text-xs py-2 px-4 font-bold cursor-pointer rounded-xl shadow-2xs hover:shadow-xs focus:ring-2 focus:ring-slate-400/30 transition-all duration-200"
             >
               + Add Comment to {currentGroup.reviewerName}
             </button>
@@ -441,7 +441,7 @@ export default function ReviewerResponseTool() {
 
       {/* Unanswered Comments Flagging Warning Modal / Banner */}
       {showUnansweredWarning && (
-        <div className="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/60 border-2 border-amber-300 dark:border-amber-800 space-y-3">
+        <div className="p-4 rounded-2xl bg-amber-50/90 dark:bg-amber-950/60 border-2 border-amber-300 dark:border-amber-800/80 space-y-3 shadow-2xs">
           <div className="flex items-center gap-2 text-amber-900 dark:text-amber-200 font-black text-sm">
             <span>⚠️</span>
             <span>Warning: Unanswered Reviewer Comments Detected</span>
@@ -460,14 +460,14 @@ export default function ReviewerResponseTool() {
             <button
               type="button"
               onClick={() => handleGenerateClick(true)}
-              className="bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold py-1.5 px-4 rounded-xl cursor-pointer"
+              className="bg-amber-600 hover:bg-amber-700 active:bg-amber-800 text-white text-xs font-bold py-1.5 px-4 rounded-xl cursor-pointer shadow-2xs transition-all duration-200"
             >
               Export Anyway with Placeholders →
             </button>
             <button
               type="button"
               onClick={() => setShowUnansweredWarning(false)}
-              className="bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-bold py-1.5 px-4 rounded-xl cursor-pointer"
+              className="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold py-1.5 px-4 rounded-xl cursor-pointer shadow-2xs transition-all duration-200"
             >
               Continue Editing Responses
             </button>
@@ -480,7 +480,7 @@ export default function ReviewerResponseTool() {
         <button
           type="button"
           onClick={() => handleGenerateClick(false)}
-          className="btn-clay-orange text-xs sm:text-sm py-3 px-8 font-extrabold flex items-center gap-2 cursor-pointer shadow-md"
+          className="btn-clay-orange text-xs sm:text-sm py-3 px-8 font-extrabold flex items-center gap-2 cursor-pointer shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#f97316]/50 transition-all duration-200"
         >
           <span>Generate Official Response Letter</span>
           <span>→</span>
@@ -504,21 +504,21 @@ export default function ReviewerResponseTool() {
               <button
                 type="button"
                 onClick={handleCopyLetter}
-                className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-100 text-xs font-bold px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 transition-colors cursor-pointer"
+                className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 active:bg-slate-300 text-slate-800 dark:text-slate-100 text-xs font-bold px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-xs focus:ring-2 focus:ring-slate-400/30"
               >
                 {copied ? '✓ Letter Copied!' : '📋 Copy Letter'}
               </button>
               <button
                 type="button"
                 onClick={handleDownloadTxt}
-                className="btn-clay-orange text-xs py-2 px-4 font-bold cursor-pointer"
+                className="btn-clay-orange text-xs py-2 px-4 font-bold cursor-pointer shadow-xs hover:shadow-sm focus:ring-2 focus:ring-[#f97316]/40 transition-all duration-200"
               >
                 💾 Download .txt File
               </button>
             </div>
           </div>
 
-          <div className="bg-slate-900 text-slate-100 p-6 rounded-2xl font-mono text-xs leading-relaxed overflow-x-auto border-2 border-slate-800">
+          <div className="bg-slate-950 text-slate-100 p-6 rounded-2xl font-mono text-xs leading-relaxed overflow-x-auto border-2 border-slate-800 shadow-inner">
             <pre className="whitespace-pre-wrap">{generatedLetter}</pre>
           </div>
         </div>

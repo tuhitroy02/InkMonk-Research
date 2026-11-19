@@ -174,13 +174,13 @@ export default function DoiCitationBibtexTool() {
             value={doiInput}
             onChange={(e) => setDoiInput(e.target.value)}
             placeholder="e.g. 10.1109/5.771073 or https://doi.org/10.1038/nature14539"
-            className="flex-1 bg-white dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 rounded-xl px-4 py-3 text-xs sm:text-sm font-mono text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8]"
+            className="flex-1 bg-white dark:bg-slate-900 border-2 border-slate-200/90 dark:border-slate-700 rounded-2xl px-4 py-3 text-xs sm:text-sm font-mono text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-[#1d4ed8] focus:ring-3 focus:ring-[#1d4ed8]/20 transition-all duration-200 shadow-2xs"
           />
           <button
             type="button"
             onClick={handleLookup}
             disabled={!doiInput.trim() || loading}
-            className="btn-clay-orange text-xs sm:text-sm py-3 px-6 font-extrabold flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shrink-0"
+            className="btn-clay-orange text-xs sm:text-sm py-3 px-6 font-extrabold flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#f97316]/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shrink-0"
           >
             {loading ? <span>Querying Registry…</span> : <span>Fetch Citation &amp; BibTeX →</span>}
           </button>
@@ -190,12 +190,12 @@ export default function DoiCitationBibtexTool() {
       {/* Useful Error & Warning States */}
       {errorInfo && (
         <div
-          className={`p-4 rounded-2xl border-2 text-xs sm:text-sm flex items-start gap-3 ${
+          className={`p-4 rounded-2xl border-2 text-xs sm:text-sm flex items-start gap-3 shadow-2xs ${
             errorInfo.type === 'invalid'
-              ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200'
+              ? 'bg-amber-50/80 dark:bg-amber-950/40 border-amber-300 dark:border-amber-800/80 text-amber-900 dark:text-amber-200'
               : errorInfo.type === 'missing'
-              ? 'bg-rose-50 dark:bg-rose-950/40 border-rose-300 dark:border-rose-800 text-rose-900 dark:text-rose-200'
-              : 'bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200'
+              ? 'bg-rose-50/80 dark:bg-rose-950/40 border-rose-300 dark:border-rose-800/80 text-rose-900 dark:text-rose-200'
+              : 'bg-slate-100/90 dark:bg-slate-800/90 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200'
           }`}
         >
           <span className="text-base shrink-0">
@@ -216,16 +216,16 @@ export default function DoiCitationBibtexTool() {
       {article && (
         <div className="space-y-6 pt-2">
           {/* Metadata Card */}
-          <div className="card-clay-white p-6 border-2 border-slate-200 dark:border-slate-800 shadow-md">
+          <div className="card-clay-white p-6 border-2 border-slate-200/90 dark:border-slate-800 rounded-2xl shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 dark:border-slate-800 pb-3 mb-4">
-              <span className="font-mono text-xs font-black bg-blue-100 text-[#1d4ed8] dark:bg-blue-950 dark:text-blue-300 px-3 py-1 rounded-lg">
+              <span className="font-mono text-xs font-black bg-blue-100 text-[#1d4ed8] dark:bg-blue-950 dark:text-blue-300 px-3 py-1 rounded-lg shadow-2xs">
                 Verified DOI: {article.doi}
               </span>
               <a
                 href={`https://doi.org/${article.doi}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-bold text-[#f97316] hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-[#f97316] hover:text-[#ea580c] dark:hover:text-orange-400 hover:underline flex items-center gap-1 transition-colors"
               >
                 <span>View on doi.org</span>
                 <span>↗</span>
@@ -237,22 +237,22 @@ export default function DoiCitationBibtexTool() {
             </h4>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs pt-2">
-              <div className="p-2.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl">
-                <span className="text-[10px] uppercase font-bold text-slate-400 block">Author(s)</span>
+              <div className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200/70 dark:border-slate-700/60 shadow-2xs">
+                <span className="text-[10px] uppercase font-bold text-slate-400 block mb-0.5">Author(s)</span>
                 <span className="font-black text-slate-800 dark:text-white">
                   {article.authors.join(', ') || article.firstAuthor}
                 </span>
               </div>
-              <div className="p-2.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl">
-                <span className="text-[10px] uppercase font-bold text-slate-400 block">Journal</span>
+              <div className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200/70 dark:border-slate-700/60 shadow-2xs">
+                <span className="text-[10px] uppercase font-bold text-slate-400 block mb-0.5">Journal</span>
                 <span className="font-black text-slate-800 dark:text-white">{article.journal}</span>
               </div>
-              <div className="p-2.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl">
-                <span className="text-[10px] uppercase font-bold text-slate-400 block">Year</span>
+              <div className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200/70 dark:border-slate-700/60 shadow-2xs">
+                <span className="text-[10px] uppercase font-bold text-slate-400 block mb-0.5">Year</span>
                 <span className="font-black text-slate-800 dark:text-white">{article.year || 'N/A'}</span>
               </div>
-              <div className="p-2.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl">
-                <span className="text-[10px] uppercase font-bold text-slate-400 block">Volume / Issue / Pages</span>
+              <div className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200/70 dark:border-slate-700/60 shadow-2xs">
+                <span className="text-[10px] uppercase font-bold text-slate-400 block mb-0.5">Volume / Issue / Pages</span>
                 <span className="font-black text-slate-800 dark:text-white">
                   {article.volume ? `vol. ${article.volume}` : ''}
                   {article.issue ? `, no. ${article.issue}` : ''}
@@ -276,7 +276,7 @@ export default function DoiCitationBibtexTool() {
           {/* Formats Grid: APA, IEEE, BibTeX */}
           <div className="grid grid-cols-1 gap-5">
             {/* 1. APA 7th Edition Output */}
-            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 space-y-3">
+            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-200/90 dark:border-slate-800 space-y-3 shadow-xs">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-black uppercase text-[#1d4ed8] dark:text-blue-400 tracking-wider">
                   APA 7th Edition Format
@@ -284,18 +284,18 @@ export default function DoiCitationBibtexTool() {
                 <button
                   type="button"
                   onClick={() => handleCopy(getApaCitation(), 'APA')}
-                  className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-100 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 transition-colors cursor-pointer"
+                  className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 active:bg-slate-300 text-slate-800 dark:text-slate-100 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-xs focus:ring-2 focus:ring-slate-400/30"
                 >
                   {copiedFormat === 'APA' ? '✓ Copied APA' : '📋 Copy APA 7th'}
                 </button>
               </div>
-              <div className="p-3.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl font-mono text-xs leading-relaxed text-slate-800 dark:text-slate-100 select-all">
+              <div className="p-3.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200/70 dark:border-slate-700/60 font-mono text-xs leading-relaxed text-slate-800 dark:text-slate-100 select-all">
                 {getApaCitation()}
               </div>
             </div>
 
             {/* 2. IEEE Format Output */}
-            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 space-y-3">
+            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-200/90 dark:border-slate-800 space-y-3 shadow-xs">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-black uppercase text-[#1d4ed8] dark:text-blue-400 tracking-wider">
                   IEEE Format
@@ -303,18 +303,18 @@ export default function DoiCitationBibtexTool() {
                 <button
                   type="button"
                   onClick={() => handleCopy(getIeeeCitation(), 'IEEE')}
-                  className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-100 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 transition-colors cursor-pointer"
+                  className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 active:bg-slate-300 text-slate-800 dark:text-slate-100 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-xs focus:ring-2 focus:ring-slate-400/30"
                 >
                   {copiedFormat === 'IEEE' ? '✓ Copied IEEE' : '📋 Copy IEEE'}
                 </button>
               </div>
-              <div className="p-3.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl font-mono text-xs leading-relaxed text-slate-800 dark:text-slate-100 select-all">
+              <div className="p-3.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200/70 dark:border-slate-700/60 font-mono text-xs leading-relaxed text-slate-800 dark:text-slate-100 select-all">
                 {getIeeeCitation()}
               </div>
             </div>
 
             {/* 3. BibTeX Record Output */}
-            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 space-y-3">
+            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-200/90 dark:border-slate-800 space-y-3 shadow-xs">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="text-xs font-black uppercase text-[#1d4ed8] dark:text-blue-400 tracking-wider">
                   BibTeX Entry (@article)
@@ -323,20 +323,20 @@ export default function DoiCitationBibtexTool() {
                   <button
                     type="button"
                     onClick={() => handleCopy(getBibtexRecord(), 'BIBTEX')}
-                    className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-100 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 transition-colors cursor-pointer"
+                    className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 active:bg-slate-300 text-slate-800 dark:text-slate-100 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 transition-all duration-200 cursor-pointer shadow-2xs hover:shadow-xs focus:ring-2 focus:ring-slate-400/30"
                   >
                     {copiedFormat === 'BIBTEX' ? '✓ Copied BibTeX' : '📋 Copy BibTeX'}
                   </button>
                   <button
                     type="button"
                     onClick={handleDownloadBib}
-                    className="btn-clay-orange text-xs py-1.5 px-3.5 font-bold cursor-pointer"
+                    className="btn-clay-orange text-xs py-1.5 px-3.5 font-bold cursor-pointer shadow-xs hover:shadow-sm focus:ring-2 focus:ring-[#f97316]/40 transition-all duration-200"
                   >
                     💾 Download .bib File
                   </button>
                 </div>
               </div>
-              <div className="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs leading-relaxed overflow-x-auto">
+              <div className="bg-slate-950 text-slate-100 p-4 rounded-xl font-mono text-xs leading-relaxed overflow-x-auto border border-slate-800 shadow-inner">
                 <pre>{getBibtexRecord()}</pre>
               </div>
             </div>

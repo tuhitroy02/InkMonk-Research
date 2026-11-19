@@ -62,14 +62,14 @@ export default function ResearchToolkitContainer({
   return (
     <div className="space-y-6">
       {/* Toolkit Top Banner */}
-      <div className="card-clay-white p-6 sm:p-7 border-2 border-slate-200 dark:border-slate-800 shadow-md">
+      <div className="card-clay-white p-6 sm:p-7 border-2 border-slate-200/90 dark:border-slate-800 rounded-3xl shadow-sm">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="bg-[#1d4ed8] text-white text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+              <span className="bg-[#1d4ed8] text-white text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-2xs">
                 SCHOLAR TOOLKIT
               </span>
-              <span className="text-slate-400 text-xs">✦ 5 Working Utilities</span>
+              <span className="text-slate-400 dark:text-slate-500 text-xs font-semibold">✦ 5 Working Utilities</span>
             </div>
             <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
               Academic Research Toolkit
@@ -83,7 +83,7 @@ export default function ResearchToolkitContainer({
             <button
               type="button"
               onClick={onBackToWorks}
-              className="btn-clay-white text-xs py-2 px-4 font-bold flex items-center gap-1.5 cursor-pointer shrink-0"
+              className="btn-clay-white text-xs py-2 px-4 font-bold flex items-center gap-1.5 cursor-pointer shrink-0 rounded-xl shadow-2xs hover:shadow-xs focus:ring-2 focus:ring-slate-400/30 transition-all duration-200"
             >
               <span>← Back to My Works</span>
             </button>
@@ -99,10 +99,10 @@ export default function ResearchToolkitContainer({
                 key={t.id}
                 type="button"
                 onClick={() => setActiveTool(t.id)}
-                className={`p-3.5 rounded-2xl text-left transition-all cursor-pointer flex flex-col justify-between border-2 ${
+                className={`p-3.5 rounded-2xl text-left transition-all duration-200 cursor-pointer flex flex-col justify-between border-2 ${
                   isActive
-                    ? 'bg-[#1d4ed8] text-white border-[#1d4ed8] shadow-md scale-102'
-                    : 'bg-slate-50 dark:bg-slate-900/60 hover:bg-white dark:hover:bg-slate-800/80 border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200'
+                    ? 'bg-gradient-to-br from-[#1d4ed8] via-[#1e40af] to-[#1e3a8a] text-white border-blue-500/80 shadow-[0_6px_18px_rgba(29,78,216,0.3)] scale-[1.02]'
+                    : 'bg-slate-50/90 dark:bg-slate-900/60 hover:bg-white dark:hover:bg-slate-800/80 border-slate-200/90 dark:border-slate-800 text-slate-800 dark:text-slate-200 shadow-2xs hover:shadow-xs hover:border-blue-300 dark:hover:border-blue-700'
                 }`}
               >
                 <div>
@@ -138,7 +138,7 @@ export default function ResearchToolkitContainer({
       </div>
 
       {/* Active Tool Body */}
-      <div className="card-clay-white p-6 sm:p-8 border-2 border-slate-200 dark:border-slate-800 shadow-xl min-h-[450px]">
+      <div className="card-clay-white p-6 sm:p-8 border-2 border-slate-200/90 dark:border-slate-800 rounded-3xl shadow-md min-h-[450px]">
         {activeTool === 'CONVERTER' && <ReferenceConverterTool />}
         {activeTool === 'URL_DOI' && <UrlDoiFinderTool />}
         {activeTool === 'DOI_CITATION' && <DoiCitationBibtexTool />}
