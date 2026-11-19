@@ -256,3 +256,22 @@ model Faq {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+ 
+// Persistent, user-scoped consultation queries. Never expose via unauthenticated endpoints.
+model ClientQuery {
+  id           String   @id @default(cuid())
+  userId       String
+  userEmail    String
+  userName     String
+  projectId    String?
+  projectTitle String?
+  queryType    String
+  subject      String
+  message      String
+  status       String   @default("PENDING")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([userId, createdAt])
+}

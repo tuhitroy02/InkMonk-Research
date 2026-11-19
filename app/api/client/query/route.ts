@@ -1,110 +1,73 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
+import { getRequestClient } from '@/lib/server-client';
 import { sanitizeText } from '@/lib/sanitize';
+import { z } from 'zod';
 
-// In-memory fallback query store to ensure instant response if database table differs
-interface ClientQueryRecord {
-  id: string;
-  projectId?: string;
-  projectTitle?: string;
-  queryType: string;
-  subject: string;
-  message: string;
-  userName: string;
-  userEmail: string;
-  status: 'PENDING' | 'UNDER_REVIEW' | 'RESOLVED';
-  assignedDirector: string;
-  createdAt: string;
-  responses?: { author: string; text: string; time: string }[];
-}
-
-const MEMORY_QUERIES: ClientQueryRecord[] = [
-  {
-    id: 'QRY-8921',
-    projectId: 'PRJ-1082',
-    projectTitle: 'Deep Learning Model & Paper on Medical Image Segmentation',
-    queryType: 'Methodology Clarification',
-    subject: 'Confirmation of U-Net vs Attention U-Net ablation test baseline',
-    message: 'Could you please confirm if the ablation study includes both Dice coefficient and Hausdorff distance metrics as requested by the IEEE journal guidelines?',
-    userName: 'Scholar',
-    userEmail: 'scholar@university.edu',
-    status: 'UNDER_REVIEW',
-    assignedDirector: 'Tuhit Roy (Founder & Director)',
-    createdAt: 'Today, 11:30 AM',
-    responses: [
-      {
-        author: 'Tuhit Roy (Director)',
-        text: 'Yes! Both 95% Hausdorff Distance and Dice metric are calculated across the 5-fold cross-validation dataset. Section 4.3 has been updated accordingly.',
-        time: 'Today, 01:15 PM',
-      },
-    ],
-  },
-];
+const QueryInput = z.object({
+  projectId: z.string().max(100).optional(),
+  projectTitle: z.string().max(250).optional(),
+  queryType: z.string().max(100).optional(),
+  subject: z.string().trim().min(1).max(200),
+  message: z.string().trim().min(1).max(3000),
+});
+const mapQuery = (q: {
+  id: string; projectId: string | null; projectTitle: string | null; queryType: string;
+  subject: string; message: string; status: string; createdAt: Date;
+}) => ({
+  id: q.id, projectId: q.projectId || undefined, projectTitle: q.projectTitle || undefined,
+  queryType: q.queryType, subject: q.subject, message: q.message,
+  status: q.status, assignedDirector: 'InkMonk Editorial Team',
+  createdAt: q.createdAt.toISOString(), responses: [],
+});
 
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const email = searchParams.get('email') || '';
-
-  const filtered = email
-    ? MEMORY_QUERIES.filter((q) => q.userEmail.toLowerCase() === email.toLowerCase() || q.userEmail === 'scholar@university.edu')
-    : MEMORY_QUERIES;
-
-  return NextResponse.json({
-    success: true,
-    queries: filtered,
-  });
+  try {
+    const client = await getRequestClient(request);
+    if (!client) return NextResponse.json({ error: 'Sign in to view your queries.' }, { status: 401 });
+    const records = await db.clientQuery.findMany({
+      where: { userId: client.id }, orderBy: { createdAt: 'desc' }, take: 100,
+    });
+    return NextResponse.json({ success: true, queries: records.map(mapQuery) },
+      { headers: { 'Cache-Control': 'private, no-store' } });
+  } catch (error) {
+    console.error('Client query read failed:', error);
+    return NextResponse.json({ error: 'Queries temporarily unavailable.' }, { status: 503 });
+  }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const {
-      projectId,
-      projectTitle,
-      queryType,
-      subject,
-      message,
-      userName,
-      userEmail,
-    } = body;
+    const client = await getRequestClient(request);
+    if (!client) return NextResponse.json({ error: 'Sign in to submit a query.' }, { status: 401 });
+    const parsed = QueryInput.safeParse(await request.json());
+    if (!parsed.success) return NextResponse.json({ error: 'Valid subject and message are required.' }, { status: 400 });
+    const data = parsed.data;
 
-    if (!subject || !message) {
-      return NextResponse.json({ error: 'Subject and query message are required.' }, { status: 400 });
+    if (data.projectId && data.projectId !== 'General') {
+      const project = await db.project.findFirst({
+        where: { id: data.projectId, clientId: client.id }, select: { id: true },
+      });
+      if (!project) return NextResponse.json({ error: 'Project not found in your account.' }, { status: 403 });
     }
 
-    const ticketId = `QRY-${Math.floor(1000 + Math.random() * 9000)}`;
-
-    const newQuery: ClientQueryRecord = {
-      id: ticketId,
-      projectId: sanitizeText(projectId || 'General'),
-      projectTitle: sanitizeText(projectTitle || 'General Academic Consultation'),
-      queryType: sanitizeText(queryType || 'General Inquiry'),
-      subject: sanitizeText(subject, 200),
-      message: sanitizeText(message, 3000),
-      userName: sanitizeText(userName || 'Scholar', 100),
-      userEmail: sanitizeText(userEmail || 'scholar@university.edu', 200),
-      status: 'UNDER_REVIEW',
-      assignedDirector: 'Tuhit Roy & Sampreeti Mukherjee (Directors)',
-      createdAt: 'Just now',
-      responses: [
-        {
-          author: 'InkMonk Academic Desk',
-          text: `Your query (${ticketId}) has been received and routed to the lead subject scholar. A comprehensive response will be issued within 4–6 working hours. For urgent escalation, WhatsApp +91 7980470880.`,
-          time: 'Just now',
-        },
-      ],
-    };
-
-    MEMORY_QUERIES.unshift(newQuery);
-
-    return NextResponse.json({
-      success: true,
-      ticketId,
-      message: 'Query submitted successfully and assigned to InkMonk Directors.',
-      query: newQuery,
+    const record = await db.clientQuery.create({
+      data: {
+        userId: client.id, userEmail: client.email, userName: client.name,
+        projectId: data.projectId && data.projectId !== 'General' ? data.projectId : null,
+        projectTitle: sanitizeText(data.projectTitle || 'General Academic Consultation', 250),
+        queryType: sanitizeText(data.queryType || 'General Inquiry', 100),
+        subject: sanitizeText(data.subject, 200),
+        message: sanitizeText(data.message, 3000),
+        status: 'PENDING',
+      },
     });
+
+    return NextResponse.json({ success: true, ticketId: record.id,
+      message: 'Your query has been saved for editorial review.', query: mapQuery(record) },
+      { status: 201, headers: { 'Cache-Control': 'no-store' } });
   } catch (error) {
-    console.error('Submit query error:', error);
-    return NextResponse.json({ error: 'Failed to submit query.' }, { status: 500 });
+    console.error('Client query submission failed:', error);
+    return NextResponse.json({ error: 'Query not saved. Please retry.' }, { status: 503 });
   }
 }

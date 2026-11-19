@@ -65,88 +65,16 @@ export default function ClientPortalPage() {
   const [statusFilter, setStatusFilter] = useState<'ALL' | 'IN_PROGRESS' | 'COMPLETED'>('ALL');
 
   // Query Form State
-  const [queryProject, setQueryProject] = useState('PRJ-1082');
+  const [queryProject, setQueryProject] = useState('General');
   const [queryType, setQueryType] = useState('Methodology Clarification');
   const [querySubject, setQuerySubject] = useState('');
   const [queryMessage, setQueryMessage] = useState('');
   const [querySubmitting, setQuerySubmitting] = useState(false);
   const [querySuccessMsg, setQuerySuccessMsg] = useState<string | null>(null);
 
-  // Queries List
-  const [queries, setQueries] = useState<QueryRecord[]>([
-    {
-      id: 'QRY-8921',
-      projectId: 'PRJ-1082',
-      projectTitle: 'Deep Learning Model & Paper on Medical Image Segmentation',
-      queryType: 'Methodology Clarification',
-      subject: 'Confirmation of U-Net vs Attention U-Net ablation test baseline',
-      message: 'Could you please confirm if the ablation study includes both Dice coefficient and Hausdorff distance metrics as requested by the IEEE journal guidelines?',
-      status: 'UNDER_REVIEW',
-      assignedDirector: 'Tuhit Roy (Founder & Director)',
-      createdAt: 'Today, 11:30 AM',
-      responses: [
-        {
-          author: 'Tuhit Roy (Director)',
-          text: 'Yes! Both 95% Hausdorff Distance and Dice metric are calculated across the 5-fold cross-validation dataset. Section 4.3 has been updated accordingly.',
-          time: 'Today, 01:15 PM',
-        },
-      ],
-    },
-  ]);
-
-  // Projects / Works List
-  const [projects] = useState<Project[]>([
-    {
-      id: 'PRJ-1082',
-      title: 'Deep Learning Model & Paper on Medical Image Segmentation',
-      service: 'Research Paper Writing (English Technical with Model)',
-      language: 'English',
-      status: 'IN_PROGRESS',
-      progress: 68,
-      deadline: '28 Nov 2026',
-      amount: '₹8,998',
-      turnitinScore: '4% (Safe)',
-      aiScore: '0% AI',
-      deliverables: [
-        { name: 'Chapter 1–3 Draft Manuscript.docx', type: 'doc', url: '#' },
-        { name: 'Turnitin Originality Report.pdf', type: 'pdf', url: '#' },
-        { name: 'PyTorch Architecture Repo.zip', type: 'code', url: '#' },
-      ],
-    },
-    {
-      id: 'PRJ-1045',
-      title: 'PRISMA 2020 Systematic Literature Review on Renewable Energy Microgrids',
-      service: 'Systematic Review Paper Writing',
-      language: 'English',
-      status: 'UNDER_REVIEW',
-      progress: 85,
-      deadline: '05 Dec 2026',
-      amount: '₹3,999',
-      turnitinScore: '6% (Safe)',
-      aiScore: '0% AI',
-      deliverables: [
-        { name: 'PRISMA 2020 Flowchart & Review.docx', type: 'doc', url: '#' },
-        { name: 'Turnitin Originality Verification.pdf', type: 'pdf', url: '#' },
-      ],
-    },
-    {
-      id: 'PRJ-1019',
-      title: 'Doctoral Dissertation Chapter 4 & 5 Empirical Findings',
-      service: 'Doctoral Thesis Writing',
-      language: 'English',
-      status: 'COMPLETED',
-      progress: 100,
-      deadline: 'Delivered',
-      amount: '₹19,999',
-      turnitinScore: '5% (Safe)',
-      aiScore: '0% AI',
-      deliverables: [
-        { name: 'Complete 5-Chapter Thesis Final.docx', type: 'doc', url: '#' },
-        { name: 'Turnitin Digital Certificate.pdf', type: 'pdf', url: '#' },
-        { name: 'Thesis Defense Slide Deck.pptx', type: 'doc', url: '#' },
-      ],
-    },
-  ]);
+  // Real account data is fetched from the authenticated API; never show fictional projects.
+  const [queries, setQueries] = useState<QueryRecord[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
 
   // URL Query Parameters support (e.g. ?tab=works&section=toolkit)
   useEffect(() => {
@@ -269,16 +197,6 @@ export default function ClientPortalPage() {
         }
       } catch {}
 
-      // 3. Check localStorage
-      try {
-        const storedUser = localStorage.getItem('inkmonk_user');
-        if (storedUser && isMounted) {
-          const parsed = JSON.parse(storedUser);
-          applyUser(parsed);
-          return;
-        }
-      } catch {}
-
       if (isMounted) {
         setUser(null);
         setLoading(false);
@@ -312,19 +230,32 @@ export default function ClientPortalPage() {
     };
   }, []);
 
-  // Fetch queries
+  // Load only real user records, with a server-validated cookie or Supabase token.
   useEffect(() => {
-    if (user?.email) {
-      fetch(`/api/client/query?email=${encodeURIComponent(user.email)}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.queries && data.queries.length > 0) {
-            setQueries(data.queries);
-          }
-        })
-        .catch(() => {});
-    }
-  }, [user]);
+    if (!user?.email) return;
+    let cancelled = false;
+    const load = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        const headers: HeadersInit = session?.access_token
+          ? { Authorization: `Bearer ${session.access_token}` } : {};
+        const [queryResult, projectResult] = await Promise.all([
+          fetch('/api/client/query', { headers, cache: 'no-store' }),
+          fetch('/api/client/projects', { headers, cache: 'no-store' }),
+        ]);
+        if (queryResult.ok) {
+          const data = await queryResult.json();
+          if (!cancelled) setQueries(data.queries || []);
+        }
+        if (projectResult.ok) {
+          const data = await projectResult.json();
+          if (!cancelled) setProjects(data.projects || []);
+        }
+      } catch (error) { console.error('Unable to load client records:', error); }
+    };
+    void load();
+    return () => { cancelled = true; };
+  }, [user?.email]);
 
   // Handle Logout
   const handleLogout = async () => {
@@ -349,54 +280,30 @@ export default function ClientPortalPage() {
     const targetProject = projects.find((p) => p.id === queryProject);
 
     try {
+      const { data: { session } } = await supabase.auth.getSession();
       const res = await fetch('/api/client/query', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(session?.access_token ? { Authorization: `Bearer ${session.access_token}` } : {}),
+        },
         body: JSON.stringify({
           projectId: queryProject,
           projectTitle: targetProject?.title || 'General Consultation',
           queryType,
           subject: querySubject,
           message: queryMessage,
-          userName: user?.name || profile?.name || 'Scholar',
-          userEmail: user?.email || profile?.email || 'scholar@university.edu',
         }),
       });
-
       const data = await res.json();
-      if (data.success && data.query) {
-        setQueries((prev) => [data.query, ...prev]);
-        setQuerySuccessMsg(`Your query (${data.ticketId}) was successfully submitted to Directors Tuhit Roy and Sampreeti Mukherjee!`);
-        setQuerySubject('');
-        setQueryMessage('');
-      } else {
-        throw new Error(data.error || 'Failed to submit query');
-      }
-    } catch {
-      // Local fallback in case of network issue
-      const ticketId = `QRY-${Math.floor(1000 + Math.random() * 9000)}`;
-      const fallbackQuery: QueryRecord = {
-        id: ticketId,
-        projectId: queryProject,
-        projectTitle: targetProject?.title || 'General Consultation',
-        queryType,
-        subject: querySubject,
-        message: queryMessage,
-        status: 'UNDER_REVIEW',
-        assignedDirector: 'Tuhit Roy & Sampreeti Mukherjee (Directors)',
-        createdAt: 'Just now',
-        responses: [
-          {
-            author: 'InkMonk Academic Desk',
-            text: `Query (${ticketId}) recorded. Assigned to lead director for review. For urgent priority, WhatsApp +91 7980470880.`,
-            time: 'Just now',
-          },
-        ],
-      };
-      setQueries((prev) => [fallbackQuery, ...prev]);
-      setQuerySuccessMsg(`Your query (${ticketId}) was submitted and recorded in your portal!`);
+      if (!res.ok || !data.success || !data.query) throw new Error(data.error || 'Query could not be saved.');
+      setQueries((prev) => [data.query, ...prev]);
+      setQuerySuccessMsg(`Your query (${data.ticketId}) was saved and is pending editorial review.`);
       setQuerySubject('');
       setQueryMessage('');
+    } catch (error) {
+      setQuerySuccessMsg(null);
+      alert(error instanceof Error ? error.message : 'Query not saved. Please retry.');
     } finally {
       setQuerySubmitting(false);
     }
