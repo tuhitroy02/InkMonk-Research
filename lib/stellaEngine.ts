@@ -1142,6 +1142,501 @@ InkMonk Research provides complete working codebases packaged with \`requirement
     }),
   },
 
+
+  // ─── Research Questions, Hypotheses & Errors ───────────────────────────────
+  {
+    id: 'research_question_hypothesis',
+    keywords: [
+      'hypothesis', 'research question', 'null hypothesis', 'alternative hypothesis',
+      'h0', 'h1', 'type 1 error', 'type 2 error', 'type i error', 'type ii error',
+      'alpha level', 'directional hypothesis', 'non-directional hypothesis',
+    ],
+    handler: () => ({
+      botMessage: `### 🔬 Research Questions, Hypotheses & Statistical Decision Errors
+
+A rigorous empirical manuscript or doctoral thesis hinges on mathematically and conceptually sound hypotheses:
+
+#### 1. Research Question vs. Hypothesis Formulation:
+- **Research Question (RQ):** An exploratory inquiry (e.g., *"Does transformer self-attention improve automated lesion segmentation in low-contrast CT scans?"*).
+- **Null Hypothesis ($H_0$):** States no effect or relationship (e.g., *$H_0: \\mu_1 = \\mu_2$*).
+- **Alternative Hypothesis ($H_1$ or $H_a$):** States a significant effect:
+  - **Directional (One-Tailed):** Asserts the direction of the effect (*$H_1: \\mu_1 > \\mu_2$*).
+  - **Non-Directional (Two-Tailed):** Tests for any divergence without directional bias (*$H_1: \\mu_1 \\neq \\mu_2$*).
+
+#### 2. Statistical Decision Errors:
+| Reality / Truth | Fail to Reject $H_0$ (Accept) | Reject $H_0$ (Significant) |
+| :--- | :--- | :--- |
+| **$H_0$ is Actually True** | Correct Decision ($1 - \\alpha$) | **Type I Error ($\\alpha$) — False Positive** |
+| **$H_0$ is Actually False** | **Type II Error ($\\beta$) — False Negative** | **Statistical Power ($1 - \\beta$)** |
+
+#### 3. Publication Standards:
+- Set significance threshold at $\\alpha = 0.05$ or $\\alpha = 0.01$.
+- Target statistical power of **$1 - \\beta \\ge 0.80$** (80% power) to minimize Type II risk.
+- Always report exact p-values (e.g., *p = .014*, not *p < .05*) and standardized effect sizes (Cohen's *d* or *\\eta_p^2*).`,
+      suggestedChips: [
+        'Statistical Data Analysis',
+        'Sampling & Sample Size',
+        'Thesis & IMRaD Structure',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Consult with Doctoral Director', href: '/quote' },
+    }),
+  },
+
+  // ─── Sampling Methods & Sample Size Power Calculation ──────────────────────
+  {
+    id: 'sampling_methods_sample_size',
+    keywords: [
+      'sampling method', 'sample size', 'cochran', 'yamane', 'g*power',
+      'purposive sampling', 'stratified sampling', 'snowball sampling',
+      'cluster sampling', 'data saturation', 'sampling frame',
+    ],
+    handler: () => ({
+      botMessage: `### 📊 Sampling Strategies & Scientific Sample Size Calculation
+
+Peer reviewers routinely reject manuscripts that fail to justify sample size mathematically or qualitatively:
+
+#### 1. Probability vs. Non-Probability Sampling:
+- **Probability (Parametric / Generalizable):**
+  - **Simple Random:** Random lottery from a defined sampling frame.
+  - **Stratified Random:** Sampling proportionately within distinct subgroups (strata).
+  - **Cluster Sampling:** Randomly sampling natural clusters (e.g., entire schools, hospitals).
+- **Non-Probability (Qualitative / Exploratory):**
+  - **Purposive / Judgmental:** Targeted selection based on specific criteria.
+  - **Snowball:** Referral-based sampling for hard-to-reach populations.
+
+#### 2. Sample Size Mathematical Formulas:
+- **Yamane Formula (Known Finite Population $N$):**
+  $n = \\frac{N}{1 + N(e)^2}$
+  *(where $e$ is margin of error, typically 0.05 for 95% confidence).*
+- **Cochran’s Formula (Large / Unknown Population):**
+  $n_0 = \\frac{Z^2 \\cdot p(1 - p)}{e^2}$
+  *(with $Z = 1.96$, $p = 0.5$, $e = 0.05 \\implies n_0 \\approx 384$).*
+- **G*Power Software:** Compute minimum $N$ for ANOVA, t-tests, or Multiple Regression based on anticipated effect size ($f^2$), $\\alpha = 0.05$, and power $= 0.80$.
+
+#### 3. Qualitative Data Saturation:
+For grounded theory or thematic analysis, continue interviews until 3 consecutive transcripts yield zero new thematic codes (typically 12–25 in-depth interviews).`,
+      suggestedChips: [
+        'Statistical Data Analysis',
+        'Validity & Reliability',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Get Sample Size Verified', href: '/quote' },
+    }),
+  },
+
+  // ─── Measurement Validity & Instrument Reliability ─────────────────────────
+  {
+    id: 'validity_and_reliability',
+    keywords: [
+      'validity', 'reliability', 'cronbach', 'cronbach alpha', 'construct validity',
+      'convergent validity', 'discriminant validity', 'ave', 'composite reliability',
+      'htmt', 'fornell-larcker', 'content validity',
+    ],
+    handler: () => ({
+      botMessage: `### 📐 Psychometric Validity & Reliability Standards
+
+Journals indexed in Scopus and Web of Science require empirical psychometric validation for all survey questionnaires and measurement instruments:
+
+#### 1. Instrument Reliability (Internal Consistency):
+- **Cronbach’s Alpha ($\\alpha$):**
+  - $\\alpha \\ge 0.70$: Acceptable for exploratory research.
+  - $\\alpha \\ge 0.80$: Good for established research.
+  - $\\alpha > 0.95$: Suggests redundant scale items.
+- **Composite Reliability (CR):** Preferred in SEM over Cronbach's alpha; threshold is **$CR \\ge 0.70$**.
+
+#### 2. Construct Validity:
+- **Convergent Validity:** Confirms items measuring the same construct correlate strongly.
+  - Factor Loadings $\\lambda \\ge 0.708$.
+  - Average Variance Extracted (**$AVE \\ge 0.50$**).
+- **Discriminant Validity:** Confirms distinct constructs do not measure the same concept.
+  - **Fornell-Larcker Criterion:** $\\sqrt{AVE}$ must exceed cross-construct inter-correlations.
+  - **HTMT (Heterotrait-Monotrait Ratio):** Modern preferred metric. Must be **$HTMT < 0.85$** (conservative) or **$< 0.90$** (liberal).`,
+      suggestedChips: [
+        'Structural Equation Modeling (SEM)',
+        'Statistical Data Analysis',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Audit Scale Reliability', href: '/quote' },
+    }),
+  },
+
+  // ─── Scoping Reviews vs. Systematic Reviews ────────────────────────────────
+  {
+    id: 'scoping_review_vs_slr',
+    keywords: [
+      'scoping review', 'systematic review vs scoping review', 'prisma-scr',
+      'difference between scoping and systematic', 'narrative review', 'scoping study',
+    ],
+    handler: () => ({
+      botMessage: `### 📑 Scoping Reviews vs. Systematic Literature Reviews (SLR)
+
+Deciding whether to conduct a Systematic Review or a Scoping Review determines your methodology and PRISMA reporting standard:
+
+#### Core Comparison Matrix:
+| Dimension | Systematic Literature Review (SLR) | Scoping Review (ScR) |
+| :--- | :--- | :--- |
+| **Primary Objective** | Answer a specific, focused research question (e.g., PICO) | Map key concepts, clarify definitions & identify gaps in a broad field |
+| **Research Question** | Highly specific and narrow | Broad and exploratory |
+| **Quality Appraisal** | **Mandatory** Risk of Bias (RoB) assessment on all included studies | **Optional / Rare** (maps what exists regardless of quality) |
+| **Synthesis Type** | Narrative synthesis, meta-analysis, or quantitative pooling | Descriptive mapping, tables, concept clustering |
+| **Reporting Standard** | **PRISMA 2020** (27 items) | **PRISMA-ScR** (22 items) |
+
+#### When to Choose a Scoping Review:
+1. The topic is emerging, heterogeneous, or multidisciplinary.
+2. You want to determine the feasibility or value of conducting a future full SLR.
+3. You wish to clarify working definitions or conceptual boundaries in the literature.`,
+      suggestedChips: [
+        'PRISMA Systematic Review Guide',
+        'Meta-Analysis & Forest Plots',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Commission a PRISMA Review', href: '/quote?service=REVIEW_PAPER' },
+    }),
+  },
+
+  // ─── Meta-Analysis, Heterogeneity & Forest Plots ────────────────────────────
+  {
+    id: 'meta_analysis_cochrane',
+    keywords: [
+      'meta analysis', 'meta-analysis', 'forest plot', 'funnel plot',
+      'heterogeneity', 'i-squared', 'i2', 'cochran q', 'pooled effect size',
+      'fixed effect', 'random effect', 'egger test',
+    ],
+    handler: () => ({
+      botMessage: `### 🌲 Meta-Analytic Synthesis & Quantitative Pooling
+
+Meta-analyses represent Level 1 clinical and empirical evidence by pooling effect sizes across multiple independent studies:
+
+#### 1. Fixed-Effects vs. Random-Effects Models:
+- **Fixed-Effects Model:** Assumes all studies share a single true effect size (heterogeneity is due solely to within-study sampling error).
+- **Random-Effects Model (DerSimonian-Laird):** Assumes true effect sizes vary across studies due to differing populations, doses, or contexts. **Preferred in 90% of real-world meta-analyses.**
+
+#### 2. Quantifying Heterogeneity:
+- **Cochran’s $Q$ Test:** $p < 0.10$ indicates significant statistical heterogeneity.
+- **$I^2$ Statistic:** Percentage of variance attributable to real study differences:
+  - **$I^2 < 25\%$:** Low heterogeneity.
+  - **$25\% - 50\%$:** Moderate heterogeneity.
+  - **$I^2 > 75\%$:** Substantial / High heterogeneity (requires subgroup or meta-regression analysis).
+
+#### 3. Visual & Bias Diagnostics:
+- **Forest Plot:** Displays individual study effect sizes with 95% Confidence Intervals and the overall pooled diamond.
+- **Funnel Plot & Egger’s Regression:** Tests for publication bias (asymmetry suggests small negative studies were unpublished).`,
+      suggestedChips: [
+        'PRISMA Systematic Review Guide',
+        'Statistical Data Analysis',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Scope Meta-Analysis Project', href: '/quote?service=REVIEW_PAPER' },
+    }),
+  },
+
+  // ─── Structural Equation Modeling (SEM) ────────────────────────────────────
+  {
+    id: 'structural_equation_modeling',
+    keywords: [
+      'sem', 'structural equation modeling', 'smartpls', 'amos', 'cb-sem',
+      'pls-sem', 'path analysis', 'fit indices', 'cfi', 'tli', 'rmsea', 'srmr',
+    ],
+    handler: () => ({
+      botMessage: `### 🔄 Structural Equation Modeling (SEM): CB-SEM vs. PLS-SEM
+
+SEM tests complex networks of causal relationships among observed and unobserved (latent) constructs simultaneously:
+
+#### 1. Choosing Between CB-SEM and PLS-SEM:
+| Feature | CB-SEM (AMOS, LISREL, lavaan) | PLS-SEM (SmartPLS, ADANCO) |
+| :--- | :--- | :--- |
+| **Core Objective** | Theory confirmation and model fit | Theory development and variance explanation ($R^2$) |
+| **Data Distribution** | Requires multivariate normal data | Non-parametric (handles skewed/non-normal data) |
+| **Sample Size** | Large ($N \\ge 200–300$) | Small to medium ($N \\ge 50–100$) |
+| **Model Complexity** | Simple to moderate | Highly complex models with formative constructs |
+
+#### 2. CB-SEM Model Fit Index Thresholds:
+- **$\\chi^2 / df$ Ratio:** $< 3.0$ (good), $< 5.0$ (acceptable).
+- **CFI (Comparative Fit Index):** $\\ge 0.95$ (excellent), $\\ge 0.90$ (acceptable).
+- **TLI (Tucker-Lewis Index):** $\\ge 0.95$ (excellent), $\\ge 0.90$ (acceptable).
+- **RMSEA (Root Mean Square Error of Approx.):** $< 0.06$ (good), $< 0.08$ (acceptable).
+- **SRMR (Standardized Root Mean Residual):** $< 0.08$.
+
+#### 3. PLS-SEM Evaluation:
+- Report $R^2$ (variance explained), $f^2$ (effect size), and $Q^2$ (Stone-Geisser predictive relevance) via 5,000 bootstrap resamples.`,
+      suggestedChips: [
+        'Mediation & Moderation Analysis',
+        'Validity & Reliability',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Get SEM Model Run & Verified', href: '/quote' },
+    }),
+  },
+
+  // ─── Mediation & Moderation Analysis ───────────────────────────────────────
+  {
+    id: 'mediation_moderation_analysis',
+    keywords: [
+      'mediation', 'moderation', 'mediating variable', 'moderating variable',
+      'hayes process', 'process macro', 'indirect effect', 'sobel test',
+      'moderated mediation', 'interaction effect', 'simple slopes',
+    ],
+    handler: () => ({
+      botMessage: `### 🔀 Mediation vs. Moderation Analysis (Hayes PROCESS)
+
+Distinguishing between mediators and moderators is critical for publishing in top-tier business, social science, and psychology journals:
+
+#### 1. Definitions & Conceptual Models:
+- **Mediation ($X \\to M \\to Y$):** Explains **HOW** or **WHY** an independent variable affects an outcome.
+  - *Example:* Training ($X$) increases Self-Efficacy ($M$), which boosts Job Performance ($Y$).
+  - **Testing:** The indirect effect ($a \\times b$) must be tested via **bootstrapping** (5,000 resamples in Hayes PROCESS Model 4). If the 95% Bootstrap CI does not include zero, significant mediation exists.
+- **Moderation ($X \\times W \\to Y$):** Specifies **WHEN** or **FOR WHOM** a relationship holds (boundary condition).
+  - *Example:* The effect of Stress ($X$) on Burnout ($Y$) is moderated by Social Support ($W$).
+  - **Testing:** Significant interaction term ($\\beta_{XW}$ in PROCESS Model 1); generate simple slopes plots at $-1 SD$, Mean, and $+1 SD$.
+
+#### 2. Moderated Mediation (Conditional Process Modeling):
+Tests whether the indirect mediating effect depends on the level of a moderator (e.g., Hayes PROCESS Model 7 or 14).`,
+      suggestedChips: [
+        'Structural Equation Modeling (SEM)',
+        'Statistical Data Analysis',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Run PROCESS Macro Analysis', href: '/quote' },
+    }),
+  },
+
+  // ─── Cover Letter to Journal Editor-in-Chief ───────────────────────────────
+  {
+    id: 'cover_letter_editor',
+    keywords: [
+      'cover letter', 'letter to editor', 'editor-in-chief', 'journal cover letter',
+      'submitting manuscript letter', 'submission letter',
+    ],
+    handler: () => ({
+      botMessage: `### ✉️ Crafting a Compelling Journal Cover Letter
+
+A persuasive cover letter to the Editor-in-Chief often makes the difference between being sent for blind peer review and getting an immediate desk-rejection:
+
+#### The 4-Paragraph Structure:
+1. **Paragraph 1: Formal Submission & Manuscript Details:**
+   - State title, article type (e.g., Original Empirical Research, Review), and confirm submission to the specific journal.
+   - *Example:* *"Please find enclosed our manuscript entitled '[Title]' for exclusive consideration in [Journal Name]."*
+2. **Paragraph 2: Core Findings & Conceptual Breakthrough:**
+   - Summarize the unresolved gap and what your study discovered in 2–3 crisp sentences. Avoid generic platitudes; provide your primary finding.
+3. **Paragraph 3: Explicit Fit with Journal Aims & Scope:**
+   - Reference recent discussions or related papers published in their journal to show why their readership will cite your paper.
+4. **Paragraph 4: Ethical & Author Declarations:**
+   - Confirm original manuscript with zero concurrent submissions.
+   - Declare all authors have reviewed and approved the submission.
+   - Affirm no financial or ethical conflicts of interest.
+   - Suggest 3–4 qualified, non-affiliated independent peer reviewers with institutional emails.`,
+      suggestedChips: [
+        'Peer-Review Rebuttal Support',
+        'Avoiding Desk Rejection',
+        'Journal Formatting (IEEE/APA)',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Get Submission Package Drafted', href: '/quote' },
+    }),
+  },
+
+  // ─── Desk Rejection Diagnosis & Fast Recovery ───────────────────────────────
+  {
+    id: 'desk_rejection_recovery',
+    keywords: [
+      'desk rejection', 'rejected without review', 'desk reject', 'manuscript rejected',
+      'how to handle rejection', 'rejection letter', 'editor rejected',
+    ],
+    handler: () => ({
+      botMessage: `### 🔄 Desk Rejection Recovery & Resubmission Strategy
+
+Receiving a desk-rejection from an Editor-in-Chief without review is common in Q1/Q2 journals (where desk-reject rates exceed 70%). Here is the strategic recovery roadmap:
+
+#### Top Reasons for Desk Rejections:
+1. **Out of Scope:** The topic diverges from the journal’s core aims or current editorial themes.
+2. **Lack of International Appeal:** The sample is localized (e.g., a single regional hospital or university) without global generalizability.
+3. **Incremental Novelty:** The manuscript merely repeats existing methodology on a new dataset without novel conceptual contributions.
+4. **Deficient Abstract / Introduction:** Failure to clearly articulate the scholarly research gap within the first 30 seconds of reading.
+5. **Formatting & Language Deficits:** Sloppy citations, poor syntax, or non-compliance with author instructions.
+
+#### Actionable 4-Step Turnaround:
+- **Step 1:** Decouple the feedback from emotion. Analyze if the editor noted specific deficiencies or sent a boiler-plate template.
+- **Step 2:** Strengthen the Introduction using Swales' 3-Move CaRS model to emphasize theoretical significance.
+- **Step 3:** Use Scopus Journal Analyzer / Journal Finder tools (Elsevier JournalFinder, Springer Nature Suggester) to find a high-fit alternate target.
+- **Step 4:** Re-typeset references and formatting to the new journal guidelines before immediate submission.`,
+      suggestedChips: [
+        'Journal Selection & Metrics',
+        'Cover Letter to Journal Editor',
+        'Peer-Review Rebuttal Support',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Reposition Rejected Paper', href: '/quote' },
+    }),
+  },
+
+  // ─── PhD Viva Voce Defense Master Questions ─────────────────────────────────
+  {
+    id: 'phd_viva_defense_questions',
+    keywords: [
+      'viva', 'viva voce', 'phd defense', 'thesis defense', 'examiner questions',
+      'defense presentation', 'oral defense', 'viva questions', 'phd oral examination',
+    ],
+    handler: () => ({
+      botMessage: `### 🎓 Top 10 PhD Viva Voce Examiner Questions & Model Answers
+
+External examiners at your oral defense evaluate your scholarly mastery, methodological defense, and intellectual independence:
+
+#### The 10 Most Common Viva Questions:
+1. *"Can you summarize your thesis contribution in 3 minutes for a non-specialist?"*
+2. *"What is the original contribution to knowledge (novelty) in this thesis?"*
+3. *"Why did you choose this methodology over alternative methodologies?"*
+4. *"What are the primary theoretical and empirical limitations of your study?"*
+5. *"If you had to begin this doctoral journey again, what would you design differently?"*
+6. *"How do your empirical findings contradict or extend established theoretical literature?"*
+7. *"How did you validate your measurement scales or computational algorithms?"*
+8. *"What are the practical, policy, or clinical implications of your findings?"*
+9. *"Which 3 scholars or foundational papers have influenced your thinking the most?"*
+10. *"What are your planned publications or post-doctoral research trajectories?"*
+
+#### The Golden Rule of Viva Defense:
+Never respond with defensiveness. Acknowledge examiners' critiques as insightful scholarly observations (*"That is a perceptive observation. While our study prioritized X due to constraint Y, your suggestion offers an exciting trajectory for post-doctoral extension."*).`,
+      suggestedChips: [
+        'PhD Thesis Framework',
+        'Research Questions & Hypotheses',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Book Viva Defense Coaching', href: '/quote?service=THESIS' },
+    }),
+  },
+
+  // ─── Double-Blind vs. Single-Blind & Open Peer Review ───────────────────────
+  {
+    id: 'double_blind_vs_single_blind_peer_review',
+    keywords: [
+      'double blind', 'single blind', 'open peer review', 'blind review',
+      'anonymize manuscript', 'blind peer review', 'peer review types',
+    ],
+    handler: () => ({
+      botMessage: `### 🎭 Peer Review Models & Anonymization Protocols
+
+Understanding your target journal's peer review model ensures procedural compliance and eliminates accidental de-anonymization:
+
+#### 1. Peer Review Models:
+- **Single-Blind Review:** Reviewers know authors' identities; authors do not know reviewers. (Most common in physical sciences and IEEE).
+- **Double-Blind Review:** Neither authors nor reviewers know each other's identities. (Standard in management, social sciences, and humanities to prevent institutional bias).
+- **Open Peer Review:** Reviewers' names and reports are published openly alongside the accepted paper.
+
+#### 2. How to Anonymize for Double-Blind Review:
+1. **Title Page:** Place author names, affiliations, email addresses, and acknowledgments on a completely separate title page document.
+2. **Body Text Anonymization:** Replace references to your own previous work (*"In our prior study (Roy & Mukherjee, 2024)..."*) with third-person phrasing (*"In a prior study (Author, 2024)..."*).
+3. **File Properties & Metadata:** Strip author names from Word/PDF file metadata (*File -> Properties -> Summary -> Remove Personal Information*).
+4. **Funding & Ethics Approvals:** Redact specific grant numbers or institutional committee names (*"Ethics approval granted by [Redacted for Blind Review]"*).`,
+      suggestedChips: [
+        'Peer-Review Rebuttal Support',
+        'Cover Letter to Journal Editor',
+        'Journal Formatting (IEEE/APA)',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Prepare Blind Submission', href: '/quote' },
+    }),
+  },
+
+  // ─── Academic Plagiarism, Patchwriting & Text Recycling ─────────────────────
+  {
+    id: 'academic_plagiarism_vs_patchwriting',
+    keywords: [
+      'patchwriting', 'self-plagiarism', 'text recycling', 'paraphrasing',
+      'accidental plagiarism', 'paraphrase', 'how to paraphrase',
+      'patchwriting and plagiarism', 'patchwriting vs plagiarism',
+      'difference between patchwriting and plagiarism', 'what is patchwriting',
+    ],
+    handler: () => ({
+      botMessage: `### ⚖️ Plagiarism vs. Patchwriting vs. Text Recycling
+
+Turnitin and iThenticate algorithms detect subtle textual borrowing patterns that trap unsuspecting scholars:
+
+#### 1. The 3 Forms of Academic Textual Infraction:
+- **Verbatim Plagiarism:** Word-for-word copying without quotation marks and attribution.
+- **Patchwriting (Most Common):** Copying from a source text and merely replacing selected words with synonyms while preserving the exact grammatical structure. **Turnitin flags this easily!**
+- **Self-Plagiarism / Text Recycling:** Reusing text from your own previously published papers or conference proceedings without citing yourself. Publishers consider this copyright infringement.
+
+#### 2. The 4-Step Paraphrasing Protocol:
+1. **Read & Internalize:** Read the original paragraph twice until you completely understand the core intellectual concept.
+2. **Turn Away:** Close the browser tab or book completely.
+3. **Re-articulate in Your Own Voice:** Write the idea entirely from memory using your own natural academic syntax and domain vocabulary.
+4. **Verify & Attribute:** Check against the original to ensure no accidental 4-word strings match, and attach the formal citation (*[1]* or *(Author, Year)*).`,
+      suggestedChips: [
+        'Turnitin Originality & AI Audits',
+        'Citation Styles Master',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Scan with Non-Repository Turnitin', href: '/services' },
+    }),
+  },
+
+  // ─── Shodhganga & UGC-CARE List Guidelines ──────────────────────────────────
+  {
+    id: 'shodhganga_and_ugc_care',
+    keywords: [
+      'shodhganga', 'ugc-care', 'ugc care', 'ugc list', 'shodhgangotri',
+      'indian phd thesis', 'care list', 'inflibnet',
+    ],
+    handler: () => ({
+      botMessage: `### 🇮🇳 Shodhganga Submission & UGC-CARE Journal Regulations
+
+For doctoral scholars registered in Indian universities under the University Grants Commission (UGC):
+
+#### 1. Shodhganga (INFLIBNET) Thesis Upload Standards:
+- **Division into Chapter-Wise PDFs:**
+  - *01_title.pdf*, *02_certificate.pdf*, *03_declaration.pdf*, *04_acknowledgement.pdf*
+  - *05_contents.pdf*, *06_chapter1.pdf* ... *11_conclusion.pdf*, *12_references.pdf*
+- **Non-Plagiarism Certificate:** Signed Turnitin/Urkund verification certificate approved by your Ph.D. Guide and University Librarian.
+- **Font & Unicode Standards:** Must use Unicode-compliant fonts (Mangal / Nirmala UI) for Hindi/Sanskrit so text is indexed and searchable.
+
+#### 2. UGC-CARE List Categories:
+- **Group I:** Journals qualified through UGC-CARE verification protocols (Sciences, Social Sciences, Arts & Humanities, and Indian languages).
+- **Group II:** Globally indexed top journals indexed in **Web of Science (SCIE/SSCI/AHCI)** or **Scopus**.`,
+      suggestedChips: [
+        'Hindi Academic Research',
+        'PhD Thesis Framework',
+        'Turnitin Originality & AI Audits',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Audit Indian Ph.D. Thesis', href: '/quote?service=THESIS' },
+    }),
+  },
+
+  // ─── LaTeX & Overleaf Manuscript Mastery ────────────────────────────────────
+  {
+    id: 'latex_overleaf_mastery',
+    keywords: [
+      'latex', 'overleaf', 'bibtex', 'compile error', 'latex template',
+      'bibtex error', 'overleaf project', 'pdflatex',
+    ],
+    handler: () => ({
+      botMessage: `### 📄 LaTeX & Overleaf Manuscript Typography
+
+LaTeX is the industry gold standard for IEEE, Springer Nature, ACM, and Elsevier STEM publications:
+
+#### 1. Core Advantages Over MS Word:
+- Flawless mathematical typesetting and complex equation rendering.
+- Automated figure, table, and cross-referencing numbering (*\\ref{...}* and *\\label{...}*).
+- Decoupled content and design: swap journal formats by changing just the *\\documentclass{...}*.
+
+#### 2. Essential BibTeX Database Entry Format:
+- Author format: *Surname, Firstname and Surname2, Firstname2*
+- Title in double braces to protect case: *{{Attention is All You Need}}*
+- Escaped special characters: *\\%*, *\\&*, *\\_*, and *\\$*
+
+#### 3. Common LaTeX Compilation Traps:
+- **Double Question Marks (??):** Run BibTeX then re-run PDFLaTeX twice to resolve forward cross-references.
+- **Underscores in DOIs:** Wrap DOIs with the *\\url{...}* package to prevent compilation crashes.`,
+      suggestedChips: [
+        'Citation Styles Master',
+        'Computational & ML Research',
+        'Journal Formatting (IEEE/APA)',
+        'Get a Project Estimate',
+      ],
+      actionLink: { label: 'Commission LaTeX Typesetting', href: '/quote' },
+    }),
+  },
+
   // ─── Client Portal & Authentication Guidance ───────────────────────────────
   {
     id: 'client_portal_access',
@@ -1790,52 +2285,79 @@ How can I assist your scholarly journey today?`,
     };
   }
 
-  // 1. Check if user is currently inside an active booking flow
-  if (context.booking && context.booking.step !== 'IDLE') {
-    // If user asks a totally off-flow ethical question, let ethics guardrail take precedence
-    for (const pattern of UNETHICAL_PATTERNS) {
-      if (pattern.test(lowerQuery)) {
-        return INTENT_RULES[0].handler(query, context);
-      }
+  // 1. Guardrail checks (Ethics, Guarantees)
+  for (const pattern of UNETHICAL_PATTERNS) {
+    if (pattern.test(lowerQuery)) {
+      return INTENT_RULES[0].handler(query, context);
     }
-    return handleBookingFlow(query, context);
+  }
+  for (const pattern of GUARANTEE_PATTERNS) {
+    if (pattern.test(lowerQuery)) {
+      return INTENT_RULES[1].handler(query, context);
+    }
   }
 
-  // 2. Check if user wants to start the booking conversation or greeting
-  const isGreetingOrBooking =
-    lowerQuery === 'hi' ||
-    lowerQuery === 'hello' ||
-    lowerQuery === 'hey' ||
-    lowerQuery === 'hola' ||
-    lowerQuery === 'namaste' ||
-    lowerQuery === 'नमस्ते' ||
-    lowerQuery === 'start' ||
-    lowerQuery === 'book' ||
-    lowerQuery === 'booking' ||
-    lowerQuery === 'quote' ||
-    lowerQuery === 'estimate' ||
-    lowerQuery === 'pricing' ||
-    lowerQuery === 'cost' ||
-    lowerQuery.includes('get a project estimate') ||
-    lowerQuery.includes('open interactive estimator') ||
-    lowerQuery.includes('calculate quote') ||
-    lowerQuery.includes('start quote');
+  // 2. Friendly Scholarly Greetings (NEVER traps user in booking flow)
+  const isGreeting =
+    /^(hi|hello|hey|hola|namaste|नमस्ते|greetings|good\s+(morning|afternoon|evening))\b/i.test(query.trim());
 
-  if (isGreetingOrBooking) {
-    context.booking = { step: 'LANGUAGE', history: [] };
+  if (isGreeting) {
     const isHindi = lowerQuery.includes('namaste') || lowerQuery.includes('नमस्ते') || lowerQuery.includes('हिंदी');
     return {
       botMessage: isHindi
-        ? `### 👋 नमस्ते! मैं स्टेला हूँ — आपकी अकादमिक सलाहकार
+        ? `### 🙏 नमस्ते! मैं स्टेला हूँ — आपकी अकादमिक सलाहकार
+**InkMonk Research** में आपका स्वागत है। मैं आपकी शोध यात्रा में निम्नलिखित क्षेत्रों में सहायता कर सकती हूँ:
+- **शोध पत्र एवं थीसिस संरचना:** आईएमआरएडी (IMRaD), शोध अंतराल (Research Gap) एवं अध्याय प्रारूप
+- **सांख्यिकीय विश्लेषण:** परिकल्पना परीक्षण, एसपीएसएस (SPSS), आर (R) एवं पाइथन
+- **संदर्भ सूची मानक:** एपीए (APA 7th), आईईईई (IEEE), हार्वर्ड एवं यूजीसी-केयर
+- **टर्निटिन ओरिजिनैलिटी:** 100% सुरक्षित नॉन-रिपॉजिटरी साहित्यिक चोरी एवं एआई ऑडिट
+- **पारदर्शी कोटेशन:** पारदर्शी माइलस्टोन अनुमान
 
+आप आज अपने शोध कार्य में किस विषय पर सहायता चाहते हैं?`
+        : `### 👋 Greetings from Stella • Academic Concierge
+Welcome to **InkMonk Research** (*"Research with care. Writing with clarity."*).
+
+I am your encyclopedic **AI Academic Concierge**, running 100% locally on your device with zero external API dependencies or latency.
+
+How can I assist your scholarship today?
+- **Journal Formatting:** IEEE, APA 7th, Springer, Elsevier, or Harvard standards
+- **Manuscript Architecture:** IMRaD structuring, research gap identification & title scoping
+- **Doctoral Theses & Viva Voce:** 5-chapter dissertation structure, DRC synopses & defense prep
+- **Statistical & Computational Methods:** Hypothesis testing, ANOVA, SEM (SmartPLS/AMOS), PyTorch models
+- **Turnitin & AI Detection:** Safe instructor-level non-repository originality audits
+- **Instant Project Quotation:** Transparent milestone estimates for English & Hindi projects`,
+      suggestedChips: [
+        'Journal Formatting (IEEE/APA)',
+        'Thesis & IMRaD Structure',
+        'Statistical Data Analysis',
+        'Get a Project Estimate',
+      ],
+    };
+  }
+
+  // 3. Explicit Quotation Wizard Trigger
+  const isBookingStart =
+    lowerQuery === 'get a project estimate' ||
+    lowerQuery === 'open interactive estimator' ||
+    lowerQuery === 'calculate quote' ||
+    lowerQuery === 'start quote' ||
+    lowerQuery === 'book a project' ||
+    lowerQuery === 'start booking' ||
+    lowerQuery === 'calculate my quote';
+
+  if (isBookingStart) {
+    context.booking = { step: 'LANGUAGE', history: [] };
+    const isHindi = lowerQuery.includes('हिंदी');
+    return {
+      botMessage: isHindi
+        ? `### 📋 कोटेशन विज़ार्ड — चरण 1/6
 **InkMonk Research** में आपका स्वागत है। मैं आपके शोध कार्य के लिए पारदर्शी कोटेशन तैयार करने में आपकी सहायता करूँगी।
 
 **चरण 1/6: आपका शोध या पांडुलिपि किस भाषा में तैयार की जानी है?**`
-        : `### 👋 Greetings from Stella • Academic Concierge
+        : `### 📋 Project Quotation Wizard — Step 1 of 6
+Welcome to **InkMonk Research**! I will guide you step-by-step to calculate an exact, transparent milestone estimate according to our schedule.
 
-Welcome to **InkMonk Research**! I will assist you in configuring your project scope and calculate an exact, transparent estimate according to our schedule.
-
-**Step 1 of 6: Which language will your research or manuscript be conducted in?**`,
+**Step 1 of 6: Which language or service will your research be conducted in?**`,
       suggestedChips: [
         'English Academic Writing',
         'Hindi Academic Research (हिंदी)',
@@ -1844,7 +2366,7 @@ Welcome to **InkMonk Research**! I will assist you in configuring your project s
     };
   }
 
-  // 3. Multi-pass semantic matcher: calculate best scoring rule across encyclopedic knowledge base
+  // 4. Multi-pass semantic matcher: calculate best scoring rule across encyclopedic knowledge base
   let bestRule: IntentRule | null = null;
   let bestScore = 0;
 
@@ -1855,13 +2377,13 @@ Welcome to **InkMonk Research**! I will assist you in configuring your project s
       if (typeof kw === 'string') {
         const lowerKw = kw.toLowerCase();
         if (lowerQuery === lowerKw) {
-          score += 15; // exact match
+          score += 20; // exact match
         } else if (lowerQuery.includes(lowerKw)) {
-          score += lowerKw.split(' ').length * 3; // phrase match weighted by word count
+          score += lowerKw.split(' ').length * 4; // phrase match weighted by word count
         }
       } else if (kw instanceof RegExp) {
         if (kw.test(lowerQuery)) {
-          score += 20; // high priority regex match (e.g. guardrails)
+          score += 25; // high priority regex match
         }
       }
     }
@@ -1872,14 +2394,50 @@ Welcome to **InkMonk Research**! I will assist you in configuring your project s
     }
   }
 
-  // If a high-confidence intent is found (score >= 3), execute its handler
+  // 5. Booking Flow Evaluation
+  // If user is inside an active booking flow, check if this query is an answer to the current step
+  if (context.booking && context.booking.step !== 'IDLE') {
+    const isStepCommand =
+      lowerQuery.includes('back') ||
+      lowerQuery.includes('reset') ||
+      lowerQuery.includes('start over') ||
+      lowerQuery.includes('english') ||
+      lowerQuery.includes('hindi') ||
+      lowerQuery.includes('turnitin') ||
+      lowerQuery.includes('tech') ||
+      lowerQuery.includes('standard') ||
+      lowerQuery.includes('express') ||
+      lowerQuery.includes('days') ||
+      lowerQuery.includes('confirm') ||
+      lowerQuery.includes('files');
+
+    // If it's a step selection or no academic rule scored high, process booking flow
+    if (isStepCommand || bestScore < 4) {
+      return handleBookingFlow(query, context);
+    }
+
+    // Otherwise, user asked a scholarly question while in booking flow!
+    // Answer the academic question, but notify them that booking is paused.
+    if (bestRule && bestScore >= 4) {
+      const response = bestRule.handler(query, context);
+      response.botMessage += `\n\n> 💡 *Note: Your quotation session is paused at Step ${context.booking.step}. You can ask any academic questions, or type "continue quote" when ready to resume.*`;
+      response.suggestedChips = [
+        ...(response.suggestedChips || []).slice(0, 3),
+        'Continue Quotation',
+        '🔄 Start Over',
+      ];
+      return response;
+    }
+  }
+
+  // 6. High-confidence academic intent execution
   if (bestRule && bestScore >= 3) {
     context.lastTopic = bestRule.id;
     context.turnCount += 1;
     return bestRule.handler(query, context);
   }
 
-  // Fallback to Universal Scholarly Reasoning Engine
+  // 7. Universal Scholarly Reasoning Engine (Answers ANY academic writing question)
   context.turnCount += 1;
   return generateUniversalScholarlyResponse(query, context);
 }

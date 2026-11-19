@@ -124,23 +124,24 @@ How can I assist your scholarship today?
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-scroll ONLY inside the chat messages container to prevent window/viewport jumping
-  const scrollToBottom = () => {
-    if (messagesContainerRef.current) {
-      messagesContainerRef.current.scrollTo({
-        top: messagesContainerRef.current.scrollHeight,
-        behavior: 'smooth',
-      });
+  // Auto-scroll ONLY inside the chat messages container without jitter or window jumping
+  useEffect(() => {
+    if (isOpen && messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
     }
-  };
+  }, [messages, isTyping, isOpen]);
 
+  // Focus input ONLY once when user explicitly opens the drawer (never on message updates)
   useEffect(() => {
     if (isOpen) {
-      scrollToBottom();
-      // Focus input without jumping or scrolling the window viewport
-      setTimeout(() => inputRef.current?.focus({ preventScroll: true }), 150);
+      const timer = setTimeout(() => {
+        if (inputRef.current) {
+          inputRef.current.focus({ preventScroll: true });
+        }
+      }, 250);
+      return () => clearTimeout(timer);
     }
-  }, [messages, isOpen, isTyping]);
+  }, [isOpen]);
 
   // Outside click handler that STRICTLY protects chat drawer and launcher
   useEffect(() => {
@@ -168,6 +169,9 @@ How can I assist your scholarship today?
     const trimmed = textToSend.trim();
     if (!trimmed || isTyping) return;
 
+    // Anchor current window scroll position to prevent browser jumping
+    const scrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+
     const userMessage: ChatMessage = {
       id: `user-${Date.now()}`,
       sender: 'user',
@@ -178,6 +182,11 @@ How can I assist your scholarship today?
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsTyping(true);
+
+    // Safeguard window scroll
+    if (typeof window !== 'undefined' && window.scrollY !== scrollY) {
+      window.scrollTo({ top: scrollY, behavior: 'instant' as ScrollBehavior });
+    }
 
     // Realistic typing delay (350ms) for high-end feel while running 100% locally
     setTimeout(() => {
@@ -195,7 +204,11 @@ How can I assist your scholarship today?
 
       setMessages((prev) => [...prev, stellaMessage]);
       setIsTyping(false);
-    }, 380);
+
+      if (typeof window !== 'undefined' && window.scrollY !== scrollY) {
+        window.scrollTo({ top: scrollY, behavior: 'instant' as ScrollBehavior });
+      }
+    }, 350);
   };
 
   return (
@@ -368,7 +381,13 @@ How can I assist your scholarship today?
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onClick={(e) => e.stopPropagation()}
-                onFocus={(e) => e.stopPropagation()}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleSendMessage(input);
+                  }
+                }}
                 placeholder="Ask Stella about formatting, IMRaD, quotes…"
                 className="flex-1 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1d4ed8] focus:bg-white dark:focus:bg-slate-900 transition-all"
                 disabled={isTyping}
