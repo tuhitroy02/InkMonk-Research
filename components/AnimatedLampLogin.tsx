@@ -135,173 +135,73 @@ export default function AnimatedLampLogin() {
     }
   }
 
-  // 3. Step 1 of Sign Up: Send OTP
+  // Step 1: delivery must succeed before opening the verification form.
   async function handleSendSignupOtp(e: React.FormEvent) {
     e.preventDefault();
     if (!email.trim() || !fullName.trim()) {
-      setError('Please enter your full name and valid email address.');
+      setError('Please enter your full name and email.');
       return;
     }
     setLoading(true);
     setError(null);
     setSuccessMsg(null);
-
     try {
-      let codeHint: string | undefined;
-
-      // 1. Try local OTP endpoint
-      try {
-        const res = await fetch('/api/auth/otp/send', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ identifier: email.trim().toLowerCase() }),
-        });
-        const data = await res.json();
-        if (data.codeHint) codeHint = data.codeHint;
-      } catch (err) {
-        console.warn('Local OTP send error:', err);
-      }
-
-      // 2. Also send via Supabase
-      try {
-        await supabase.auth.signInWithOtp({ email: email.trim().toLowerCase() });
-      } catch (err) {
-        console.warn('Supabase signInWithOtp error:', err);
-      }
-
-      setSuccessMsg(
-        codeHint
-          ? `Verification OTP: ${codeHint} (Dispatched to ${email.trim()}).`
-          : `6-Digit verification code dispatched to ${email.trim()}. (Instant testing code: 123456)`
-      );
+      const res = await fetch('/api/auth/otp/send', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ identifier: email.trim().toLowerCase() }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Unable to send verification code.');
+      setSuccessMsg(`Verification code sent to ${email.trim()}.`);
       setSignupStage(2);
-    } catch (err: unknown) {
-      setSuccessMsg(`Verification code dispatched to ${email.trim()}. (For instant access, you may use 123456)`);
-      setSignupStage(2);
-    } finally {
-      setLoading(false);
-    }
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'Unable to send code.');
+    } finally { setLoading(false); }
   }
 
-  // 4. Step 2 of Sign Up: Verify OTP & Set Password
+  // Step 2: the server validates and consumes a one-time code before registration.
   async function handleVerifyOtpAndSetPassword(e: React.FormEvent) {
     e.preventDefault();
-    const token = otpCode.trim();
-    if (!token) {
-      setError('Please enter the 6-digit OTP code.');
-      return;
-    }
-    const cleanPassword = newPassword.trim() || 'Scholar@2026!';
-    if (newPassword && newPassword.length < 6) {
-      setError('Password must be at least 6 characters.');
-      return;
-    }
-    if (newPassword && confirmPassword && newPassword !== confirmPassword) {
-      setError('Passwords do not match. Please re-enter.');
-      return;
-    }
-
+    if (!/^\d{6}$/.test(otpCode.trim())) { setError('Enter a valid six-digit code.'); return; }
+    if (newPassword.length < 8) { setError('Password must contain at least 8 characters.'); return; }
+    if (newPassword !== confirmPassword) { setError('Passwords do not match.'); return; }
     setLoading(true);
     setError(null);
-
     try {
-      let isVerified = false;
-
-      // 1. Verify via Supabase if possible
-      try {
-        const { data, error } = await supabase.auth.verifyOtp({
-          email: email.trim().toLowerCase(),
-          token: token,
-          type: 'email',
-        });
-        if (!error && data?.session) isVerified = true;
-      } catch {}
-
-      // 2. Call backend signup API
-      try {
-        const res = await fetch('/api/auth/signup', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: email.trim().toLowerCase(),
-            name: fullName.trim(),
-            password: cleanPassword,
-            gender,
-            qualification,
-            institution: institution.trim(),
-            discipline: discipline.trim(),
-            code: token,
-          }),
-        });
-        const data = await res.json();
-        if (res.ok) isVerified = true;
-      } catch {}
-
-      // 3. Fallback Instant Code
-      if (token === '123456') {
-        isVerified = true;
-      }
-
-      if (isVerified) {
-        const scholarUser = {
-          id: 'user-' + Date.now(),
-          name: fullName.trim(),
-          email: email.trim().toLowerCase(),
-          role: 'CLIENT',
-        };
-        const scholarProfile = {
-          name: fullName.trim(),
-          email: email.trim().toLowerCase(),
-          gender,
-          qualification,
-          institution: institution.trim() || 'Academic Institution',
-          discipline: discipline.trim() || 'Multidisciplinary Research',
-        };
-        try {
-          localStorage.setItem('inkmonk_user', JSON.stringify(scholarUser));
-          localStorage.setItem('inkmonk_scholar_profile', JSON.stringify(scholarProfile));
-        } catch {}
-
-        setSuccessMsg('Account created and verified! Redirecting to your Client Portal…');
-        setTimeout(() => router.push('/client'), 400);
-      } else {
-        throw new Error('Invalid verification code. Please check your email or enter 123456.');
-      }
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Verification failed.');
-    } finally {
-      setLoading(false);
-    }
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.trim().toLowerCase(), name: fullName.trim(),
+          password: newPassword, code: otpCode.trim(),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Registration failed.');
+      setSuccessMsg('Account created successfully. Opening your client portal…');
+      router.push('/client');
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'Registration failed.');
+    } finally { setLoading(false); }
   }
 
-  // 5. Forgot Password: Step 1 Send OTP
+  // Password recovery uses the same verified email delivery.
   async function handleSendForgotOtp(e: React.FormEvent) {
     e.preventDefault();
-    if (!email.trim()) {
-      setError('Please enter your registered email address.');
-      return;
-    }
+    if (!email.trim()) { setError('Enter your registered email address.'); return; }
     setLoading(true);
     setError(null);
     try {
       const res = await fetch('/api/auth/otp/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ identifier: email.trim() }),
       });
       const data = await res.json();
-      setSuccessMsg(
-        data.codeHint
-          ? `Reset OTP generated: ${data.codeHint}. (Sent to ${email})`
-          : `Password reset code sent to ${email}.`
-      );
+      if (!res.ok) throw new Error(data.error || 'Unable to send code.');
+      setSuccessMsg(`Password reset code sent to ${email.trim()}.`);
       setForgotStage(2);
-    } catch {
-      setSuccessMsg(`Password reset code sent to ${email}. (Use 123456 if testing)`);
-      setForgotStage(2);
-    } finally {
-      setLoading(false);
-    }
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'Unable to send code.');
+    } finally { setLoading(false); }
   }
 
   // 6. Forgot Password: Step 2 Reset Password
@@ -311,7 +211,7 @@ export default function AnimatedLampLogin() {
       setError('Enter verification code and new password.');
       return;
     }
-    if (newPassword.length < 6) {
+    if (newPassword.length < 8) {
       setError('Password must be at least 6 characters.');
       return;
     }
@@ -334,10 +234,10 @@ export default function AnimatedLampLogin() {
       if (data.user) {
         localStorage.setItem('inkmonk_user', JSON.stringify(data.user));
       }
-      setSuccessMsg('Password updated successfully! Entering Client Portal…');
-      setTimeout(() => router.push('/client'), 600);
+      setSuccessMsg('Password updated successfully. Sign in using your new password.');
+      setAuthMode('LOGIN');
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Reset failed. Try code 123456.');
+      setError(err instanceof Error ? err.message : 'Password reset failed.');
     } finally {
       setLoading(false);
     }
@@ -811,7 +711,7 @@ export default function AnimatedLampLogin() {
 
                     <div>
                       <label className="block text-xs font-bold text-slate-300 mb-1">
-                        Set Password (Min 6 chars):
+                        Set Password (Min 8 chars):
                       </label>
                       <input
                         type="password"

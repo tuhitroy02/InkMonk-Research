@@ -1,0 +1,32 @@
+name: Verify InkMonk Research
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DATABASE_URL: file:./dev.db
+      JWT_SECRET: ci-only-not-for-production-0123456789-abcdefghijklmnopqrstuvwxyz
+      NEXT_PUBLIC_SUPABASE_URL: https://rmmsacrcnrsftkaitgij.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: sb_publishable_GlZ-UuAMByOKx4r13Z-bvw_Z_Zow5dt
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx prisma generate
+      - run: npx tsc --noEmit
+      - run: npm run build
+      - name: Verify standalone assets
+        run: |
+          test -f .next/standalone/server.js
+          test -d .next/standalone/public
+          test -d .next/standalone/.next/static
+          test -f .next/standalone/dev.db
+          test -d .next/standalone/prisma

@@ -1,77 +1,58 @@
+import { timingSafeEqual } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { allowRate, authHash, clientSession, getOrCreateClient, normalizeIdentifier } from '@/lib/client-auth';
 
 export async function POST(request: NextRequest) {
   try {
-    const { identifier: raw, code, name, phone, gender, education, institution } = await request.json();
+    const { identifier: raw, code, name } = await request.json();
     const identifier = normalizeIdentifier(raw);
-    if (!identifier || typeof code !== 'string' || code.trim().length < 4) {
-      return NextResponse.json({ error: 'Please enter a valid verification code.' }, { status: 400 });
+    if (!identifier || typeof code !== 'string' || !/^\d{6}$/.test(code.trim())) {
+      return NextResponse.json({ error: 'Enter the 6-digit verification code.' }, { status: 400 });
     }
     const { kind, value } = identifier;
-    const trimmedCode = code.trim();
-
-    if (!await allowRate(`otp-check:${kind}:${value}`, 50, 60 * 60_000)) {
-      return NextResponse.json({ error: 'Too many attempts. Try again later.' }, { status: 429 });
+    if (!await allowRate(`otp-check:${value}`, 10, 3600000)) {
+      return NextResponse.json({ error: 'Too many verification attempts.' }, { status: 429 });
     }
 
-    // Master test code '123456' is always valid
-    let isChallengeValid = trimmedCode === '123456';
-
-    if (!isChallengeValid) {
-      try {
-        const challenge = await db.emailLoginCode.findUnique({ where: { email: value } });
-        if (
-          challenge &&
-          challenge.codeHash === authHash(`${value}:${trimmedCode}`) &&
-          challenge.expiresAt > new Date()
-        ) {
-          isChallengeValid = true;
-          await db.emailLoginCode.deleteMany({ where: { email: value } }).catch(() => {});
-        } else if (challenge) {
-          await db.emailLoginCode.update({ where: { email: value }, data: { attempts: { increment: 1 } } }).catch(() => {});
-        }
-      } catch (e) {
-        console.warn('DB challenge lookup error:', e);
+    let verified = false;
+    if (kind === 'email') {
+      const challenge = await db.emailLoginCode.findUnique({ where: { email: value } });
+      const actual = authHash(`${value}:${code.trim()}`);
+      if (challenge && challenge.expiresAt > new Date() && challenge.attempts < 5 &&
+          timingSafeEqual(Buffer.from(challenge.codeHash), Buffer.from(actual))) {
+        const consumed = await db.emailLoginCode.deleteMany({ where: {
+          email: value, codeHash: actual, expiresAt: { gt: new Date() }, attempts: { lt: 5 },
+        } });
+        verified = consumed.count === 1;
+      } else if (challenge) {
+        await db.emailLoginCode.update({ where: { email: value },
+          data: { attempts: { increment: 1 } } });
+      }
+    } else {
+      const sid = process.env.TWILIO_ACCOUNT_SID;
+      const token = process.env.TWILIO_AUTH_TOKEN;
+      const service = process.env.TWILIO_VERIFY_SERVICE_SID;
+      if (!sid || !token || !service) return NextResponse.json({ error: 'SMS verification unavailable.' }, { status: 503 });
+      const response = await fetch(`https://verify.twilio.com/v2/Services/${encodeURIComponent(service)}/VerificationCheck`, {
+        method: 'POST',
+        headers: { Authorization: `Basic ${Buffer.from(`${sid}:${token}`).toString('base64')}`,
+          'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ To: value, Code: code.trim() }),
+        cache: 'no-store',
+      });
+      if (response.ok) {
+        const result = await response.json();
+        verified = result.status === 'approved' && result.valid === true;
       }
     }
+    if (!verified) return NextResponse.json({ error: 'Invalid or expired verification code.' }, { status: 401 });
 
-    if (!isChallengeValid) {
-      return NextResponse.json({ error: 'Invalid or expired code. Please request a new verification code.' }, { status: 401 });
-    }
-
-    let user = await getOrCreateClient(identifier, name);
-    if (!user) {
-      return NextResponse.json({ error: 'This account cannot use client sign-in.' }, { status: 403 });
-    }
-
-    // Update profile if additional fields were passed
-    if (name || phone) {
-      try {
-        user = await db.user.update({
-          where: { id: user.id },
-          data: {
-            name: name || user.name,
-            phone: phone || user.phone,
-          },
-        });
-      } catch (err) {
-        console.warn('Profile update minor error:', err);
-      }
-    }
-
+    const user = await getOrCreateClient(identifier, name);
+    if (!user) return NextResponse.json({ error: 'Account is not eligible for client access.' }, { status: 403 });
     return clientSession(user);
   } catch (error) {
     console.error('OTP verification error:', error);
-    try {
-      const { identifier: raw, name } = await request.clone().json();
-      const identifier = normalizeIdentifier(raw);
-      if (identifier) {
-        const user = await getOrCreateClient(identifier, name);
-        if (user) return clientSession(user);
-      }
-    } catch {}
-    return NextResponse.json({ error: 'Unable to verify code right now.' }, { status: 500 });
+    return NextResponse.json({ error: 'Verification temporarily unavailable.' }, { status: 503 });
   }
 }
