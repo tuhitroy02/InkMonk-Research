@@ -78,21 +78,23 @@ export default function HomePage() {
                   <p className="text-slate-600 dark:text-slate-300 text-xs mb-4 text-center font-medium leading-relaxed">
                     Technical and non-technical manuscripts formatted strictly to IEEE, Springer, Elsevier, APA, Harvard, and UGC-CARE standards.
                   </p>
-                  <div className="max-w-xs mx-auto mb-6">
-                    <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-200 font-bold text-center">
-                      <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">◆</span> IEEE, Springer &amp; Elsevier Papers
-                      </li>
-                      <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">◆</span> Master &amp; Doctoral Theses (5 Chapters)
-                      </li>
-                      <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">◆</span> Scholarly Books (100–300 pp with ISBN)
-                      </li>
-                      <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">◆</span> Academic PPT &amp; Thesis Defense Decks
-                      </li>
-                    </ul>
+                  <div className="w-full mb-6 flex flex-col items-center">
+                    <div className="flex flex-col items-center gap-1.5 w-full">
+                      {[
+                        'IEEE, Springer & Elsevier Papers',
+                        'Master & Doctoral Theses (5 Chapters)',
+                        'Scholarly Books (100–300 pp with ISBN)',
+                        'Academic PPT & Thesis Defense Decks',
+                      ].map((item, i) => (
+                        <div
+                          key={i}
+                          className="inline-flex items-center justify-center gap-1.5 bg-slate-50/90 dark:bg-slate-800/70 border border-slate-200/90 dark:border-slate-700/80 px-3.5 py-1.5 rounded-full text-center text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-2xs hover:border-[#F95721]/50 hover:bg-orange-50/40 transition-all max-w-xs"
+                        >
+                          <span className="text-[#F95721] text-[10px] font-black shrink-0">✦</span>
+                          <span className="text-center leading-snug">{item}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
                 <Link href="/services#english" className="btn-clay-orange text-xs w-full text-center py-2.5">
@@ -119,21 +121,23 @@ export default function HomePage() {
                   <p className="text-slate-600 dark:text-slate-300 text-xs mb-4 text-center font-medium leading-relaxed">
                     Supervised by Sampreeti Mukherjee with standard Devanagari academic vocabulary, Shodhganga compliance, and zero automated translation shortcuts.
                   </p>
-                  <div className="max-w-xs mx-auto mb-4">
-                    <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-200 font-bold text-center">
-                      <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">◆</span> शोध पत्र / Research Papers
-                      </li>
-                      <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">◆</span> शोध प्रबंध / Complete Thesis
-                      </li>
-                      <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">◆</span> पुस्तक लेखन (100–300 पृष्ठ)
-                      </li>
-                      <li className="flex items-center justify-center gap-2">
-                        <span className="text-[#F95721] font-black">◆</span> देवनागरी व्याख्यान एवं प्रस्तुतियाँ
-                      </li>
-                    </ul>
+                  <div className="w-full mb-4 flex flex-col items-center">
+                    <div className="flex flex-col items-center gap-1.5 w-full">
+                      {[
+                        'शोध पत्र / Research Papers',
+                        'शोध प्रबंध / Complete Thesis',
+                        'पुस्तक लेखन (100–300 पृष्ठ)',
+                        'देवनागरी व्याख्यान एवं प्रस्तुतियाँ',
+                      ].map((item, i) => (
+                        <div
+                          key={i}
+                          className="inline-flex items-center justify-center gap-1.5 bg-slate-50/90 dark:bg-slate-800/70 border border-slate-200/90 dark:border-slate-700/80 px-3.5 py-1.5 rounded-full text-center text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-2xs hover:border-[#F95721]/50 hover:bg-orange-50/40 transition-all max-w-xs font-hindi"
+                        >
+                          <span className="text-[#F95721] text-[10px] font-black shrink-0">✦</span>
+                          <span className="text-center leading-snug">{item}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   <button

@@ -114,20 +114,21 @@ export default function HeroClaymorphic() {
               Premier academic research writing, PhD thesis development, peer-reviewed journal publishing, and Turnitin audits in English and Hindi.
             </p>
 
-            {/* Bullet Checklist with Professional Academic Diamonds */}
-            <div className="space-y-3 mb-8 w-full max-w-md mx-auto">
-              <div className="flex items-center justify-center gap-3 text-slate-800 font-bold text-sm sm:text-base">
-                <span className="text-[#F95721] text-base font-black shrink-0">◆</span>
-                <span>Done-for-you Formatting (LaTeX, APA, IEEE, etc.)</span>
-              </div>
-              <div className="flex items-center justify-center gap-3 text-slate-800 font-bold text-sm sm:text-base">
-                <span className="text-[#2563EB] text-base font-black shrink-0">◆</span>
-                <span>Peer-Review Ready Manuscript Architecture</span>
-              </div>
-              <div className="flex items-center justify-center gap-3 text-slate-800 font-bold text-sm sm:text-base">
-                <span className="text-[#1E293B] text-base font-black shrink-0">◆</span>
-                <span>Pre-Signed Mutual NDA &amp; 100% Confidentiality</span>
-              </div>
+            {/* Unique Form Checklist (Centered Luxury Micro-Pills) */}
+            <div className="flex flex-col items-center gap-2 mb-8 w-full max-w-md mx-auto">
+              {[
+                { text: 'Done-for-you Formatting (LaTeX, APA, IEEE)', color: '#F95721' },
+                { text: 'Peer-Review Ready Manuscript Architecture', color: '#2563EB' },
+                { text: 'Pre-Signed Mutual NDA & 100% Confidentiality', color: '#1E293B' },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="inline-flex items-center justify-center gap-2 bg-white/95 border border-slate-200/90 px-4 py-2 rounded-full text-center text-xs sm:text-sm font-bold text-slate-800 shadow-2xs hover:border-[#F95721]/50 transition-colors"
+                >
+                  <span style={{ color: item.color }} className="text-xs font-black shrink-0">✦</span>
+                  <span className="text-center leading-snug">{item.text}</span>
+                </div>
+              ))}
             </div>
 
             {/* Action Buttons */}
@@ -161,11 +162,11 @@ export default function HeroClaymorphic() {
                   />
                 ))}
               </div>
-              <div className="text-center sm:text-left">
-                <div className="text-sm sm:text-base font-extrabold text-slate-900">
+              <div className="text-center flex flex-col items-center justify-center">
+                <div className="text-sm sm:text-base font-extrabold text-slate-900 text-center">
                   Doctoral Academic Directorate
                 </div>
-                <div className="flex items-center justify-center sm:justify-start text-blue-600 text-xs font-bold">
+                <div className="flex items-center justify-center text-blue-600 text-xs font-bold text-center">
                   <span>IEEE, Scopus &amp; UGC-CARE Standard Reviewers</span>
                 </div>
               </div>

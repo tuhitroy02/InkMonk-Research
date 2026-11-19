@@ -69,7 +69,7 @@ export default function ResearchToolkitContainer({
               <span className="bg-[#1d4ed8] text-white text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">
                 SCHOLAR TOOLKIT
               </span>
-              <span className="text-slate-400 text-xs">• 5 Working Utilities</span>
+              <span className="text-slate-400 text-xs">✦ 5 Working Utilities</span>
             </div>
             <h2 className="font-serif text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
               Academic Research Toolkit

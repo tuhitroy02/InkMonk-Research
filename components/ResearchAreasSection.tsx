@@ -21,11 +21,11 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     name: 'Engineering & Technology',
     category: 'STEM & Engineering',
     image: '/research-areas/engineering.jpg',
-    desc: 'Experimental design, finite element modeling (FEM), computational simulations, and technical manuscript drafting across all engineering branches.',
+    desc: 'Experimental design, computational simulations, and technical manuscript drafting across engineering branches.',
     subfields: [
-      'Robotics, Autonomous Systems & Control Theory',
-      'Finite Element Modeling (FEM) & Structural Dynamics',
-      'Renewable Microgrids & Advanced Materials',
+      'Robotics & Control Systems',
+      'Finite Element Modeling (FEM)',
+      'Renewable Energy & Materials',
     ],
     standards: 'IEEE, ASME, ASCE, Elsevier, Springer',
   },
@@ -34,11 +34,11 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     name: 'Computer Science & Artificial Intelligence',
     category: 'STEM & Computing',
     image: '/research-areas/computer-science.jpg',
-    desc: 'State-of-the-art computational algorithms, deep neural network architectures (PyTorch/CUDA), and empirical benchmarking with reproducible codebases.',
+    desc: 'Computational algorithms, deep neural network architectures, and empirical benchmarking with reproducible code.',
     subfields: [
-      'Deep Learning, Transformers & LLM Architectures',
-      'Computer Vision & Medical Image Segmentation',
-      'Cybersecurity, Cryptography & Distributed Systems',
+      'Deep Learning & Transformers',
+      'Computer Vision & Medical Imaging',
+      'Cybersecurity & Distributed Systems',
     ],
     standards: 'IEEE Transactions, ACM, Springer LNCS, Scopus Q1',
   },
@@ -47,11 +47,11 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     name: 'Medicine & Health Sciences',
     category: 'Life & Clinical Sciences',
     image: '/research-areas/medicine.jpg',
-    desc: 'Biomedical investigations, clinical trials analysis, epidemiological surveys, and pharmacological literature reviews adhering to strict medical publication ethics.',
+    desc: 'Biomedical investigations, clinical trials analysis, and pharmacological reviews adhering to ICMJE standards.',
     subfields: [
-      'Clinical Trials Protocols & Systematic Meta-Analyses',
-      'Public Health, Epidemiology & Global Disease Modeling',
-      'Pharmacokinetics & Targeted Drug Delivery',
+      'Clinical Trials & Meta-Analyses',
+      'Epidemiology & Disease Modeling',
+      'Pharmacokinetics & Therapeutics',
     ],
     standards: 'ICMJE, PubMed, The Lancet / BMJ guidelines, APA 7th',
   },
@@ -60,11 +60,11 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     name: 'Natural & Physical Sciences',
     category: 'Foundational Sciences',
     image: '/research-areas/natural-sciences.jpg',
-    desc: 'Rigorous theoretical formulations, laboratory experimental synthesis, and quantitative data modeling across fundamental sciences.',
+    desc: 'Theoretical formulations, laboratory experimental synthesis, and quantitative data modeling.',
     subfields: [
-      'Theoretical Physics & Quantum Information',
-      'Synthetic Organic, Analytical Chemistry & Nanotech',
-      'Molecular Genetics & Stochastic Biomathematics',
+      'Quantum & Theoretical Physics',
+      'Organic Chemistry & Nanotech',
+      'Molecular Genetics & Biomathematics',
     ],
     standards: 'Nature, Science, ACS, APS, Royal Society of Chemistry',
   },
@@ -73,11 +73,11 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     name: 'Environmental Sciences & Sustainability',
     category: 'Environmental Sciences',
     image: '/research-areas/environmental.jpg',
-    desc: 'Climate impact assessments, ecological biodiversity modeling, renewable energy lifecycle analysis, and sustainable urban environmental policies.',
+    desc: 'Climate impact assessments, ecological biodiversity modeling, and clean energy lifecycle analyses.',
     subfields: [
-      'Climate Dynamics, Carbon Audits & IPCC Metrics',
-      'Ecology, Biodiversity & Marine Conservation',
-      'Circular Bio-Economy & Clean Energy Systems',
+      'Climate Dynamics & Carbon Audits',
+      'Ecology & Marine Conservation',
+      'Clean Energy & Circular Economy',
     ],
     standards: 'IPCC Guidelines, Elsevier Environmental, UGC-CARE',
   },
@@ -86,11 +86,11 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     name: 'Economics, Management & Finance',
     category: 'Commerce & Management',
     image: '/research-areas/business.jpg',
-    desc: 'Quantitative econometrics, corporate financial modeling, behavioral consumer dynamics, and strategic organizational management research.',
+    desc: 'Quantitative econometrics, corporate financial modeling, and strategic organizational research.',
     subfields: [
-      'Empirical Econometrics & Time-Series Modeling (GARCH/Panel)',
-      'Corporate Finance, Capital Asset Pricing & FinTech',
-      'Strategic Leadership & Global Supply Operations',
+      'Econometrics & Time-Series',
+      'Corporate Finance & FinTech',
+      'Strategic Leadership & Operations',
     ],
     standards: 'JFE, AER, Harvard Business Review, APA / Chicago',
   },
@@ -99,11 +99,11 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     name: 'Social Sciences & Humanities',
     category: 'Social Sciences',
     image: '/research-areas/social-sciences.jpg',
-    desc: 'Qualitative field studies, sociological theory, historical archival analysis, governance frameworks, and interdisciplinary human inquiry.',
+    desc: 'Qualitative field studies, sociological theory, historical archival analysis, and public policy inquiry.',
     subfields: [
-      'Global Governance, Geopolitics & Public Policy',
-      'Sociological Field Studies & Gender Frameworks',
-      'Cognitive Psychology & Higher Education Pedagogy',
+      'Governance & Geopolitics',
+      'Sociological Field Frameworks',
+      'Cognitive & Educational Psychology',
     ],
     standards: 'APA 7th, Chicago Manual of Style, MLA 9th, UGC-CARE',
   },
@@ -113,11 +113,11 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     hindiName: 'हिंदी साहित्य एवं अंतःविषय शोध',
     category: 'Vernacular & Humanities',
     image: '/research-areas/hindi-sahitya.jpg',
-    desc: 'Specialized academic research in Hindi supervised by Sampreeti Mukherjee with standard Devanagari vocabulary and Shodhganga compliance.',
+    desc: 'सम्प्रीति मुखर्जी मैम के निर्देशन में शोधगंगा एवं यूजीसी-केयर अनुरूप मानक हिंदी शोध।',
     subfields: [
-      'समकालीन हिंदी साहित्य, विमर्श एवं आलोचनात्मक सिद्धांत',
-      'तुलनात्मक भाषाविज्ञान एवं देवनागरी पारिभाषिक मानक',
-      'शोधगंगा एवं यूजीसी-केयर अनुरूप शोध प्रबंध निर्देशन',
+      'समकालीन साहित्य एवं आलोचना',
+      'तुलनात्मक भाषाविज्ञान व देवनागरी मानक',
+      'शोधगंगा व यूजीसी-केयर शोध',
     ],
     standards: 'Shodhganga (शोधगंगा), UGC-CARE List, Devanagari Standards',
   },
@@ -126,11 +126,11 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     name: 'Language, Literature & Linguistics',
     category: 'Humanities & Culture',
     image: '/research-areas/humanities.jpg',
-    desc: 'Critical textual hermeneutics, post-colonial literary discourse, comparative rhetoric, and descriptive/applied linguistics.',
+    desc: 'Critical textual hermeneutics, comparative rhetoric, and descriptive or applied linguistics.',
     subfields: [
-      'Comparative Literary Theory & Post-Colonial Studies',
-      'Applied Linguistics, Syntax & Computational Semiotics',
-      'Cross-Cultural Translation & Digital Humanities',
+      'Comparative Literary Theory',
+      'Applied & Computational Linguistics',
+      'Cross-Cultural Translation Studies',
     ],
     standards: 'MLA 9th Edition, MHRA, Chicago Style',
   },
@@ -139,11 +139,11 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     name: 'Agriculture & Agronomy',
     category: 'Agricultural Sciences',
     image: '/research-areas/environmental.jpg',
-    desc: 'Agronomic field experiment design, crop physiology modeling, soil microbiome analytics, and agribusiness supply economics.',
+    desc: 'Agronomic field experiments, crop physiology modeling, and agribusiness supply economics.',
     subfields: [
-      'Precision Agriculture, IoT Sensing & Drone Analytics',
-      'Soil Microbiology & Sustainable Crop Protection',
-      'Agribusiness Value Chains & Climate-Resilient Farming',
+      'Precision Agriculture & Smart IoT',
+      'Soil Microbiology & Crop Protection',
+      'Agribusiness & Climate Resilience',
     ],
     standards: 'ICAR Guidelines, FAO Standards, Springer AgSciences',
   },
@@ -152,11 +152,11 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     name: 'Architecture & Urban Planning',
     category: 'Design & Built Environment',
     image: '/research-areas/engineering.jpg',
-    desc: 'Spatial urban analysis, sustainable architectural design paradigms, GIS geographic modeling, and resilient city infrastructure.',
+    desc: 'Spatial urban analysis, sustainable architectural design paradigms, and GIS geographic modeling.',
     subfields: [
-      'Sustainable Architecture & Net-Zero Green Building',
-      'GIS Spatial Analytics & Resilient City Planning',
-      'Urban Transportation & Infrastructure Mobility Networks',
+      'Sustainable & Green Architecture',
+      'GIS Spatial Planning & Cities',
+      'Urban Mobility & Infrastructure',
     ],
     standards: 'RIBA, Council of Architecture (CoA), Harvard Style',
   },
@@ -165,11 +165,11 @@ export const RESEARCH_AREAS: ResearchArea[] = [
     name: 'Arts, Design & Visual Culture',
     category: 'Creative & Practice-Led',
     image: '/research-areas/business.jpg',
-    desc: 'Practice-led academic research, visual culture analysis, industrial product ergonomics, and digital media design theory.',
+    desc: 'Practice-led academic research, visual culture analysis, and human-computer design theory.',
     subfields: [
-      'Practice-Led Research (PaR) & Curatorial Studies',
-      'Human-Computer Interaction (HCI) & Digital Media Theory',
-      'Sustainable Materiality & Industrial Ergonomics',
+      'Practice-Led Research (PaR)',
+      'HCI & Digital Media Theory',
+      'Industrial Design & Ergonomics',
     ],
     standards: 'Harvard, Chicago Author-Date, Design Research Society',
   },
@@ -260,31 +260,34 @@ export default function ResearchAreasSection({ className = "" }: { className?: s
                   {area.desc}
                 </p>
 
-                {/* Core Research Focus (Centered, 3 Concise & High-Impact Points) */}
-                <div className="w-full mb-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-center">
-                  <div className="text-[10px] font-black text-slate-800 dark:text-slate-200 mb-2 uppercase tracking-wider text-center">
-                    Key Research Focus:
+                {/* Core Research Focus (Unique form: Centered Luxury Micro-Pills) */}
+                <div className="w-full mb-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col items-center text-center">
+                  <div className="text-[10px] font-extrabold text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-widest text-center">
+                    Key Research Focus
                   </div>
-                  <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 font-medium flex flex-col items-center justify-center">
+                  <div className="flex flex-col items-center gap-1.5 w-full">
                     {area.subfields.map((sub, i) => (
-                      <li key={i} className="flex items-start justify-center gap-2 text-center max-w-xs">
-                        <span className="text-[#F95721] font-bold text-xs shrink-0 mt-0.5">•</span>
-                        <span className="leading-snug">{sub}</span>
-                      </li>
+                      <div
+                        key={i}
+                        className="inline-flex items-center justify-center gap-1.5 bg-slate-50/90 dark:bg-slate-800/70 border border-slate-200/90 dark:border-slate-700/80 px-3.5 py-1.5 rounded-full text-center text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-2xs hover:border-[#F95721]/50 hover:bg-orange-50/40 transition-all max-w-xs"
+                      >
+                        <span className="text-[#F95721] text-[11px] font-black shrink-0">✦</span>
+                        <span className="text-center leading-snug">{sub}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </div>
 
-              {/* Footer with Standards & Action */}
-              <div className="w-full pt-3 border-t border-slate-100 flex items-center justify-between text-xs mt-auto">
-                <div className="text-[10px] text-slate-500 text-center">
-                  <span className="text-slate-400 block font-bold">STANDARD:</span>
-                  <span className="font-bold text-slate-800 truncate max-w-[140px] block">{area.standards}</span>
+              {/* Footer with Standards & Action - Fully Centered */}
+              <div className="w-full pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col items-center justify-center gap-2 text-xs mt-auto text-center">
+                <div className="text-[10px] text-slate-500 dark:text-slate-400 text-center">
+                  <span className="text-slate-400 font-bold uppercase tracking-wider block text-center">Standard:</span>
+                  <span className="font-bold text-slate-800 dark:text-slate-200 block text-center truncate max-w-[240px]">{area.standards}</span>
                 </div>
                 <Link
                   href={`/quote?domain=${encodeURIComponent(area.name)}`}
-                  className="text-xs font-bold text-[#F95721] hover:underline flex items-center gap-1"
+                  className="inline-flex items-center justify-center gap-1 text-xs font-bold text-[#F95721] hover:underline uppercase tracking-wide text-center pt-0.5"
                 >
                   <span>Request Quote →</span>
                 </Link>
@@ -294,19 +297,19 @@ export default function ResearchAreasSection({ className = "" }: { className?: s
           ))}
         </div>
 
-        {/* Bottom Banner */}
-        <div className="mt-14 p-6 sm:p-8 rounded-3xl card-clay-white max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-md">
-          <div>
-            <div className="text-slate-900 font-serif font-black text-xl">
+        {/* Bottom Banner - Strictly Centered */}
+        <div className="mt-14 p-6 sm:p-8 rounded-3xl card-clay-white max-w-4xl mx-auto flex flex-col items-center justify-center gap-4 text-center shadow-md">
+          <div className="text-center flex flex-col items-center justify-center">
+            <div className="text-slate-900 font-serif font-black text-xl text-center">
               Have an Interdisciplinary or Custom Topic?
             </div>
-            <div className="text-xs text-slate-600 font-medium mt-1">
+            <div className="text-xs text-slate-600 font-medium mt-1 text-center max-w-xl">
               Our directors evaluate cross-domain studies (e.g. AI in Healthcare, Econometrics of Climate Policy, Digital Humanities).
             </div>
           </div>
           <Link
             href="/quote"
-            className="btn-clay-orange text-xs whitespace-nowrap !py-3 !px-6"
+            className="btn-clay-orange text-xs whitespace-nowrap !py-3 !px-6 text-center"
           >
             Configure Custom Topic →
           </Link>

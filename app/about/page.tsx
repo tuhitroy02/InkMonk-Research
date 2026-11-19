@@ -37,22 +37,22 @@ export default function AboutPage() {
 
         {/* Research Lab Crest & Ethical Integrity Standard */}
         <div className="card-clay-white p-8 md:p-12 mb-16 text-center shadow-lg">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-center md:text-left">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-orange-50 text-[#F95721] border border-orange-200 text-xs font-black px-3 py-1 rounded-full mb-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-center">
+            <div className="flex flex-col items-center text-center">
+              <div className="inline-flex items-center gap-2 bg-orange-50 text-[#F95721] border border-orange-200 text-xs font-black px-3.5 py-1.5 rounded-full mb-3 text-center">
                 <TurnitinShieldLogo className="w-4 h-4" />
-                <span>COPE Ethics Compliant • Zero Essay Mills</span>
+                <span>COPE Ethics Compliant ✦ Zero Essay Mills</span>
               </div>
-              <h2 className="font-serif text-2xl sm:text-4xl font-black text-slate-900 mb-4 text-center md:text-left">
+              <h2 className="font-serif text-2xl sm:text-4xl font-black text-slate-900 mb-4 text-center">
                 The InkMonk Academic Standard
               </h2>
-              <p className="text-slate-600 text-sm leading-relaxed mb-4 text-center md:text-left font-medium">
+              <p className="text-slate-600 text-sm leading-relaxed mb-4 text-center font-medium">
                 The name <strong>InkMonk</strong> represents the focused, disciplined intellectual devotion of a scholarly monk coupled with the analytical precision of the modern researcher&apos;s pen.
               </p>
-              <p className="text-slate-600 text-sm leading-relaxed mb-4 text-center md:text-left font-medium">
+              <p className="text-slate-600 text-sm leading-relaxed mb-4 text-center font-medium">
                 We strictly separate <strong>ethical consultation, language normalization, and reproducible code validation</strong> from ghostwriting shortcuts. Our laboratory operates strictly under Committee on Publication Ethics (COPE) principles: ensuring genuine intellectual authorship, verifiable benchmark reproducibility, and transparent citation attribution.
               </p>
-              <p className="text-slate-600 text-sm leading-relaxed text-center md:text-left font-medium">
+              <p className="text-slate-600 text-sm leading-relaxed text-center font-medium">
                 Every project is backed by a <strong>Pre-Signed Mutual Non-Disclosure Agreement (NDA)</strong> guaranteeing that all raw survey datasets, unpublished hypotheses, and thesis drafts remain the 100% exclusive intellectual property of the researcher.
               </p>
             </div>
@@ -137,7 +137,7 @@ export default function AboutPage() {
                   <span className="text-[#2563EB] font-bold">◆</span>
                   <span>UGC-CARE Standards</span>
                 </span>
-                <span>•</span>
+                <span className="text-[#F95721] font-black">✦</span>
                 <span className="flex items-center gap-1">
                   <span className="text-[#F95721] font-bold">◆</span>
                   <span>Comparative Literature</span>

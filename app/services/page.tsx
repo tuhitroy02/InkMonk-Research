@@ -47,11 +47,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: '4-STAGE MILESTONE ESCROW',
     tier: 'GLOBAL DRC COMPLIANT',
     image: '/services/thesis-dissertation.jpg',
-    desc: 'End-to-end doctoral thesis drafting from Chapter 1 through literature review, methodology, results, and conclusion. Available with or without computational models.',
+    desc: 'End-to-end doctoral thesis drafting tailored to your university guidelines, with optional computational modeling.',
     features: [
-      'Comprehensive 5-chapter doctoral structure strictly aligned with university DRC rubrics',
-      '4-stage milestone delivery schedule with private escrow payment protection',
-      'Direct doctoral supervisory consultation & defense-ready literature synthesis',
+      '5-Chapter DRC Architecture',
+      '4-Stage Milestone Escrow',
+      'Direct Supervisory Defense Prep',
     ],
     href: '/quote?service=THESIS&lang=EN',
   },
@@ -62,11 +62,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: 'IEEE / SPRINGER / SCOPUS',
     tier: 'INTERNATIONAL PEER REVIEW',
     image: '/services/research-paper.jpg',
-    desc: 'High-impact empirical and theoretical research manuscripts structured to international publication standards. Formatted to IEEE, Springer, Elsevier, or target UGC-CARE guidelines.',
+    desc: 'High-impact empirical and theoretical manuscripts engineered for top-tier peer-reviewed journals.',
     features: [
-      'Target journal manuscript drafting compliant with IEEE, Springer & Elsevier formatting',
-      'Rigorous empirical methodology, statistical hypothesis testing & error analysis',
-      'Flawless LaTeX / BibTeX citation architecture with zero AI writing',
+      'Target Journal Formatting',
+      'Empirical & Error Analysis',
+      '100% Original & Zero AI',
     ],
     href: '/quote?service=RESEARCH_PAPER&lang=EN',
   },
@@ -77,11 +77,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: 'PRISMA 2020 GUIDELINES',
     tier: 'BIBLIOMETRIC SURVEY',
     image: '/services/review-paper.jpg',
-    desc: 'Comprehensive systematic literature reviews, state-of-the-art meta-analyses, and VOSviewer/Biblioshiny bibliometric network mapping across your discipline.',
+    desc: 'PRISMA-compliant systematic reviews, meta-analyses, and bibliometric network mapping across your field.',
     features: [
-      'PRISMA-compliant search strategy, screening protocol & inclusion flowcharts',
-      'Critical synthesis & comparative taxonomy of 100+ peer-reviewed primary studies',
-      'Bibliometric network co-occurrence mapping via VOSviewer & Biblioshiny',
+      'PRISMA 2020 Protocol',
+      '100+ Primary Studies Synthesis',
+      'VOSviewer Bibliometric Mapping',
     ],
     href: '/quote?service=REVIEW_PAPER&lang=EN',
   },
@@ -92,11 +92,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: 'DRC & GRANT READY',
     tier: 'INSTITUTIONAL RUBRIC',
     image: '/services/synopsis-proposal.jpg',
-    desc: 'Crisp, defensible research synopses, doctoral registration proposals, and academic grant applications formulated to pass university screening committees.',
+    desc: 'Defensible research synopses and doctoral proposals structured for swift institutional committee approval.',
     features: [
-      'Defensible problem statement, research questions & verifiable hypotheses',
-      'Robust methodological design, sampling frame & chronological Gantt timeline',
-      'Formulated for swift doctoral committee approval & grant screening boards',
+      'Defensible Problem Formulation',
+      'Methodology & Gantt Roadmap',
+      'DRC Committee Alignment',
     ],
     href: '/quote?service=SYNOPSIS&lang=EN',
   },
@@ -107,11 +107,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: 'ISBN ACADEMIC PRESS',
     tier: 'MONOGRAPH STANDARDS',
     image: '/services/book-monograph.jpg',
-    desc: 'Full-length scholarly monographs, edited volumes, and reference textbooks prepared for academic publishers with ISBN registration support.',
+    desc: 'Full-length academic monographs and edited volumes prepared for international university presses.',
     features: [
-      'Full-length academic monographs & edited volumes for university presses',
-      'Pedagogical chapter architecture, front-matter, preface & comprehensive index',
-      'Camera-ready digital & print typesetting conforming to international ISBN standards',
+      'University Press Architecture',
+      'Peer-Reviewed Monograph Prose',
+      'Camera-Ready Typesetting & ISBN',
     ],
     href: '/quote?service=BOOK&lang=EN',
   },
@@ -122,11 +122,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: 'PYTORCH / MATLAB / DOCKER',
     tier: 'REPRODUCIBLE CODEBASE',
     image: '/services/computational-model.jpg',
-    desc: 'Machine learning, deep neural network (PyTorch, TensorFlow, CUDA), Python, and MATLAB simulation development with reproducible benchmarks and Git handoff.',
+    desc: 'Deep learning, Python, and MATLAB simulations with reproducible benchmarks and private repository handoff.',
     features: [
-      'Production-grade deep learning, computer vision & statistical simulation code',
-      'Benchmark validation with AUC-ROC curves, confusion matrices & experiment logs',
-      'Full Docker containerization & private Git repository client handoff',
+      'PyTorch & CUDA Architectures',
+      'Reproducible Benchmark Metrics',
+      'Docker & Git Code Handoff',
     ],
     href: '/quote?service=MODEL&lang=EN',
     isCode: true,
@@ -138,11 +138,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: 'SCOPUS / UGC-CARE',
     tier: 'PREMIUM PROSE',
     image: '/services/article-writing.jpg',
-    desc: 'Scholarly articles, edited book chapters, policy whitepapers, and conference proceedings with verified word count tiers and rigorous citation apparatus.',
+    desc: 'Targeted scholarly essays, peer-reviewed chapters, and policy whitepapers with verified citation apparatus.',
     features: [
-      'High-impact scholarly essays & book chapters across 1,000 to 5,000+ words',
-      'Targeted APA 7th, Harvard, Chicago, or MLA reference apparatus',
-      'Rigorous domain fact-checking with zero generative AI hallucinations',
+      '1,000–5,000+ Word Manuscripts',
+      'APA, Chicago, Harvard & MLA',
+      'Peer-Review Fact Verification',
     ],
     href: '/quote?service=ARTICLE&lang=EN',
   },
@@ -153,11 +153,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: 'DEFENSE READY',
     tier: '16:9 EXECUTIVE DECKS',
     image: '/services/academic-presentation.jpg',
-    desc: 'Professional thesis defense slide decks, conference presentations, and seminar slides formatted to withstand tough academic committee inquiries.',
+    desc: 'Widescreen 16:9 defense decks and conference slides crafted for high-stakes academic committee evaluations.',
     features: [
-      'Widescreen 16:9 presentation decks structured for doctoral defense committees',
-      'High-contrast methodology workflows, architecture schematics & data figures',
-      'Concise slide narrative paired with comprehensive speaker defense notes',
+      '16:9 High-Contrast Visuals',
+      'Methodology & Flow Architecture',
+      'Comprehensive Defense Notes',
     ],
     href: '/quote?service=PPT&lang=EN',
   },
@@ -172,11 +172,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: 'शोधगंगा एवं यूजीसी मानक',
     tier: '4-चरणीय एस्क्रो',
     image: '/research-areas/hindi-sahitya.jpg',
-    desc: 'सम्प्रीति मुखर्जी मैम के प्रत्यक्ष पर्यवेक्षण में संपूर्ण 5-अध्यायी हिंदी शोध प्रबंध लेखन। शोधगंगा, यूजीसी-केयर एवं विश्वविद्यालय नियमावली के अनुरूप।',
+    desc: 'सम्प्रीति मुखर्जी मैम के प्रत्यक्ष पर्यवेक्षण में संपूर्ण 5-अध्यायी हिंदी शोध प्रबंध लेखन।',
     features: [
-      'संपूर्ण 5-अध्यायी शोध प्रबंध संरचना (शोधगंगा एवं यूजीसी नियमावली अनुरूप)',
-      '4-चरणीय माइलस्टोन समीक्षा एवं पूर्ण एस्क्रो सुरक्षा',
-      'मानक देवनागरी पारिभाषिक शब्दावली एवं मौखिक परीक्षा (Viva) तैयारी',
+      '5-अध्यायी शोध प्रबंध संरचना',
+      '4-चरणीय माइलस्टोन सुरक्षा',
+      'मानक देवनागरी एवं मौखिक तैयारी',
     ],
     href: '/quote?service=THESIS&lang=HI',
     isHindi: true,
@@ -188,11 +188,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: 'यूजीसी-केयर सूचीबद्ध',
     tier: 'शत-प्रतिशत मौलिक',
     image: '/services/research-paper.jpg',
-    desc: 'यूजीसी-केयर (UGC-CARE) एवं समकक्ष प्रतिष्ठित शोध पत्रिकाओं हेतु उच्च स्तरीय मौलिक शोध पत्र लेखन, संदर्भ ग्रंथ सूची एवं शोध प्रविधि सहित।',
+    desc: 'यूजीसी-केयर एवं समकक्ष प्रतिष्ठित शोध पत्रिकाओं हेतु उच्च स्तरीय मौलिक शोध पत्र लेखन।',
     features: [
-      'यूजीसी-केयर एवं समकक्ष प्रतिष्ठित शोध पत्रिकाओं हेतु मौलिक लेखन',
-      'प्रामाणिक प्राथमिक/द्वितीयक स्रोत एवं मानकीकृत संदर्भ प्रणाली',
-      '0% AI लेखन, शत-प्रतिशत बौद्धिक शोध एवं पत्रिका संशोधन सहयोग',
+      'यूजीसी-केयर मानक प्रारूप',
+      'प्रामाणिक प्राथमिक संदर्भ',
+      '100% मौलिक एवं शून्य AI',
     ],
     href: '/quote?service=RESEARCH_PAPER&lang=HI',
     isHindi: true,
@@ -204,11 +204,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: 'समालोचनात्मक सर्वेक्षण',
     tier: 'ग्रंथपरक विश्लेषण',
     image: '/services/review-paper.jpg',
-    desc: 'हिंदी साहित्य, भाषाविज्ञान, इतिहास, समाजशास्त्र एवं दर्शनशास्त्र में समकालीन शोध प्रवृत्तियों का व्यापक समालोचनात्मक एवं ग्रंथपरक सर्वेक्षण।',
+    desc: 'हिंदी साहित्य एवं समाजशास्त्र में समकालीन शोध प्रवृत्तियों का समालोचनात्मक एवं ग्रंथपरक सर्वेक्षण।',
     features: [
-      'समकालीन शोध प्रवृत्तियों का व्यापक समालोचनात्मक एवं ग्रंथपरक सर्वेक्षण',
-      'शोध अंतराल (Research Gaps) एवं तुलनात्मक सैद्धांतिक विश्लेषण',
-      'मानक देवनागरी संदर्भ ग्रंथ सूची एवं वैज्ञानिक शब्दावली',
+      'समालोचनात्मक साहित्य सर्वेक्षण',
+      'तुलनात्मक सैद्धांतिक विश्लेषण',
+      'मानक देवनागरी संदर्भ प्रणाली',
     ],
     href: '/quote?service=REVIEW_PAPER&lang=HI',
     isHindi: true,
@@ -220,11 +220,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: 'डीआरसी समिति स्वीकृत',
     tier: 'पंजीकरण स्वीकृति',
     image: '/services/synopsis-proposal.jpg',
-    desc: 'पीएच.डी. पंजीकरण एवं विभागीय शोध समिति (DRC/RAC) हेतु तर्कसंगत, सुस्पष्ट एवं प्रामाणिक शोध प्रस्ताव (Synopsis) निर्माण।',
+    desc: 'पीएच.डी. पंजीकरण एवं विभागीय शोध समिति (DRC) हेतु प्रामाणिक शोध प्रस्ताव निर्माण।',
     features: [
-      'सुस्पष्ट समस्या कथन, शोध प्रश्न, उद्देश्य एवं प्राक्कल्पना निर्माण',
-      'शोध क्षेत्र, प्रतिचयन (Sampling) प्रविधि एवं समयबद्ध कार्ययोजना',
-      'विभागीय शोध समिति (DRC/RAC) प्रस्तुति एवं पंजीकरण स्वीकृति मानक',
+      'सुस्पष्ट शोध समस्या एवं प्राक्कल्पना',
+      'प्रतिचयन प्रविधि एवं कार्ययोजना',
+      'विभागीय समिति स्वीकृति मानक',
     ],
     href: '/quote?service=SYNOPSIS&lang=HI',
     isHindi: true,
@@ -236,11 +236,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: 'आईएसबीएन (ISBN) मानक',
     tier: 'अकादमिक ग्रंथ',
     image: '/services/book-monograph.jpg',
-    desc: 'अकादमिक संदर्भ ग्रंथ, संपादित पुस्तकें, शोध मोनोग्राफ एवं पाठ्य-सामग्री का उच्च स्तरीय देवनागरी लेखन, आईएसबीएन प्रारूप सहित।',
+    desc: 'अकादमिक संदर्भ ग्रंथ, संपादित पुस्तकें एवं शोध मोनोग्राफ का उच्च स्तरीय देवनागरी लेखन।',
     features: [
-      'अकादमिक संदर्भ ग्रंथ, संपादित पुस्तकें एवं शोध मोनोग्राफ (100–300 पृष्ठ)',
-      'प्रस्तावना, विषय-विभाजन, विस्तृत अनुक्रमणिका एवं ग्रंथ सूची',
-      'राष्ट्रीय-अंतरराष्ट्रीय प्रकाशकों हेतु मुद्रण-योग्य मानकीकृत स्वरूप',
+      '100–300 पृष्ठ अकादमिक ग्रंथ',
+      'प्रस्तावना एवं विस्तृत अनुक्रमणिका',
+      'आईएसबीएन मुद्रण प्रारूप',
     ],
     href: '/quote?service=BOOK&lang=HI',
     isHindi: true,
@@ -252,11 +252,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: 'शुद्ध देवनागरी लेखन',
     tier: 'शून्य मशीनी अनुवाद',
     image: '/services/article-writing.jpg',
-    desc: 'विद्वत्तापूर्ण आलेख, संपादित पुस्तकों के अध्याय एवं शोध निबंध। शून्य मशीनी अनुवाद—पूर्णतः मानवीय एवं बौद्धिक लेखन।',
+    desc: 'विद्वत्तापूर्ण आलेख, पुस्तक अध्याय एवं शोध निबंध (शून्य मशीनी अनुवाद—पूर्णतः मानवीय लेखन)।',
     features: [
-      'विद्वत्तापूर्ण आलेख एवं शोध निबंध (1,000–5,000+ शब्द)',
-      'शुद्ध मानक देवनागरी वर्तनी, व्याकरण एवं उच्च बौद्धिक भाषा शैली',
-      'शून्य मशीनी अनुवाद—पूर्णतः मौलिक एवं मानवीय शोध',
+      '1,000–5,000+ शब्द मानक आलेख',
+      'शुद्ध देवनागरी वर्तनी व व्याकरण',
+      '100% मानवीय बौद्धिक शोध',
     ],
     href: '/quote?service=ARTICLE&lang=HI',
     isHindi: true,
@@ -268,11 +268,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: 'मौखिक परीक्षा (VIVA) तैयार',
     tier: '16:9 स्लाइड प्रारूप',
     image: '/services/academic-presentation.jpg',
-    desc: 'पीएच.डी. मौखिक परीक्षा, शोध संगोष्ठी (Seminar) एवं राष्ट्रीय सम्मेलनों हेतु आकर्षक 16:9 देवनागरी स्लाइड एवं वक्ता नोट्स।',
+    desc: 'पीएच.डी. मौखिक परीक्षा (Viva) एवं शोध संगोष्ठियों हेतु 16:9 देवनागरी स्लाइड एवं वक्ता नोट्स।',
     features: [
-      '16:9 उच्च-विभेदन देवनागरी स्लाइड एवं विस्तृत वक्ता नोट्स',
-      'शोध प्रविधि, अवधारणात्मक मॉडल एवं कार्यप्रणाली के स्पष्ट आरेख',
-      'पीएच.डी. मौखिक परीक्षा (Viva Voce) एवं राष्ट्रीय संगोष्ठियों हेतु तैयार',
+      '16:9 उच्च-गुणवत्ता देवनागरी स्लाइड',
+      'शोध प्रविधि एवं मॉडल आरेख',
+      'मौखिक परीक्षा वक्ता नोट्स',
     ],
     href: '/quote?service=PPT&lang=HI',
     isHindi: true,
@@ -288,11 +288,11 @@ const FULL_SERVICE_CATALOG: ServiceItem[] = [
     badge: 'SAFE NON-REPOSITORY',
     tier: 'EXPRESS 15-30 MIN',
     image: '/services/turnitin-report.jpg',
-    desc: 'Instructor-tier Turnitin verification audits checking similarity index and AI writing percentages without saving your manuscript to public databases.',
+    desc: 'Official instructor-tier similarity and AI writing audits delivered with zero repository storage.',
     features: [
-      'Official instructor-grade similarity report with color-coded citation matches',
-      '100% safe non-repository scan guaranteeing zero institutional database deposit',
-      'Proprietary Turnitin AI writing detection index with express 15–30 min delivery',
+      'Safe Non-Repository Scan',
+      'Official Similarity Index',
+      'Express 15–30 Min Delivery',
     ],
     href: '/quote?type=TURNITIN',
     isTurnitin: true,
@@ -467,11 +467,11 @@ export default function ServicesPage() {
               
               {/* Academic Badges (Zero Public Prices - Pure Scholarly Standards) */}
               <div className="w-full flex flex-col items-center">
-                <div className="flex items-center justify-between w-full gap-2 mb-3">
-                  <span className="text-[10px] font-black uppercase text-[#2563EB] bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 px-2.5 py-1 rounded-full truncate">
+                <div className="flex items-center justify-center flex-wrap gap-2 w-full mb-3">
+                  <span className="text-[10px] font-black uppercase text-[#2563EB] bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 px-3 py-1 rounded-full text-center">
                     {service.badge}
                   </span>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-[#F95721] bg-orange-50 dark:bg-orange-950/60 border border-orange-200 dark:border-orange-800 px-2.5 py-1 rounded-full shrink-0">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-[#F95721] bg-orange-50 dark:bg-orange-950/60 border border-orange-200 dark:border-orange-800 px-3 py-1 rounded-full text-center">
                     {service.tier}
                   </span>
                 </div>
@@ -491,33 +491,36 @@ export default function ServicesPage() {
                 <h3 className={`font-serif text-xl font-black text-slate-900 dark:text-white mb-2 group-hover:text-[#F95721] transition-colors text-center ${service.isHindi ? 'font-hindi' : ''}`}>
                   {service.title}
                 </h3>
-                <p className={`text-slate-600 dark:text-slate-300 text-xs font-medium leading-relaxed mb-4 text-center ${service.isHindi ? 'font-hindi' : ''}`}>
+                <p className={`text-slate-600 dark:text-slate-300 text-xs font-medium leading-relaxed mb-4 text-center max-w-sm mx-auto ${service.isHindi ? 'font-hindi' : ''}`}>
                   {service.desc}
                 </p>
 
-                {/* Features Bullet List (Center-aligned Heading with Left-aligned Bullets) */}
-                <div className="w-full pt-3 border-t border-slate-100 dark:border-slate-800 mb-5">
-                  <div className="text-[10px] text-slate-800 dark:text-slate-200 font-bold uppercase mb-2 tracking-wider text-center">
-                    {service.isHindi ? 'प्रमुख मानक एवं विशेषताएं:' : 'Key Deliverables & Standards:'}
+                {/* Key Deliverables (Unique form: Centered Luxury Micro-Pills) */}
+                <div className="w-full pt-3 border-t border-slate-100 dark:border-slate-800 mb-5 flex flex-col items-center text-center">
+                  <div className="text-[10px] text-slate-500 dark:text-slate-400 font-extrabold uppercase mb-2 tracking-widest text-center">
+                    {service.isHindi ? 'प्रमुख मानक' : 'Key Deliverables'}
                   </div>
-                  <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 font-medium text-left max-w-sm mx-auto">
+                  <div className="flex flex-col items-center gap-1.5 w-full">
                     {service.features.map((feat, i) => (
-                      <li key={i} className={`flex items-start gap-2 text-left ${service.isHindi ? 'font-hindi' : ''}`}>
-                        <span className="text-[#F95721] font-bold text-xs shrink-0 mt-0.5">•</span>
-                        <span className="leading-snug">{feat}</span>
-                      </li>
+                      <div
+                        key={i}
+                        className={`inline-flex items-center justify-center gap-1.5 bg-slate-50/90 dark:bg-slate-800/70 border border-slate-200/90 dark:border-slate-700/80 px-3.5 py-1.5 rounded-full text-center text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-2xs hover:border-[#F95721]/50 hover:bg-orange-50/40 transition-all max-w-sm ${service.isHindi ? 'font-hindi' : ''}`}
+                      >
+                        <span className="text-[#F95721] text-[11px] font-black shrink-0">✦</span>
+                        <span className="text-center leading-snug">{feat}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </div>
 
               {/* Card Action Buttons */}
-              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-2.5 mt-auto w-full">
+              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col items-center justify-center gap-2.5 mt-auto w-full text-center">
                 {service.isCode ? (
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col items-center justify-center gap-2 w-full text-center">
                     <button
                       onClick={() => setScopeBuilderOpen(true)}
-                      className="btn-clay-orange text-xs w-full py-2.5 flex items-center justify-center gap-1.5 cursor-pointer"
+                      className="btn-clay-orange text-xs w-full py-2.5 flex items-center justify-center gap-1.5 cursor-pointer text-center"
                     >
                       <TerminalLogIcon className="w-3.5 h-3.5" />
                       <span>Interactive Code Scope Builder →</span>
@@ -530,10 +533,10 @@ export default function ServicesPage() {
                     </Link>
                   </div>
                 ) : service.isTurnitin ? (
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col items-center justify-center gap-2 w-full text-center">
                     <button
                       onClick={() => setTurnitinModalOpen(true)}
-                      className="btn-clay-orange text-xs w-full py-2.5 cursor-pointer"
+                      className="btn-clay-orange text-xs w-full py-2.5 cursor-pointer text-center"
                     >
                       Upload &amp; Verify Originality →
                     </button>
@@ -545,26 +548,26 @@ export default function ServicesPage() {
                     </button>
                   </div>
                 ) : service.isHindi ? (
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col items-center justify-center gap-2 w-full text-center">
                     <Link
                       href={service.href}
-                      className="btn-clay-orange text-xs w-full text-center py-2.5"
+                      className="btn-clay-orange text-xs w-full text-center py-2.5 font-hindi flex items-center justify-center"
                     >
                       कोटेशन कॉन्फ़िगर करें / Get Instant Estimate →
                     </Link>
                     <button
                       onClick={() => setAuditModalOpen(true)}
-                      className="text-xs text-[#2563EB] hover:underline inline-flex items-center justify-center gap-1 cursor-pointer font-bold"
+                      className="text-xs text-[#2563EB] hover:underline inline-flex items-center justify-center gap-1 cursor-pointer font-bold text-center"
                     >
                       <AuditTrailIcon className="w-3.5 h-3.5" />
                       <span>View Vernacular Translation Audit</span>
                     </button>
                   </div>
                 ) : (
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col items-center justify-center gap-2 w-full text-center">
                     <Link
                       href={service.href}
-                      className="btn-clay-orange text-xs w-full text-center py-2.5"
+                      className="btn-clay-orange text-xs w-full text-center py-2.5 flex items-center justify-center"
                     >
                       Configure Instant Quote →
                     </Link>
