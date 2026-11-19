@@ -168,71 +168,148 @@ export default function ClientPortalPage() {
     }
   }, []);
 
-  // Auth Checking
+  // Auth Checking & Real-time OAuth Listener
   useEffect(() => {
-    async function checkAuth() {
-      try {
-        // 1. Check Supabase Auth session first
-        const { data: { user: sbUser } } = await supabase.auth.getUser();
-        if (sbUser) {
-          const scholarUser: User = {
-            id: sbUser.id,
-            name: sbUser.user_metadata?.full_name || sbUser.email?.split('@')[0] || 'Scholar',
-            email: sbUser.email || '',
-            role: 'CLIENT',
-          };
-          setUser(scholarUser);
+    let isMounted = true;
 
-          const stored = localStorage.getItem('inkmonk_scholar_profile');
-          if (stored) {
-            setProfile(JSON.parse(stored));
-          } else {
-            setProfile({
-              name: scholarUser.name,
-              email: scholarUser.email,
-              gender: sbUser.user_metadata?.gender || 'Not Specified',
-              qualification: 'PhD Scholar / Researcher',
-              institution: 'Academic Institution',
-              discipline: 'Multidisciplinary Research',
-            });
+    const applyUser = (userData: User, profileData?: Partial<ScholarProfile>) => {
+      if (!isMounted) return;
+      setUser(userData);
+      try {
+        localStorage.setItem('inkmonk_user', JSON.stringify(userData));
+      } catch {}
+
+      const storedProfile = localStorage.getItem('inkmonk_scholar_profile');
+      if (storedProfile) {
+        try {
+          setProfile(JSON.parse(storedProfile));
+        } catch {
+          setProfile({
+            name: userData.name,
+            email: userData.email,
+            gender: 'Not Specified',
+            qualification: 'PhD Scholar / Researcher',
+            institution: 'Academic Institution',
+            discipline: 'Multidisciplinary Research',
+          });
+        }
+      } else {
+        const defaultProfile: ScholarProfile = {
+          name: userData.name,
+          email: userData.email,
+          gender: profileData?.gender || 'Not Specified',
+          qualification: profileData?.qualification || 'PhD Scholar / Researcher',
+          institution: profileData?.institution || 'Academic Institution',
+          discipline: profileData?.discipline || 'Multidisciplinary Research',
+        };
+        setProfile(defaultProfile);
+        try {
+          localStorage.setItem('inkmonk_scholar_profile', JSON.stringify(defaultProfile));
+        } catch {}
+      }
+      setLoading(false);
+
+      // Clean up URL if OAuth callback hash/code parameters are present
+      if (typeof window !== 'undefined' && (window.location.hash || window.location.search.includes('code='))) {
+        window.history.replaceState({}, document.title, '/client');
+      }
+    };
+
+    async function checkAuth() {
+      // 0. If OAuth code is in URL, exchange it first
+      if (typeof window !== 'undefined' && window.location.search.includes('code=')) {
+        const code = new URLSearchParams(window.location.search).get('code');
+        if (code) {
+          try {
+            await supabase.auth.exchangeCodeForSession(code);
+          } catch (e) {
+            console.warn('OAuth code exchange:', e);
           }
-          setLoading(false);
+        }
+      }
+
+      // 1. Check Supabase session first
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user && isMounted) {
+          applyUser({
+            id: session.user.id,
+            name: session.user.user_metadata?.full_name || session.user.user_metadata?.name || session.user.email?.split('@')[0] || 'Scholar',
+            email: session.user.email || '',
+            role: 'CLIENT',
+          }, {
+            gender: session.user.user_metadata?.gender,
+          });
           return;
         }
 
-        // 2. Check local cookie / session
+        const { data: { user: sbUser } } = await supabase.auth.getUser();
+        if (sbUser && isMounted) {
+          applyUser({
+            id: sbUser.id,
+            name: sbUser.user_metadata?.full_name || sbUser.user_metadata?.name || sbUser.email?.split('@')[0] || 'Scholar',
+            email: sbUser.email || '',
+            role: 'CLIENT',
+          }, {
+            gender: sbUser.user_metadata?.gender,
+          });
+          return;
+        }
+      } catch {}
+
+      // 2. Check local cookie / session
+      try {
         const res = await fetch('/api/auth/me');
-        if (res.ok) {
+        if (res.ok && isMounted) {
           const data = await res.json();
           if (data.user) {
-            setUser(data.user);
-            const stored = localStorage.getItem('inkmonk_scholar_profile');
-            if (stored) setProfile(JSON.parse(stored));
-            setLoading(false);
+            applyUser(data.user);
             return;
           }
         }
+      } catch {}
 
-        // 3. Check localStorage
+      // 3. Check localStorage
+      try {
         const storedUser = localStorage.getItem('inkmonk_user');
-        if (storedUser) {
+        if (storedUser && isMounted) {
           const parsed = JSON.parse(storedUser);
-          setUser(parsed);
-          const storedProfile = localStorage.getItem('inkmonk_scholar_profile');
-          if (storedProfile) setProfile(JSON.parse(storedProfile));
-          setLoading(false);
+          applyUser(parsed);
           return;
         }
+      } catch {}
 
+      if (isMounted) {
         setUser(null);
-      } catch {
-        setUser(null);
-      } finally {
         setLoading(false);
       }
     }
 
+    // 4. Real-time Supabase Auth state listener (Crucial for OAuth redirects & OTP login)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session?.user && isMounted) {
+        applyUser({
+          id: session.user.id,
+          name: session.user.user_metadata?.full_name || session.user.user_metadata?.name || session.user.email?.split('@')[0] || 'Scholar',
+          email: session.user.email || '',
+          role: 'CLIENT',
+        }, {
+          gender: session.user.user_metadata?.gender,
+        });
+      }
+      if (event === 'SIGNED_OUT' && isMounted) {
+        setUser(null);
+        setProfile(null);
+        setLoading(false);
+      }
+    });
+
     checkAuth();
+
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   // Fetch queries

@@ -99,22 +99,20 @@ export default function ResearchToolkitContainer({
                 key={t.id}
                 type="button"
                 onClick={() => setActiveTool(t.id)}
-                className={`p-3.5 rounded-2xl text-left transition-all duration-200 cursor-pointer flex flex-col justify-between border-2 ${
-                  isActive
-                    ? 'bg-gradient-to-br from-[#1d4ed8] via-[#1e40af] to-[#1e3a8a] text-white border-blue-500/80 shadow-[0_6px_18px_rgba(29,78,216,0.3)] scale-[1.02]'
-                    : 'bg-slate-50/90 dark:bg-slate-900/60 hover:bg-white dark:hover:bg-slate-800/80 border-slate-200/90 dark:border-slate-800 text-slate-800 dark:text-slate-200 shadow-2xs hover:shadow-xs hover:border-blue-300 dark:hover:border-blue-700'
-                }`}
+                className={`p-3.5 rounded-2xl text-left transition-all duration-200 cursor-pointer flex flex-col justify-between border-2 ${isActive
+                  ? 'bg-gradient-to-br from-[#1d4ed8] via-[#1e40af] to-[#1e3a8a] text-white border-blue-500/80 shadow-[0_6px_18px_rgba(29,78,216,0.3)] scale-[1.02]'
+                  : 'bg-slate-50/90 dark:bg-slate-900/60 hover:bg-white dark:hover:bg-slate-800/80 border-slate-200/90 dark:border-slate-800 text-slate-800 dark:text-slate-200 shadow-2xs hover:shadow-xs hover:border-blue-300 dark:hover:border-blue-700'
+                  }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-xl">{t.icon}</span>
                     {t.badge && (
                       <span
-                        className={`text-[9px] font-black px-1.5 py-0.5 rounded-md ${
-                          isActive
-                            ? 'bg-white/20 text-white'
-                            : 'bg-orange-100 text-[#f97316] dark:bg-orange-950/60'
-                        }`}
+                        className={`text-[9px] font-black px-1.5 py-0.5 rounded-md ${isActive
+                          ? 'bg-white/20 text-white'
+                          : 'bg-orange-100 text-[#f97316] dark:bg-orange-950/60'
+                          }`}
                       >
                         {t.badge}
                       </span>
@@ -125,9 +123,8 @@ export default function ResearchToolkitContainer({
                   </h4>
                 </div>
                 <p
-                  className={`text-[10px] mt-2 line-clamp-2 ${
-                    isActive ? 'text-blue-100' : 'text-slate-500 dark:text-slate-400'
-                  }`}
+                  className={`text-[10px] mt-2 line-clamp-2 ${isActive ? 'text-blue-100' : 'text-slate-500 dark:text-slate-400'
+                    }`}
                 >
                   {t.shortDesc}
                 </p>

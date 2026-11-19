@@ -401,11 +401,10 @@ export default function ServicesPage() {
                   key={cat}
                   id={`tab-${tabAnchor}`}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-5 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer whitespace-nowrap uppercase tracking-wider ${
-                    isActive
-                      ? 'bg-[#F95721] text-white shadow-[0_4px_0_#C43B00,0_8px_18px_rgba(249,87,33,0.35)] scale-105'
-                      : 'text-slate-700 hover:text-[#F95721] hover:bg-slate-50'
-                  }`}
+                  className={`px-5 sm:px-8 py-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer whitespace-nowrap uppercase tracking-wider ${isActive
+                    ? 'bg-[#F95721] text-white shadow-[0_4px_0_#C43B00,0_8px_18px_rgba(249,87,33,0.35)] scale-105'
+                    : 'text-slate-700 hover:text-[#F95721] hover:bg-slate-50'
+                    }`}
                 >
                   {cat}
                 </button>
@@ -453,135 +452,135 @@ export default function ServicesPage() {
           {filteredServices.map((service) => {
             const cardAnchor =
               service.id === 'en-research-paper' ? 'research-paper' :
-              service.id === 'en-thesis' ? 'thesis' :
-              service.id === 'en-review-paper' ? 'reviews' :
-              service.id === 'en-book' || service.id === 'hi-book' ? 'books' :
-              service.id === 'turnitin-scan' ? 'turnitin-service' : service.id;
+                service.id === 'en-thesis' ? 'thesis' :
+                  service.id === 'en-review-paper' ? 'reviews' :
+                    service.id === 'en-book' || service.id === 'hi-book' ? 'books' :
+                      service.id === 'turnitin-scan' ? 'turnitin-service' : service.id;
 
             return (
-            <div
-              key={service.id}
-              id={cardAnchor}
-              className="card-clay-white p-6 flex flex-col justify-between text-center items-center h-full group relative scroll-mt-28"
-            >
-              
-              {/* Academic Badges (Zero Public Prices - Pure Scholarly Standards) */}
-              <div className="w-full flex flex-col items-center">
-                <div className="flex items-center justify-center flex-wrap gap-2 w-full mb-3">
-                  <span className="text-[10px] font-black uppercase text-[#2563EB] bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 px-3 py-1 rounded-full text-center">
-                    {service.badge}
-                  </span>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-[#F95721] bg-orange-50 dark:bg-orange-950/60 border border-orange-200 dark:border-orange-800 px-3 py-1 rounded-full text-center">
-                    {service.tier}
-                  </span>
-                </div>
+              <div
+                key={service.id}
+                id={cardAnchor}
+                className="card-clay-white p-6 flex flex-col justify-between text-center items-center h-full group relative scroll-mt-28"
+              >
 
-                {/* Real High-Resolution Deliverable Photograph */}
-                <div className="w-full my-2 transform group-hover:scale-[1.02] transition-transform duration-300">
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    width={400}
-                    height={200}
-                    className="w-full h-44 object-cover rounded-2xl mb-4 border-2 border-slate-200/80 shadow-sm"
-                  />
-                </div>
-
-                {/* Title & Desc */}
-                <h3 className={`font-serif text-xl font-black text-slate-900 dark:text-white mb-2 group-hover:text-[#F95721] transition-colors text-center ${service.isHindi ? 'font-hindi' : ''}`}>
-                  {service.title}
-                </h3>
-                <p className={`text-slate-600 dark:text-slate-300 text-xs font-medium leading-relaxed mb-4 text-center max-w-sm mx-auto ${service.isHindi ? 'font-hindi' : ''}`}>
-                  {service.desc}
-                </p>
-
-                {/* Key Deliverables (Unique form: Centered Luxury Micro-Pills) */}
-                <div className="w-full pt-3 border-t border-slate-100 dark:border-slate-800 mb-5 flex flex-col items-center text-center">
-                  <div className="text-[10px] text-slate-500 dark:text-slate-400 font-extrabold uppercase mb-2 tracking-widest text-center">
-                    {service.isHindi ? 'प्रमुख मानक' : 'Key Deliverables'}
+                {/* Academic Badges (Zero Public Prices - Pure Scholarly Standards) */}
+                <div className="w-full flex flex-col items-center">
+                  <div className="flex items-center justify-center flex-wrap gap-2 w-full mb-3">
+                    <span className="text-[10px] font-black uppercase text-[#2563EB] bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 px-3 py-1 rounded-full text-center">
+                      {service.badge}
+                    </span>
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#F95721] bg-orange-50 dark:bg-orange-950/60 border border-orange-200 dark:border-orange-800 px-3 py-1 rounded-full text-center">
+                      {service.tier}
+                    </span>
                   </div>
-                  <div className="flex flex-col items-center gap-1.5 w-full">
-                    {service.features.map((feat, i) => (
-                      <div
-                        key={i}
-                        className={`inline-flex items-center justify-center gap-1.5 bg-slate-50/90 dark:bg-slate-800/70 border border-slate-200/90 dark:border-slate-700/80 px-3.5 py-1.5 rounded-full text-center text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-2xs hover:border-[#F95721]/50 hover:bg-orange-50/40 transition-all max-w-sm ${service.isHindi ? 'font-hindi' : ''}`}
+
+                  {/* Real High-Resolution Deliverable Photograph */}
+                  <div className="w-full my-2 transform group-hover:scale-[1.02] transition-transform duration-300">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      width={400}
+                      height={200}
+                      className="w-full h-44 object-cover rounded-2xl mb-4 border-2 border-slate-200/80 shadow-sm"
+                    />
+                  </div>
+
+                  {/* Title & Desc */}
+                  <h3 className={`font-serif text-xl font-black text-slate-900 dark:text-white mb-2 group-hover:text-[#F95721] transition-colors text-center ${service.isHindi ? 'font-hindi' : ''}`}>
+                    {service.title}
+                  </h3>
+                  <p className={`text-slate-600 dark:text-slate-300 text-xs font-medium leading-relaxed mb-4 text-center max-w-sm mx-auto ${service.isHindi ? 'font-hindi' : ''}`}>
+                    {service.desc}
+                  </p>
+
+                  {/* Key Deliverables (Unique form: Centered Luxury Micro-Pills) */}
+                  <div className="w-full pt-3 border-t border-slate-100 dark:border-slate-800 mb-5 flex flex-col items-center text-center">
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400 font-extrabold uppercase mb-2 tracking-widest text-center">
+                      {service.isHindi ? 'प्रमुख मानक' : 'Key Deliverables'}
+                    </div>
+                    <div className="flex flex-col items-center gap-1.5 w-full">
+                      {service.features.map((feat, i) => (
+                        <div
+                          key={i}
+                          className={`inline-flex items-center justify-center gap-1.5 bg-slate-50/90 dark:bg-slate-800/70 border border-slate-200/90 dark:border-slate-700/80 px-3.5 py-1.5 rounded-full text-center text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-2xs hover:border-[#F95721]/50 hover:bg-orange-50/40 transition-all max-w-sm ${service.isHindi ? 'font-hindi' : ''}`}
+                        >
+                          <span className="text-[#F95721] text-[11px] font-black shrink-0">✦</span>
+                          <span className="text-center leading-snug">{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card Action Buttons */}
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col items-center justify-center gap-2.5 mt-auto w-full text-center">
+                  {service.isCode ? (
+                    <div className="flex flex-col items-center justify-center gap-2 w-full text-center">
+                      <button
+                        onClick={() => setScopeBuilderOpen(true)}
+                        className="btn-clay-orange text-xs w-full py-2.5 flex items-center justify-center gap-1.5 cursor-pointer text-center"
                       >
-                        <span className="text-[#F95721] text-[11px] font-black shrink-0">✦</span>
-                        <span className="text-center leading-snug">{feat}</span>
-                      </div>
-                    ))}
+                        <TerminalLogIcon className="w-3.5 h-3.5" />
+                        <span>Interactive Code Scope Builder →</span>
+                      </button>
+                      <Link
+                        href={service.href}
+                        className="text-xs font-bold text-[#2563EB] hover:underline text-center"
+                      >
+                        Configure Custom Code Scope →
+                      </Link>
+                    </div>
+                  ) : service.isTurnitin ? (
+                    <div className="flex flex-col items-center justify-center gap-2 w-full text-center">
+                      <button
+                        onClick={() => setTurnitinModalOpen(true)}
+                        className="btn-clay-orange text-xs w-full py-2.5 cursor-pointer text-center"
+                      >
+                        Upload &amp; Verify Originality →
+                      </button>
+                      <button
+                        onClick={() => setSampleModalOpen(true)}
+                        className="text-xs text-[#2563EB] hover:underline font-bold text-center cursor-pointer"
+                      >
+                        View Watermarked Sample Report
+                      </button>
+                    </div>
+                  ) : service.isHindi ? (
+                    <div className="flex flex-col items-center justify-center gap-2 w-full text-center">
+                      <Link
+                        href={service.href}
+                        className="btn-clay-orange text-xs w-full text-center py-2.5 font-hindi flex items-center justify-center"
+                      >
+                        कोटेशन कॉन्फ़िगर करें / Get Instant Estimate →
+                      </Link>
+                      <button
+                        onClick={() => setAuditModalOpen(true)}
+                        className="text-xs text-[#2563EB] hover:underline inline-flex items-center justify-center gap-1 cursor-pointer font-bold text-center"
+                      >
+                        <AuditTrailIcon className="w-3.5 h-3.5" />
+                        <span>View Vernacular Translation Audit</span>
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center gap-2 w-full text-center">
+                      <Link
+                        href={service.href}
+                        className="btn-clay-orange text-xs w-full text-center py-2.5 flex items-center justify-center"
+                      >
+                        Configure Instant Quote →
+                      </Link>
+                    </div>
+                  )}
+
+                  <div className="text-[10px] text-slate-400 font-medium text-center">
+                    Protected under Pre-Signed Mutual NDA
                   </div>
                 </div>
+
               </div>
-
-              {/* Card Action Buttons */}
-              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col items-center justify-center gap-2.5 mt-auto w-full text-center">
-                {service.isCode ? (
-                  <div className="flex flex-col items-center justify-center gap-2 w-full text-center">
-                    <button
-                      onClick={() => setScopeBuilderOpen(true)}
-                      className="btn-clay-orange text-xs w-full py-2.5 flex items-center justify-center gap-1.5 cursor-pointer text-center"
-                    >
-                      <TerminalLogIcon className="w-3.5 h-3.5" />
-                      <span>Interactive Code Scope Builder →</span>
-                    </button>
-                    <Link
-                      href={service.href}
-                      className="text-xs font-bold text-[#2563EB] hover:underline text-center"
-                    >
-                      Configure Custom Code Scope →
-                    </Link>
-                  </div>
-                ) : service.isTurnitin ? (
-                  <div className="flex flex-col items-center justify-center gap-2 w-full text-center">
-                    <button
-                      onClick={() => setTurnitinModalOpen(true)}
-                      className="btn-clay-orange text-xs w-full py-2.5 cursor-pointer text-center"
-                    >
-                      Upload &amp; Verify Originality →
-                    </button>
-                    <button
-                      onClick={() => setSampleModalOpen(true)}
-                      className="text-xs text-[#2563EB] hover:underline font-bold text-center cursor-pointer"
-                    >
-                      View Watermarked Sample Report
-                    </button>
-                  </div>
-                ) : service.isHindi ? (
-                  <div className="flex flex-col items-center justify-center gap-2 w-full text-center">
-                    <Link
-                      href={service.href}
-                      className="btn-clay-orange text-xs w-full text-center py-2.5 font-hindi flex items-center justify-center"
-                    >
-                      कोटेशन कॉन्फ़िगर करें / Get Instant Estimate →
-                    </Link>
-                    <button
-                      onClick={() => setAuditModalOpen(true)}
-                      className="text-xs text-[#2563EB] hover:underline inline-flex items-center justify-center gap-1 cursor-pointer font-bold text-center"
-                    >
-                      <AuditTrailIcon className="w-3.5 h-3.5" />
-                      <span>View Vernacular Translation Audit</span>
-                    </button>
-                  </div>
-                ) : (
-                  <div className="flex flex-col items-center justify-center gap-2 w-full text-center">
-                    <Link
-                      href={service.href}
-                      className="btn-clay-orange text-xs w-full text-center py-2.5 flex items-center justify-center"
-                    >
-                      Configure Instant Quote →
-                    </Link>
-                  </div>
-                )}
-
-                <div className="text-[10px] text-slate-400 font-medium text-center">
-                  Protected under Pre-Signed Mutual NDA
-                </div>
-              </div>
-
-            </div>
-          );
-        })}
+            );
+          })}
         </div>
 
         {/* ─── Bottom CTA & Video Consultation Banner ──────────────────────── */}
