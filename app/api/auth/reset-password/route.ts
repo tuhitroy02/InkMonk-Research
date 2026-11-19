@@ -1,95 +1,44 @@
+import { timingSafeEqual } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { db } from '@/lib/db';
-import { signToken } from '@/lib/auth';
-import { authHash } from '@/lib/client-auth';
+import { allowRate, authHash } from '@/lib/client-auth';
 import { z } from 'zod';
 
 const ResetSchema = z.object({
   email: z.string().email().max(254),
-  code: z.string().min(4).max(10),
-  newPassword: z.string().min(6).max(128),
+  code: z.string().regex(/^\d{6}$/),
+  newPassword: z.string().min(8).max(128),
 });
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const parsed = ResetSchema.safeParse(body);
-
-    if (!parsed.success) {
-      return NextResponse.json(
-        { error: 'Please provide email, verification code, and new password (min 6 chars).' },
-        { status: 400 }
-      );
-    }
-
-    const { email: rawEmail, code, newPassword } = parsed.data;
-    const email = rawEmail.trim().toLowerCase();
-
-    // Verify code
+    const parsed = ResetSchema.safeParse(await request.json());
+    if (!parsed.success) return NextResponse.json({ error: 'A valid email, 6-digit code and new password (8+ characters) are required.' }, { status: 400 });
+    const { code, newPassword } = parsed.data;
+    const email = parsed.data.email.trim().toLowerCase();
+    if (!await allowRate(`password-reset:${email}`, 10, 3600000))
+      return NextResponse.json({ error: 'Too many attempts.' }, { status: 429 });
     const challenge = await db.emailLoginCode.findUnique({ where: { email } });
-    const isValidCode = Boolean(
-      challenge &&
-      (challenge.codeHash === authHash(`${email}:${code.trim()}`) || code.trim() === '123456') &&
-      challenge.expiresAt > new Date()
-    );
-
-    if (!isValidCode && code.trim() !== '123456') {
-      return NextResponse.json(
-        { error: 'Invalid or expired 6-digit verification code.' },
-        { status: 401 }
-      );
+    const hash = authHash(`${email}:${code}`);
+    if (!challenge || challenge.expiresAt <= new Date() || challenge.attempts >= 5 ||
+        !timingSafeEqual(Buffer.from(challenge.codeHash), Buffer.from(hash))) {
+      if (challenge) await db.emailLoginCode.update({ where: { email },
+        data: { attempts: { increment: 1 } } }).catch(() => {});
+      return NextResponse.json({ error: 'Invalid or expired verification code.' }, { status: 401 });
     }
-
-    // Delete used code
-    await db.emailLoginCode.deleteMany({ where: { email } });
-
+    const consumed = await db.emailLoginCode.deleteMany({ where: { email, codeHash: hash,
+      expiresAt: { gt: new Date() }, attempts: { lt: 5 } } });
+    if (consumed.count !== 1) return NextResponse.json({ error: 'Verification code already used.' }, { status: 401 });
     const user = await db.user.findUnique({ where: { email } });
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-
-    let updatedUser;
-    if (user) {
-      updatedUser = await db.user.update({
-        where: { id: user.id },
-        data: { hashedPassword, status: 'ACTIVE' },
-      });
-    } else {
-      updatedUser = await db.user.create({
-        data: {
-          email,
-          name: email.split('@')[0],
-          hashedPassword,
-          role: 'CLIENT',
-          provider: 'credentials',
-          status: 'ACTIVE',
-        },
-      });
-    }
-
-    const token = await signToken({
-      userId: updatedUser.id,
-      email: updatedUser.email,
-      name: updatedUser.name,
-      role: 'CLIENT',
-    });
-
-    const response = NextResponse.json({
-      success: true,
-      message: 'Password updated successfully.',
-      user: { id: updatedUser.id, name: updatedUser.name, email: updatedUser.email, role: 'CLIENT' },
-    });
-
-    response.cookies.set('inkmonk_session', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 7 * 24 * 60 * 60,
-      path: '/',
-    });
-
-    return response;
+    if (!user || user.status !== 'ACTIVE' || user.role !== 'CLIENT')
+      return NextResponse.json({ error: 'Unable to reset this account.' }, { status: 403 });
+    await db.user.update({ where: { id: user.id }, data: {
+      hashedPassword: await bcrypt.hash(newPassword, 12),
+    } });
+    return NextResponse.json({ success: true, message: 'Password updated. Sign in using your new password.' });
   } catch (error) {
-    console.error('Reset password error:', error);
-    return NextResponse.json({ error: 'Failed to reset password. Please try again.' }, { status: 500 });
+    console.error('Password reset error:', error);
+    return NextResponse.json({ error: 'Password reset temporarily unavailable.' }, { status: 503 });
   }
 }

@@ -3,61 +3,16 @@ import { getSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 
 export async function GET() {
-  const session = await getSession();
-  if (!session || !session.userId) {
-    return NextResponse.json({ authenticated: false }, { status: 401 });
+  try {
+    const session = await getSession();
+    if (!session?.userId) return NextResponse.json({ authenticated: false }, { status: 401 });
+    const user = await db.user.findUnique({ where: { id: session.userId },
+      select: { id: true, name: true, email: true, role: true, status: true } });
+    if (!user || user.email !== session.email || user.status !== 'ACTIVE' || user.role !== session.role)
+      return NextResponse.json({ authenticated: false }, { status: 401 });
+    return NextResponse.json({ authenticated: true, user }, { headers: { 'Cache-Control': 'no-store' } });
+  } catch (error) {
+    console.error('Session lookup failed:', error);
+    return NextResponse.json({ authenticated: false }, { status: 503 });
   }
-
-  let user = await db.user.findUnique({
-    where: { id: session.userId },
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      role: true,
-      status: true,
-    },
-  });
-
-  if (!user && session.email) {
-    user = await db.user.findUnique({
-      where: { email: session.email },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        role: true,
-        status: true,
-      },
-    });
-
-    if (!user) {
-      try {
-        user = await db.user.create({
-          data: {
-            id: session.userId,
-            email: session.email,
-            name: session.name || session.email.split('@')[0],
-            role: session.role || 'CLIENT',
-            status: 'ACTIVE',
-          },
-          select: {
-            id: true,
-            name: true,
-            email: true,
-            role: true,
-            status: true,
-          },
-        });
-      } catch (e) {
-        console.warn('Auto-create session user error:', e);
-      }
-    }
-  }
-
-  if (!user || user.status === 'SUSPENDED') {
-    return NextResponse.json({ authenticated: false }, { status: 401 });
-  }
-
-  return NextResponse.json({ authenticated: true, user });
 }

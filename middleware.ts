@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { jwtVerify } from 'jose';
 
 function sessionKey() {
-  const secret = process.env.JWT_SECRET || 'inkmonk_research_prod_secret_jwt_key_9283748293749823_secure';
+  const secret = process.env.JWT_SECRET || '';
   return new TextEncoder().encode(secret.padEnd(32, '0'));
 }
 
@@ -38,7 +38,8 @@ export async function middleware(request: NextRequest) {
     }
 
     try {
-      const { payload } = await jwtVerify(token, sessionKey());
+      if (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 32) throw new Error('Missing session secret');
+      const { payload } = await jwtVerify(token, sessionKey(), { algorithms: ['HS256'] });
       const role = (payload as { role?: string })?.role;
       if (role !== 'ADMIN' && role !== 'STAFF') {
         const loginUrl = new URL('/login?portal=admin&error=forbidden', request.url);
