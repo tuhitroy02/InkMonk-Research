@@ -12,7 +12,22 @@ if (fs.existsSync(standaloneDir)) {
   fs.mkdirSync(prismaDest, { recursive: true });
   fs.copyFileSync(path.join(rootDir, 'prisma', 'schema.prisma'), path.join(prismaDest, 'schema.prisma'));
 
-  // 3. Copy public directory
+  // 1. Copy dev.db (SQLite database)
+  const dbSrc = path.join(rootDir, 'dev.db');
+  const dbDest = path.join(standaloneDir, 'dev.db');
+  if (fs.existsSync(dbSrc)) {
+    fs.copyFileSync(dbSrc, dbDest);
+    console.log('✓ Copied dev.db to .next/standalone/dev.db');
+  }
+
+  const prismaDbSrc = path.join(rootDir, 'prisma', 'dev.db');
+  const prismaDbDest = path.join(prismaDest, 'dev.db');
+  if (fs.existsSync(prismaDbSrc)) {
+    fs.copyFileSync(prismaDbSrc, prismaDbDest);
+    console.log('✓ Copied prisma/dev.db to .next/standalone/prisma/dev.db');
+  }
+
+  // 2. Copy public directory
   const publicSrc = path.join(rootDir, 'public');
   const publicDest = path.join(standaloneDir, 'public');
   if (fs.existsSync(publicSrc)) {
@@ -20,7 +35,7 @@ if (fs.existsSync(standaloneDir)) {
     console.log('✓ Copied public/ to .next/standalone/public/');
   }
 
-  // 4. Copy .next/static directory
+  // 3. Copy .next/static directory
   const staticSrc = path.join(rootDir, '.next', 'static');
   const staticDest = path.join(standaloneDir, '.next', 'static');
   if (fs.existsSync(staticSrc)) {
