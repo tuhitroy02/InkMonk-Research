@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { supabase } from '@/lib/supabaseClient';
 import ResearchToolkitContainer from '@/components/toolkit/ResearchToolkitContainer';
 
 interface User {
@@ -65,90 +64,19 @@ export default function ClientPortalPage() {
   const [statusFilter, setStatusFilter] = useState<'ALL' | 'IN_PROGRESS' | 'COMPLETED'>('ALL');
 
   // Query Form State
-  const [queryProject, setQueryProject] = useState('PRJ-1082');
+  const [queryProject, setQueryProject] = useState('General');
   const [queryType, setQueryType] = useState('Methodology Clarification');
   const [querySubject, setQuerySubject] = useState('');
   const [queryMessage, setQueryMessage] = useState('');
+  const [queryError, setQueryError] = useState<string | null>(null);
   const [querySubmitting, setQuerySubmitting] = useState(false);
   const [querySuccessMsg, setQuerySuccessMsg] = useState<string | null>(null);
 
   // Queries List
-  const [queries, setQueries] = useState<QueryRecord[]>([
-    {
-      id: 'QRY-8921',
-      projectId: 'PRJ-1082',
-      projectTitle: 'Deep Learning Model & Paper on Medical Image Segmentation',
-      queryType: 'Methodology Clarification',
-      subject: 'Confirmation of U-Net vs Attention U-Net ablation test baseline',
-      message: 'Could you please confirm if the ablation study includes both Dice coefficient and Hausdorff distance metrics as requested by the IEEE journal guidelines?',
-      status: 'UNDER_REVIEW',
-      assignedDirector: 'Tuhit Roy (Founder & Director)',
-      createdAt: 'Today, 11:30 AM',
-      responses: [
-        {
-          author: 'Tuhit Roy (Director)',
-          text: 'Yes! Both 95% Hausdorff Distance and Dice metric are calculated across the 5-fold cross-validation dataset. Section 4.3 has been updated accordingly.',
-          time: 'Today, 01:15 PM',
-        },
-      ],
-    },
-  ]);
+  const [queries, setQueries] = useState<QueryRecord[]>([]);
 
-  // Projects / Works List
-  const [projects] = useState<Project[]>([
-    {
-      id: 'PRJ-1082',
-      title: 'Deep Learning Model & Paper on Medical Image Segmentation',
-      service: 'Research Paper Writing (English Technical with Model)',
-      language: 'English',
-      status: 'IN_PROGRESS',
-      progress: 68,
-      deadline: '28 Nov 2026',
-      amount: '₹8,998',
-      turnitinScore: '4% (Safe)',
-      aiScore: '0% AI',
-      deliverables: [
-        { name: 'Chapter 1–3 Draft Manuscript.docx', type: 'doc', url: '#' },
-        { name: 'Turnitin Originality Report.pdf', type: 'pdf', url: '#' },
-        { name: 'PyTorch Architecture Repo.zip', type: 'code', url: '#' },
-      ],
-    },
-    {
-      id: 'PRJ-1045',
-      title: 'PRISMA 2020 Systematic Literature Review on Renewable Energy Microgrids',
-      service: 'Systematic Review Paper Writing',
-      language: 'English',
-      status: 'UNDER_REVIEW',
-      progress: 85,
-      deadline: '05 Dec 2026',
-      amount: '₹3,999',
-      turnitinScore: '6% (Safe)',
-      aiScore: '0% AI',
-      deliverables: [
-        { name: 'PRISMA 2020 Flowchart & Review.docx', type: 'doc', url: '#' },
-        { name: 'Turnitin Originality Verification.pdf', type: 'pdf', url: '#' },
-      ],
-    },
-    {
-      id: 'PRJ-1019',
-      title: 'Doctoral Dissertation Chapter 4 & 5 Empirical Findings',
-      service: 'Doctoral Thesis Writing',
-      language: 'English',
-      status: 'COMPLETED',
-      progress: 100,
-      deadline: 'Delivered',
-      amount: '₹19,999',
-      turnitinScore: '5% (Safe)',
-      aiScore: '0% AI',
-      deliverables: [
-        { name: 'Complete 5-Chapter Thesis Final.docx', type: 'doc', url: '#' },
-        { name: 'Turnitin Digital Certificate.pdf', type: 'pdf', url: '#' },
-        { name: 'Thesis Defense Slide Deck.pptx', type: 'doc', url: '#' },
-      ],
-    },
-  ]);
+  const [projects] = useState<Project[]>([]);
 
-  // URL Query Parameters support (e.g. ?tab=works&section=toolkit)
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
@@ -172,91 +100,27 @@ export default function ClientPortalPage() {
   useEffect(() => {
     let isMounted = true;
 
-    const applyUser = (userData: User, profileData?: Partial<ScholarProfile>) => {
-      if (!isMounted) return;
-      setUser(userData);
+    const applyUser = (userData: User) => {
+      const defaultProfile: ScholarProfile = {
+        name: userData.name, email: userData.email, gender: 'Not Specified',
+        qualification: 'PhD Scholar / Researcher', institution: 'Academic Institution',
+        discipline: 'Multidisciplinary Research',
+      };
       try {
-        localStorage.setItem('inkmonk_user', JSON.stringify(userData));
-      } catch {}
-
-      const storedProfile = localStorage.getItem('inkmonk_scholar_profile');
-      if (storedProfile) {
-        try {
-          setProfile(JSON.parse(storedProfile));
-        } catch {
-          setProfile({
-            name: userData.name,
-            email: userData.email,
-            gender: 'Not Specified',
-            qualification: 'PhD Scholar / Researcher',
-            institution: 'Academic Institution',
-            discipline: 'Multidisciplinary Research',
-          });
+        const stored = JSON.parse(localStorage.getItem('inkmonk_scholar_profile') ?? 'null');
+        if (stored?.email === userData.email) {
+          setProfile({ ...defaultProfile, ...stored, name: userData.name, email: userData.email });
+        } else {
+          setProfile(defaultProfile);
         }
-      } else {
-        const defaultProfile: ScholarProfile = {
-          name: userData.name,
-          email: userData.email,
-          gender: profileData?.gender || 'Not Specified',
-          qualification: profileData?.qualification || 'PhD Scholar / Researcher',
-          institution: profileData?.institution || 'Academic Institution',
-          discipline: profileData?.discipline || 'Multidisciplinary Research',
-        };
+      } catch {
         setProfile(defaultProfile);
-        try {
-          localStorage.setItem('inkmonk_scholar_profile', JSON.stringify(defaultProfile));
-        } catch {}
       }
+      setUser(userData);
       setLoading(false);
-
-      // Clean up URL if OAuth callback hash/code parameters are present
-      if (typeof window !== 'undefined' && (window.location.hash || window.location.search.includes('code='))) {
-        window.history.replaceState({}, document.title, '/client');
-      }
     };
 
     async function checkAuth() {
-      // 0. If OAuth code is in URL, exchange it first
-      if (typeof window !== 'undefined' && window.location.search.includes('code=')) {
-        const code = new URLSearchParams(window.location.search).get('code');
-        if (code) {
-          try {
-            await supabase.auth.exchangeCodeForSession(code);
-          } catch (e) {
-            console.warn('OAuth code exchange:', e);
-          }
-        }
-      }
-
-      // 1. Check Supabase session first
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (session?.user && isMounted) {
-          applyUser({
-            id: session.user.id,
-            name: session.user.user_metadata?.full_name || session.user.user_metadata?.name || session.user.email?.split('@')[0] || 'Scholar',
-            email: session.user.email || '',
-            role: 'CLIENT',
-          }, {
-            gender: session.user.user_metadata?.gender,
-          });
-          return;
-        }
-
-        const { data: { user: sbUser } } = await supabase.auth.getUser();
-        if (sbUser && isMounted) {
-          applyUser({
-            id: sbUser.id,
-            name: sbUser.user_metadata?.full_name || sbUser.user_metadata?.name || sbUser.email?.split('@')[0] || 'Scholar',
-            email: sbUser.email || '',
-            role: 'CLIENT',
-          }, {
-            gender: sbUser.user_metadata?.gender,
-          });
-          return;
-        }
-      } catch {}
-
       // 2. Check local cookie / session
       try {
         const res = await fetch('/api/auth/me');
@@ -269,56 +133,26 @@ export default function ClientPortalPage() {
         }
       } catch {}
 
-      // 3. Check localStorage
-      try {
-        const storedUser = localStorage.getItem('inkmonk_user');
-        if (storedUser && isMounted) {
-          const parsed = JSON.parse(storedUser);
-          applyUser(parsed);
-          return;
-        }
-      } catch {}
-
       if (isMounted) {
         setUser(null);
         setLoading(false);
       }
     }
 
-    // 4. Real-time Supabase Auth state listener (Crucial for OAuth redirects & OTP login)
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session?.user && isMounted) {
-        applyUser({
-          id: session.user.id,
-          name: session.user.user_metadata?.full_name || session.user.user_metadata?.name || session.user.email?.split('@')[0] || 'Scholar',
-          email: session.user.email || '',
-          role: 'CLIENT',
-        }, {
-          gender: session.user.user_metadata?.gender,
-        });
-      }
-      if (event === 'SIGNED_OUT' && isMounted) {
-        setUser(null);
-        setProfile(null);
-        setLoading(false);
-      }
-    });
-
     checkAuth();
 
     return () => {
       isMounted = false;
-      subscription.unsubscribe();
     };
   }, []);
 
   // Fetch queries
   useEffect(() => {
     if (user?.email) {
-      fetch(`/api/client/query?email=${encodeURIComponent(user.email)}`)
+      fetch('/api/client/query')
         .then((res) => res.json())
         .then((data) => {
-          if (data.queries && data.queries.length > 0) {
+          if (Array.isArray(data.queries)) {
             setQueries(data.queries);
           }
         })
@@ -328,10 +162,9 @@ export default function ClientPortalPage() {
 
   // Handle Logout
   const handleLogout = async () => {
-    try {
-      await supabase.auth.signOut();
-    } catch {}
-    await fetch('/api/auth/logout', { method: 'POST' }).catch(() => {});
+    const response = await fetch('/api/auth/logout', { method: 'POST' }).catch(() => null);
+    if (!response?.ok) return;
+    setQueries([]);
     localStorage.removeItem('inkmonk_user');
     localStorage.removeItem('inkmonk_scholar_profile');
     setUser(null);
@@ -344,6 +177,7 @@ export default function ClientPortalPage() {
     if (!querySubject.trim() || !queryMessage.trim()) return;
 
     setQuerySubmitting(true);
+    setQueryError(null);
     setQuerySuccessMsg(null);
 
     const targetProject = projects.find((p) => p.id === queryProject);
@@ -366,37 +200,15 @@ export default function ClientPortalPage() {
       const data = await res.json();
       if (data.success && data.query) {
         setQueries((prev) => [data.query, ...prev]);
-        setQuerySuccessMsg(`Your query (${data.ticketId}) was successfully submitted to Directors Tuhit Roy and Sampreeti Mukherjee!`);
+        setQuerySuccessMsg(`Your query (${data.ticketId}) was saved.`);
         setQuerySubject('');
         setQueryMessage('');
       } else {
         throw new Error(data.error || 'Failed to submit query');
       }
     } catch {
-      // Local fallback in case of network issue
-      const ticketId = `QRY-${Math.floor(1000 + Math.random() * 9000)}`;
-      const fallbackQuery: QueryRecord = {
-        id: ticketId,
-        projectId: queryProject,
-        projectTitle: targetProject?.title || 'General Consultation',
-        queryType,
-        subject: querySubject,
-        message: queryMessage,
-        status: 'UNDER_REVIEW',
-        assignedDirector: 'Tuhit Roy & Sampreeti Mukherjee (Directors)',
-        createdAt: 'Just now',
-        responses: [
-          {
-            author: 'InkMonk Academic Desk',
-            text: `Query (${ticketId}) recorded. Assigned to lead director for review. For urgent priority, WhatsApp +91 7980470880.`,
-            time: 'Just now',
-          },
-        ],
-      };
-      setQueries((prev) => [fallbackQuery, ...prev]);
-      setQuerySuccessMsg(`Your query (${ticketId}) was submitted and recorded in your portal!`);
-      setQuerySubject('');
-      setQueryMessage('');
+      setQuerySuccessMsg(null);
+      setQueryError('Your query could not be submitted. Please try again.');
     } finally {
       setQuerySubmitting(false);
     }
@@ -453,33 +265,6 @@ export default function ClientPortalPage() {
               <span>→</span>
             </Link>
 
-            {/* 1-Click Instant Demo Login */}
-            <button
-              type="button"
-              onClick={() => {
-                const demoUser: User = {
-                  id: 'demo-scholar-001',
-                  name: 'Dr. Debabrata Roy',
-                  email: 'scholar@university.edu',
-                  role: 'CLIENT',
-                };
-                const demoProfile: ScholarProfile = {
-                  name: 'Dr. Debabrata Roy',
-                  email: 'scholar@university.edu',
-                  gender: 'Male',
-                  qualification: 'Postdoctoral Fellow / Assistant Professor',
-                  institution: 'Jadavpur University / IIT Kharagpur',
-                  discipline: 'Computer Science & Biomedical Engineering',
-                };
-                localStorage.setItem('inkmonk_user', JSON.stringify(demoUser));
-                localStorage.setItem('inkmonk_scholar_profile', JSON.stringify(demoProfile));
-                setUser(demoUser);
-                setProfile(demoProfile);
-              }}
-              className="w-full py-3 px-4 rounded-2xl bg-blue-50 dark:bg-blue-950/50 hover:bg-blue-100 text-[#1d4ed8] dark:text-blue-300 border-2 border-blue-200 dark:border-blue-800 font-extrabold text-xs sm:text-sm transition-all hover:scale-102 flex items-center justify-center gap-2 cursor-pointer shadow-sm"
-            >
-              <span>⚡ 1-Click Demo Scholar Access</span>
-            </button>
           </div>
 
           <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-500">
@@ -963,6 +748,7 @@ export default function ClientPortalPage() {
                 )}
 
                 <form onSubmit={handleSubmitQuery} className="space-y-4 text-left">
+                  {queryError && <p role="alert" className="text-red-600">{queryError}</p>}
                   {/* Project Selector */}
                   <div>
                     <label className="block text-xs font-black text-slate-700 dark:text-slate-300 mb-1">
@@ -1095,7 +881,7 @@ export default function ClientPortalPage() {
                         <span className="font-extrabold text-amber-600 bg-amber-50 dark:bg-amber-950/60 px-2.5 py-0.5 rounded-full border border-amber-200 dark:border-amber-800">
                           ● {q.status.replace('_', ' ')}
                         </span>
-                        <span className="text-slate-400 dark:text-slate-500">{q.createdAt}</span>
+                        <span className="text-slate-400 dark:text-slate-500">{new Date(q.createdAt).toLocaleString()}</span>
                       </div>
                     </div>
 

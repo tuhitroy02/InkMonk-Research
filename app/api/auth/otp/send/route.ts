@@ -2,146 +2,168 @@ import { randomInt } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { allowRate, authHash, normalizeIdentifier } from '@/lib/client-auth';
+import { codeKey, CodePurpose } from '@/lib/email-code';
 
 export async function POST(request: NextRequest) {
   try {
-    const { identifier: raw } = await request.json();
-    const identifier = normalizeIdentifier(raw);
-    if (!identifier) return NextResponse.json({ error: 'Enter a valid email or phone number.' }, { status: 400 });
+    const body = await request.json().catch(() => null);
+    const identifier = normalizeIdentifier(body?.identifier);
+    if (!identifier) {
+      return NextResponse.json({ error: 'Enter a valid email or phone number.' }, { status: 400 });
+    }
     const { kind, value } = identifier;
+    const rawPurpose = typeof body?.purpose === 'string' ? body.purpose.trim().toLowerCase() : '';
+    const purpose: CodePurpose = rawPurpose === 'signup' || rawPurpose === 'reset' ? rawPurpose : 'login';
 
-    const existing = await (async () => {
-      try {
-        return kind === 'email'
-          ? await db.user.findUnique({ where: { email: value } })
-          : await db.user.findUnique({ where: { phone: value } });
-      } catch (e) {
-        console.warn('DB check warning in otp/send:', e);
-        return null;
-      }
-    })();
-
-    if (existing && (existing.role !== 'CLIENT' || existing.status !== 'ACTIVE')) {
-      return NextResponse.json({ error: 'This account cannot use client OTP sign-in.' }, { status: 403 });
-    }
-
-    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+    // Account eligibility and purpose validation
     try {
-      if (!await allowRate(`otp-ip:${ip}`, 50, 60 * 60_000) ||
-          !await allowRate(`otp-send:${kind}:${value}`, 20, 60 * 60_000)) {
-        return NextResponse.json({ error: 'Too many requests. Try again later.' }, { status: 429 });
+      const existing = kind === 'email'
+        ? await db.user.findUnique({ where: { email: value } })
+        : await db.user.findUnique({ where: { phone: value } });
+
+      if (purpose === 'reset' && (!existing || existing.status !== 'ACTIVE' || existing.role !== 'CLIENT')) {
+        console.warn('[AUTH_DIAGNOSTICS] OTP send rejected: reset requested for non-existent or inactive user.');
+        return NextResponse.json({ error: 'No active account found with this email address.' }, { status: 404 });
       }
-    } catch {
-      // Allow proceeding if rate limiting storage is inaccessible
+
+      if (purpose === 'signup' && existing) {
+        console.warn('[AUTH_DIAGNOSTICS] OTP send rejected: signup requested for existing email address.');
+        return NextResponse.json({ error: 'An account with this email already exists. Please sign in.' }, { status: 409 });
+      }
+
+      if (purpose === 'login' && existing && (existing.role !== 'CLIENT' || existing.status !== 'ACTIVE')) {
+        console.warn('[AUTH_DIAGNOSTICS] OTP send rejected: account not eligible or suspended.');
+        return NextResponse.json({ error: 'This account cannot use client OTP sign-in.' }, { status: 403 });
+      }
+    } catch (dbErr) {
+      console.error('[AUTH_DIAGNOSTICS] OTP send failed at database user eligibility stage.');
+      return NextResponse.json({ error: 'Database service is currently unavailable. Please try again.' }, { status: 500 });
     }
 
-    const code = String(randomInt(100_000, 999_999));
-    const now = new Date();
+    // Rate Limiting
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+    if (!await allowRate(`otp-ip:${ip}`, 50, 60 * 60_000) ||
+        !await allowRate(`otp-send:${kind}:${value}`, 5, 60 * 60_000)) {
+      console.warn('[AUTH_DIAGNOSTICS] OTP send rate limit exceeded.');
+      return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
+    }
 
     if (kind === 'email') {
-      const apiKey = process.env.RESEND_API_KEY;
-      const from = process.env.OTP_FROM_EMAIL;
-      let emailDispatched = false;
-      if (apiKey && from) {
-        try {
-          const res = await fetch('https://api.resend.com/emails', {
-            method: 'POST',
-            headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              from,
-              to: [value],
-              subject: 'Your InkMonk Research sign-in code',
-              text: `Your InkMonk Research sign-in code is ${code}. It expires in 10 minutes.`,
-            }),
-            cache: 'no-store',
-          });
-          if (res.ok) emailDispatched = true;
-        } catch (e) {
-          console.error('Email send failed:', e);
-        }
+      const apiKey = process.env.RESEND_API_KEY?.trim();
+      const from = process.env.OTP_FROM_EMAIL?.trim();
+
+      if (!apiKey || !from) {
+        console.warn('[AUTH_DIAGNOSTICS] OTP send aborted: Resend configuration missing (RESEND_API_KEY or OTP_FROM_EMAIL unset).');
+        return NextResponse.json({ error: 'Email service is not configured. Please contact support.' }, { status: 503 });
       }
 
+      const code = String(randomInt(100_000, 1_000_000));
+      const now = new Date();
+      const expiresAt = new Date(now.getTime() + 10 * 60_000); // 10 minutes
+      const emailKey = codeKey(value, purpose);
+      const codeHash = authHash(`${emailKey}:${code}`);
+
+      // Save challenge in DB first
       try {
         await db.emailLoginCode.upsert({
-          where: { email: value },
+          where: { email: emailKey },
           create: {
-            email: value,
-            codeHash: authHash(`${value}:${code}`),
-            expiresAt: new Date(now.getTime() + 600_000),
+            email: emailKey,
+            codeHash,
+            expiresAt,
             lastSentAt: now,
+            attempts: 0,
+            sends: 1,
           },
           update: {
-            codeHash: authHash(`${value}:${code}`),
-            expiresAt: new Date(now.getTime() + 600_000),
+            codeHash,
+            expiresAt,
             lastSentAt: now,
             attempts: 0,
             sends: { increment: 1 },
           },
         });
-      } catch (err) {
-        console.warn('DB challenge upsert warning:', err);
+      } catch (dbErr) {
+        console.error('[AUTH_DIAGNOSTICS] OTP send failed at database challenge stage.');
+        return NextResponse.json({ error: 'Database error saving verification challenge. Please try again.' }, { status: 500 });
       }
 
+      // Dispatch via Resend API
+      let resendResponse: Response;
+      try {
+        resendResponse = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from,
+            to: [value],
+            subject: 'Your InkMonk Research sign-in code',
+            text: `Your InkMonk Research verification code is ${code}. It expires in 10 minutes. If you did not request this, please disregard.`,
+          }),
+          cache: 'no-store',
+          signal: AbortSignal.timeout(10_000),
+        });
+      } catch (networkErr) {
+        console.error('[AUTH_DIAGNOSTICS] OTP send failed at email provider stage: network error connecting to Resend.');
+        await db.emailLoginCode.deleteMany({ where: { email: emailKey, codeHash } }).catch(() => {});
+        return NextResponse.json({ error: 'Failed to connect to email service. Please try again later.' }, { status: 502 });
+      }
+
+      if (!resendResponse.ok) {
+        console.error(`[AUTH_DIAGNOSTICS] OTP send failed at email provider stage: Resend returned HTTP status ${resendResponse.status}.`);
+        await db.emailLoginCode.deleteMany({ where: { email: emailKey, codeHash } }).catch(() => {});
+        return NextResponse.json({ error: 'Failed to dispatch verification email. Please check your address or try again later.' }, { status: 502 });
+      }
+
+      console.info('[AUTH_DIAGNOSTICS] Email OTP challenge successfully created and dispatched via Resend.');
       return NextResponse.json({
         success: true,
-        message: 'Verification code dispatched.',
-        codeHint: !apiKey || !emailDispatched ? code : undefined,
+        message: 'Verification code dispatched to your email.',
       });
     } else {
-      const sid = process.env.TWILIO_ACCOUNT_SID;
-      const token = process.env.TWILIO_AUTH_TOKEN;
-      const service = process.env.TWILIO_VERIFY_SERVICE_SID;
+      // SMS / Phone OTP via Twilio Verify
+      const sid = process.env.TWILIO_ACCOUNT_SID?.trim();
+      const token = process.env.TWILIO_AUTH_TOKEN?.trim();
+      const service = process.env.TWILIO_VERIFY_SERVICE_SID?.trim();
 
-      if (sid && token && service) {
-        try {
-          await fetch(`https://verify.twilio.com/v2/Services/${encodeURIComponent(service)}/Verifications`, {
-            method: 'POST',
-            headers: {
-              Authorization: `Basic ${Buffer.from(`${sid}:${token}`).toString('base64')}`,
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({ To: value, Channel: 'sms' }),
-            cache: 'no-store',
-          });
-        } catch (e) {
-          console.error('SMS send failed:', e);
-        }
+      if (!sid || !token || !service) {
+        console.warn('[AUTH_DIAGNOSTICS] Phone OTP send aborted: Twilio Verify credentials unset.');
+        return NextResponse.json({ error: 'SMS verification is not configured. Please sign in with email.' }, { status: 503 });
       }
 
+      let twilioResponse: Response;
       try {
-        await db.emailLoginCode.upsert({
-          where: { email: value },
-          create: {
-            email: value,
-            codeHash: authHash(`${value}:${code}`),
-            expiresAt: new Date(now.getTime() + 600_000),
-            lastSentAt: now,
+        twilioResponse = await fetch(`https://verify.twilio.com/v2/Services/${encodeURIComponent(service)}/Verifications`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Basic ${Buffer.from(`${sid}:${token}`).toString('base64')}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
-          update: {
-            codeHash: authHash(`${value}:${code}`),
-            expiresAt: new Date(now.getTime() + 600_000),
-            lastSentAt: now,
-            attempts: 0,
-            sends: { increment: 1 },
-          },
+          body: new URLSearchParams({ To: value, Channel: 'sms' }),
+          cache: 'no-store',
+          signal: AbortSignal.timeout(10_000),
         });
-      } catch (err) {
-        console.warn('DB challenge upsert warning (phone):', err);
+      } catch (networkErr) {
+        console.error('[AUTH_DIAGNOSTICS] Phone OTP send failed at SMS provider stage: network error connecting to Twilio.');
+        return NextResponse.json({ error: 'Failed to connect to SMS service. Please try again later.' }, { status: 502 });
       }
 
+      if (!twilioResponse.ok) {
+        console.error(`[AUTH_DIAGNOSTICS] Phone OTP send failed at SMS provider stage: Twilio returned HTTP status ${twilioResponse.status}.`);
+        return NextResponse.json({ error: 'Failed to dispatch SMS verification code. Please try again later.' }, { status: 502 });
+      }
+
+      console.info('[AUTH_DIAGNOSTICS] Phone OTP challenge successfully dispatched via Twilio Verify.');
       return NextResponse.json({
         success: true,
-        message: 'Phone verification code generated.',
-        codeHint: !sid ? code : undefined,
+        message: 'SMS verification code dispatched.',
       });
     }
   } catch (error) {
-    console.error('OTP send error:', error);
-    // Fallback code so scholars are never blocked
-    return NextResponse.json({
-      success: true,
-      message: 'Verification code dispatched.',
-      codeHint: '123456',
-    });
+    console.error('[AUTH_DIAGNOSTICS] Unhandled OTP send error:', error);
+    return NextResponse.json({ error: 'Unable to dispatch verification code right now.' }, { status: 500 });
   }
 }

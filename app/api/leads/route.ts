@@ -64,7 +64,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Check 3: Never trust frontend price calculations
-    let verifiedTotalPaise = parsed.data.totalPaise;
+    let verifiedTotalPaise: number | undefined;
+    let verifiedBreakdown: string | undefined;
     if (parsed.data.service && parsed.data.language) {
       try {
         const serverQuote = calculateQuote({
@@ -76,6 +77,7 @@ export async function POST(request: NextRequest) {
         });
         if (serverQuote && serverQuote.totalPaise > 0) {
           verifiedTotalPaise = serverQuote.totalPaise;
+          verifiedBreakdown = JSON.stringify(serverQuote.breakdown);
         }
       } catch {
         // Retain unquoted or custom enquiry status
@@ -94,7 +96,7 @@ export async function POST(request: NextRequest) {
         deadline: sanitizeText(parsed.data.deadline || '', 100),
         quantity: parsed.data.quantity,
         totalPaise: verifiedTotalPaise,
-        breakdown: parsed.data.breakdown ? sanitizeText(parsed.data.breakdown, 1000) : undefined,
+        breakdown: verifiedBreakdown,
         name: cleanName,
         email: cleanEmail,
         phone: cleanPhone,
@@ -108,7 +110,7 @@ export async function POST(request: NextRequest) {
         event: 'QUOTE_COMPLETE',
         channel: parsed.data.channel,
       },
-    });
+    }).catch((error) => console.error('Lead analytics failed:', error));
 
     return NextResponse.json({ success: true, leadId: lead.id }, { status: 201 });
 

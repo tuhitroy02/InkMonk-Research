@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { supabase } from '@/lib/supabaseClient';
 
 export default function AnimatedLampLogin() {
   const router = useRouter();
@@ -50,7 +49,12 @@ export default function AnimatedLampLogin() {
 
   // Status & Feedback
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const oauthError = params.get('error');
+  const [error, setError] = useState<string | null>(() => {
+    if (oauthError === 'google-unavailable') return 'Google sign-in is temporarily unavailable. You can continue with email.';
+    if (oauthError === 'google-failed' || oauthError === 'client-only') return 'Google sign-in could not be completed. Try again or use email.';
+    return null;
+  });
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
 
   // Web Audio Click Synthesizer for Lamp Pull Cord
@@ -75,7 +79,7 @@ export default function AnimatedLampLogin() {
 
       osc.start();
       osc.stop(ctx.currentTime + 0.06);
-    } catch {}
+    } catch { }
   };
 
   const handleToggleLamp = () => {
@@ -88,22 +92,8 @@ export default function AnimatedLampLogin() {
   };
 
   // 1. Google OAuth
-  async function handleGoogleAuth() {
-    setError(null);
-    setLoading(true);
-    try {
-      const redirectUrl = typeof window !== 'undefined' ? `${window.location.origin}/client` : undefined;
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: redirectUrl,
-        },
-      });
-      if (error) throw error;
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Google authentication failed');
-      setLoading(false);
-    }
+  function handleGoogleAuth() {
+    window.location.assign('/api/auth/google');
   }
 
   // 2. Standard Client Password Login
@@ -147,37 +137,17 @@ export default function AnimatedLampLogin() {
     setSuccessMsg(null);
 
     try {
-      let codeHint: string | undefined;
-
-      // 1. Try local OTP endpoint
-      try {
-        const res = await fetch('/api/auth/otp/send', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ identifier: email.trim().toLowerCase() }),
-        });
-        const data = await res.json();
-        if (data.codeHint) codeHint = data.codeHint;
-      } catch (err) {
-        console.warn('Local OTP send error:', err);
-      }
-
-      // 2. Also send via Supabase
-      try {
-        await supabase.auth.signInWithOtp({ email: email.trim().toLowerCase() });
-      } catch (err) {
-        console.warn('Supabase signInWithOtp error:', err);
-      }
-
-      setSuccessMsg(
-        codeHint
-          ? `Verification OTP: ${codeHint} (Dispatched to ${email.trim()}).`
-          : `6-Digit verification code dispatched to ${email.trim()}. (Instant testing code: 123456)`
-      );
+      const res = await fetch('/api/auth/otp/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ identifier: email.trim(), purpose: 'signup' }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      setSuccessMsg('Verification code sent. Check your email.');
       setSignupStage(2);
-    } catch (err: unknown) {
-      setSuccessMsg(`Verification code dispatched to ${email.trim()}. (For instant access, you may use 123456)`);
-      setSignupStage(2);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to send verification code.');
     } finally {
       setLoading(false);
     }
@@ -191,12 +161,12 @@ export default function AnimatedLampLogin() {
       setError('Please enter the 6-digit OTP code.');
       return;
     }
-    const cleanPassword = newPassword.trim() || 'Scholar@2026!';
-    if (newPassword && newPassword.length < 6) {
+    const cleanPassword = newPassword;
+    if (newPassword.length < 6) {
       setError('Password must be at least 6 characters.');
       return;
     }
-    if (newPassword && confirmPassword && newPassword !== confirmPassword) {
+    if (newPassword !== confirmPassword) {
       setError('Passwords do not match. Please re-enter.');
       return;
     }
@@ -205,68 +175,18 @@ export default function AnimatedLampLogin() {
     setError(null);
 
     try {
-      let isVerified = false;
-
-      // 1. Verify via Supabase if possible
-      try {
-        const { data, error } = await supabase.auth.verifyOtp({
-          email: email.trim().toLowerCase(),
-          token: token,
-          type: 'email',
-        });
-        if (!error && data?.session) isVerified = true;
-      } catch {}
-
-      // 2. Call backend signup API
-      try {
-        const res = await fetch('/api/auth/signup', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: email.trim().toLowerCase(),
-            name: fullName.trim(),
-            password: cleanPassword,
-            gender,
-            qualification,
-            institution: institution.trim(),
-            discipline: discipline.trim(),
-            code: token,
-          }),
-        });
-        const data = await res.json();
-        if (res.ok) isVerified = true;
-      } catch {}
-
-      // 3. Fallback Instant Code
-      if (token === '123456') {
-        isVerified = true;
-      }
-
-      if (isVerified) {
-        const scholarUser = {
-          id: 'user-' + Date.now(),
-          name: fullName.trim(),
-          email: email.trim().toLowerCase(),
-          role: 'CLIENT',
-        };
-        const scholarProfile = {
-          name: fullName.trim(),
-          email: email.trim().toLowerCase(),
-          gender,
-          qualification,
-          institution: institution.trim() || 'Academic Institution',
-          discipline: discipline.trim() || 'Multidisciplinary Research',
-        };
-        try {
-          localStorage.setItem('inkmonk_user', JSON.stringify(scholarUser));
-          localStorage.setItem('inkmonk_scholar_profile', JSON.stringify(scholarProfile));
-        } catch {}
-
-        setSuccessMsg('Account created and verified! Redirecting to your Client Portal…');
-        setTimeout(() => router.push('/client'), 400);
-      } else {
-        throw new Error('Invalid verification code. Please check your email or enter 123456.');
-      }
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.trim().toLowerCase(), name: fullName.trim(), password: cleanPassword,
+          gender, qualification, institution: institution.trim(), discipline: discipline.trim(), code: token,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      localStorage.setItem('inkmonk_scholar_profile', JSON.stringify(data.profile));
+      router.push('/client');
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Verification failed.');
     } finally {
@@ -287,18 +207,14 @@ export default function AnimatedLampLogin() {
       const res = await fetch('/api/auth/otp/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ identifier: email.trim() }),
+        body: JSON.stringify({ identifier: email.trim(), purpose: 'reset' }),
       });
       const data = await res.json();
-      setSuccessMsg(
-        data.codeHint
-          ? `Reset OTP generated: ${data.codeHint}. (Sent to ${email})`
-          : `Password reset code sent to ${email}.`
-      );
+      if (!res.ok) throw new Error(data.error);
+      setSuccessMsg('Password reset code sent. Check your email.');
       setForgotStage(2);
-    } catch {
-      setSuccessMsg(`Password reset code sent to ${email}. (Use 123456 if testing)`);
-      setForgotStage(2);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to send reset code.');
     } finally {
       setLoading(false);
     }
@@ -337,7 +253,7 @@ export default function AnimatedLampLogin() {
       setSuccessMsg('Password updated successfully! Entering Client Portal…');
       setTimeout(() => router.push('/client'), 600);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Reset failed. Try code 123456.');
+      setError(err instanceof Error ? err.message : 'Password reset failed.');
     } finally {
       setLoading(false);
     }
@@ -347,7 +263,7 @@ export default function AnimatedLampLogin() {
   async function handleAdminLogin(e: React.FormEvent) {
     e.preventDefault();
     if (!adminEmail.trim() || !adminPassword) {
-      setError('Admin email and master password required.');
+      setError('Enter your admin account email and password.');
       return;
     }
     setLoading(true);
@@ -372,41 +288,10 @@ export default function AnimatedLampLogin() {
     }
   }
 
-  // Instant 1-Click Demo Access
-  const quickClientAccess = () => {
-    const demoUser = {
-      id: 'demo-scholar-001',
-      name: 'Dr. Debabrata Roy',
-      email: 'scholar@university.edu',
-      role: 'CLIENT',
-    };
-    const demoProfile = {
-      name: 'Dr. Debabrata Roy',
-      email: 'scholar@university.edu',
-      gender: 'Male',
-      qualification: 'Postdoctoral Fellow / Assistant Professor',
-      institution: 'Jadavpur University / IIT Kharagpur',
-      discipline: 'Computer Science & Biomedical Engineering',
-    };
-    localStorage.setItem('inkmonk_user', JSON.stringify(demoUser));
-    localStorage.setItem('inkmonk_scholar_profile', JSON.stringify(demoProfile));
-    router.push('/client');
-  };
-
-  const quickAdminAccess = () => {
-    const adminUser = {
-      id: 'admin-001',
-      name: 'Tuhit Roy (Director)',
-      email: 'inkmonkresearch@gmail.com',
-      role: 'ADMIN',
-    };
-    localStorage.setItem('inkmonk_user', JSON.stringify(adminUser));
-    router.push('/admin');
-  };
 
   return (
     <div className="min-h-screen w-full bg-[#05070E] text-white flex flex-col justify-between relative overflow-hidden select-none">
-      
+
       {/* ─── Top Header Bar ───────────────────────────────────────────── */}
       <header className="relative z-30 flex items-center justify-between px-4 sm:px-8 py-4 border-b border-slate-800 bg-black/40 backdrop-blur-md">
         <Link href="/" className="flex items-center gap-2.5">
@@ -447,14 +332,13 @@ export default function AnimatedLampLogin() {
 
       {/* ─── Main Interactive Stage ───────────────────────────────────── */}
       <main className="relative flex-1 flex flex-col lg:flex-row items-center justify-center px-4 sm:px-8 py-8 gap-8 lg:gap-14 max-w-7xl mx-auto w-full z-20">
-        
+
         {/* LEFT COLUMN: 3D Animated Retro Desk Lamp */}
         <div className="w-full lg:w-5/12 flex flex-col items-center justify-center relative min-h-[300px] lg:min-h-[480px]">
           {/* Volumetric Warm Light Beam */}
           <div
-            className={`absolute top-[60px] w-[260px] sm:w-[340px] lg:w-[420px] h-[340px] sm:h-[440px] pointer-events-none transition-opacity duration-700 ${
-              lampOn ? 'opacity-90' : 'opacity-0'
-            }`}
+            className={`absolute top-[60px] w-[260px] sm:w-[340px] lg:w-[420px] h-[340px] sm:h-[440px] pointer-events-none transition-opacity duration-700 ${lampOn ? 'opacity-90' : 'opacity-0'
+              }`}
             style={{
               background: 'radial-gradient(ellipse at 50% 0%, rgba(251, 191, 36, 0.45) 0%, rgba(245, 158, 11, 0.22) 35%, rgba(217, 119, 6, 0.08) 65%, transparent 100%)',
               clipPath: 'polygon(42% 0%, 58% 0%, 100% 100%, 0% 100%)',
@@ -464,16 +348,14 @@ export default function AnimatedLampLogin() {
           {/* Lamp Shade & Pull Cord */}
           <div className="relative z-10 flex flex-col items-center">
             {/* Shade */}
-            <div className={`w-36 h-20 rounded-t-full transition-all duration-300 shadow-2xl relative ${
-              lampOn ? 'bg-gradient-to-b from-amber-600 via-amber-700 to-amber-900 shadow-amber-500/50' : 'bg-slate-800'
-            }`}>
+            <div className={`w-36 h-20 rounded-t-full transition-all duration-300 shadow-2xl relative ${lampOn ? 'bg-gradient-to-b from-amber-600 via-amber-700 to-amber-900 shadow-amber-500/50' : 'bg-slate-800'
+              }`}>
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-3 bg-amber-900 rounded-t-sm" />
             </div>
 
             {/* Glowing Bulb Bottom */}
-            <div className={`w-28 h-6 rounded-b-full transition-colors duration-300 shadow-lg ${
-              lampOn ? 'bg-amber-200 shadow-[0_10px_40px_rgba(251,191,36,0.9)]' : 'bg-slate-700'
-            }`} />
+            <div className={`w-28 h-6 rounded-b-full transition-colors duration-300 shadow-lg ${lampOn ? 'bg-amber-200 shadow-[0_10px_40px_rgba(251,191,36,0.9)]' : 'bg-slate-700'
+              }`} />
 
             {/* Lamp Arm */}
             <div className="w-3 h-28 bg-gradient-to-r from-amber-800 to-amber-950 rounded-sm shadow-inner mt-0.5" />
@@ -485,9 +367,8 @@ export default function AnimatedLampLogin() {
             <button
               type="button"
               onClick={handleToggleLamp}
-              className={`absolute top-20 right-4 flex flex-col items-center cursor-pointer group transition-transform ${
-                isPulling ? 'translate-y-3' : 'translate-y-0'
-              }`}
+              className={`absolute top-20 right-4 flex flex-col items-center cursor-pointer group transition-transform ${isPulling ? 'translate-y-3' : 'translate-y-0'
+                }`}
               title="Click to toggle desk light"
             >
               <div className="w-0.5 h-14 bg-amber-300/80 group-hover:bg-amber-200 transition-colors" />
@@ -503,7 +384,7 @@ export default function AnimatedLampLogin() {
         {/* RIGHT COLUMN: Unified Auth Card */}
         <div className="w-full lg:w-7/12 max-w-lg">
           <div className="bg-[#0D1322] border-2 border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl relative">
-            
+
             {/* Top Toggle: Scholar Client Portal vs Director Admin Portal */}
             <div className="flex rounded-2xl bg-slate-900 p-1.5 border border-slate-800 mb-6">
               <button
@@ -513,11 +394,10 @@ export default function AnimatedLampLogin() {
                   setError(null);
                   setSuccessMsg(null);
                 }}
-                className={`flex-1 py-2 text-xs font-black rounded-xl transition-all cursor-pointer ${
-                  portalRole === 'CLIENT'
-                    ? 'bg-gradient-to-r from-[#1d4ed8] to-[#2563eb] text-white shadow-md'
-                    : 'text-slate-400 hover:text-white'
-                }`}
+                className={`flex-1 py-2 text-xs font-black rounded-xl transition-all cursor-pointer ${portalRole === 'CLIENT'
+                  ? 'bg-gradient-to-r from-[#1d4ed8] to-[#2563eb] text-white shadow-md'
+                  : 'text-slate-400 hover:text-white'
+                  }`}
               >
                 🎓 SCHOLAR CLIENT PORTAL
               </button>
@@ -528,11 +408,10 @@ export default function AnimatedLampLogin() {
                   setError(null);
                   setSuccessMsg(null);
                 }}
-                className={`flex-1 py-2 text-xs font-black rounded-xl transition-all cursor-pointer ${
-                  portalRole === 'ADMIN'
-                    ? 'bg-gradient-to-r from-[#f97316] to-[#ea580c] text-white shadow-md'
-                    : 'text-slate-400 hover:text-white'
-                }`}
+                className={`flex-1 py-2 text-xs font-black rounded-xl transition-all cursor-pointer ${portalRole === 'ADMIN'
+                  ? 'bg-gradient-to-r from-[#f97316] to-[#ea580c] text-white shadow-md'
+                  : 'text-slate-400 hover:text-white'
+                  }`}
               >
                 🛡️ DIRECTOR / ADMIN
               </button>
@@ -557,7 +436,7 @@ export default function AnimatedLampLogin() {
             {/* ══════════════════════════════════════════════════════════════ */}
             {portalRole === 'CLIENT' && (
               <div>
-                
+
                 {/* 1. Google 1-Click Button */}
                 <button
                   type="button"
@@ -591,11 +470,10 @@ export default function AnimatedLampLogin() {
                       setError(null);
                       setSuccessMsg(null);
                     }}
-                    className={`pb-2.5 px-3 transition-colors cursor-pointer ${
-                      authMode === 'LOGIN'
-                        ? 'border-b-2 border-[#1d4ed8] text-white font-black'
-                        : 'text-slate-400 hover:text-slate-200'
-                    }`}
+                    className={`pb-2.5 px-3 transition-colors cursor-pointer ${authMode === 'LOGIN'
+                      ? 'border-b-2 border-[#1d4ed8] text-white font-black'
+                      : 'text-slate-400 hover:text-slate-200'
+                      }`}
                   >
                     Sign In
                   </button>
@@ -607,11 +485,10 @@ export default function AnimatedLampLogin() {
                       setError(null);
                       setSuccessMsg(null);
                     }}
-                    className={`pb-2.5 px-3 transition-colors cursor-pointer ${
-                      authMode === 'SIGNUP'
-                        ? 'border-b-2 border-[#f97316] text-[#f97316] font-black'
-                        : 'text-slate-400 hover:text-slate-200'
-                    }`}
+                    className={`pb-2.5 px-3 transition-colors cursor-pointer ${authMode === 'SIGNUP'
+                      ? 'border-b-2 border-[#f97316] text-[#f97316] font-black'
+                      : 'text-slate-400 hover:text-slate-200'
+                      }`}
                   >
                     Create Account (Sign Up)
                   </button>
@@ -623,11 +500,10 @@ export default function AnimatedLampLogin() {
                       setError(null);
                       setSuccessMsg(null);
                     }}
-                    className={`pb-2.5 px-3 ml-auto transition-colors cursor-pointer text-[11px] ${
-                      authMode === 'FORGOT_PASSWORD'
-                        ? 'text-amber-400 font-bold underline'
-                        : 'text-slate-500 hover:text-slate-300'
-                    }`}
+                    className={`pb-2.5 px-3 ml-auto transition-colors cursor-pointer text-[11px] ${authMode === 'FORGOT_PASSWORD'
+                      ? 'text-amber-400 font-bold underline'
+                      : 'text-slate-500 hover:text-slate-300'
+                      }`}
                   >
                     Forgot Password?
                   </button>
@@ -926,16 +802,6 @@ export default function AnimatedLampLogin() {
                   </form>
                 )}
 
-                {/* 1-Click Demo Shortcut */}
-                <div className="mt-6 pt-5 border-t border-slate-800 text-center">
-                  <button
-                    type="button"
-                    onClick={quickClientAccess}
-                    className="text-xs font-extrabold text-blue-400 hover:text-blue-300 flex items-center justify-center gap-1.5 mx-auto hover:underline cursor-pointer"
-                  >
-                    <span>⚡ 1-Click Instant Demo Scholar Access (Bypass Login)</span>
-                  </button>
-                </div>
 
               </div>
             )}
@@ -984,13 +850,6 @@ export default function AnimatedLampLogin() {
                 </button>
 
                 <div className="mt-4 pt-3 border-t border-slate-800 text-center">
-                  <button
-                    type="button"
-                    onClick={quickAdminAccess}
-                    className="text-xs font-extrabold text-orange-400 hover:text-orange-300 flex items-center justify-center gap-1.5 mx-auto hover:underline cursor-pointer"
-                  >
-                    <span>⚡ 1-Click Instant Director Access</span>
-                  </button>
                 </div>
               </form>
             )}

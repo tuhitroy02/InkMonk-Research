@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SupabaseAuthProvider } from "@/context/SupabaseAuthContext";
-import SupabaseAuthModal from "@/components/SupabaseAuthModal";
 import WebMcpProvider from "@/components/WebMcpProvider";
 
 export const metadata: Metadata = {
@@ -372,7 +371,6 @@ export default function RootLayout({
             </main>
             <Footer />
             <ChatWidget />
-            <SupabaseAuthModal />
           </SupabaseAuthProvider>
         </ThemeProvider>
       </body>

@@ -18,7 +18,6 @@ import {
 } from '@/components/RealIcons';
 
 import {
-  InstantTurnitinModal,
   TurnitinSampleModal,
   FormalNdaModal,
   ConsultationSchedulerModal,
@@ -27,7 +26,6 @@ import {
 } from '@/components/FuturisticInteractions';
 
 export default function HomePage() {
-  const [turnitinModalOpen, setTurnitinModalOpen] = useState(false);
   const [sampleModalOpen, setSampleModalOpen] = useState(false);
   const [ndaModalOpen, setNdaModalOpen] = useState(false);
   const [schedulerModalOpen, setSchedulerModalOpen] = useState(false);
@@ -187,12 +185,12 @@ export default function HomePage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <button
-                    onClick={() => setTurnitinModalOpen(true)}
+                  <Link
+                    href="/quote?lang=TURNITIN"
                     className="btn-clay-orange text-xs w-full text-center py-2.5 cursor-pointer"
                   >
-                    Upload &amp; Verify Originality →
-                  </button>
+                    Request an originality check →
+                  </Link>
                 </div>
               </div>
             </div>
@@ -247,12 +245,12 @@ export default function HomePage() {
                 <p className="text-slate-600 dark:text-slate-300 text-xs font-medium leading-relaxed mb-4 text-center">
                   Files are checked under strict instructor no-repository settings, ensuring your work is never indexed or flagged when you submit to university committees.
                 </p>
-                <button
-                  onClick={() => setTurnitinModalOpen(true)}
+                <Link
+                  href="/quote?lang=TURNITIN"
                   className="text-xs text-[#2563EB] dark:text-[#60A5FA] font-bold hover:underline cursor-pointer"
                 >
-                  Learn About Non-Repo →
-                </button>
+                  Request a non-repository check →
+                </Link>
               </div>
 
               {/* Guarantee 3 */}
@@ -477,11 +475,6 @@ export default function HomePage() {
       </section>
 
       {/* ─── Interactive Modals ─────────────────────────────────────────── */}
-      <InstantTurnitinModal
-        isOpen={turnitinModalOpen}
-        onClose={() => setTurnitinModalOpen(false)}
-      />
-
       <TurnitinSampleModal
         isOpen={sampleModalOpen}
         onClose={() => setSampleModalOpen(false)}

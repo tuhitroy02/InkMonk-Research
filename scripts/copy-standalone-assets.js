@@ -8,21 +8,9 @@ const standaloneDir = path.join(rootDir, '.next', 'standalone');
 if (fs.existsSync(standaloneDir)) {
   console.log('Copying required runtime assets to .next/standalone...');
 
-  // 1. Copy dev.db (SQLite database)
-  const dbSrc = path.join(rootDir, 'dev.db');
-  const dbDest = path.join(standaloneDir, 'dev.db');
-  if (fs.existsSync(dbSrc)) {
-    fs.copyFileSync(dbSrc, dbDest);
-    console.log('✓ Copied dev.db to .next/standalone/dev.db');
-  }
-
-  // 2. Copy prisma directory
-  const prismaSrc = path.join(rootDir, 'prisma');
   const prismaDest = path.join(standaloneDir, 'prisma');
-  if (fs.existsSync(prismaSrc)) {
-    fs.cpSync(prismaSrc, prismaDest, { recursive: true });
-    console.log('✓ Copied prisma/ to .next/standalone/prisma/');
-  }
+  fs.mkdirSync(prismaDest, { recursive: true });
+  fs.copyFileSync(path.join(rootDir, 'prisma', 'schema.prisma'), path.join(prismaDest, 'schema.prisma'));
 
   // 3. Copy public directory
   const publicSrc = path.join(rootDir, 'public');

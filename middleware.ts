@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { jwtVerify } from 'jose';
-
-function sessionKey() {
-  const secret = process.env.JWT_SECRET || 'inkmonk_research_prod_secret_jwt_key_9283748293749823_secure';
-  return new TextEncoder().encode(secret.padEnd(32, '0'));
-}
+import { verifyToken } from '@/lib/auth';
+import { getTrustedPublicOrigin } from '@/lib/url-helper';
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -33,19 +29,19 @@ export async function middleware(request: NextRequest) {
   if (pathname.startsWith('/admin')) {
     const token = request.cookies.get('inkmonk_session')?.value;
     if (!token) {
-      const loginUrl = new URL('/login?portal=admin', request.url);
+      const loginUrl = new URL('/login?portal=admin', getTrustedPublicOrigin(request));
       return NextResponse.redirect(loginUrl);
     }
 
     try {
-      const { payload } = await jwtVerify(token, sessionKey());
+      const payload = await verifyToken(token);
       const role = (payload as { role?: string })?.role;
       if (role !== 'ADMIN' && role !== 'STAFF') {
-        const loginUrl = new URL('/login?portal=admin&error=forbidden', request.url);
+        const loginUrl = new URL('/login?portal=admin&error=forbidden', getTrustedPublicOrigin(request));
         return NextResponse.redirect(loginUrl);
       }
     } catch {
-      const loginUrl = new URL('/login?portal=admin&error=expired', request.url);
+      const loginUrl = new URL('/login?portal=admin&error=expired', getTrustedPublicOrigin(request));
       return NextResponse.redirect(loginUrl);
     }
   }

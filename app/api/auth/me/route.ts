@@ -8,7 +8,7 @@ export async function GET() {
     return NextResponse.json({ authenticated: false }, { status: 401 });
   }
 
-  let user = await db.user.findUnique({
+  const user = await db.user.findUnique({
     where: { id: session.userId },
     select: {
       id: true,
@@ -19,43 +19,7 @@ export async function GET() {
     },
   });
 
-  if (!user && session.email) {
-    user = await db.user.findUnique({
-      where: { email: session.email },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        role: true,
-        status: true,
-      },
-    });
-
-    if (!user) {
-      try {
-        user = await db.user.create({
-          data: {
-            id: session.userId,
-            email: session.email,
-            name: session.name || session.email.split('@')[0],
-            role: session.role || 'CLIENT',
-            status: 'ACTIVE',
-          },
-          select: {
-            id: true,
-            name: true,
-            email: true,
-            role: true,
-            status: true,
-          },
-        });
-      } catch (e) {
-        console.warn('Auto-create session user error:', e);
-      }
-    }
-  }
-
-  if (!user || user.status === 'SUSPENDED') {
+  if (!user || user.status !== 'ACTIVE') {
     return NextResponse.json({ authenticated: false }, { status: 401 });
   }
 

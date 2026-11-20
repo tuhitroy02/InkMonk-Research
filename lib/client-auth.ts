@@ -16,7 +16,8 @@ export function normalizeIdentifier(value: unknown): { kind: 'email' | 'phone'; 
 }
 
 export function authHash(value: string): string {
-  const secret = process.env.JWT_SECRET || 'inkmonk_research_prod_secret_jwt_key_9283748293749823_secure';
+  const secret = process.env.JWT_SECRET;
+  if (!secret || secret.length < 32) throw new Error('JWT_SECRET must contain at least 32 characters');
   return createHmac('sha256', secret).update(value).digest('hex');
 }
 
@@ -64,7 +65,6 @@ export async function clientSession(user: { id: string; name: string; email: str
 }
 
 export async function getOrCreateClient(identifier: { kind: 'email' | 'phone'; value: string }, name?: string) {
-  try {
     const user = identifier.kind === 'email'
       ? await db.user.findUnique({ where: { email: identifier.value } })
       : await db.user.findUnique({ where: { phone: identifier.value } });
@@ -72,21 +72,13 @@ export async function getOrCreateClient(identifier: { kind: 'email' | 'phone'; v
       if (user.role !== 'CLIENT' || user.status !== 'ACTIVE') return null;
       return user;
     }
-    return await db.user.create({ data: {
-      email: identifier.kind === 'email' ? identifier.value : `${identifier.value.slice(1)}@phone.inkmonk.invalid`,
-      phone: identifier.kind === 'phone' ? identifier.value : null,
-      name: name?.trim().slice(0, 100) || (identifier.kind === 'phone' ? 'Client' : identifier.value.split('@')[0]),
-      provider: identifier.kind === 'phone' ? 'phone_otp' : 'email_otp', role: 'CLIENT',
-    } });
-  } catch (err) {
-    console.error('getOrCreateClient database error, using fallback client session:', err);
-    return {
-      id: 'usr_' + authHash(identifier.value).slice(0, 16),
-      name: name?.trim().slice(0, 100) || (identifier.kind === 'phone' ? 'Client' : identifier.value.split('@')[0]),
-      email: identifier.kind === 'email' ? identifier.value : `${identifier.value.slice(1)}@phone.inkmonk.invalid`,
-      phone: identifier.kind === 'phone' ? identifier.value : null,
-      role: 'CLIENT',
-      status: 'ACTIVE',
-    };
-  }
+    return await db.user.create({
+      data: {
+        email: identifier.kind === 'email' ? identifier.value : `${identifier.value.slice(1)}@phone.inkmonk.invalid`,
+        phone: identifier.kind === 'phone' ? identifier.value : null,
+        name: name?.trim().slice(0, 100) || (identifier.kind === 'phone' ? 'Client' : identifier.value.split('@')[0]),
+        provider: identifier.kind === 'phone' ? 'phone_otp' : 'email_otp', role: 'CLIENT',
+      }
+    });
+
 }

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { db } from '@/lib/db';
 import { signToken } from '@/lib/auth';
-import { authHash } from '@/lib/client-auth';
+import { consumeCode } from '@/lib/email-code';
 import { z } from 'zod';
 
 const ResetSchema = z.object({
@@ -26,45 +26,14 @@ export async function POST(request: NextRequest) {
     const { email: rawEmail, code, newPassword } = parsed.data;
     const email = rawEmail.trim().toLowerCase();
 
-    // Verify code
-    const challenge = await db.emailLoginCode.findUnique({ where: { email } });
-    const isValidCode = Boolean(
-      challenge &&
-      (challenge.codeHash === authHash(`${email}:${code.trim()}`) || code.trim() === '123456') &&
-      challenge.expiresAt > new Date()
-    );
-
-    if (!isValidCode && code.trim() !== '123456') {
-      return NextResponse.json(
-        { error: 'Invalid or expired 6-digit verification code.' },
-        { status: 401 }
-      );
-    }
-
-    // Delete used code
-    await db.emailLoginCode.deleteMany({ where: { email } });
-
-    const user = await db.user.findUnique({ where: { email } });
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-
-    let updatedUser;
-    if (user) {
-      updatedUser = await db.user.update({
-        where: { id: user.id },
-        data: { hashedPassword, status: 'ACTIVE' },
-      });
-    } else {
-      updatedUser = await db.user.create({
-        data: {
-          email,
-          name: email.split('@')[0],
-          hashedPassword,
-          role: 'CLIENT',
-          provider: 'credentials',
-          status: 'ACTIVE',
-        },
-      });
-    }
+    const updatedUser = await db.$transaction(async (tx) => {
+      const user = await tx.user.findUnique({ where: { email } });
+      if (!user || user.role !== 'CLIENT' || user.status !== 'ACTIVE') return null;
+      if (!await consumeCode(tx, email, code, 'reset')) return null;
+      return tx.user.update({ where: { id: user.id }, data: { hashedPassword } });
+    });
+    if (!updatedUser) return NextResponse.json({ error: 'Invalid or expired code.' }, { status: 401 });
 
     const token = await signToken({
       userId: updatedUser.id,

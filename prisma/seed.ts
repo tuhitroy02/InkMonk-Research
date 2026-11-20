@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
 
 async function main() {
+  if (process.env.NODE_ENV === 'production') throw new Error('Demo data can only be seeded outside production');
   console.log('Seeding InkMonk Research database...');
 
   // 1. Create Admin User

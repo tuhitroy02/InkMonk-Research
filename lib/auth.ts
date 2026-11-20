@@ -8,7 +8,8 @@ import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 
 function sessionKey() {
-  const secret = process.env.JWT_SECRET || 'inkmonk_research_prod_secret_jwt_key_9283748293749823_secure';
+  const secret = process.env.JWT_SECRET;
+  if (!secret || secret.length < 32) throw new Error('JWT_SECRET must contain at least 32 characters');
   return new TextEncoder().encode(secret.padEnd(32, '0'));
 }
 

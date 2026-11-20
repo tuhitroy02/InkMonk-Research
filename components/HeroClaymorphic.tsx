@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { useSupabaseAuth } from '@/context/SupabaseAuthContext';
 import {
   CurvedPointerArrow,
   NotepadPencilIcon,
@@ -27,7 +26,6 @@ const SCHOLAR_AVATARS = [
 
 export default function HeroClaymorphic() {
   const router = useRouter();
-  const { user, openAuthModal } = useSupabaseAuth();
 
   // Calculator state
   const [selectedService, setSelectedService] = useState<'RESEARCH_PAPER' | 'THESIS' | 'LIT_REVIEW'>('RESEARCH_PAPER');
@@ -41,25 +39,7 @@ export default function HeroClaymorphic() {
     return '10 Days';
   };
 
-  // Auth gate triggers
-  const handleStartJourney = (e: React.MouseEvent) => {
-    if (!user) {
-      e.preventDefault();
-      openAuthModal(() => {
-        router.push('/quote');
-      });
-    }
-  };
-
-  const handleShowPricing = (e: React.MouseEvent) => {
-    const targetUrl = `/quote?service=${selectedService}&stage=${encodeURIComponent(stage)}&words=${encodeURIComponent(wordCount)}`;
-    if (!user) {
-      e.preventDefault();
-      openAuthModal(() => {
-        router.push(targetUrl);
-      });
-    }
-  };
+  const quoteUrl = `/quote?service=${selectedService}&stage=${encodeURIComponent(stage)}&words=${encodeURIComponent(wordCount)}`;
 
   return (
     <section className="relative pt-32 sm:pt-36 pb-16 sm:pb-24 overflow-hidden bg-notebook-grid min-h-[92vh] flex flex-col justify-between">
@@ -179,7 +159,7 @@ export default function HeroClaymorphic() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                handleShowPricing(e as any);
+                router.push(quoteUrl);
               }}
               // @ts-expect-error WebMCP browser standard attributes
               toolname="calculate_research_estimate"
@@ -292,8 +272,7 @@ export default function HeroClaymorphic() {
 
               {/* Main Button */}
               <Link
-                href={`/quote?service=${selectedService}&stage=${encodeURIComponent(stage)}&words=${encodeURIComponent(wordCount)}`}
-                onClick={handleShowPricing}
+                href={quoteUrl}
                 className="btn-clay-orange w-full !py-3 text-xs sm:text-sm font-extrabold shadow-lg"
               >
                 <span>Show Pricing &amp; Next Steps</span>

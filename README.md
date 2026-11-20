@@ -55,7 +55,8 @@ Client sign-in supports Google, one-time codes sent by email, and SMS codes sent
 1. Copy `.env.example` to `.env.local`. Set a unique `JWT_SECRET` (at least 32 characters) and a persistent `DATABASE_URL`. Never commit these values.
 2. Back up the database used by the running server. Run `npx prisma db push` and `npx prisma generate` with `DATABASE_URL` set. Prisma may warn that adding the unique nullable phone field could cause data loss; review the backup and use `npx prisma db push --accept-data-loss` if your existing data has no phone conflicts. The new schema adds a client phone field, email code records, and persistent rate limits.
 3. In Google Cloud, create an OAuth web client. Register the exact production callback URL `https://YOUR_DOMAIN/api/auth/google/callback` as an authorized redirect URI. Set `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, and `GOOGLE_REDIRECT_URI` to match. For local testing use `http://localhost:3000/api/auth/google/callback`.
-4. Verify your sending domain in Resend, then set `RESEND_API_KEY` and `OTP_FROM_EMAIL` to a sender at that domain. Email codes expire after 10 minutes, are single-use, and are limited to five guesses.
+
+4. Verify your sending domain in Resend, then set `RESEND_API_KEY` and `OTP_FROM_EMAIL` to a sender at that domain. Email codes expire after 10 minutes, are purpose-specific and single-use, and are limited to five guesses.
 5. Create a Twilio Verify service with SMS enabled. Set `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, and `TWILIO_VERIFY_SERVICE_SID`. Twilio handles SMS code creation and delivery; SMS availability and cost depend on your Twilio account and destination.
 6. Add the same secret variables to your hosting provider's server environment, apply the database schema there, then redeploy. A local SQLite file on an ephemeral server is unsuitable for durable client accounts; use persistent database storage before public launch.
 
@@ -148,3 +149,5 @@ The repository originally included a demonstration database and published exampl
 - **Office**: Karunamoyee, Sector 2, Salt Lake, Kolkata 700091, West Bengal
 - **Email**: `inkmonkresearch@gmail.com`
 - **Phone / WhatsApp**: `+91 7980470880`
+
+Before deploying against an existing SQLite database, back it up and apply the additive Prisma schema update with `npx prisma db push` using the production database path. The application build does not modify the database. Set a new random production `JWT_SECRET` of at least 32 characters to invalidate sessions issued by older builds. Staff and administrators sign in using the bcrypt password stored for their provisioned account.

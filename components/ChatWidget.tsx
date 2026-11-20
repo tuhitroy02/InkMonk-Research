@@ -86,6 +86,7 @@ function FormattedMessage({ text }: { text: string }) {
 // Inline Markdown (Bold, Italics, Code tags, Links)
 function renderInlineMarkdown(str: string): string {
   return str
+    .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
     .replace(/\*\*(.*?)\*\*/g, '<strong class="font-extrabold text-slate-900 dark:text-white">$1</strong>')
     .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
     .replace(/`([^`]+)`/g, '<code class="bg-slate-100 dark:bg-slate-800 text-[#1d4ed8] dark:text-blue-300 px-1 py-0.5 rounded text-[11px] font-mono">$1</code>');
